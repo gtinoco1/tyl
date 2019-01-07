@@ -1,0 +1,68 @@
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-2">
+    <h4 class="text-secondary text-uppercase">
+      <%= @property.address %>
+    </h4>
+  </div>
+
+  <div class="col-md-2">
+    <a href="/properties/<%=@property.id%>/report.pdf" class="btn btn-block btn-outline-secondary">
+      Generate Report
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <a href="/activities/new/<%= @property.id %>" class="btn btn-block btn-outline-secondary">
+      Add Activity
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+
+    <div class="list-group">
+      <% @property.activities.each do |activity| %>
+
+        <a href="../activities/<%= activity.id %>/" class="list-group-item list-group-item-action">
+          <div class="row">
+            <div class="col text-center">
+              <%= activity.activity_type.title %>
+            </div>
+            <div class="col text-center">
+              <%= activity.subject %>
+            </div>
+            <div class="col text-center">
+              <%= activity.date.strftime("%b %d")  %>
+            </div>
+
+          </div>
+        </a>
+
+
+      <% end  %>
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit Property
+        </a>
+        <a href="/properties" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

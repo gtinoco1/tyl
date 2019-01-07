@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+
+    <h4 class="text-uppercase text-secondary">
+      Add a new activity
+    </h4>
+
+
+    <hr>
+
+    <form action="/create_activity" method="post">
+
+      <div class="form-row">
+        
+        <div class="form-group col-lg-4 mb-3">
+          <label for="activity_type_id">
+            Activity Type
+          </label>
+          <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").all, :id, :title,), :class => "form-control", :prompt => "Select type" ) %>
+          <a href="/activity_types/new" class="">
+            Add a type 
+          </a>
+        </div>
+
+        <div class="form-group col-lg-4 mb-0">
+          <label for="date">
+            Date
+          </label>
+          <input type="date" id="date" name="date" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
+        </div>
+
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Next
+      </button>
+    </form>
+
+    <hr>
+
+    <a href="/properties/<%= @property_id %> ">
+      Go back
+    </a>
+
+  </div>
+</div>

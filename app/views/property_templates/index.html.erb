@@ -1,0 +1,37 @@
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-secondary text-uppercase">
+      All properties
+    </h4>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% current_user.properties.each do |property| %>
+
+      <div>
+        <a href="properties/<%= property.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
+        </a>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <hr>
+    <h5>
+      <a href="/properties/new" class="btn btn-block btn-outline-secondary">
+        Add a new property
+      </a>
+
+    </h5>
+
+  </div>
+</div>

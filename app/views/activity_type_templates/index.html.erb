@@ -1,0 +1,122 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All activity types
+    </h1>
+
+    <a href="/activity_types/new" class="btn btn-block btn-outline-secondary">
+      Add a new activity type
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Cost toggle
+        </th>
+
+        <th>
+          Duration toggle
+        </th>
+
+        <th>
+          Detail toggle
+        </th>
+
+        <th>
+          Outcome toggle
+        </th>
+
+        <th>
+          Contact toggle
+        </th>
+
+        <th>
+          Flyer img toggle
+        </th>
+
+        <th>
+          Postcard img toggle
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @activity_types.each do |activity_type| %>
+      <tr>
+        <td>
+          <%= activity_type.id %>
+        </td>
+
+        <td>
+          <%= activity_type.title %>
+        </td>
+
+        <td>
+          <%= activity_type.cost_toggle %>
+        </td>
+
+        <td>
+          <%= activity_type.duration_toggle %>
+        </td>
+
+        <td>
+          <%= activity_type.detail_toggle %>
+        </td>
+
+        <td>
+          <%= activity_type.outcome_toggle %>
+        </td>
+
+        <td>
+          <%= activity_type.contact_toggle %>
+        </td>
+
+        <td>
+          <%= activity_type.flyer_img_toggle %>
+        </td>
+
+        <td>
+          <%= activity_type.postcard_img_toggle %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(activity_type.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(activity_type.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/activity_types/<%= activity_type.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
