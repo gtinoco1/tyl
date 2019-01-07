@@ -10,6 +10,21 @@ class PropertiesController < ApplicationController
 
     render("property_templates/show.html.erb")
   end
+  
+    def create_pdf
+    @property = Property.find(params.fetch("id_to_display"))
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(@property)
+        send_data pdf.render, filename: "test",
+                              type: "application/pdf",
+                              disposition: "inline"
+            
+      end
+    end
+  end
 
   def new_form
     @property = Property.new

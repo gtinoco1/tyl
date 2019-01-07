@@ -14,6 +14,12 @@ gem "sass-rails", "~> 5.0"
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "uglifier", ">= 1.3.0"
 
+gem "prawn"
+gem 'prawn-table'
+
+gem "carrierwave"
+gem "cloudinary"
+
 group :production do
   gem "pg"
   gem "rails_12factor"
