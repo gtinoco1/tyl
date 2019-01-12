@@ -64,26 +64,26 @@
       
             <div class="row mb-2">
         <div class="col-lg-3">
-          <label for="flyer_img_toggle">
+          <label for="agent_toggle">
             Agent 
           </label>
-          <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+          <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
 
         <div class="col-lg-3">
-          <label for="agent_toggle">
+          <label for="customer_toggle">
           Customer  
           </label>
-          <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+          <%= select_tag(:customer_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
       </div>
 
       <div class="row mb-2">
         <div class="col-lg-3">
-          <label for="customer_toggle">
+          <label for="flyer_img_toggle">
             Flyer Image 
           </label>
-          <%= select_tag(:customer_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+          <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
 
         <div class="col-lg-3">
