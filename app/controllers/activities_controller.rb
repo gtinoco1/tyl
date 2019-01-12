@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find(params.fetch("id_to_display"))
-    
+
     render("activity_templates/show.html.erb")
   end
 
@@ -23,15 +23,17 @@ class ActivitiesController < ApplicationController
 
     @activity.activity_type_id = params.fetch("activity_type_id")
     @activity.date = params.fetch("date")
-    @activity.duration = params.fetch("duration","")
-    @activity.cost = params.fetch("cost","")
-    @activity.property_id = params.fetch("property_id","")
-    @activity.detail = params.fetch("detail","")
-    @activity.outcome = params.fetch("outcome","")
-    @activity.contact = params.fetch("contact","")
-    @activity.subject = params.fetch("subject","")
-    @activity.flyer_img = params.fetch("flyer_img","")
-    @activity.postcard__img = params.fetch("postcard__img","")
+    @activity.duration = params.fetch("duration", "")
+    @activity.cost = params.fetch("cost", "")
+    @activity.property_id = params.fetch("property_id", "")
+    @activity.detail = params.fetch("detail", "")
+    @activity.outcome = params.fetch("outcome", "")
+    @activity.contact = params.fetch("contact", "")
+    @activity.subject = params.fetch("subject", "")
+    @activity.flyer_img = params.fetch("flyer_img", "")
+    @activity.postcard__img = params.fetch("postcard__img", "")
+    @activity.agent = params.fetch("agent", "")
+    @activity.customer = params.fetch("customer", "")
 
     if @activity.valid?
       @activity.save
@@ -51,21 +53,23 @@ class ActivitiesController < ApplicationController
   def update_row
     @activity = Activity.find(params.fetch("id_to_modify"))
 
-    @activity.activity_type_id = params.fetch("activity_type_id","")
-    @activity.date = params.fetch("date","")
-    @activity.duration = params.fetch("duration","")
-    @activity.cost = params.fetch("cost","")
-    @activity.property_id = params.fetch("property_id","")
-    @activity.detail = params.fetch("detail","")
-    @activity.outcome = params.fetch("outcome","")
-    @activity.contact = params.fetch("contact","")
-    @activity.subject = params.fetch("subject","")
-    @activity.flyer_img = params.fetch("flyer_img","")
-    @activity.postcard__img = params.fetch("postcard__img","")
+    @activity.activity_type_id = params.fetch("activity_type_id", "")
+    @activity.date = params.fetch("date", "")
+    @activity.duration = params.fetch("duration", "")
+    @activity.cost = params.fetch("cost", "")
+    @activity.property_id = params.fetch("property_id", "")
+    @activity.detail = params.fetch("detail", "")
+    @activity.outcome = params.fetch("outcome", "")
+    @activity.contact = params.fetch("contact", "")
+    @activity.subject = params.fetch("subject", "")
+    @activity.flyer_img = params.fetch("flyer_img", "")
+    @activity.postcard__img = params.fetch("postcard__img", "")
+    @activity.agent = params.fetch("agent", "")
+    @activity.customer = params.fetch("customer", "")
 
     if @activity.valid?
-       @activity.save
-      
+      @activity.save
+
       redirect_to("/properties/#{@activity.property_id}", :notice => "Activity created successfully.")
     else
       render("activity_templates/edit_form_with_errors.html.erb")
@@ -77,6 +81,6 @@ class ActivitiesController < ApplicationController
 
     @activity.destroy
 
-      redirect_to("/properties/#{@activity.property_id}", :notice => "Activity deleted successfully.")
+    redirect_to("/properties/#{@activity.property_id}", :notice => "Activity deleted successfully.")
   end
 end

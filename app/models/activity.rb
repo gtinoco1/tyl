@@ -16,6 +16,8 @@
 #  postcard__img    :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  agent            :string
+#  customer         :string
 #
 
 class Activity < ApplicationRecord

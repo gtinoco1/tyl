@@ -28,6 +28,9 @@ class ActivityTypesController < ApplicationController
     @activity_type.contact_toggle = params.fetch("contact_toggle")
     @activity_type.flyer_img_toggle = params.fetch("flyer_img_toggle")
     @activity_type.postcard_img_toggle = params.fetch("postcard_img_toggle")
+    @activity_type.subject_toggle = params.fetch("subject_toggle")
+    @activity_type.agent_toggle = params.fetch("agent_toggle")
+    @activity_type.customer_toggle = params.fetch("customer_toggle")
 
     if @activity_type.valid?
       @activity_type.save
@@ -55,6 +58,9 @@ class ActivityTypesController < ApplicationController
     @activity_type.contact_toggle = params.fetch("contact_toggle")
     @activity_type.flyer_img_toggle = params.fetch("flyer_img_toggle")
     @activity_type.postcard_img_toggle = params.fetch("postcard_img_toggle")
+    @activity_type.subject_toggle = params.fetch("subject_toggle")
+    @activity_type.agent_toggle = params.fetch("agent_toggle")
+    @activity_type.customer_toggle = params.fetch("customer_toggle")
 
     if @activity_type.valid?
       @activity_type.save

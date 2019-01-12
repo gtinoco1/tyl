@@ -53,34 +53,57 @@
           </label>
           <%= select_tag(:outcome_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
+
+        <div class="col-lg-3">
+          <label for="subject_toggle">
+            Subject
+          </label>
+          <%= select_tag(:subject_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
       </div>
       
-                  <div class="row mb-2">
+            <div class="row mb-2">
         <div class="col-lg-3">
           <label for="flyer_img_toggle">
-            Flyer Image 
+            Agent 
           </label>
-          <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"], @activity_type.flyer_img_toggle), :class => "form-control") %>
+          <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
 
         <div class="col-lg-3">
-          <label for="outcome_toggle">
-            Postcard Image
+          <label for="agent_toggle">
+          Customer  
           </label>
-          <%= select_tag(:postcard_img_toggle, options_for_select(["Show", "Hide"], @activity_type.postcard_img_toggle), :class => "form-control") %>
+          <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
       </div>
 
-    <button class="btn btn-block btn-outline-secondary">
-      Create activity type
-    </button>
-  </form>
+      <div class="row mb-2">
+        <div class="col-lg-3">
+          <label for="customer_toggle">
+            Flyer Image 
+          </label>
+          <%= select_tag(:customer_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
 
-  <hr>
+        <div class="col-lg-3">
+          <label for="postcard_img_toggle">
+            Postcard Image
+          </label>
+          <%= select_tag(:postcard_img_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+      </div>
 
-  <a href="/activity_types">
-    Go back
-  </a>
+      <button class="btn btn-block btn-outline-secondary">
+        Create activity type
+      </button>
+    </form>
 
-</div>
+    <hr>
+
+    <a href="/activity_types">
+      Go back
+    </a>
+
+  </div>
 </div>

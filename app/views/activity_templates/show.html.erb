@@ -33,12 +33,45 @@
         <input type="date" id="date" name="date" class="form-control" value="<%= @activity.date %>" disabled>
       </div>
 
-      <div class="form-group col-lg-4 mb-0">
-        <div class="mb-1">
-          Subject
+      <% if @activity.activity_type.subject_toggle == "Show" %>
+        <div class="form-group col-lg-4 mb-0">
+          <div class="mb-1">
+            Subject
+          </div>
+          <input type="text" id="subject" name="subject" class="form-control" value="<%= @activity.subject %>" disabled>
         </div>
-        <input type="text" id="subject" name="subject" class="form-control" value="<%= @activity.subject %>" disabled>
-      </div>
+
+      <% else %>
+      <% end %>
+
+    </div>
+
+    <div class="form-row">
+
+      <% if @activity.activity_type.agent_toggle == "Show" %>
+
+        <div class="form-group col-lg-6">
+          <label for="agent">
+            Agent            
+          </label>
+          <input type="text" id="agent" name="agent" class="form-control" value="<%= @activity.agent %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+
+      <% if @activity.activity_type.customer_toggle == "Show" %>
+
+        <div class="form-group col-lg-4 mb-0">
+          <label for="customer">
+            Customer            
+          </label>
+          <input type="text" id="customer" name="customer" class="form-control" value="<%= @activity.customer %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+
     </div>
 
     <div class="form-row">
@@ -117,8 +150,8 @@
 
     <% else %>
     <% end %>
-    
-        <% if @activity.activity_type.postcard_img_toggle == "Show" %>
+
+    <% if @activity.activity_type.postcard_img_toggle == "Show" %>
 
       <div class="col-lg-8 pl-0 pt-3">
         <div class="form-group mt-1 mb-0">

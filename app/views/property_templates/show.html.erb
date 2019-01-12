@@ -32,7 +32,13 @@
               <%= activity.activity_type.title %>
             </div>
             <div class="col text-center">
-              <%= activity.subject %>
+              
+      <% if activity.activity_type.subject_toggle == "Show" %>
+          <%= activity.subject %>
+      <% else %>
+          <%= activity.detail %>
+      <% end %>
+      
             </div>
             <div class="col text-center">
               <%= activity.date.strftime("%b %d")  %>

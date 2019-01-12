@@ -13,6 +13,9 @@
 #  postcard_img_toggle :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  agent_toggle        :string
+#  customer_toggle     :string
+#  subject_toggle      :string
 #
 
 class ActivityType < ApplicationRecord
