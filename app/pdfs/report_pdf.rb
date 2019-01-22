@@ -14,7 +14,7 @@ class ReportPdf < Prawn::Document
 
     def line_items
         move_down 20
-      table activity_rows, :cell_style => { :font => "Times-Roman", 
+      table call_rows, :cell_style => { :font => "Times-Roman", 
                                             
                                               } do
       row(0).font_style = :bold
@@ -27,7 +27,7 @@ class ReportPdf < Prawn::Document
       end
     end
     
-    def activity_rows
+    def call_rows
     [["Date", "Subject", "Contact", "Duration", "Details"]] +
     
     @property.activities.order(date: :desc).map do |activity|

@@ -18,13 +18,11 @@ class PropertiesController < ApplicationController
       format.html
       format.pdf do
         pdf = ReportPdf.new(@property)
-        send_data pdf.render, filename: "test",
-                              type: "application/pdf",
-                              disposition: "inline"
-            
-      end
+        send_data pdf.render, filename: "Report for #{@property.address}.pdf",
+                              type: 'application/pdf'
+        end
+       end
     end
-  end
 
   def new_form
     @property = Property.new
