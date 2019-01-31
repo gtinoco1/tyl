@@ -21,6 +21,9 @@ class ReportPdf < Prawn::Document
     logo
     header
     tables
+    footer
+    
+
   end
   
   def logo
@@ -32,14 +35,18 @@ class ReportPdf < Prawn::Document
   end
 
   def header
-      
     font "Nunito"
     text "#{@property.address.upcase}", size: 15, style: :bold, :color => "60b0f4"
     text "This report documents all activity between #{@property.activities.order(date: :asc).first.date.strftime("%b %d, %Y")} and #{@property.activities.order(date: :asc).last.date.strftime("%b %d, %Y")}."
     stroke do
       horizontal_rule
     end
-
+  end
+  
+  def footer
+    repeat(:all, :dynamic => true) do
+     draw_text page_number, :at => [530, 0]
+    end
   end
 
   def call_table
