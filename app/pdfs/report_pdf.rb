@@ -25,7 +25,7 @@ class ReportPdf < Prawn::Document
   
   def logo
     repeat(:all) do
-    image "#{Rails.root}/app/assets/logos/logo1.jpg", :height => 75,   :at => [450, 750]
+    image "#{Rails.root}/app/assets/logos/logo1.jpg", :height => 75,   :at => [450, 745]
 
     end
     
@@ -35,7 +35,7 @@ class ReportPdf < Prawn::Document
       
     font "Nunito"
     text "#{@property.address.upcase}", size: 15, style: :bold, :color => "60b0f4"
-    text "The following report tracks all ongoing activity for this listing. "
+    text "This report documents all activity between #{@property.activities.order(date: :asc).first.date.strftime("%b %d, %Y")} and #{@property.activities.order(date: :asc).last.date.strftime("%b %d, %Y")}."
     stroke do
       horizontal_rule
     end
@@ -47,7 +47,7 @@ class ReportPdf < Prawn::Document
     font "Nunito"
     text "Calls", :align => :left, size: 13, style: :bold
     move_down 5
-    table call_rows, :position => :center, :width => 550, :column_widths => {0 => 50, 3 => 60 },
+    table call_rows, :position => :center, :width => 540, :column_widths => {0 => 50, 3 => 60 },
  :cell_style => {:font => "Nunito", :size => 10} do
       row(0).font_style = :bold
       columns(0..3).align = :center
@@ -61,7 +61,7 @@ class ReportPdf < Prawn::Document
     font "Nunito"
     text "Showings", :align => :left, size: 13, style: :bold
     move_down 5
-    table showing_rows, :position => :center, :width => 550, :column_widths => {0 => 50, 4 => 60},
+    table showing_rows, :position => :center, :width => 540, :column_widths => {0 => 50, 4 => 60},
     :cell_style => {:size => 10} do
       row(0).font_style = :bold
       columns(0..4).align = :center
@@ -75,7 +75,7 @@ class ReportPdf < Prawn::Document
         font "Nunito"
     text "Listing Agreement Paperwork", :align => :left, size: 13, style: :bold
     move_down 5
-    table listing_agreement_rows, :position => :center, :width => 550,  :column_widths => {0 => 50, 2 => 60},
+    table listing_agreement_rows, :position => :center, :width => 540,  :column_widths => {0 => 50, 2 => 60},
     :cell_style => {:size => 10} do
       row(0).font_style = :bold
       columns(0..3).align = :center
