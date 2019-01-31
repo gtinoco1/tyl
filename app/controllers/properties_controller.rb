@@ -11,15 +11,21 @@ class PropertiesController < ApplicationController
     render("property_templates/show.html.erb")
   end
   
+  def report_html
+    @property = Property.find(params.fetch("id_to_display"))
+    @call_type = ActivityType.where(title: "Call").first
+    render("property_templates/report_html.html.erb")
+  end
+  
     def create_pdf
     @property = Property.find(params.fetch("id_to_display"))
+    @activity_types = ActivityType.all
     
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ReportPdf.new(@property)
-        send_data pdf.render, filename: "Report for #{@property.address}.pdf",
-                              type: 'application/pdf'
+        pdf = ReportPdf.new(@property, @activity_types)
+        send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", disposition: 'inline'
         end
        end
     end

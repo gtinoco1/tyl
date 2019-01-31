@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get("/properties/:prefill_with_id/edit", { :controller => "properties", :action => "edit_form" })
   post("/update_property/:id_to_modify", { :controller => "properties", :action => "update_row" })
  get("/properties/:id_to_display/report", { :controller => "properties", :action => "create_pdf" }) 
+  get("/properties/:id_to_display/report_html", { :controller => "properties", :action => "report_html" }) 
   # DELETE
   get("/delete_property/:id_to_remove", { :controller => "properties", :action => "destroy_row" })
 
