@@ -92,10 +92,10 @@ class ReportPdf < Prawn::Document
     font "Nunito"
     text "Other", :align => :left, size: 13, style: :bold
     move_down 5
-    table other_rows, :position => :center, :width => 540, :column_widths => {0 => 50, 2 => 60},
+    table other_rows, :position => :center, :width => 540, :column_widths => {0 => 50, 4 => 60},
                                   :cell_style => {:size => 10} do
       row(0).font_style = :bold
-      columns(0..3).align = :center
+      columns(0..4).align = :center
       self.row_colors = ["F0F0F0", "FFFFFF"]
       self.header = true
     end
@@ -123,9 +123,9 @@ class ReportPdf < Prawn::Document
   end
   
   def other_rows
-    [["Date", "Details", "Time (min)"]] +
+    [["Date", "Subject", "Details", "Cost", "Time (min)"]] +
     @property.activities.where(activity_type: @activity_types.where(title: "Other").first.id).order(date: :desc).map do |activity|
-      [activity.date.strftime("%b %d"), activity.detail, activity.duration.to_i]
+      [activity.date.strftime("%b %d"), activity.subject, activity.detail, "$#{activity.cost.to_i}", activity.duration.to_i]
     end
   end
 
