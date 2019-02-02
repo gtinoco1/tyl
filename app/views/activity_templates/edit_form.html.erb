@@ -54,7 +54,7 @@
             <label for="subject">
               Subject
             </label>
-            <input type="text" id="subject" name="subject" class="form-control" value="<%= @activity.subject %>">
+            <input type="text" id="subject" name="subject" class="form-control" value="<%= @activity.subject %>" required>
           </div>
 
         <% else %>
@@ -109,7 +109,7 @@
             <label for="duration">
               Duration (minutes)            
             </label>
-            <input type="text" id="duration" name="duration" class="form-control" value="<%= @activity.duration %>">
+            <input type="text" id="duration" name="duration" class="form-control" value="<%= @activity.duration %>" required>
           </div>
 
         <% else %>

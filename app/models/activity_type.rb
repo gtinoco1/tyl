@@ -16,8 +16,16 @@
 #  agent_toggle        :string
 #  customer_toggle     :string
 #  subject_toggle      :string
+#  user_id             :integer
 #
 
 class ActivityType < ApplicationRecord
-    has_many :activities, :dependent => :destroy
+  has_many :activities, :dependent => :destroy
+  belongs_to :user
+
+  validates :title, :presence => {:message => "Title can't be blank."}
+  validates :title, :uniqueness => {:scope => [:user_id], :message => "already exists."}
+  
+  
+  
 end

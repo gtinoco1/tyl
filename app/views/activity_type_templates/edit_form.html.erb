@@ -9,6 +9,10 @@
     <form action="/update_activity_type/<%= @activity_type.id %>" method="post">
 
       <div class="form-group">
+        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+      </div>
+      
+      <div class="form-group">
         <label for="title">
           Title
         </label>

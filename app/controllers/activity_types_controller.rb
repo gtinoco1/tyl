@@ -31,6 +31,7 @@ class ActivityTypesController < ApplicationController
     @activity_type.subject_toggle = params.fetch("subject_toggle")
     @activity_type.agent_toggle = params.fetch("agent_toggle")
     @activity_type.customer_toggle = params.fetch("customer_toggle")
+    @activity_type.user_id = params.fetch("user_id")
 
     if @activity_type.valid?
       @activity_type.save
@@ -61,6 +62,7 @@ class ActivityTypesController < ApplicationController
     @activity_type.subject_toggle = params.fetch("subject_toggle")
     @activity_type.agent_toggle = params.fetch("agent_toggle")
     @activity_type.customer_toggle = params.fetch("customer_toggle")
+    @activity_type.user_id = params.fetch("user_id")
 
     if @activity_type.valid?
       @activity_type.save

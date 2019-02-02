@@ -23,6 +23,9 @@
 class Activity < ApplicationRecord
   belongs_to :property
   belongs_to :activity_type
+
+  validates :date, :presence => true
+
   mount_uploader :flyer_img, FlyerImgUploader
   mount_uploader :postcard__img, PostcardImgUploader
 end

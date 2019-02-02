@@ -26,6 +26,84 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :properties, :foreign_key => "realtor_id", :dependent => :destroy
+  has_many :activity_types, :dependent => :destroy
   validates :last_name, :presence => true
   validates :first_name, :presence => true
+  
+  after_create :add_types
+
+  def add_types
+    ActivityType.create(user: self, title: "Showing", 
+                                    cost_toggle: "Hide",
+                                    duration_toggle: "Show", 
+                                    detail_toggle: "Show", 
+                                    outcome_toggle: "Hide",
+                                    contact_toggle: "Hide", 
+                                    flyer_img_toggle: "Hide", 
+                                    postcard_img_toggle: "Hide",
+                                    subject_toggle: "Show", 
+                                    agent_toggle: "Show", 
+                                    customer_toggle: "Show")
+                                    
+    ActivityType.create(user: self, title: "Call", 
+                                    cost_toggle: "Hide",
+                                    duration_toggle: "Show", 
+                                    detail_toggle: "Show", 
+                                    outcome_toggle: "Hide",
+                                    contact_toggle: "Show", 
+                                    flyer_img_toggle: "Hide", 
+                                    postcard_img_toggle: "Hide",
+                                    subject_toggle: "Show", 
+                                    agent_toggle: "Hide", 
+                                    customer_toggle: "Hide")
+                                    
+    ActivityType.create(user: self, title: "Flyer", 
+                                    cost_toggle: "Show",
+                                    duration_toggle: "Show", 
+                                    detail_toggle: "Hide", 
+                                    outcome_toggle: "Hide",
+                                    contact_toggle: "Show", 
+                                    flyer_img_toggle: "Show", 
+                                    postcard_img_toggle: "Hide",
+                                    subject_toggle: "Show", 
+                                    agent_toggle: "Hide", 
+                                    customer_toggle: "Hide")
+                                    
+    ActivityType.create(user: self, title: "Postcard", 
+                                    cost_toggle: "Show",
+                                    duration_toggle: "Show", 
+                                    detail_toggle: "Hide", 
+                                    outcome_toggle: "Hide",
+                                    contact_toggle: "Show", 
+                                    flyer_img_toggle: "Hide", 
+                                    postcard_img_toggle: "Show",
+                                    subject_toggle: "Show", 
+                                    agent_toggle: "Hide", 
+                                    customer_toggle: "Hide")
+                                    
+    ActivityType.create(user: self, title: "Other", 
+                                    cost_toggle: "Show",
+                                    duration_toggle: "Show", 
+                                    detail_toggle: "Show", 
+                                    outcome_toggle: "Show",
+                                    contact_toggle: "Show", 
+                                    flyer_img_toggle: "Show", 
+                                    postcard_img_toggle: "Show",
+                                    subject_toggle: "Show", 
+                                    agent_toggle: "Show", 
+                                    customer_toggle: "Show")
+    
+    ActivityType.create(user: self, title: "Listing Agreement Paperwork", 
+                                    cost_toggle: "Hide",
+                                    duration_toggle: "Show", 
+                                    detail_toggle: "Show", 
+                                    outcome_toggle: "Hide",
+                                    contact_toggle: "Hide", 
+                                    flyer_img_toggle: "Hide", 
+                                    postcard_img_toggle: "Hide",
+                                    subject_toggle: "Hide", 
+                                    agent_toggle: "Hide", 
+                                    customer_toggle: "Hide")
+  
+  end
 end
