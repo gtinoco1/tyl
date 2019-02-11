@@ -67,7 +67,7 @@ class ActivityTypesController < ApplicationController
     if @activity_type.valid?
       @activity_type.save
 
-      redirect_to("/activity_types/#{@activity_type.id}", :notice => "Activity type updated successfully.")
+      redirect_to("/activity_types", :notice => "Activity type updated successfully.")
     else
       render("activity_type_templates/edit_form_with_errors.html.erb")
     end
