@@ -26,23 +26,14 @@ class ReportTwoPdf < Prawn::Document
     # eval("test_#{type.id}")
     # end
 
-    @activity_types.each do |type|
-      eval("method_#{type.id}")
+    ActivityType.where(user_id: @current_user.id).each do |type|
+      if type.activities.count > 0
+        eval("method_#{type.id}")
+      else
+      end
     end
 
     footer
-  end
-
-  # def test
-  #   @activity_types.each do |type|
-  #   text type.title
-  # end
-  # end
-
-  ActivityType.all.each do |type|
-    define_method("test_#{type.id}") do
-      text type.title
-    end
   end
 
   def logo
@@ -65,17 +56,27 @@ class ReportTwoPdf < Prawn::Document
       draw_text page_number, :at => [530, 0]
     end
   end
+  
 
   ActivityType.all.each do |type|
     define_method("method_#{type.id}") do
       move_down 20
+      a =  [1,
+           type.subject_toggle == "Show" ? 1 : nil,
+           type.contact_toggle == "Show" ? 1 : nil,
+           type.agent_toggle == "Show" ? 1 : nil,
+           type.customer_toggle == "Show" ? 1 : nil,
+           type.detail_toggle == "Show" ? 1 : nil,
+           type.outcome_toggle == "Show" ? 1 : nil,
+           type.cost_toggle == "Show" ? 1 : nil,
+           type.duration_toggle == "Show" ? 1 : nil].compact.length - 1
       font "Nunito"
       text type.title, :align => :left, size: 13, style: :bold
       move_down 5
-      table eval("rows_#{type.id}"), :position => :center, :width => 540, :column_widths => {0 => 50, 3 => 60},
-                                     :cell_style => {:font => "Nunito", :size => 10} do
+      table eval("row_#{type.id}"), :position => :center, :width => 540, :column_widths => {0 => 50, a => 60},
+                                    :cell_style => {:font => "Nunito", :size => 10} do
         row(0).font_style = :bold
-        columns(0..3).align = :center
+        columns(0..8).align = :center
         self.row_colors = ["F0F0F0", "FFFFFF"]
         self.header = true
       end
@@ -83,11 +84,29 @@ class ReportTwoPdf < Prawn::Document
   end
 
   ActivityType.all.each do |type|
-    define_method("rows_#{type.id}") do
-      [["Date", "Contact", "Details", "Time (min)"]] +
-        type.activities.order(date: :desc).map do |activity|
-          [activity.date.strftime("%b %d"), activity.contact, activity.detail, activity.duration.to_i]
+    define_method("row_#{type.id}") do
+      type.subject_toggle == "Show" ? subject_header = "Subject" : subject_header = nil
+      type.contact_toggle == "Show" ? contact_header = "Contact" : contact_header = nil
+      type.agent_toggle == "Show" ? agent_header = "Agent" : agent_header = nil
+      type.customer_toggle == "Show" ? customer_header = "Customer" : customer_header = nil
+      type.detail_toggle == "Show" ? detail_header = "Detail" : detail_header = nil
+      type.outcome_toggle == "Show" ? outcome_header = "Outcome" : outcome_header = nil
+      type.cost_toggle == "Show" ? cost_header = "Cost" : cost_header = nil
+      type.duration_toggle == "Show" ? duration_header = "Time (min)" : duration_header = nil
+      [["Date", subject_header, contact_header, agent_header, customer_header, detail_header, outcome_header, cost_header, duration_header].compact] +
+        type.activities.order(date: :asc).map do |activity|
+          [activity.date.strftime("%b %d"),
+           type.subject_toggle == "Show" ? activity.subject : nil,
+           type.contact_toggle == "Show" ? activity.contact : nil,
+           type.agent_toggle == "Show" ? activity.agent : nil,
+           type.customer_toggle == "Show" ? activity.customer : nil,
+           type.detail_toggle == "Show" ? activity.detail : nil,
+           type.outcome_toggle == "Show" ? activity.outcome : nil,
+           type.cost_toggle == "Show" ? activity.cost.to_i : nil,
+           type.duration_toggle == "Show" ? activity.duration.to_i : nil].compact
         end
     end
   end
+
 end
+
