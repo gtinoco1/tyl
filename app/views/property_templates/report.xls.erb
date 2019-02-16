@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Address</Data></Cell>
+        <Cell><Data ss:Type="String">State</Data></Cell>
+        <Cell><Data ss:Type="String">Zipcode</Data></Cell>
+      </Row>
+    <% @property.each do |property| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= property.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= property.address %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= property.state %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= property.zipcode %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

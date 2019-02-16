@@ -4,6 +4,12 @@ class PropertiesController < ApplicationController
 
     render("property_templates/index.html.erb")
   end
+  
+    def all
+    @properties = Property.where(status: "Active")
+
+    render("property_templates/all_properties.html.erb")
+  end
 
   def show
     @property = Property.find(params.fetch("id_to_display"))
@@ -19,11 +25,15 @@ class PropertiesController < ApplicationController
   
     def create_pdf
     @property = Property.find(params.fetch("id_to_display"))
+    @activities = Activity.where(property_id: 1)
     @activity_types = current_user.activity_types
     @current_user_id = current_user.id
     
     respond_to do |format|
       format.html
+      # format.csv {render text: Property.all.to_csv}
+      format.xls { send_data Property.all.to_csv(col_sep: "\t") }
+      
       format.pdf do
         pdf = ReportTwoPdf.new(@property, @activity_types, @current_user)
         send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", disposition: 'inline'
@@ -46,6 +56,7 @@ class PropertiesController < ApplicationController
     @property.state = params.fetch("state")
     @property.zipcode = params.fetch("zipcode")
     @property.status = params.fetch("status")
+    @property.listing_type = params.fetch("listing_type","")
 
     if @property.valid?
       @property.save
@@ -71,6 +82,7 @@ class PropertiesController < ApplicationController
     @property.state = params.fetch("state")
     @property.zipcode = params.fetch("zipcode")
     @property.status = params.fetch("status")
+    @property.listing_type = params.fetch("listing_type")
 
     if @property.valid?
       @property.save

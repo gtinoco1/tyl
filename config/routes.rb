@@ -46,8 +46,9 @@ Rails.application.routes.draw do
   post("/create_property", { :controller => "properties", :action => "create_row" })
 
   # READ
-  get("/properties", { :controller => "properties", :action => "index" })
+  get("/", { :controller => "properties", :action => "index" })
   get("/properties/:id_to_display", { :controller => "properties", :action => "show" })
+  get("/all_properties", { :controller => "properties", :action => "all" })
 
   # UPDATE
   get("/properties/:prefill_with_id/edit", { :controller => "properties", :action => "edit_form" })

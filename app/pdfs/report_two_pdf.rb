@@ -70,6 +70,7 @@ class ReportTwoPdf < Prawn::Document
            type.outcome_toggle == "Show" ? 1 : nil,
            type.cost_toggle == "Show" ? 1 : nil,
            type.duration_toggle == "Show" ? 1 : nil].compact.length - 1
+
       font "Nunito"
       text type.title, :align => :left, size: 13, style: :bold
       move_down 5

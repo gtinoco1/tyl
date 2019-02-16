@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-8 offset-lg-2">
+  <div class="col-lg-6 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
       Add a new property
     </h4>
@@ -7,10 +7,20 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-8 offset-lg-2">
+<form action="/create_property" method="post">
+  <div class="row">
+    <div class="col-lg-2 offset-lg-3">
+      <div class="form-group">
+        <label for="listing_type">
+          Listing
+        </label>
+        <%= select_tag(:listing_type, options_for_select(["For Sale", "For Rent"], @property.listing_type), :class => "form-control") %>
+      </div>
+    </div>
+  </div>
 
-    <form action="/create_property" method="post">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
 
       <div class="form-group">
         <label for="address">
@@ -58,16 +68,15 @@
       </div>
 
 
-      <button class="btn btn-block btn-outline-secondary">
+      <button class="btn btn-block btn-outline-success">
         Create property
       </button>
     </form>
 
     <hr>
 
-    <a href="/properties">
-      Go back
-    </a>
-
+        <a href="/all_properties" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
   </div>
 </div>
