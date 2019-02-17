@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190215202756) do
+ActiveRecord::Schema.define(version: 20190217010016) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -76,6 +76,47 @@ ActiveRecord::Schema.define(version: 20190215202756) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "buyer_activities", force: :cascade do |t|
+    t.integer "duration"
+    t.string "property_address"
+    t.integer "zipcode"
+    t.string "detail"
+    t.string "comment"
+    t.string "image"
+    t.integer "buyer_id"
+    t.integer "buyer_activity_type_id"
+    t.date "date"
+    t.string "subject"
+    t.string "agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "buyer_activity_types", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "duration_toggle"
+    t.string "property_address_toggle"
+    t.string "zipcode_toggle"
+    t.string "detail_toggle"
+    t.string "comment_toggle"
+    t.string "image_toggle"
+    t.string "subject_toggle"
+    t.string "agent_toggle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+  end
+
+  create_table "buyers", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "funds"
+    t.integer "downpayment"
+    t.string "preapproval"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "properties", force: :cascade do |t|

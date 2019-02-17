@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-secondary text-uppercase">
+      Add a new buyer
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<form action="/create_buyer" method="post">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="form-group">
+        <label for="name">
+          Buyer Name
+        </label>
+        <input type="text" id="name" name="name" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 offset-lg-3">
+      <div class="form-group">
+        <label for="funds">
+          Funds
+        </label>
+        <input type="text" id="funds" name="funds" class="form-control">
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="downpayment">
+          Downpayment
+        </label>
+        <input type="text" id="downpayment" name="downpayment" class="form-control">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="form-group">
+        <label for="preapproval">
+          Preapproval?
+        </label>
+        <input type="text" id="preapproval" name="preapproval" class="form-control">
+      </div>
+
+
+      <div class="form-group">
+        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <button class="btn btn-block btn-outline-success">
+        Create buyer
+      </button>
+    </form>
+
+    <hr>
+
+    <a href="/all_properties" class="btn btn-block btn-outline-secondary">
+      Go back
+    </a>
+  </div>
+</div>

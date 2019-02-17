@@ -1,0 +1,146 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All buyer activities
+    </h1>
+
+    <a href="/buyer_activities/new" class="btn btn-block btn-outline-secondary">
+      Add a new buyer activity
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Duration
+        </th>
+
+        <th>
+          Property address
+        </th>
+
+        <th>
+          Zipcode
+        </th>
+
+        <th>
+          Detail
+        </th>
+
+        <th>
+          Comment
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Buyer
+        </th>
+
+        <th>
+          Buyer activity type
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Subject
+        </th>
+
+        <th>
+          Agent
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @buyer_activities.each do |buyer_activity| %>
+      <tr>
+        <td>
+          <%= buyer_activity.id %>
+        </td>
+
+        <td>
+          <%= buyer_activity.duration %>
+        </td>
+
+        <td>
+          <%= buyer_activity.property_address %>
+        </td>
+
+        <td>
+          <%= buyer_activity.zipcode %>
+        </td>
+
+        <td>
+          <%= buyer_activity.detail %>
+        </td>
+
+        <td>
+          <%= buyer_activity.comment %>
+        </td>
+
+        <td>
+          <%= buyer_activity.image %>
+        </td>
+
+        <td>
+          <%= buyer_activity.buyer_id %>
+        </td>
+
+        <td>
+          <%= buyer_activity.buyer_activity_type_id %>
+        </td>
+
+        <td>
+          <%= buyer_activity.date %>
+        </td>
+
+        <td>
+          <%= buyer_activity.subject %>
+        </td>
+
+        <td>
+          <%= buyer_activity.agent %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(buyer_activity.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(buyer_activity.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/buyer_activities/<%= buyer_activity.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

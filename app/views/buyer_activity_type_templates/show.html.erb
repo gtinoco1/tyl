@@ -1,0 +1,107 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+      Buyer activity type #<%= @buyer_activity_type.id %> details
+    </h1>
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/buyer_activity_types" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/buyer_activity_types/<%= @buyer_activity_type.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit buyer activity type
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="/delete_buyer_activity_type/<%= @buyer_activity_type.id %>" class="btn btn-block btn-outline-secondary">
+          Delete buyer activity type
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.user_id %>
+      </dd>
+
+      <dt>
+        Duration toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.duration_toggle %>
+      </dd>
+
+      <dt>
+        Property address toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.property_address_toggle %>
+      </dd>
+
+      <dt>
+        Zipcode toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.zipcode_toggle %>
+      </dd>
+
+      <dt>
+        Detail toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.detail_toggle %>
+      </dd>
+
+      <dt>
+        Comment toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.comment_toggle %>
+      </dd>
+
+      <dt>
+        Image toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.image_toggle %>
+      </dd>
+
+      <dt>
+        Subject toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.subject_toggle %>
+      </dd>
+
+      <dt>
+        Agent toggle
+      </dt>
+      <dd>
+        <%= @buyer_activity_type.agent_toggle %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@buyer_activity_type.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@buyer_activity_type.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+

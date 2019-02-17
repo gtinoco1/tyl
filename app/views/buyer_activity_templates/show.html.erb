@@ -1,0 +1,161 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h4 class="text-uppercase text-secondary">
+      Activity Details
+    </h4>
+    <hr>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+
+    <div class="form-row">
+
+      <div class="form-group col-lg-3 mb-0">
+        <div class="mb-1 mt-0">
+          Activity Type            
+        </div>
+        <input type="text" id="buyer_activity_type_id" name="activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type.title %>" disabled>
+      </div>
+
+      <div class="form-group col-lg-3 mb-0">
+        <div class="mb-1">
+          Date            
+        </div>
+        <input type="date" id="date" name="date" class="form-control" value="<%= @buyer_activity.date %>" disabled>
+      </div>
+
+      <% if @buyer_activity.buyer_activity_type.subject_toggle == "Show" %>
+        <div class="form-group col-lg-4 mb-0">
+          <div class="mb-1">
+            Subject
+          </div>
+          <input type="text" id="subject" name="subject" class="form-control" value="<%= @buyer_activity.subject %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+
+    </div>
+
+    <div class="form-row">
+
+      <% if @buyer_activity.buyer_activity_type.agent_toggle == "Show" %>
+
+        <div class="form-group col-lg-6">
+          <label for="agent">
+            Agent            
+          </label>
+          <input type="text" id="agent" name="agent" class="form-control" value="<%= @buyer_activity.agent %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+
+      <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
+
+        <div class="form-group col-lg-4 mb-0">
+          <label for="comment">
+            Comment            
+          </label>
+          <input type="text" id="customer" name="comment" class="form-control" value="<%= @buyer_activity.comment %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+
+    </div>
+
+    <div class="form-row">
+
+      <% if @buyer_activity.buyer_activity_type.property_address_toggle == "Show" %>
+
+        <div class="form-group col-lg-6 mb-0">
+          <div class="mb-1">
+            Property Address            
+          </div>
+          <input type="text" id="property_address" name="property_address" class="form-control" value="<%= @buyer_activity.property_address %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+
+      <% if @buyer_activity.buyer_activity_type.zipcode_toggle == "Show" %>
+
+        <div class="form-group col-lg-3 mb-0">
+          <div class="mb-1">
+            Zipcode            
+          </div>
+          <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%= @buyer_activity.zipcode %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+      
+            <% if @buyer_activity.buyer_activity_type.duration_toggle == "Show" %>
+
+        <div class="form-group col-lg-4 mb-0">
+          <div class="mb-1">
+            Duration (minutes)            
+          </div>
+
+          <input type="text" id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>" disabled>
+        </div>
+
+      <% else %>
+      <% end %>
+    </div>
+
+    <% if @buyer_activity.buyer_activity_type.detail_toggle == "Show" %>
+
+      <div class="form-group mt-1 mb-0">
+        <div class="mb-1">
+          Detail            
+        </div>
+        <textarea disabled id="detail" name="detail" class="form-control" rows="3"><%= @buyer_activity.detail %></textarea>
+      </div>
+
+    <% else %>
+    <% end %>
+
+    <% if @buyer_activity.buyer_activity_type.image_toggle == "Show" %>
+
+      <div class="col-lg-8 pl-0 pt-3">
+        <div class="form-group mt-1 mb-0">
+          <img src="<%= @buyer_activity.image %>" alt="flyer" class="img-thumbnail">
+        </div>
+      </div>
+
+    <% else %>
+    <% end %>
+
+    <hr>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="row">
+      <div class="col-lg-4">
+        <a href="/buyers/<%= @buyer_activity.buyer_id %>" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+
+      <div class="col-lg-4">
+        <a href="/buyer_activities/<%= @buyer_activity.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit activity
+        </a>
+      </div>
+
+      <div class="col-lg-4">
+        <a href="/delete_buyer_activity/<%= @buyer_activity.id %>" class="btn btn-block btn-outline-secondary">
+          Delete activity
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

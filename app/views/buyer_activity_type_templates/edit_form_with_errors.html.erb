@@ -1,0 +1,98 @@
+<% if @buyer_activity_type.errors.any? %>
+  <% @buyer_activity_type.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit buyer activity type #<%= @buyer_activity_type.id %>
+</h1>
+
+<hr>
+
+<form action="/update_buyer_activity_type/<%= @buyer_activity_type.id %>" method="post">
+
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @buyer_activity_type.user_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="duration_toggle">
+      Duration toggle
+    </label>
+
+    <input type="text" id="duration_toggle" name="duration_toggle" class="form-control" value="<%= @buyer_activity_type.duration_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="property_address_toggle">
+      Property address toggle
+    </label>
+
+    <input type="text" id="property_address_toggle" name="property_address_toggle" class="form-control" value="<%= @buyer_activity_type.property_address_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="zipcode_toggle">
+      Zipcode toggle
+    </label>
+
+    <input type="text" id="zipcode_toggle" name="zipcode_toggle" class="form-control" value="<%= @buyer_activity_type.zipcode_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="detail_toggle">
+      Detail toggle
+    </label>
+
+    <input type="text" id="detail_toggle" name="detail_toggle" class="form-control" value="<%= @buyer_activity_type.detail_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="comment_toggle">
+      Comment toggle
+    </label>
+
+    <input type="text" id="comment_toggle" name="comment_toggle" class="form-control" value="<%= @buyer_activity_type.comment_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="image_toggle">
+      Image toggle
+    </label>
+
+    <input type="text" id="image_toggle" name="image_toggle" class="form-control" value="<%= @buyer_activity_type.image_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="subject_toggle">
+      Subject toggle
+    </label>
+
+    <input type="text" id="subject_toggle" name="subject_toggle" class="form-control" value="<%= @buyer_activity_type.subject_toggle %>">
+  </div>
+
+  <div class="form-group">
+    <label for="agent_toggle">
+      Agent toggle
+    </label>
+
+    <input type="text" id="agent_toggle" name="agent_toggle" class="form-control" value="<%= @buyer_activity_type.agent_toggle %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update buyer activity type
+  </button>
+</form>
+
+<hr>
+
+<a href="/buyer_activity_types">
+  Go back
+</a>

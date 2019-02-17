@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+
+    <h4 class="text-uppercase text-secondary">
+      Edit activity type
+    </h4>
+    <hr>
+
+    <form action="/update_buyer_activity_type/<%= @buyer_activity_type.id %>" method="post">
+
+      <div class="form-group">
+        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <div class="form-group">
+        <label for="title">
+          Title
+        </label>
+        <input type="text" id="title" name="title" class="form-control" value="<%= @buyer_activity_type.title %>">
+      </div>
+
+      <div class="row mb-2">
+
+        <div class="col-lg-3">
+          <label for="length_toggle">
+            Duration (min)
+          </label>
+          <%= select_tag(:duration_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.duration_toggle), :class => "form-control") %>
+        </div>
+
+        <div class="col-lg-3">
+          <label for="cost_toggle">
+            Property Address
+          </label>
+          <%= select_tag(:property_address_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.property_address_toggle), :class => "form-control") %>
+        </div>
+
+        <div class="col-lg-3">
+          <label for="zipcode_toggle">
+            Zipcode
+          </label>
+          <%= select_tag(:zipcode_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.zipcode_toggle), :class => "form-control") %>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-lg-3">
+          <label for="detail_toggle">
+            Details
+          </label>
+          <%= select_tag(:detail_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.detail_toggle), :class => "form-control") %>
+        </div>
+
+        <div class="col-lg-3">
+          <label for="comment_toggle">
+            Comment
+          </label>
+          <%= select_tag(:comment_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.comment_toggle), :class => "form-control") %>
+        </div>
+
+        <div class="col-lg-3">
+          <label for="subject_toggle">
+            Subject
+          </label>
+          <%= select_tag(:subject_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.subject_toggle), :class => "form-control") %>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-lg-3">
+          <label for="agent_toggle">
+            Agent 
+          </label>
+          <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.agent_toggle), :class => "form-control") %>
+        </div>
+
+        <div class="col-lg-3">
+          <label for="image_toggle">
+            Image 
+          </label>
+          <%= select_tag(:image_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.image_toggle), :class => "form-control") %>
+        </div>
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Edit activity type
+      </button>
+    </form>
+
+    <hr>
+
+    <a href="/activity_types">
+      Go back
+    </a>
+
+  </div>
+</div>

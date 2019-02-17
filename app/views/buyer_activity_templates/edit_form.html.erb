@@ -1,0 +1,149 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h4 class="text-uppercase text-secondary">
+      Activity Details
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<form action="/update_buyer_activity/<%= @buyer_activity.id %>" method="post" enctype="multipart/form-data">
+
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+
+      <div class="form-row">
+
+        <div class="form-group col-lg-3 mb-0">
+          <div class="mb-1 mt-0">
+            Activity Type            
+          </div>
+          <input type="text" id="buyer_activity_type_id" name="buyer_activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type.title %>" >
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" name="buyer_activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type_id %>">
+        </div>
+
+        <div class="form-group col-lg-3 mb-0">
+          <div class="mb-1">
+            Date            
+          </div>
+          <input type="date" id="date" name="date" class="form-control" value="<%= @buyer_activity.date %>" >
+        </div>
+
+        <% if @buyer_activity.buyer_activity_type.subject_toggle == "Show" %>
+          <div class="form-group col-lg-4 mb-0">
+            <div class="mb-1">
+              Subject
+            </div>
+            <input type="text" id="subject" name="subject" class="form-control" value="<%= @buyer_activity.subject %>" >
+          </div>
+
+        <% else %>
+        <% end %>
+
+      </div>
+
+      <div class="form-row">
+
+        <% if @buyer_activity.buyer_activity_type.agent_toggle == "Show" %>
+
+          <div class="form-group col-lg-6">
+            <label for="agent">
+              Agent            
+            </label>
+            <input type="text" id="agent" name="agent" class="form-control" value="<%= @buyer_activity.agent %>" >
+          </div>
+
+        <% else %>
+        <% end %>
+
+        <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
+
+          <div class="form-group col-lg-4 mb-0">
+            <label for="comment">
+              Comment            
+            </label>
+            <input type="text" id="customer" name="comment" class="form-control" value="<%= @buyer_activity.comment %>" >
+          </div>
+
+        <% else %>
+        <% end %>
+
+      </div>
+
+      <div class="form-row">
+
+        <% if @buyer_activity.buyer_activity_type.property_address_toggle == "Show" %>
+
+          <div class="form-group col-lg-6 mb-0">
+            <div class="mb-1">
+              Property Address            
+            </div>
+            <input type="text" id="property_address" name="property_address" class="form-control" value="<%= @buyer_activity.property_address %>" >
+          </div>
+
+        <% else %>
+        <% end %>
+
+        <% if @buyer_activity.buyer_activity_type.zipcode_toggle == "Show" %>
+
+          <div class="form-group col-lg-3 mb-0">
+            <div class="mb-1">
+              Zipcode            
+            </div>
+            <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%= @buyer_activity.zipcode %>" >
+          </div>
+
+        <% else %>
+        <% end %>
+
+        <% if @buyer_activity.buyer_activity_type.duration_toggle == "Show" %>
+
+          <div class="form-group col-lg-4 mb-0">
+            <div class="mb-1">
+              Duration (minutes)            
+            </div>
+
+            <input type="text" id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>">
+          </div>
+
+        <% else %>
+        <% end %>
+      </div>
+
+      <% if @buyer_activity.buyer_activity_type.detail_toggle == "Show" %>
+
+        <div class="form-group mt-1 mb-0">
+          <div class="mb-1">
+            Detail            
+          </div>
+          <textarea id="detail" name="detail" class="form-control" rows="3"><%= @buyer_activity.detail %></textarea>
+        </div>
+
+      <% else %>
+      <% end %>
+
+      <% if @buyer_activity.buyer_activity_type.image_toggle == "Show" %>
+
+        <div class="col-lg-8 pl-0 pt-3">
+          <div class="form-group mt-1 mb-0">
+            <img src="<%= @buyer_activity.image %>" alt="flyer" class="img-thumbnail">
+          </div>
+        </div>
+
+      <% else %>
+      <% end %>
+
+      <div class="form-group">
+        <input type="hidden" name="buyer_id" class="form-control" value="<%= @buyer_activity.buyer_id %>">
+      </div>
+
+      <hr>
+      <button class="btn btn-block btn-outline-secondary">
+        Update activity
+      </button>
+    </form>
+  </div>
+</div>

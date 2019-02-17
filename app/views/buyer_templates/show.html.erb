@@ -1,0 +1,67 @@
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-2">
+    <h4 class="text-secondary text-uppercase">
+      <%= @buyer.name %>
+    </h4>
+  </div>
+
+  <div class="col-md-2">
+    <a href="" class="btn btn-block btn-outline-secondary">
+      Generate Report
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <a href="/buyer_activities/new/<%= @buyer.id %>" class="btn btn-block btn-outline-secondary">
+      Add Activity
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+
+    <div class="list-group">
+      <% @buyer.buyer_activities.each do |buyer_activity| %>
+
+        <a href="../buyer_activities/<%= buyer_activity.id %>/" class="list-group-item list-group-item-action">
+          <div class="row">
+            <div class="col text-center">
+              <%= buyer_activity.buyer_activity_type.title %>
+            </div>
+            <div class="col text-center">
+              
+            </div>
+            <div class="col text-center">
+              <%= buyer_activity.date.strftime("%b %d")  %>
+            </div>
+
+          </div>
+        </a>
+      <% end  %>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/buyers/<%= @buyer.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit Buyer Details
+        </a>
+        <a href="/buyers" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

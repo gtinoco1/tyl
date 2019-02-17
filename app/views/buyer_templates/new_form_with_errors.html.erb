@@ -1,0 +1,70 @@
+<!-- Validation failure messages -->
+<% if @buyer.present? %>
+  <% if @buyer.errors.any? %>
+    <% @buyer.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new buyer
+</h1>
+
+
+<hr>
+
+<form action="/create_buyer" method="post">
+
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @buyer.user_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @buyer.name %>">
+  </div>
+
+  <div class="form-group">
+    <label for="funds">
+      Funds
+    </label>
+
+    <input type="text" id="funds" name="funds" class="form-control" value="<%= @buyer.funds %>">
+  </div>
+
+  <div class="form-group">
+    <label for="downpayment">
+      Downpayment
+    </label>
+
+    <input type="text" id="downpayment" name="downpayment" class="form-control" value="<%= @buyer.downpayment %>">
+  </div>
+
+  <div class="form-group">
+    <label for="preapproval">
+      Preapproval
+    </label>
+
+    <input type="text" id="preapproval" name="preapproval" class="form-control" value="<%= @buyer.preapproval %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create buyer
+  </button>
+</form>
+
+<hr>
+
+<a href="/buyers">
+  Go back
+</a>
