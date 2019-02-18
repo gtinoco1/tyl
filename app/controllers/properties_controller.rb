@@ -61,7 +61,7 @@ class PropertiesController < ApplicationController
     if @property.valid?
       @property.save
 
-      redirect_to("/properties", :notice => "Property created successfully.")
+      redirect_to("/all_properties", :notice => "Property created successfully.")
     else
       render("property_templates/new_form_with_errors.html.erb")
     end
@@ -98,6 +98,6 @@ class PropertiesController < ApplicationController
 
     @property.destroy
 
-    redirect_to("/properties", :notice => "Property deleted successfully.")
+    redirect_to("/all_properties", :notice => "Property deleted successfully.")
   end
 end
