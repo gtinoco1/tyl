@@ -10,6 +10,11 @@ class BuyersController < ApplicationController
 
     render("buyer_templates/show.html.erb")
   end
+  
+  def help_page
+    @buyer = Buyer.all
+    render("shared/help_page.html.erb")
+  end
 
   def new_form
     @buyer = Buyer.new

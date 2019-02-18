@@ -118,6 +118,7 @@ Rails.application.routes.draw do
   get("/delete_property/:id_to_remove", { :controller => "properties", :action => "destroy_row" })
 
   #------------------------------
+  get("/help", { :controller => "buyers", :action => "help_page" })
 
   devise_for :users
   ActiveAdmin.routes(self)
