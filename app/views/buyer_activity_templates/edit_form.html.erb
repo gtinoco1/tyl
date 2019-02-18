@@ -31,6 +31,19 @@
           </div>
           <input type="date" id="date" name="date" class="form-control" value="<%= @buyer_activity.date %>" >
         </div>
+        
+        <% if @buyer_activity.buyer_activity_type.duration_toggle == "Show" %>
+
+          <div class="form-group col-lg-4 mb-0">
+            <div class="mb-1">
+              Duration (minutes)            
+            </div>
+
+            <input type="text" id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>">
+          </div>
+
+        <% else %>
+        <% end %>
 
         <% if @buyer_activity.buyer_activity_type.subject_toggle == "Show" %>
           <div class="form-group col-lg-4 mb-0">
@@ -54,18 +67,6 @@
               Agent            
             </label>
             <input type="text" id="agent" name="agent" class="form-control" value="<%= @buyer_activity.agent %>" >
-          </div>
-
-        <% else %>
-        <% end %>
-
-        <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
-
-          <div class="form-group col-lg-4 mb-0">
-            <label for="comment">
-              Comment            
-            </label>
-            <input type="text" id="customer" name="comment" class="form-control" value="<%= @buyer_activity.comment %>" >
           </div>
 
         <% else %>
@@ -99,18 +100,19 @@
         <% else %>
         <% end %>
 
-        <% if @buyer_activity.buyer_activity_type.duration_toggle == "Show" %>
+        <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
 
-          <div class="form-group col-lg-4 mb-0">
-            <div class="mb-1">
-              Duration (minutes)            
-            </div>
-
-            <input type="text" id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>">
+          <div class="form-group col-lg-12 mb-0">
+            <label for="comment">
+              Comment            
+            </label>
+              <textarea id="comment" name="comment" class="form-control" rows="3" value="<%= @buyer_activity.comment %>"> <%= @buyer_activity.comment %> </textarea>
           </div>
 
         <% else %>
         <% end %>
+
+        
       </div>
 
       <% if @buyer_activity.buyer_activity_type.detail_toggle == "Show" %>
