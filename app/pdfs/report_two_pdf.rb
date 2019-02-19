@@ -72,10 +72,10 @@ class ReportTwoPdf < Prawn::Document
            type.duration_toggle == "Show" ? 1 : nil].compact.length - 1
 
       font "Nunito"
-      text type.title, :align => :left, size: 13, style: :bold
+      text type.title, :align => :left, size: 12, style: :bold
       move_down 5
       table eval("row_#{type.id}"), :position => :center, :width => 540, :column_widths => {0 => 50, a => 60},
-                                    :cell_style => {:font => "Nunito", :size => 10} do
+                                    :cell_style => {:font => "Nunito", :size => 9} do
         row(0).font_style = :bold
         columns(0..8).align = :center
         self.row_colors = ["F0F0F0", "FFFFFF"]
