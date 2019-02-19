@@ -11,7 +11,8 @@
   <div class="col-lg-6 offset-lg-3">
 
     <div class="text-center font-weight-light">
-      This page is for all your questions, concerns and suggestions. Please tell us how we can make Track Your Listing better.
+      This page is for all your questions, concerns and suggestions. Please tell us how we can make 
+      Track Your Listing better. To ask a question directly please email us at info@trackyourlisting.com.
     </div>
     <hr>
 
@@ -44,7 +45,7 @@
   <div class="row mb-2">
     <div class="col-lg-6 offset-lg-3">
 
-      <div class="card bg-light">
+      <div class="card bg-light" id="card<%= comment.id %>">
         <div class="card-body">
           <ul class="list-inline">
             <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
@@ -55,28 +56,66 @@
 
       <div class="row">
         <div class="col-8">
-          <p>
-            <small>
-              <a href="/comments" >Like</a> - <a href="/comments" >Reply</a> -
-              <%= comment.created_at.strftime("%b %d at %I:%M %p") %>
-            </small>
-          </p>
-        </div>
-        <div class="col-4 pl-2 text-secondary text-right">
-          <p><small>
-          <% if comment.user_id == current_user.id %>
-            <span class="text-secondary">
-              <a href="/delete_comment/<%= comment.id %>" >Delete</a> - 
-            </span>
-          <% else %>
-          <% end %>
-          <span class="fas fa-thumbs-up"></span>
-          <span class="badge badge-secondary">4</span>
-          </small></p>
+
+          <% i = Like.find_by({ :user_id => current_user.id, :comment_id => comment.id }) %>
+          <% if i == nil   %>
+            <p class="mt-0 mb-0 pt-0 pb-0">
+              <small>
+                <span>
+                  <form action="/create_like" method="post" class="">
+                    <input type="hidden" name="comment_id" value="<%= comment.id %>">
+                    <input type="hidden" name="user_id" value="<%= current_user.id %>">
+                    <button class="btn btn-sm btn-link pb-2 pr-0">
+                      Like
+                    </button>
+                  </form>
+                </span>
+              <% else %>
+                <p  class="mt-0 mb-0 pt-0 pb-0">
+                  <small>
+                    <span>
+                      <form action="/delete_like/<%= i.id %>" method="post" class="">
+                        <button class="btn btn-sm btn-link pb-2 pr-0">
+                          Unlike
+                        </button>
+                      </form>
+                    </span>
+                  <% end %>
+                  
+                  <% @time = comment.created_at - 18000 %>
+
+                  <span> - <%= @time.strftime("%b %d at %I:%M %p") %>
+                  </span>
+                </small>
+              </p>
+            </div>
+
+            <div class="col-4 pl-2 text-secondary text-right">
+
+              <% if comment.user_id == current_user.id %>
+                <span class="text-secondary">
+                  <a href="/delete_comment/<%= comment.id %>" >Delete</a> - 
+                </span>
+              <% else %>
+              <% end %>
+
+              <% if i == nil   %>
+                <span class="fas fa-thumbs-up"></span>
+                <span class="badge badge-secondary">
+                  <%= comment.likes.count %>
+                </span>
+              <% else %>
+                <span class="fas fa-thumbs-up text-success"></span>
+                <span class="badge badge-success">
+                  <%= comment.likes.count %>
+                </span>
+              <% end %>
+
+
+            </div>
+          </div>
+
+
         </div>
       </div>
-      
-      
-    </div>
-  </div>
-<% end %>
+    <% end %>

@@ -1,130 +1,96 @@
 <div class="row mb-3">
-  <div class="col-md-12">
-    <h1>
-      All buyer activity types
-    </h1>
+  <div class="col-md-8 offset-md-2">
+    <h4 class="text-secondary text-uppercase">
+      Settings
+    </h4>
+    <hr>
+  </div>
+</div>
 
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+
+
+    <div class="accordion" id="accordionExample">
+      <% current_user.buyer_activity_types.each do |type| %>
+
+        <form action="/update_buyer_activity_type/<%= type.id %>" method="post">
+          <div class="card bg-white border-white">
+            <div class="card-header bg-white " id="heading<%= type.id %>">
+              <h2 class="mb-0">
+                <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapse<%= type.id %>" aria-expanded="true" aria-controls="collapse<%= type.id %>">
+                  <%= type.title %>
+                </button>
+              </h2>
+            </div>
+            <div id="collapse<%= type.id %>" class="collapse" aria-labelledby="heading<%= type.id %>" data-parent="#accordionExample">
+              <div class="card-body">
+                <div class = "row mb-1">
+                  <div class="form-group">
+                    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" name="title" class="form-control" value="<%= type.title %>">
+                  </div>
+
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Subject
+                    <%= select_tag(:subject_toggle, options_for_select(["Show", "Hide"], type.subject_toggle), :class => "form-control") %>
+                  </div>
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Duration
+                    <%= select_tag(:duration_toggle, options_for_select(["Show", "Hide"], type.duration_toggle), :class => "form-control") %>
+                  </div>
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Property Address
+                    <%= select_tag(:property_address_toggle, options_for_select(["Show", "Hide"], type.property_address_toggle), :class => "form-control") %>
+                  </div>
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Zipcode
+                    <%= select_tag(:zipcode_toggle, options_for_select(["Show", "Hide"], type.zipcode_toggle), :class => "form-control") %>
+                  </div>
+                </div>
+                <div class = "row mb-3">
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Details
+                    <%= select_tag(:detail_toggle, options_for_select(["Show", "Hide"], type.detail_toggle), :class => "form-control") %>
+                  </div>
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Comments
+                    <%= select_tag(:comment_toggle, options_for_select(["Show", "Hide"], type.comment_toggle), :class => "form-control") %>
+                  </div>
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Agent
+                    <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"], type.agent_toggle), :class => "form-control") %>
+                  </div>
+                  <div class="col-lg-3 col-6 col-sm-6 mb-1">
+                    Image
+                    <%= select_tag(:image_toggle, options_for_select(["Show", "Hide"], type.image_toggle), :class => "form-control") %>
+                  </div>
+                </div>
+
+                <button class="btn btn-block btn-outline-success">
+                  Save
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
     <a href="/buyer_activity_types/new" class="btn btn-block btn-outline-secondary">
-      Add a new buyer activity type
+      Add a new activity type
     </a>
   </div>
 </div>
 
-
-<hr>
-
-<div class="row mb-3">
-  <div class="col-md-12">
-    <table class="table">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Duration toggle
-        </th>
-
-        <th>
-          Property address toggle
-        </th>
-
-        <th>
-          Zipcode toggle
-        </th>
-
-        <th>
-          Detail toggle
-        </th>
-
-        <th>
-          Comment toggle
-        </th>
-
-        <th>
-          Image toggle
-        </th>
-
-        <th>
-          Subject toggle
-        </th>
-
-        <th>
-          Agent toggle
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @buyer_activity_types.each do |buyer_activity_type| %>
-      <tr>
-        <td>
-          <%= buyer_activity_type.id %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.user_id %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.duration_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.property_address_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.zipcode_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.detail_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.comment_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.image_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.subject_toggle %>
-        </td>
-
-        <td>
-          <%= buyer_activity_type.agent_toggle %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(buyer_activity_type.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(buyer_activity_type.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/buyer_activity_types/<%= buyer_activity_type.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>

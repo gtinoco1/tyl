@@ -1,5 +1,5 @@
 <div class="row mb-3">
-  <div class="col-md-10 offset-md-1">
+  <div class="col-md-8 offset-md-2">
     <h4 class="text-secondary text-uppercase">
       Settings
     </h4>
@@ -8,7 +8,7 @@
 </div>
 
 <div class="row mb-3">
-  <div class="col-md-10 offset-md-1">
+  <div class="col-md-8 offset-md-2">
 
 
     <div class="accordion" id="accordionExample">
@@ -18,7 +18,7 @@
           <div class="card bg-white border-white">
             <div class="card-header bg-white " id="heading<%= type.id %>">
               <h2 class="mb-0">
-                <button class="btn btn-outline-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse<%= type.id %>" aria-expanded="true" aria-controls="collapse<%= type.id %>">
+                <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapse<%= type.id %>" aria-expanded="true" aria-controls="collapse<%= type.id %>">
                   <%= type.title %>
                 </button>
               </h2>
@@ -33,47 +33,47 @@
                     <input type="hidden" name="title" class="form-control" value="<%= type.title %>">
                   </div>
                   
-                  <div class="col-lg-2 offset-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Subject
                     <%= select_tag(:subject_toggle, options_for_select(["Show", "Hide"], type.subject_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Contact
                     <%= select_tag(:contact_toggle, options_for_select(["Show", "Hide"], type.contact_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Duration
                     <%= select_tag(:duration_toggle, options_for_select(["Show", "Hide"], type.duration_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Cost
                     <%= select_tag(:cost_toggle, options_for_select(["Show", "Hide"], type.cost_toggle), :class => "form-control") %>
                   </div>
                   </div>
-                  <div class = "row mb-3">
-                  <div class="col-lg-2 offset-lg-2 col-6 col-sm-6">
+                  <div class = "row mb-2">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Details
                     <%= select_tag(:detail_toggle, options_for_select(["Show", "Hide"], type.detail_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Outcome
                     <%= select_tag(:outcome_toggle, options_for_select(["Show", "Hide"], type.outcome_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Agent
                     <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"], type.agent_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Customer
                     <%= select_tag(:customer_toggle, options_for_select(["Show", "Hide"], type.customer_toggle), :class => "form-control") %>
                   </div>
                   </div>
-                  <div class = "row mb-3">
-                  <div class="col-lg-2 offset-lg-2 col-6 col-sm-6">
+                  <div class = "row mb-2">
+                  <div class="col-lg-3 offset-lg-3 col-6 col-sm-6">
                     Flyer Image
                     <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"], type.flyer_img_toggle), :class => "form-control") %>
                   </div>
-                  <div class="col-lg-2 col-6 col-sm-6">
+                  <div class="col-lg-3 col-6 col-sm-6">
                     Postcard Image
                     <%= select_tag(:postcard_img_toggle, options_for_select(["Show", "Hide"], type.postcard_img_toggle), :class => "form-control") %>
                   </div>
@@ -97,8 +97,8 @@
 </div>
 
 <div class="row mb-3">
-  <div class="col-md-10 offset-md-1">
-    <a href="/activity_types/new" class="btn btn-block btn-outline-primary">
+  <div class="col-md-8 offset-md-2">
+    <a href="/activity_types/new" class="btn btn-block btn-outline-secondary">
       Add a new activity type
     </a>
   </div>

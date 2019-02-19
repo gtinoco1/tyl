@@ -26,7 +26,7 @@ class LikesController < ApplicationController
     if @like.valid?
       @like.save
 
-      redirect_back(:fallback_location => "/likes", :notice => "Like created successfully.")
+       redirect_to("/comments#card#{@like.comment.id}")
     else
       render("like_templates/new_form_with_errors.html.erb")
     end
@@ -58,6 +58,6 @@ class LikesController < ApplicationController
 
     @like.destroy
 
-    redirect_to("/likes", :notice => "Like deleted successfully.")
+    redirect_to("/comments#card#{@like.comment.id}")
   end
 end

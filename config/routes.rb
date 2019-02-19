@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   post("/update_like/:id_to_modify", { :controller => "likes", :action => "update_row" })
 
   # DELETE
-  get("/delete_like/:id_to_remove", { :controller => "likes", :action => "destroy_row" })
+  post("/delete_like/:id_to_remove", { :controller => "likes", :action => "destroy_row" })
 
   #------------------------------
 
@@ -176,6 +176,7 @@ Rails.application.routes.draw do
 
   #------------------------------
   get("/help", { :controller => "buyers", :action => "help_page" })
+  get("/settings", { :controller => "activity_types", :action => "settings" })
 
   devise_for :users
   ActiveAdmin.routes(self)

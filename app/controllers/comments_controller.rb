@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
+
     render("comment_templates/index.html.erb")
   end
 

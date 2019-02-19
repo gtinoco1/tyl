@@ -10,6 +10,12 @@ class ActivityTypesController < ApplicationController
 
     render("activity_type_templates/show.html.erb")
   end
+  
+    def settings
+    @activity_type = ActivityType.all
+
+    render("shared/settings.html.erb")
+  end
 
   def new_form
     @activity_type = ActivityType.new
