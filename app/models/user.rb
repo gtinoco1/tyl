@@ -25,8 +25,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :properties, :foreign_key => "realtor_id", :dependent => :destroy
-  has_many :activity_types, :dependent => :destroy
+has_many :properties, :foreign_key => "realtor_id", :dependent => :destroy
+has_many :activity_types, :dependent => :destroy
+has_many :buyers, :dependent => :destroy
+has_many :comments, :dependent => :destroy
+has_many :buyer_activity_types, :dependent => :destroy
+has_many :replies, :dependent => :destroy
+has_many :likes, :dependent => :destroy
   validates :last_name, :presence => true
   validates :first_name, :presence => true
   

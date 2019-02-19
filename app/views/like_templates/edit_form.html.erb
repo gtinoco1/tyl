@@ -1,0 +1,34 @@
+<h1>
+  Edit like #<%= @like.id %>
+</h1>
+
+<hr>
+
+<form action="/update_like/<%= @like.id %>" method="post">
+
+  <div class="form-group">
+    <label for="comment_id">
+      Comment
+    </label>
+
+    <input type="text" id="comment_id" name="comment_id" class="form-control" value="<%= @like.comment_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @like.user_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update like
+  </button>
+</form>
+
+<hr>
+
+<a href="/likes">
+  Go back
+</a>

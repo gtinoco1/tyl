@@ -1,0 +1,54 @@
+<!-- Validation failure messages -->
+<% if @reply.present? %>
+  <% if @reply.errors.any? %>
+    <% @reply.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new reply
+</h1>
+
+
+<hr>
+
+<form action="/create_reply" method="post">
+
+  <div class="form-group">
+    <label for="comment_id">
+      Comment
+    </label>
+
+    <input type="text" id="comment_id" name="comment_id" class="form-control" value="<%= @reply.comment_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @reply.user_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="body">
+      Body
+    </label>
+
+    <textarea id="body" name="body" class="form-control" rows="3"><%= @reply.body %></textarea>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create reply
+  </button>
+</form>
+
+<hr>
+
+<a href="/replies">
+  Go back
+</a>

@@ -1,0 +1,50 @@
+<% if @reply.errors.any? %>
+  <% @reply.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit reply #<%= @reply.id %>
+</h1>
+
+<hr>
+
+<form action="/update_reply/<%= @reply.id %>" method="post">
+
+  <div class="form-group">
+    <label for="comment_id">
+      Comment
+    </label>
+
+    <input type="text" id="comment_id" name="comment_id" class="form-control" value="<%= @reply.comment_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @reply.user_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="body">
+      Body
+    </label>
+
+    <textarea id="body" name="body" class="form-control" rows="3"><%= @reply.body %></textarea>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update reply
+  </button>
+</form>
+
+<hr>
+
+<a href="/replies">
+  Go back
+</a>

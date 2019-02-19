@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-info text-uppercase">
+      Feedback
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+
+    <div class="text-center font-weight-light">
+      This page is for all your questions, concerns and suggestions. Please tell us how we can make Track Your Listing better.
+    </div>
+    <hr>
+
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <form action="/create_comment" method="post">
+
+      <div class="form-group">
+        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <div class="form-group">
+        <textarea id="body" name="body" class="form-control" rows="2" placeholder="Leave us a comment"></textarea>
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Submit
+      </button>
+    </form>
+
+  </div>
+</div>
+
+
+<% @comments.order('created_at DESC').each do |comment| %>
+  <div class="row mb-2">
+    <div class="col-lg-6 offset-lg-3">
+
+      <div class="card bg-light">
+        <div class="card-body">
+          <ul class="list-inline">
+            <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
+            <li class="list-inline-item"><%= comment.body %></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8">
+          <p>
+            <small>
+              <a href="/comments" >Like</a> - <a href="/comments" >Reply</a> -
+              <%= comment.created_at.strftime("%b %d at %I:%M %p") %>
+            </small>
+          </p>
+        </div>
+        <div class="col-4 pl-2 text-secondary text-right">
+          <p><small>
+          <% if comment.user_id == current_user.id %>
+            <span class="text-secondary">
+              <a href="/delete_comment/<%= comment.id %>" >Delete</a> - 
+            </span>
+          <% else %>
+          <% end %>
+          <span class="fas fa-thumbs-up"></span>
+          <span class="badge badge-secondary">4</span>
+          </small></p>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+<% end %>

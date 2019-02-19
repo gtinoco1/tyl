@@ -1,4 +1,61 @@
 Rails.application.routes.draw do
+  # Routes for the Reply resource:
+
+  # CREATE
+  get("/replies/new", { :controller => "replies", :action => "new_form" })
+  post("/create_reply", { :controller => "replies", :action => "create_row" })
+
+  # READ
+  get("/replies", { :controller => "replies", :action => "index" })
+  get("/replies/:id_to_display", { :controller => "replies", :action => "show" })
+
+  # UPDATE
+  get("/replies/:prefill_with_id/edit", { :controller => "replies", :action => "edit_form" })
+  post("/update_reply/:id_to_modify", { :controller => "replies", :action => "update_row" })
+
+  # DELETE
+  get("/delete_reply/:id_to_remove", { :controller => "replies", :action => "destroy_row" })
+
+  #------------------------------
+
+  # Routes for the Like resource:
+
+  # CREATE
+  get("/likes/new", { :controller => "likes", :action => "new_form" })
+  post("/create_like", { :controller => "likes", :action => "create_row" })
+
+  # READ
+  get("/likes", { :controller => "likes", :action => "index" })
+  get("/likes/:id_to_display", { :controller => "likes", :action => "show" })
+
+  # UPDATE
+  get("/likes/:prefill_with_id/edit", { :controller => "likes", :action => "edit_form" })
+  post("/update_like/:id_to_modify", { :controller => "likes", :action => "update_row" })
+
+  # DELETE
+  get("/delete_like/:id_to_remove", { :controller => "likes", :action => "destroy_row" })
+
+  #------------------------------
+
+  # Routes for the Comment resource:
+
+  # CREATE
+  get("/comments/new", { :controller => "comments", :action => "new_form" })
+  post("/create_comment", { :controller => "comments", :action => "create_row" })
+
+  # READ
+  get("/comments", { :controller => "comments", :action => "index" })
+  get("/comments/:id_to_display", { :controller => "comments", :action => "show" })
+
+  # UPDATE
+  get("/comments/:prefill_with_id/edit", { :controller => "comments", :action => "edit_form" })
+  post("/update_comment/:id_to_modify", { :controller => "comments", :action => "update_row" })
+
+  # DELETE
+  get("/delete_comment/:id_to_remove", { :controller => "comments", :action => "destroy_row" })
+
+  #------------------------------
+
   # Routes for the Buyer activity type resource:
 
   # CREATE
