@@ -26,8 +26,10 @@ class ReportTwoPdf < Prawn::Document
     # eval("test_#{type.id}")
     # end
 
-    ActivityType.where(user_id: @current_user.id).each do |type|
-      if type.activities.count > 0
+
+    current_user.activity_types.each do |type|
+      
+      if @property.activities.where(activity_type_id: type).count > 0
         eval("method_#{type.id}")
       else
       end
@@ -56,12 +58,16 @@ class ReportTwoPdf < Prawn::Document
       draw_text page_number, :at => [530, 0]
     end
   end
-  
+
+  def set_width_constraints
+    @min_width ||= padding_left + padding_right
+    @max_width ||= @pdf.bounds.width
+  end
 
   ActivityType.all.each do |type|
     define_method("method_#{type.id}") do
       move_down 20
-      a =  [1,
+      a = [1,
            type.subject_toggle == "Show" ? 1 : nil,
            type.contact_toggle == "Show" ? 1 : nil,
            type.agent_toggle == "Show" ? 1 : nil,
@@ -74,7 +80,7 @@ class ReportTwoPdf < Prawn::Document
       font "Nunito"
       text type.title, :align => :left, size: 12, style: :bold
       move_down 5
-      table eval("row_#{type.id}"), :position => :center, :width => 540, :column_widths => {0 => 50, a => 60},
+      table eval("row_#{type.id}"), :position => :center, :width => 540, :column_widths => {0 => 50,1 => @min_width, a => 60},
                                     :cell_style => {:font => "Nunito", :size => 9} do
         row(0).font_style = :bold
         columns(0..8).align = :center
@@ -95,7 +101,7 @@ class ReportTwoPdf < Prawn::Document
       type.cost_toggle == "Show" ? cost_header = "Cost" : cost_header = nil
       type.duration_toggle == "Show" ? duration_header = "Time (min)" : duration_header = nil
       [["Date", subject_header, contact_header, agent_header, customer_header, detail_header, outcome_header, cost_header, duration_header].compact] +
-        type.activities.order(date: :asc).map do |activity|
+        type.activities.where(property_id: @property.id).order(date: :asc).map do |activity|
           [activity.date.strftime("%b %d"),
            type.subject_toggle == "Show" ? activity.subject : nil,
            type.contact_toggle == "Show" ? activity.contact : nil,
@@ -108,6 +114,4 @@ class ReportTwoPdf < Prawn::Document
         end
     end
   end
-
 end
-
