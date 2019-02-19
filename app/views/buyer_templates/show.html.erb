@@ -6,7 +6,7 @@
   </div>
 
   <div class="col-md-2">
-    <a href="" class="btn btn-block btn-outline-secondary">
+    <a href="../buyers/<%=@buyer.id%>/report.pdf" class="btn btn-block btn-outline-secondary">
       Generate Report
     </a>
   </div>
@@ -24,7 +24,7 @@
   <div class="col-md-8 offset-md-2">
 
     <div class="list-group">
-      <% @buyer.buyer_activities.each do |buyer_activity| %>
+      <% @buyer.buyer_activities.order(date: :desc).each do |buyer_activity| %>
 
         <a href="../buyer_activities/<%= buyer_activity.id %>/" class="list-group-item list-group-item-action">
           <div class="row">
@@ -32,7 +32,7 @@
               <%= buyer_activity.buyer_activity_type.title %>
             </div>
             <div class="col text-center">
-              
+              <%= buyer_activity.property_address %>
             </div>
             <div class="col text-center">
               <%= buyer_activity.date.strftime("%b %d")  %>

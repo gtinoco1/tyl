@@ -107,6 +107,7 @@ Rails.application.routes.draw do
   # UPDATE
   get("/buyers/:prefill_with_id/edit", { :controller => "buyers", :action => "edit_form" })
   post("/update_buyer/:id_to_modify", { :controller => "buyers", :action => "update_row" })
+   get("/buyers/:id_to_display/report", { :controller => "buyers", :action => "create_pdf" }) 
 
   # DELETE
   get("/delete_buyer/:id_to_remove", { :controller => "buyers", :action => "destroy_row" })

@@ -24,7 +24,7 @@
   <div class="col-md-8 offset-md-2">
 
     <div class="list-group">
-      <% @property.activities.each do |activity| %>
+      <% @property.activities.order(date: :desc).each do |activity| %>
 
         <a href="../activities/<%= activity.id %>/" class="list-group-item list-group-item-action">
           <div class="row">

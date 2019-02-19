@@ -25,7 +25,6 @@ class PropertiesController < ApplicationController
   
     def create_pdf
     @property = Property.find(params.fetch("id_to_display"))
-    @activities = Activity.where(property_id: 1)
     @activity_types = current_user.activity_types
     @current_user_id = current_user.id
     

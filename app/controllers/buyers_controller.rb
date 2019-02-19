@@ -11,6 +11,24 @@ class BuyersController < ApplicationController
     render("buyer_templates/show.html.erb")
   end
   
+   def create_pdf
+    @buyer = Buyer.find(params.fetch("id_to_display"))
+    @buyer_activity_types = current_user.buyer_activity_types
+    @current_user_id = current_user.id
+    
+    respond_to do |format|
+      format.html
+      # format.csv {render text: Property.all.to_csv}
+      format.xls { send_data Buyer.all.to_csv(col_sep: "\t") }
+      
+      format.pdf do
+        pdf = BuyerReportPdf.new(@buyer, @buyer_activity_types, @current_user)
+        send_data pdf.render, :filename => "Report: #{@buyer.name}.pdf", :type => "application/pdf", disposition: 'inline'
+        end
+       end
+    end
+
+  
   def help_page
     @buyer = Buyer.all
     render("shared/help_page.html.erb")
