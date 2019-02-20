@@ -46,10 +46,10 @@
     <div class="col-lg-6 offset-lg-3">
 
       <% if comment.user_id == current_user.id %>
-        <div class="card bg-light" id="card<%= comment.id %>">
+         <div class="card" style="background-color: #e6f2ff" id="card<%= comment.id %>">
         <% else %>
-          <div class="card" style="background-color: #e6f2ff" id="card<%= comment.id %>">
-          <% end %>
+         <div class="card bg-light" id="card<%= comment.id %>">
+       <% end %>
 
           <div class="card-body">
             <ul class="list-inline">
