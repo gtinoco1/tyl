@@ -45,77 +45,86 @@
   <div class="row mb-2">
     <div class="col-lg-6 offset-lg-3">
 
-      <div class="card bg-light" id="card<%= comment.id %>">
-        <div class="card-body">
-          <ul class="list-inline">
-            <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
-            <li class="list-inline-item"><%= comment.body %></li>
-          </ul>
-        </div>
-      </div>
+      <% if comment.user_id == current_user.id %>
+        <div class="card bg-light" id="card<%= comment.id %>">
+        <% else %>
+          <div class="card" style="background-color: #e6f2ff" id="card<%= comment.id %>">
+          <% end %>
 
-      <div class="row">
-        <div class="col-8">
-
-          <% i = Like.find_by({ :user_id => current_user.id, :comment_id => comment.id }) %>
-          <% if i == nil   %>
-            <p class="mt-0 mb-0 pt-0 pb-0">
-              <small>
-                <span>
-                  <form action="/create_like" method="post" class="">
-                    <input type="hidden" name="comment_id" value="<%= comment.id %>">
-                    <input type="hidden" name="user_id" value="<%= current_user.id %>">
-                    <button class="btn btn-sm btn-link pb-2 pr-0">
-                      Like
-                    </button>
-                  </form>
-                </span>
-              <% else %>
-                <p  class="mt-0 mb-0 pt-0 pb-0">
-                  <small>
-                    <span>
-                      <form action="/delete_like/<%= i.id %>" method="post" class="">
-                        <button class="btn btn-sm btn-link pb-2 pr-0">
-                          Unlike
-                        </button>
-                      </form>
-                    </span>
-                  <% end %>
-                  
-                  <% @time = comment.created_at - 18000 %>
-
-                  <span> - <%= @time.strftime("%b %d at %I:%M %p") %>
-                  </span>
-                </small>
-              </p>
-            </div>
-
-            <div class="col-4 pl-2 text-secondary text-right">
-
+          <div class="card-body">
+            <ul class="list-inline">
               <% if comment.user_id == current_user.id %>
-                <span class="text-secondary">
-                  <a href="/delete_comment/<%= comment.id %>" >Delete</a> - 
-                </span>
+                <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
               <% else %>
+                <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
               <% end %>
-
-              <% if i == nil   %>
-                <span class="fas fa-thumbs-up"></span>
-                <span class="badge badge-secondary">
-                  <%= comment.likes.count %>
-                </span>
-              <% else %>
-                <span class="fas fa-thumbs-up text-success"></span>
-                <span class="badge badge-success">
-                  <%= comment.likes.count %>
-                </span>
-              <% end %>
-
-
-            </div>
+              <li class="list-inline-item"><%= comment.body %></li>
+            </ul>
           </div>
-
-
         </div>
-      </div>
-    <% end %>
+
+        <div class="row">
+          <div class="col-8">
+
+            <% i = Like.find_by({ :user_id => current_user.id, :comment_id => comment.id }) %>
+            <% if i == nil   %>
+              <p class="mt-0 mb-0 pt-0 pb-0">
+                <small>
+                  <span>
+                    <form action="/create_like" method="post" class="">
+                      <input type="hidden" name="comment_id" value="<%= comment.id %>">
+                      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+                      <button class="btn btn-sm btn-link text-info pb-2 pr-0">
+                        Like
+                      </button>
+                    </form>
+                  </span>
+                <% else %>
+                  <p  class="mt-0 mb-0 pt-0 pb-0">
+                    <small>
+                      <span>
+                        <form action="/delete_like/<%= i.id %>" method="post" class="">
+                          <button class="btn btn-sm btn-link text-info font-weight-bold pb-2 pr-0">
+                            Like
+                          </button>
+                        </form>
+                      </span>
+                    <% end %>
+
+                    <% @time = comment.created_at - 18000 %>
+
+                    <span> - <%= @time.strftime("%b %d at %I:%M %p") %>
+                    </span>
+                  </small>
+                </p>
+              </div>
+
+              <div class="col-4 pl-2 text-secondary text-right">
+
+                <% if comment.user_id == current_user.id %>
+                  <span class="text-secondary font-sm">
+                    <a class="text-danger" href="/delete_comment/<%= comment.id %>" ><small>Delete</small></a> - 
+                  </span>
+                <% else %>
+                <% end %>
+
+                <% if i == nil   %>
+                  <span class="fas fa-thumbs-up"></span>
+                  <span class="badge badge-secondary">
+                    <%= comment.likes.count %>
+                  </span>
+                <% else %>
+                  <span class="fas fa-thumbs-up text-success"></span>
+                  <span class="badge badge-success">
+                    <%= comment.likes.count %>
+                  </span>
+                <% end %>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      <% end %>
