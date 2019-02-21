@@ -139,6 +139,7 @@ Rails.application.routes.draw do
   # CREATE
   get("/activities/new/:id_of_property", { :controller => "activities", :action => "new_form" })
   post("/create_activity", { :controller => "activities", :action => "create_row" })
+  
 
   # READ
   get("/activities", { :controller => "activities", :action => "index" })

@@ -19,6 +19,7 @@ class ActivitiesController < ApplicationController
   end
 
   def create_row
+
     @activity = Activity.new
 
     @activity.activity_type_id = params.fetch("activity_type_id")
@@ -40,7 +41,7 @@ class ActivitiesController < ApplicationController
 
       redirect_to("/activities/#{@activity.id}/edit/")
     else
-      render("activity_templates/new_form_with_errors.html.erb")
+      redirect_to("/properties/#{@activity.property_id}", :notice => "Type and Date cannot be blank.")
     end
   end
 
