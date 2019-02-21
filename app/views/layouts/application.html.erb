@@ -35,8 +35,10 @@
 
       <%= yield %>
     </div>
+    <div class="col-6 offset-3">
     <hr>
     <hr>
+    </div>
     <%= render "shared/footer" %>
     <%= dev_tools if Rails.env.development? %>
     

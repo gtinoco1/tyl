@@ -46,17 +46,17 @@
     <div class="col-lg-6 offset-lg-3">
 
       <% if comment.user_id == current_user.id %>
-         <div class="card" style="background-color: #e6f2ff" id="card<%= comment.id %>">
+        <div class="card" style="background-color: #e6f2ff" id="card<%= comment.id %>">
         <% else %>
-         <div class="card bg-light" id="card<%= comment.id %>">
-       <% end %>
+          <div class="card bg-light" id="card<%= comment.id %>">
+          <% end %>
 
           <div class="card-body">
             <ul class="list-inline">
               <% if comment.user_id == current_user.id %>
-                <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
+                <li class="list-inline-item text-dark font-weight-bold"><%= comment.user.first_name %></li>
               <% else %>
-                <li class="list-inline-item text-info font-weight-bold"><%= comment.user.first_name %></li>
+                <li class="list-inline-item text-dark font-weight-bold"><%= comment.user.first_name %></li>
               <% end %>
               <li class="list-inline-item"><%= comment.body %></li>
             </ul>
@@ -120,11 +120,35 @@
                   </span>
                 <% end %>
 
-
               </div>
             </div>
 
+            <% comment.replies.each do |reply| %>
+              <div class="row">
+                <div class="col-8 offset-4">
+                  <% if reply.user_id == 3 %>
+                      <div class="card" style="background-color: #DCF8C7" id="card<%= reply.id %>">
+                    <% else %>
+                      <div class="card bg-light" id="card<%= reply.id %>">
+                      <% end %>
 
+                      <div class="card-body">
+                        <ul class="list-inline">
+                          <li class="list-inline-item text-dark font-weight-bold"><%= reply.user.first_name %></li>
+                          <li class="list-inline-item"><%= reply.body %></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 offset-8 text-right mb-4">
+                    <% if current_user.id == 3 %>
+                      <a class="text-danger" href="/delete_reply/<%= reply.id %>" ><small>Delete</small></a>
+                    <% else %>
+                    <% end %>
+                  </div>
+                </div>
+
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>

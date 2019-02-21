@@ -27,7 +27,7 @@ class RepliesController < ApplicationController
     if @reply.valid?
       @reply.save
 
-      redirect_back(:fallback_location => "/replies", :notice => "Reply created successfully.")
+      redirect_to("/comments", :notice => "Reply created successfully.")
     else
       render("reply_templates/new_form_with_errors.html.erb")
     end
@@ -60,6 +60,6 @@ class RepliesController < ApplicationController
 
     @reply.destroy
 
-    redirect_to("/replies", :notice => "Reply deleted successfully.")
+    redirect_to("/comments", :notice => "Reply deleted successfully.")
   end
 end

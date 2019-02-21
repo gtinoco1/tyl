@@ -1,43 +1,50 @@
-<h1>
-  Add a new reply
-</h1>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+
+    <h4 class="text-info text-uppercase">
+      Reply to Comment
+    </h4>
 
 
-<hr>
+    <hr>
 
-<form action="/create_reply" method="post">
+    <form action="/create_reply" method="post">
 
-  <div class="form-group">
-    <label for="comment_id">
-      Comment
-    </label>
+      <div class="form-group">
+        <label for="comment_id">
+          Comment
+        </label>
+        <%= select_tag(:comment_id, options_from_collection_for_select(Comment.order("created_at ASC"), :id, :body,), :class => "form-control", :prompt => "Select Comment" ) %>
+      </div>
 
-    <input type="text" id="comment_id" name="comment_id" class="form-control">
+      <!--<div class="form-group">-->
+      <!--  <label for="user_id">-->
+      <!--    User-->
+      <!--  </label>-->
+      <!--  <input type="text" id="user_id" name="user_id" class="form-control">-->
+      <!--</div>-->
+
+      <div class="form-group">
+        <input type="hidden" name="user_id" class="form-control" value= "3" >
+      </div>
+
+      <div class="form-group">
+        <label for="body">
+          Body
+        </label>
+        <textarea id="body" name="body" class="form-control" rows="3"></textarea>
+      </div>
+
+      <button class="btn btn-block btn-outline-secondary">
+        Create reply
+      </button>
+    </form>
+
+    <hr>
+
+    <a href="/replies">
+      Go back
+    </a>
+
   </div>
-
-  <div class="form-group">
-    <label for="user_id">
-      User
-    </label>
-
-    <input type="text" id="user_id" name="user_id" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label for="body">
-      Body
-    </label>
-
-    <textarea id="body" name="body" class="form-control" rows="3"></textarea>
-  </div>
-
-  <button class="btn btn-block btn-outline-secondary">
-    Create reply
-  </button>
-</form>
-
-<hr>
-
-<a href="/replies">
-  Go back
-</a>
+</div>
