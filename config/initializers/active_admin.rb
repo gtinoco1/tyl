@@ -157,10 +157,6 @@ ActiveAdmin.setup do |config|
   #
   config.localize_format = :long
 
-  setting :display_name_methods, [:name,
-                                  :email,
-                                  :to_s]
-
   # == Setting a Favicon
   #
   # config.favicon = 'favicon.ico'
