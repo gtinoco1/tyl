@@ -15,3 +15,4 @@ ActiveAdmin.register BuyerActivity do
 # end
 
 end
+

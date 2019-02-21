@@ -5,8 +5,8 @@ ActiveAdmin.setup do |config|
   # for each of the active admin pages.
   #
   config.site_title = "Track Your Listing"
-  
-  config.comments_registration_name = 'AdminComment'
+
+  config.comments_registration_name = "AdminComment"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -157,6 +157,10 @@ ActiveAdmin.setup do |config|
   #
   config.localize_format = :long
 
+  setting :display_name_methods, [:name,
+                                  :email,
+                                  :to_s]
+
   # == Setting a Favicon
   #
   # config.favicon = 'favicon.ico'
@@ -270,7 +274,7 @@ ActiveAdmin.setup do |config|
   # hand side with a filter for each attribute of the registered model.
   # You can enable or disable them for all resources here.
   #
-  # config.filters = true
+  config.filters = true
   #
   # By default the filters include associations in a select, which means
   # that every record will be loaded for each association.
