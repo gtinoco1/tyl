@@ -53,7 +53,7 @@
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
 
-    <% current_user.buyers.where(buyer_type: "Buyer").each do |buyer| %>
+    <% current_user.buyers.where(buyer_type: "Tenant").each do |buyer| %>
 
       <div>
         <a href="buyers/<%= buyer.id %>">
