@@ -44,7 +44,7 @@
 <% @comments.order('created_at DESC').each do |comment| %>
   <div class="row mb-2">
     <div class="col-lg-6 offset-lg-3">
-
+<hr>
       <% if comment.user_id == current_user.id %>
         <div class="card" style="background-color: #e6f2ff" id="card<%= comment.id %>">
         <% else %>
@@ -121,6 +121,7 @@
                 <% end %>
 
               </div>
+              <hr>
             </div>
 
             <% comment.replies.each do |reply| %>
@@ -130,6 +131,7 @@
                       <div class="card" style="background-color: #DCF8C7" id="card<%= reply.id %>">
                     <% else %>
                       <div class="card bg-light" id="card<%= reply.id %>">
+                        
                       <% end %>
 
                       <div class="card-body">
@@ -140,14 +142,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 offset-8 text-right mb-4">
+                  <div class="col-4 offset-8 text-right mb-2">
                     <% if current_user.id == 3 %>
                       <a class="text-danger" href="/delete_reply/<%= reply.id %>" ><small>Delete</small></a>
                     <% else %>
                     <% end %>
                   </div>
                 </div>
-
+<hr>
               <% end %>
             </div>
           </div>
