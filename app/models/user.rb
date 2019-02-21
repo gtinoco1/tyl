@@ -111,15 +111,14 @@ has_many :likes, :dependent => :destroy
                                     customer_toggle: "Hide")
                                     
     BuyerActivityType.create(user: self, title: "Showing", 
-                                    zipcode_toggle: "Hide",
+                                    zipcode_toggle: "Show",
                                     duration_toggle: "Show", 
-                                    detail_toggle: "Show", 
-                                    outcome_toggle: "Hide",
-                                    property_address_toggle: "Hide", 
+                                    detail_toggle: "Hide", 
+                                    comment_toggle: "Show",
+                                    property_address_toggle: "Show", 
                                     image_toggle: "Hide", 
                                     subject_toggle: "Hide", 
-                                    agent_toggle: "Hide", 
-                                    customer_toggle: "Hide")
+                                    agent_toggle: "Show")
   
   end
   
