@@ -7,20 +7,38 @@
 <% end %>
 
 <div class="row">
-  <div class="col-lg-6 offset-lg-3">
+  <div class="col-lg-4 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
       Edit buyer details
     </h4>
     <hr>
   </div>
+  <div class="col-lg-2">
+    <a href="/delete_buyer/<%= @buyer.id %>" class="btn btn-block btn-outline-danger">
+      Delete Customer
+    </a>
+  </div>
+
+
 </div>
 
 <form action="/update_buyer/<%= @buyer.id %>" method="post">
   <div class="row">
+    <div class="col-lg-2 offset-lg-3">
+      <div class="form-group">
+        <label for="listing_type">
+          Customer Type
+        </label>
+        <%= select_tag(:buyer_type, options_for_select(["Buyer", "Tenant"], @buyer.buyer_type), :class => "form-control") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-lg-6 offset-lg-3">
       <div class="form-group">
         <label for="name">
-          Buyer Name
+          Customer Name
         </label>
         <input type="text" id="name" name="name" class="form-control" value="<%= @buyer.name %>">
       </div>
@@ -62,7 +80,7 @@
       </div>
 
       <button class="btn btn-block btn-outline-success">
-        Update Buyer
+        Update Customer
       </button>
     </form>
 
@@ -73,3 +91,4 @@
     </a>
   </div>
 </div>
+

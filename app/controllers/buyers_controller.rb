@@ -48,6 +48,7 @@ class BuyersController < ApplicationController
     @buyer.funds = params.fetch("funds")
     @buyer.downpayment = params.fetch("downpayment")
     @buyer.preapproval = params.fetch("preapproval")
+    @buyer.buyer_type = params.fetch("buyer_type")
 
     if @buyer.valid?
       @buyer.save
@@ -71,6 +72,7 @@ class BuyersController < ApplicationController
     @buyer.funds = params.fetch("funds")
     @buyer.downpayment = params.fetch("downpayment")
     @buyer.preapproval = params.fetch("preapproval")
+    @buyer.buyer_type = params.fetch("buyer_type")
 
     if @buyer.valid?
       @buyer.save

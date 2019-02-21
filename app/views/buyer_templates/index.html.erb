@@ -1,16 +1,59 @@
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
     <h4 class="text-info text-uppercase">
-      ALL Buyers
+      Customers
     </h4>
     <hr>
   </div>
 </div>
 
+<% if current_user.buyers.where(buyer_type: "Buyer").count > 0 %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-secondary text-uppercase">
+      Buyers
+    </h4>
+  </div>
+</div>
+
+<% else %>
+<% end %>
+
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
 
-    <% @buyers.where(user_id: current_user.id).each do |buyer| %>
+    <% current_user.buyers.where(buyer_type: "Buyer").each do |buyer| %>
+
+      <div>
+        <a href="buyers/<%= buyer.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= buyer.name %></button>
+        </a>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
+<% if current_user.buyers.where(buyer_type: "Tenant").count > 0 %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-secondary text-uppercase">
+      Tenants
+    </h4>
+  </div>
+</div>
+
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% current_user.buyers.where(buyer_type: "Buyer").each do |buyer| %>
 
       <div>
         <a href="buyers/<%= buyer.id %>">
@@ -28,7 +71,7 @@
     <hr>
     <h5>
       <a href="/buyers/new" class="btn btn-block btn-outline-secondary">
-        Add a new buyer
+        Add a new customer
       </a>
     </h5>
   </div>

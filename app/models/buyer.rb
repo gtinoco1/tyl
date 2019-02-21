@@ -10,6 +10,7 @@
 #  preapproval :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  buyer_type  :string
 #
 
 class Buyer < ApplicationRecord
