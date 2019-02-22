@@ -66,7 +66,7 @@ class BuyerActivitiesController < ApplicationController
     if @buyer_activity.valid?
       @buyer_activity.save
 
-      redirect_to("/buyer_activities/#{@buyer_activity.id}", :notice => "Buyer activity updated successfully.")
+      redirect_to("/buyers/#{@buyer_activity.buyer_id}", :notice => "Activity created successfully.")
     else
       render("buyer_activity_templates/edit_form_with_errors.html.erb")
     end

@@ -23,7 +23,7 @@
           <label for="date">
             Date
           </label>
-          <input type="date" id="date" name="date" class="form-control" value="<%= Date.current.strftime('%Y-%m-%d') %>">
+          <input type="date" id="date" name="date" class="form-control" value="<%= (Date.current - 1).strftime('%Y-%m-%d') %>">
         </div>
 
         <div class="form-group">
