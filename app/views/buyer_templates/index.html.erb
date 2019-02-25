@@ -20,6 +20,17 @@
 <% else %>
 <% end %>
 
+<% if current_user.buyers.count == 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="font-weight-light text-center text-uppercase">
+        Add a customer to get started.
+      </h5>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
 
