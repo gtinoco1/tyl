@@ -10,28 +10,37 @@ class BuyersController < ApplicationController
 
     render("buyer_templates/show.html.erb")
   end
-  
-   def create_pdf
+
+  def create_pdf
     @buyer = Buyer.find(params.fetch("id_to_display"))
     @buyer_activity_types = current_user.buyer_activity_types
     @current_user_id = current_user.id
-    
+
     respond_to do |format|
       format.html
       # format.csv {render text: Property.all.to_csv}
       format.xls { send_data Buyer.all.to_csv(col_sep: "\t") }
-      
+
       format.pdf do
         pdf = BuyerReportPdf.new(@buyer, @buyer_activity_types, @current_user)
-        send_data pdf.render, :filename => "Report: #{@buyer.name}.pdf", :type => "application/pdf", disposition: 'inline'
-        end
-       end
+        send_data pdf.render, :filename => "Report: #{@buyer.name}.pdf", :type => "application/pdf", disposition: "inline"
+      end
     end
+  end
 
-  
   def help_page
     @buyer = Buyer.all
     render("shared/help_page.html.erb")
+  end
+
+  def terms
+    @buyer = Buyer.all
+    render("shared/terms.html.erb")
+  end
+
+  def privacy
+    @buyer = Buyer.all
+    render("shared/privacy.html.erb")
   end
 
   def new_form
@@ -52,7 +61,7 @@ class BuyersController < ApplicationController
 
     if @buyer.valid?
       @buyer.save
-       redirect_to("/buyers", :notice => "Buyer updated successfully.")
+      redirect_to("/buyers", :notice => "Buyer updated successfully.")
     else
       render("buyer_templates/new_form_with_errors.html.erb")
     end

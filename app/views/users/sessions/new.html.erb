@@ -17,7 +17,7 @@
             <%= flash[:alert] %>
           </div>
         <% end %>
-
+        
         <% form_html_options = { novalidate: true, class: "mb-3" } %>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: form_html_options) do |f| %>
