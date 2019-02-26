@@ -42,7 +42,7 @@ class ActivityTypesController < ApplicationController
     if @activity_type.valid?
       @activity_type.save
 
-      redirect_to("/properties", :notice => "Activity type created successfully.")
+      redirect_to("/activity_types", :notice => "Activity type created successfully.")
     else
       render("activity_type_templates/new_form_with_errors.html.erb")
     end

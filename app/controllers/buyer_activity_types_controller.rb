@@ -34,7 +34,7 @@ class BuyerActivityTypesController < ApplicationController
     if @buyer_activity_type.valid?
       @buyer_activity_type.save
 
-      redirect_to("/buyers", :notice => "Activity type created successfully.")
+      redirect_to("/buyer_activity_types", :notice => "Activity type created successfully.")
     else
       render("buyer_activity_type_templates/new_form_with_errors.html.erb")
     end
@@ -62,7 +62,7 @@ class BuyerActivityTypesController < ApplicationController
 
     if @buyer_activity_type.valid?
       @buyer_activity_type.save
-      redirect_back(:fallback_location => "/buyer_activity_types", :notice => "Activity updates successfully.")
+      redirect_to("/buyer_activity_types", :notice => "Activity updated successfully.")
     else
       render("buyer_activity_type_templates/edit_form_with_errors.html.erb")
     end

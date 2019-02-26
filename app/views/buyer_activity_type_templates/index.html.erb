@@ -12,7 +12,7 @@
 
 
     <div class="accordion" id="accordionExample">
-      <% current_user.buyer_activity_types.each do |type| %>
+      <% current_user.buyer_activity_types.order(created_at: :desc).each do |type| %>
 
         <form action="/update_buyer_activity_type/<%= type.id %>" method="post">
           <div class="card bg-white border-white">
@@ -25,12 +25,29 @@
             </div>
             <div id="collapse<%= type.id %>" class="collapse" aria-labelledby="heading<%= type.id %>" data-parent="#accordionExample">
               <div class="card-body">
+
+                <div class="row mb-2">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label for="title">
+                        Title
+                      </label>
+                      <input type="text" id="title" name="title" class="form-control" value="<%= type.title %>">
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div><br>
+                    </div>
+                    <a href="/delete_buyer_activity_type/<%= type.id %>/">
+                      <button type="button" class="btn btn-outline-danger btn-block mt-2 text-uppercase">Delete</button>
+                    </a>
+                  </div>
+                </div>
+
                 <div class = "row mb-1">
                   <div class="form-group">
                     <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="title" class="form-control" value="<%= type.title %>">
                   </div>
 
                   <div class="col-lg-3 col-6 col-sm-6 mb-1">
@@ -93,4 +110,3 @@
     </a>
   </div>
 </div>
-

@@ -50,30 +50,6 @@ class User < ApplicationRecord
                         agent_toggle: "Show",
                         customer_toggle: "Show")
 
-    ActivityType.create(user: self, title: "Call",
-                        cost_toggle: "Hide",
-                        duration_toggle: "Show",
-                        detail_toggle: "Show",
-                        outcome_toggle: "Hide",
-                        contact_toggle: "Show",
-                        flyer_img_toggle: "Hide",
-                        postcard_img_toggle: "Hide",
-                        subject_toggle: "Show",
-                        agent_toggle: "Hide",
-                        customer_toggle: "Hide")
-
-    ActivityType.create(user: self, title: "Flyer",
-                        cost_toggle: "Show",
-                        duration_toggle: "Show",
-                        detail_toggle: "Hide",
-                        outcome_toggle: "Hide",
-                        contact_toggle: "Show",
-                        flyer_img_toggle: "Show",
-                        postcard_img_toggle: "Hide",
-                        subject_toggle: "Show",
-                        agent_toggle: "Hide",
-                        customer_toggle: "Hide")
-
     ActivityType.create(user: self, title: "Postcard",
                         cost_toggle: "Show",
                         duration_toggle: "Show",
@@ -110,6 +86,30 @@ class User < ApplicationRecord
                         agent_toggle: "Hide",
                         customer_toggle: "Hide")
 
+    ActivityType.create(user: self, title: "Flyer",
+                        cost_toggle: "Show",
+                        duration_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        contact_toggle: "Show",
+                        flyer_img_toggle: "Show",
+                        postcard_img_toggle: "Hide",
+                        subject_toggle: "Show",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide")
+
+    ActivityType.create(user: self, title: "Call",
+                        cost_toggle: "Hide",
+                        duration_toggle: "Show",
+                        detail_toggle: "Show",
+                        outcome_toggle: "Hide",
+                        contact_toggle: "Show",
+                        flyer_img_toggle: "Hide",
+                        postcard_img_toggle: "Hide",
+                        subject_toggle: "Show",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide")
+
     BuyerActivityType.create(user: self, title: "Showing",
                              zipcode_toggle: "Show",
                              duration_toggle: "Show",
@@ -128,16 +128,6 @@ class User < ApplicationRecord
                              comment_toggle: "Hide",
                              image_toggle: "Hide",
                              subject_toggle: "Hide",
-                             agent_toggle: "Hide")
-
-    BuyerActivityType.create(user: self, title: "Search",
-                             duration_toggle: "Show",
-                             property_address_toggle: "Hide",
-                             zipcode_toggle: "Hide",
-                             detail_toggle: "Show",
-                             comment_toggle: "Hide",
-                             image_toggle: "Hide",
-                             subject_toggle: "Show",
                              agent_toggle: "Hide")
 
     BuyerActivityType.create(user: self, title: "Make Appointments",
