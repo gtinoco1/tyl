@@ -2,3 +2,9 @@ production:
   cloud_name: "hnx8y80mv"
   api_key: "659841373811211"
   api_secret: "QVlNyS0H2hFd1SeR0Ir9F3i1Xkw"
+  
+  development:
+  production:
+  cloud_name: "hnx8y80mv"
+  api_key: "659841373811211"
+  api_secret: "QVlNyS0H2hFd1SeR0Ir9F3i1Xkw"
