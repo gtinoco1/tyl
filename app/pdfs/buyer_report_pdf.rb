@@ -66,7 +66,7 @@ class BuyerReportPdf < Prawn::Document
            type.subject_toggle == "Show" ? 1 : nil,
            type.agent_toggle == "Show" ? 1 : nil,
            type.property_address_toggle == "Show" ? 1 : nil,
-           type.zipcode_toggle == "Show" ? 1 : nil,
+           type.city_toggle == "Show" ? 1 : nil,
            type.detail_toggle == "Show" ? 1 : nil,
            type.comment_toggle == "Show" ? 1 : nil,
            type.duration_toggle == "Show" ? 1 : nil].compact.length - 1
@@ -89,17 +89,17 @@ class BuyerReportPdf < Prawn::Document
       type.subject_toggle == "Show" ? subject_header = "Subject" : subject_header = nil
       type.agent_toggle == "Show" ? agent_header = "Agent" : agent_header = nil
       type.property_address_toggle == "Show" ? property_address_header = "Property" : property_address_header = nil
-      type.zipcode_toggle == "Show" ? zipcode_header = "Zipcode" : zipcode_header = nil
+      type.city_toggle == "Show" ? city_header = "City" : city_header = nil
       type.detail_toggle == "Show" ? detail_header = "Detail" : detail_header = nil
       type.comment_toggle == "Show" ? comment_header = "Comment" : comment_header = nil
       type.duration_toggle == "Show" ? duration_header = "Time (min)" : duration_header = nil
-      [["Date", subject_header, agent_header, property_address_header, zipcode_header, detail_header, comment_header, duration_header].compact] +
+      [["Date", subject_header, agent_header, property_address_header, city_header, detail_header, comment_header, duration_header].compact] +
         type.buyer_activities.where(buyer_id: @buyer.id).order(date: :asc).map do |activity|
           [activity.date.strftime("%b %d"),
            type.subject_toggle == "Show" ? activity.subject : nil,
            type.agent_toggle == "Show" ? activity.agent : nil,
            type.property_address_toggle == "Show" ? activity.property_address : nil,
-           type.zipcode_toggle == "Show" ? activity.zipcode : nil,
+           type.city_toggle == "Show" ? activity.city : nil,
            type.detail_toggle == "Show" ? activity.detail : nil,
            type.comment_toggle == "Show" ? activity.comment: nil,
            type.duration_toggle == "Show" ? activity.duration.to_i : nil].compact

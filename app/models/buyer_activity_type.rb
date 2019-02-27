@@ -15,6 +15,8 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  title                   :string
+#  city_toggle             :string
+#  state_toggle            :string
 #
 
 class BuyerActivityType < ApplicationRecord

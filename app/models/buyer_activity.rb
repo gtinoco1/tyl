@@ -16,6 +16,8 @@
 #  agent                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  city                   :string
+#  state                  :string
 #
 
 class BuyerActivity < ApplicationRecord

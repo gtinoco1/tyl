@@ -23,13 +23,15 @@ class BuyerActivityTypesController < ApplicationController
     @buyer_activity_type.user_id = params.fetch("user_id")
     @buyer_activity_type.duration_toggle = params.fetch("duration_toggle")
     @buyer_activity_type.property_address_toggle = params.fetch("property_address_toggle")
-    @buyer_activity_type.zipcode_toggle = params.fetch("zipcode_toggle")
+    @buyer_activity_type.zipcode_toggle = params.fetch("zipcode_toggle","")
     @buyer_activity_type.detail_toggle = params.fetch("detail_toggle")
     @buyer_activity_type.comment_toggle = params.fetch("comment_toggle")
     @buyer_activity_type.image_toggle = params.fetch("image_toggle")
     @buyer_activity_type.subject_toggle = params.fetch("subject_toggle")
     @buyer_activity_type.agent_toggle = params.fetch("agent_toggle")
     @buyer_activity_type.title = params.fetch("title")
+    @buyer_activity_type.city_toggle = params.fetch("city_toggle","")
+    @buyer_activity_type.state_toggle = params.fetch("state_toggle","")
 
     if @buyer_activity_type.valid?
       @buyer_activity_type.save
@@ -52,13 +54,15 @@ class BuyerActivityTypesController < ApplicationController
     @buyer_activity_type.user_id = params.fetch("user_id")
     @buyer_activity_type.duration_toggle = params.fetch("duration_toggle")
     @buyer_activity_type.property_address_toggle = params.fetch("property_address_toggle")
-    @buyer_activity_type.zipcode_toggle = params.fetch("zipcode_toggle")
+    @buyer_activity_type.zipcode_toggle = params.fetch("zipcode_toggle","")
     @buyer_activity_type.detail_toggle = params.fetch("detail_toggle")
     @buyer_activity_type.comment_toggle = params.fetch("comment_toggle")
     @buyer_activity_type.image_toggle = params.fetch("image_toggle")
     @buyer_activity_type.subject_toggle = params.fetch("subject_toggle")
     @buyer_activity_type.agent_toggle = params.fetch("agent_toggle")
     @buyer_activity_type.title = params.fetch("title")
+    @buyer_activity_type.city_toggle = params.fetch("city_toggle","")
+    @buyer_activity_type.state_toggle = params.fetch("state_toggle","")
 
     if @buyer_activity_type.valid?
       @buyer_activity_type.save

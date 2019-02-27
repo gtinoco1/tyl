@@ -1,9 +1,22 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h4 class="text-secondary text-uppercase">
-      Settings
+      Manage Customer Activity Types
     </h4>
     <hr>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-lg-8 offset-lg-2">
+
+    <div class="text-center font-weight-light">
+    This allows you to customize what fields are shown for your activity types. 
+    To enable a field, toggle that field to "Show" in the specific actitivity type.
+    In order to delete a type there must not be any activities associated with that type.
+    </div>
+    <hr>
+
   </div>
 </div>
 
@@ -37,11 +50,24 @@
                   </div>
 
                   <div class="col-6">
-                    <div><br>
-                    </div>
-                    <a href="/delete_buyer_activity_type/<%= type.id %>/">
-                      <button type="button" class="btn btn-outline-danger btn-block mt-2 text-uppercase">Delete</button>
-                    </a>
+
+                    <% if type.buyer_activities.count == 0 %>
+
+                      <div><br>
+                      </div>
+                      <a href="/delete_activity_type/<%= type.id %>/">
+                        <button type="button" class="btn btn-outline-danger btn-block mt-2 text-uppercase">Delete</button>
+                      </a>
+
+
+                    <% else %>
+                      <div><br>
+                      </div>
+                      <a href="/delete_activity_type/<%= type.id %>/">
+                        <button type="button" class="btn btn-outline-secondary btn-block mt-2 text-uppercase" disabled>Delete</button>
+                      </a>
+                    <% end %>
+
                   </div>
                 </div>
 
@@ -63,8 +89,8 @@
                     <%= select_tag(:property_address_toggle, options_for_select(["Show", "Hide"], type.property_address_toggle), :class => "form-control") %>
                   </div>
                   <div class="col-lg-3 col-6 col-sm-6 mb-1">
-                    Zipcode
-                    <%= select_tag(:zipcode_toggle, options_for_select(["Show", "Hide"], type.zipcode_toggle), :class => "form-control") %>
+                    City
+                    <%= select_tag(:city_toggle, options_for_select(["Show", "Hide"], type.city_toggle), :class => "form-control") %>
                   </div>
                 </div>
                 <div class = "row mb-3">

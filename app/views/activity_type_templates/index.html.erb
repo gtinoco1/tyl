@@ -1,9 +1,22 @@
 <div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <h4 class="text-secondary text-uppercase">
-      Settings
-    </h4>
+  <div class="col-lg-8 offset-lg-2">
+    <h5 class="text-info text-uppercase">
+      Manage Property Activity Types
+    </h5>
     <hr>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-lg-8 offset-lg-2">
+
+    <div class="text-center font-weight-light">
+    This allows you to customize what fields are shown for your activity types. 
+    To enable a field, toggle that field to "Show" in the specific actitivity type.
+    In order to delete a type there must not be any activities associated with that type.
+    </div>
+    <hr>
+
   </div>
 </div>
 
@@ -36,12 +49,23 @@
                       <input type="text" id="title" name="title" class="form-control" value="<%= type.title %>">
                     </div>
                   </div>
-
                   <div class="col-6">
-                    <div><br></div>
-                    <a href="/delete_activity_type/<%= type.id %>/">
-                      <button type="button" class="btn btn-outline-danger btn-block mt-2 text-uppercase">Delete</button>
-                    </a>
+
+                    <% if type.activities.count == 0 %>
+
+                      <div><br>
+                      </div>
+                      <a href="/delete_activity_type/<%= type.id %>/">
+                        <button type="button" class="btn btn-outline-danger btn-block mt-2 text-uppercase">Delete</button>
+                      </a>
+
+                    <% else %>
+                      <div><br>
+                      </div>
+                      <a href="/delete_activity_type/<%= type.id %>/">
+                        <button type="button" class="btn btn-outline-secondary btn-block mt-2 text-uppercase" disabled>Delete</button>
+                      </a>
+                    <% end %>
                   </div>
                 </div>
 

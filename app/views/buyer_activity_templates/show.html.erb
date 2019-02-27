@@ -68,46 +68,61 @@
 
     </div>
 
+
+        <% if @buyer_activity.buyer_activity_type.property_address_toggle == "Show" %>
+        
     <div class="form-row">
-
-      <% if @buyer_activity.buyer_activity_type.property_address_toggle == "Show" %>
-
-        <div class="form-group col-lg-6 mb-0">
-          <div class="mb-1">
-            Property Address            
+          <div class="form-group col-lg-7 mb-0">
+            <div class="mb-1">
+              Property Address            
+            </div>
+            <input type="text" id="property_address" name="property_address" class="form-control" value="<%= @buyer_activity.property_address %>" disabled>
           </div>
-          <input type="text" id="property_address" name="property_address" class="form-control" value="<%= @buyer_activity.property_address %>" disabled>
-        </div>
 
-      <% else %>
-      <% end %>
-
-      <% if @buyer_activity.buyer_activity_type.zipcode_toggle == "Show" %>
-
-        <div class="form-group col-lg-3 mb-0">
-          <div class="mb-1">
-            Zipcode            
+          <div class="form-group col-lg-5 mb-0">
+            <div class="mb-1">
+              City            
+            </div>
+            <input type="text" id="city" name="city" class="form-control" value="<%= @buyer_activity.city %>" disabled>
           </div>
-          <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%= @buyer_activity.zipcode %>" disabled>
+
         </div>
 
+        <div class="form-row">
+          <div class="form-group col-lg-6 mb-0">
+            <div class="mb-1">
+              State            
+            </div>
+            <input type="text" id="state" name="state" class="form-control" value="<%= @buyer_activity.state %>" disabled >
+          </div>
+
+          <div class="form-group col-lg-2 mb-0">
+            <div class="mb-1">
+              Zipcode            
+            </div>
+            <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%= @buyer_activity.zipcode %>" disabled>
+          </div>
+        </div>
+        
       <% else %>
       <% end %>
 
-      <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
+      <div class="form-row">
 
-        <div class="form-group col-lg-12 mb-0">
-          <label for="comment">
-            Comments    
-          </label>
-         <textarea disabled id="comment" name="comment" class="form-control" rows="3" value="<%= @buyer_activity.comment %>"> <%= @buyer_activity.comment %> </textarea>
-        </div>
+        <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
 
-      <% else %>
-      <% end %>
+          <div class="form-group col-lg-12 mb-0">
+            <label for="comment">
+              Comments            
+            </label>
+            <textarea disabled id="comment" name="comment" class="form-control" rows="3" value="<%= @buyer_activity.comment %>"> <%= @buyer_activity.comment %> </textarea>
+          </div>
+
+        <% else %>
+        <% end %>
 
 
-    </div>
+      </div>
 
     <% if @buyer_activity.buyer_activity_type.detail_toggle == "Show" %>
 
