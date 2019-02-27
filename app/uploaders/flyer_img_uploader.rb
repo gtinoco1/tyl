@@ -7,7 +7,7 @@ class FlyerImgUploader < CarrierWave::Uploader::Base
   process :tags => ["flyer_img"]
 
   def public_id
-    return "trackyourlisting/flyers/" + model.property.address + "_" + model.subject + "_" + model.date.strftime("%m_%d_%Y")
+    return "activities/" + model.property.address + "_" + model.subject + "_" + model.date.strftime("%m_%d_%Y")
   end  
  
   # version :standard do
