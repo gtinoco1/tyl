@@ -180,6 +180,7 @@ Rails.application.routes.draw do
   get("/terms", {:controller => "buyers", :action => "terms"})
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
+    get("/updates", {:controller => "buyers", :action => "updates"})
 
   devise_for :users
   ActiveAdmin.routes(self)

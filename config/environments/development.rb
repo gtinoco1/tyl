@@ -70,7 +70,7 @@ Rails.application.configure do
     address: "smtp.mailgun.org",
     port: 587,
     domain: "mg.trackyourlisting.com",
-    :user_name => ENV.fetch("MAILGUN_SMTP_USERNAME"),
+    :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
     :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
   }
   

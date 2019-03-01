@@ -43,9 +43,12 @@ class BuyersController < ApplicationController
     render("shared/privacy.html.erb")
   end
 
+  def updates
+    render("shared/updates.html.erb")
+  end
+  
   def new_form
     @buyer = Buyer.new
-
     render("buyer_templates/new_form.html.erb")
   end
 
