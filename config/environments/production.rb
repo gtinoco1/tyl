@@ -99,7 +99,7 @@ config.action_mailer.default :charset => "utf-8"
     port: 587,
     enable_starttls_auto: true,
     domain: "mg.trackyourlisting.com",
-    :user_name => ENV.fetch("MAILGUN_USERNAME"),
-    :password => ENV.fetch("MAILGUN_PASSWORD")
+    :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
+    :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
   }
 end
