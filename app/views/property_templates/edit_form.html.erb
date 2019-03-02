@@ -1,17 +1,10 @@
 <div class="row">
-  <div class="col-lg-6 offset-lg-2">
+  <div class="col-lg-8 offset-lg-2">
     <h4 class="text-secondary text-uppercase">
       Edit Property
       <hr>
     </h4>
   </div>
-  
-  <div class="col-lg-2">
-    <a href="/delete_property/<%= @property.id %>" class="btn btn-block btn-outline-danger">
-      Delete Property
-    </a>
-  </div>
-
 </div>
 
 
@@ -35,6 +28,7 @@
 
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
+
       <div class="form-group">
         <label for="address">
           Street Address
@@ -72,9 +66,6 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <input type="hidden" name="realtor_id" class="form-control" value="<%= current_user.id %>">
-      </div>
     </div>
   </div>
 
@@ -96,14 +87,51 @@
       </div>
     </div>
   </div>
+  
+  <div class="form-group">
+    <input type="hidden" name="realtor_id" class="form-control" value="<%= current_user.id %>">
+  </div>
 
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-lg-8 offset-lg-2">
       <button class="btn btn-block btn-outline-success">
         Save Changes
       </button>
     </form>
+  </div>
+</div>
 
+<% if @property.activities.count == 0 %>
+
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <a href="/delete_property/<%= @property.id %>" class="btn btn-block btn-outline-danger">
+        Delete Property
+      </a>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="row mb-3">
+    <div class="col-lg-4 offset-lg-2">
+      <a href="/delete_property/<%= @property.id %>" class="btn disabled btn-block btn-outline-secondary mb-2">
+        Delete Property
+      </a>
+    </div>
+
+    <div class="col-lg-4">
+      <p class="text-secondary text-center">
+        You can only delete a property that does not contain any activities.
+      </p>
+    </div>
+  </div>
+
+<% end %>
+
+
+<div class="row mb-3">
+  <div class="col-lg-8 offset-lg-2">
     <hr>
 
     <a href="/all_properties" class="btn btn-block btn-outline-secondary">
