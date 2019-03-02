@@ -9,86 +9,100 @@
   <% end %>
 <% end %>
 
-<h1>
-  Add a new activity type
-</h1>
-
-
-<hr>
-
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <h4 class="text-uppercase text-secondary">
+      Add a new activity type
+    </h4>
+    <hr>
+  </div>
+</div>
 <form action="/create_activity_type" method="post">
+  
+<div class = "row">
+  <div class="col-lg-8 offset-lg-2">
+
+    <div class="form-group">
+      <label for="title">
+        Title
+      </label>
+      <input type="text" id="title" name="title" class="form-control">
+    </div>
+
+  </div>
+</div>
 
   <div class="form-group">
-    <label for="title">
-      Title
-    </label>
-
-    <input type="text" id="title" name="title" class="form-control" value="<%= @activity_type.title %>">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
   </div>
 
-  <div class="form-group">
-    <label for="cost_toggle">
-      Cost toggle
-    </label>
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
 
-    <input type="text" id="cost_toggle" name="cost_toggle" class="form-control" value="<%= @activity_type.cost_toggle %>">
+      <div class = "row mb-2">
+
+        <div class="col-lg-3 col-6 col-sm-6">
+          Subject
+          <%= select_tag(:subject_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Contact
+          <%= select_tag(:contact_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Duration
+          <%= select_tag(:duration_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Cost
+          <%= select_tag(:cost_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+
+
+      </div>
+
+      <div class = "row mb-2">
+
+        <div class="col-lg-3 col-6 col-sm-6">
+          Details
+          <%= select_tag(:detail_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Outcome
+          <%= select_tag(:outcome_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Agent
+          <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Customer
+          <%= select_tag(:customer_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+      </div>
+
+
+      <div class = "row mb-3">
+        <div class="col-lg-3 offset-lg-3 col-6 col-sm-6">
+          Flyer Image
+          <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+        <div class="col-lg-3 col-6 col-sm-6">
+          Postcard Image
+          <%= select_tag(:postcard_img_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
+        </div>
+      </div>
+
+      <button class="btn btn-block btn-outline-success">
+        Save
+      </button>
+
+    </form>
+    <hr>
+
+    <a href="/activity_types">
+      Go back
+    </a>
+
   </div>
-
-  <div class="form-group">
-    <label for="duration_toggle">
-      Duration toggle
-    </label>
-
-    <input type="text" id="duration_toggle" name="duration_toggle" class="form-control" value="<%= @activity_type.duration_toggle %>">
-  </div>
-
-  <div class="form-group">
-    <label for="detail_toggle">
-      Detail toggle
-    </label>
-
-    <input type="text" id="detail_toggle" name="detail_toggle" class="form-control" value="<%= @activity_type.detail_toggle %>">
-  </div>
-
-  <div class="form-group">
-    <label for="outcome_toggle">
-      Outcome toggle
-    </label>
-
-    <input type="text" id="outcome_toggle" name="outcome_toggle" class="form-control" value="<%= @activity_type.outcome_toggle %>">
-  </div>
-
-  <div class="form-group">
-    <label for="contact_toggle">
-      Contact toggle
-    </label>
-
-    <input type="text" id="contact_toggle" name="contact_toggle" class="form-control" value="<%= @activity_type.contact_toggle %>">
-  </div>
-
-  <div class="form-group">
-    <label for="flyer_img_toggle">
-      Flyer img toggle
-    </label>
-
-    <input type="text" id="flyer_img_toggle" name="flyer_img_toggle" class="form-control" value="<%= @activity_type.flyer_img_toggle %>">
-  </div>
-
-  <div class="form-group">
-    <label for="postcard_img_toggle">
-      Postcard img toggle
-    </label>
-
-    <input type="text" id="postcard_img_toggle" name="postcard_img_toggle" class="form-control" value="<%= @activity_type.postcard_img_toggle %>">
-  </div>
-
-  <button class="btn btn-block btn-outline-secondary">
-    Create activity type
-  </button>
-</form>
-
-<hr>
-
-<a href="/activity_types">
-  Go back
-</a>
+</div>
