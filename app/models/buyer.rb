@@ -11,6 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  buyer_type  :string
+#  status      :string
 #
 
 class Buyer < ApplicationRecord

@@ -9,7 +9,7 @@
 
     <!-- Connect Font Awesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.2/css/all.css">
-  <link href="https://fonts.googleapis.com/css?family=Krub|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Krub|Nunito" rel="stylesheet">
 
     <!-- Connect Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -18,8 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    
-    
+
 
     <!-- Make it responsive to small screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,12 +36,16 @@
 
       <%= yield %>
     </div>
-    <div class="col-lg-6 col-10 offset-lg-3 offset-1">
-    <hr>
-    <hr>
+
+    <div class="container">
+      <div class="col-lg-6 offset-lg-3 col-12 pl-1 pr-1">
+        <hr>
+        <hr>
+      </div>
     </div>
+
     <%= render "shared/footer" %>
     <%= dev_tools if Rails.env.development? %>
-    
+
   </body>
 </html>

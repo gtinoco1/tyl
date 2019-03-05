@@ -176,12 +176,14 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_property/:id_to_remove", {:controller => "properties", :action => "destroy_row"})
 
+  get("/archive", {:controller => "properties", :action => "archive"})
   #------------------------------
   get("/help", {:controller => "buyers", :action => "help_page"})
   get("/terms", {:controller => "buyers", :action => "terms"})
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
     get("/updates", {:controller => "buyers", :action => "updates"})
+    
 
   devise_for :users
   ActiveAdmin.routes(self)

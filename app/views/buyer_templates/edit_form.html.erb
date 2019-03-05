@@ -1,17 +1,10 @@
 <div class="row">
-  <div class="col-lg-4 offset-lg-3 mb-2">
+  <div class="col-lg-6 offset-lg-3 mb-2">
     <h4 class="text-secondary text-uppercase">
       Edit Customer Details
     </h4>
     <hr>
   </div>
-  
-  <div class="col-lg-2 mb-2">
-    <a href="/delete_buyer/<%= @buyer.id %>" class="btn btn-block btn-outline-danger">
-      Delete Customer
-    </a>
-  </div>
-
 
 </div>
 
@@ -71,14 +64,113 @@
       <div class="form-group">
         <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
       </div>
+    </div>
+  </div>
 
+  <div class="row mb-5">
+    <div class="col-lg-6 offset-lg-3">
       <button class="btn btn-block btn-outline-success">
-        Update Customer
+        Save Changes
       </button>
     </form>
+  </div>
+</div>
 
+
+<% if @buyer.buyer_activities.count == 0 %>
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <a href="/delete_buyer/<%= @buyer.id %>" class="btn btn-block btn-outline-danger">
+        Delete Customer
+      </a>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="row mb-3">
+    <div class="col-lg-3 offset-lg-3">
+      <a href="/delete_buyer/<%= @buyer.id %>" class="btn disabled btn-block btn-outline-secondary mb-2">
+        Delete Customer
+      </a>
+    </div>
+
+    <div class="col-lg-3">
+      <p class="text-secondary text-center">
+        You can only delete a customer that does not contain any activities.
+      </p>
+    </div>
+  </div>
+
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
     <hr>
+  </div>
+</div>
 
+<% if @buyer.status == "Active" or @buyer.status == "" %>
+
+<div class="row mb-3">
+  <div class="col-lg-3 offset-lg-3">
+    <form action="/update_buyer/<%= @buyer.id %>" method="post">
+      <div class="form-group">
+        <input type="hidden" name="status" class="form-control" value="Archive">
+        <input type="hidden" name="user_id" class="form-control" value="<%= @buyer.user_id %>">
+        <input type="hidden" name="name" class="form-control" value="<%= @buyer.name %>">
+        <input type="hidden" name="funds" class="form-control" value="<%= @buyer.funds %>">
+        <input type="hidden" name="downpayment" class="form-control" value="<%= @buyer.downpayment %>">
+        <input type="hidden" name="preapproval" class="form-control" value="<%= @buyer.preapproval %>">
+        <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
+      </div>
+      <button class="btn btn-block btn-outline-warning">
+        Archive Customer
+      </button>
+    </form>
+  </div>
+
+  <div class="col-lg-3">
+    <p class="text-secondary text-center">
+      Archived Customers will be saved on the <a href="/archive"> Archive </a> page for future reference. 
+      All activity information will be saved with the customer.
+    </p>
+  </div>
+</div>
+
+<% else %>
+
+<div class="row mb-3">
+  <div class="col-lg-3 offset-lg-3">
+    <form action="/update_buyer/<%= @buyer.id %>" method="post">
+      <div class="form-group">
+        <input type="hidden" name="status" class="form-control" value="Active">
+        <input type="hidden" name="user_id" class="form-control" value="<%= @buyer.user_id %>">
+        <input type="hidden" name="name" class="form-control" value="<%= @buyer.name %>">
+        <input type="hidden" name="funds" class="form-control" value="<%= @buyer.funds %>">
+        <input type="hidden" name="downpayment" class="form-control" value="<%= @buyer.downpayment %>">
+        <input type="hidden" name="preapproval" class="form-control" value="<%= @buyer.preapproval %>">
+        <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
+      </div>
+      <button class="btn btn-block btn-outline-success">
+        Restore Customer
+      </button>
+    </form>
+  </div>
+
+  <div class="col-lg-3">
+    <p class="text-secondary text-center">
+      Restored Customers will be moved out of the archive and back to your active customers.
+    </p>
+  </div>
+</div>
+
+<% end %>
+
+<div class="row mb-5">
+  <div class="col-lg-6 offset-lg-3">
+    <hr>
     <a href="/buyers" class="btn btn-block btn-outline-secondary">
       Go back
     </a>

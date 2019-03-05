@@ -1,6 +1,6 @@
 class BuyersController < ApplicationController
   def index
-    @buyers = Buyer.all
+    @buyers_active = current_user.buyers.where(status: "Active").or(current_user.buyers.where(status: ""))
 
     render("buyer_templates/index.html.erb")
   end
@@ -46,7 +46,7 @@ class BuyersController < ApplicationController
   def updates
     render("shared/updates.html.erb")
   end
-  
+
   def new_form
     @buyer = Buyer.new
     render("buyer_templates/new_form.html.erb")
@@ -61,6 +61,7 @@ class BuyersController < ApplicationController
     @buyer.downpayment = params.fetch("downpayment")
     @buyer.preapproval = params.fetch("preapproval")
     @buyer.buyer_type = params.fetch("buyer_type")
+    @buyer.status = params.fetch("status")
 
     if @buyer.valid?
       @buyer.save
@@ -85,6 +86,7 @@ class BuyersController < ApplicationController
     @buyer.downpayment = params.fetch("downpayment")
     @buyer.preapproval = params.fetch("preapproval")
     @buyer.buyer_type = params.fetch("buyer_type")
+    @buyer.status = params.fetch("status")
 
     if @buyer.valid?
       @buyer.save

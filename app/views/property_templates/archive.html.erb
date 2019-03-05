@@ -1,0 +1,172 @@
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-info text-uppercase">
+      Archive
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<% if current_user.properties.where(status: "Archive").count == 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="text-center font-weight-light">
+        Archived Properties and Customers will be saved here. To save to the archive go to the property or customer's edit page.
+      </div>
+      <hr>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<% if current_user.properties.where(status: "Archive").count > 0 %>
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="text-secondary text-uppercase">
+        Properties
+      </h5>
+    </div>
+  </div>
+
+<% else %>
+<% end %>
+
+<% if current_user.properties.where(listing_type: "For Sale").where(status: "Archive").count > 0 %>
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="text-info text-center font-weight-light text-uppercase">
+        For Sale
+      </h5>
+    </div>
+  </div>
+
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% current_user.properties.where(listing_type: "For Sale").where(status: "Archive").each do |property| %>
+      <div>
+        <a href="properties/<%= property.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
+        </a>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<% if current_user.properties.where(listing_type: "For Rent").count > 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="text-info text-center font-weight-light text-uppercase">
+        For Rent
+      </h5>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% current_user.properties.where(listing_type: "For Rent").each do |property| %>
+
+      <div>
+        <a href="properties/<%= property.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
+        </a>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<% if current_user.buyers.where(status: "Archive").count > 0 %>
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <hr>
+      <h5 class="text-secondary text-uppercase">
+        Customers
+      </h5>
+    </div>
+  </div>
+
+<% else %>
+<% end %>
+
+<% if current_user.buyers.where(buyer_type: "Buyer").where(status: "Archive").count > 0 %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <h5 class="text-info text-center font-weight-light text-uppercase">
+      Buyers
+    </h5>
+  </div>
+</div>
+
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% current_user.buyers.where(buyer_type: "Buyer").where(status: "Archive").each do |buyer| %>
+
+      <div>
+        <a href="buyers/<%= buyer.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= buyer.name %></button>
+        </a>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
+<% if current_user.buyers.where(buyer_type: "Tenant").where(status: "Archive").count > 0 %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <h5 class="text-info text-center font-weight-light text-uppercase">
+      Tenants
+    </h5>
+  </div>
+</div>
+
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% current_user.buyers.where(buyer_type: "Tenant").where(status: "Archive").each do |buyer| %>
+
+      <div>
+        <a href="buyers/<%= buyer.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= buyer.name %></button>
+        </a>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <hr>
+    <h5>
+      <a href="/" class="btn btn-block btn-outline-secondary">
+        Go Back
+      </a>
+    </h5>
+  </div>
+</div>

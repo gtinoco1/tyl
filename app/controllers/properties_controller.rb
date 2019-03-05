@@ -1,12 +1,11 @@
 class PropertiesController < ApplicationController
   def index
-    @properties = Property.where(status: "Active")
-
+    
     render("property_templates/index.html.erb")
   end
   
-    def all
-    @properties = Property.where(status: "Active")
+  def all
+    @properties_active = current_user.properties.where(status: "Active")
 
     render("property_templates/all_properties.html.erb")
   end
@@ -15,6 +14,11 @@ class PropertiesController < ApplicationController
     @property = Property.find(params.fetch("id_to_display"))
 
     render("property_templates/show.html.erb")
+  end
+  
+  def archive
+    @properties = Property.all
+    render("property_templates/archive.html.erb")
   end
   
   # def report_html

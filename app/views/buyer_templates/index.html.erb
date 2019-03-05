@@ -7,20 +7,20 @@
   </div>
 </div>
 
-<% if current_user.buyers.where(buyer_type: "Buyer").count > 0 %>
+<% if current_user.buyers.where(buyer_type: "Buyer").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).count > 0 %>
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    <h4 class="text-secondary text-uppercase">
+    <h5 class="text-secondary text-uppercase">
       Buyers
-    </h4>
+    </h5>
   </div>
 </div>
 
 <% else %>
 <% end %>
 
-<% if current_user.buyers.count == 0 %>
+<% if current_user.buyers.where(status: "Active").or(current_user.buyers.where(status: "")).count == 0 %>
   <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
       <h5 class="font-weight-light text-center text-uppercase">
@@ -34,7 +34,7 @@
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
 
-    <% current_user.buyers.where(buyer_type: "Buyer").each do |buyer| %>
+    <%  current_user.buyers.where(buyer_type: "Buyer").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).each do |buyer| %>
 
       <div>
         <a href="buyers/<%= buyer.id %>">
@@ -48,13 +48,13 @@
 </div>
 
 
-<% if current_user.buyers.where(buyer_type: "Tenant").count > 0 %>
+<% if  current_user.buyers.where(buyer_type: "Tenant").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).count > 0 %>
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    <h4 class="text-secondary text-uppercase">
+    <h5 class="text-secondary text-uppercase">
       Tenants
-    </h4>
+    </h5>
   </div>
 </div>
 
@@ -64,7 +64,7 @@
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
 
-    <% current_user.buyers.where(buyer_type: "Tenant").each do |buyer| %>
+    <%  current_user.buyers.where(buyer_type: "Tenant").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).each do |buyer| %>
 
       <div>
         <a href="buyers/<%= buyer.id %>">
@@ -77,7 +77,7 @@
   </div>
 </div>
 
-<div class="row mb-3">
+<div class="row">
   <div class="col-lg-6 offset-lg-3">
     <hr>
     <h5>
@@ -85,5 +85,14 @@
         Add a new customer
       </a>
     </h5>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3 text-center">
+    <hr class="mt-2">
+  <a class="font-weight-light" href="/archive">
+    Archive
+  </a>
   </div>
 </div>
