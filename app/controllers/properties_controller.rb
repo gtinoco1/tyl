@@ -22,11 +22,17 @@ class PropertiesController < ApplicationController
   #   @call_type = ActivityType.where(title: "Call").first
   #   render("property_templates/report_html.html.erb")
   # end
+    def report_settings
+    @property = Property.find(params.fetch("id_to_display"))
+
+    render("property_templates/report_generator.html.erb")
+  end
   
     def create_pdf
     @property = Property.find(params.fetch("id_to_display"))
-    @activity_types = current_user.activity_types
     @current_user_id = current_user.id
+    @start_date = Date.strptime(params.fetch("start_date"), "%Y-%m-%d")
+    @end_date = Date.strptime(params.fetch("end_date"), "%Y-%m-%d")
     
     respond_to do |format|
       format.html
@@ -34,7 +40,7 @@ class PropertiesController < ApplicationController
       format.xls { send_data Property.all.to_csv(col_sep: "\t") }
       
       format.pdf do
-        pdf = ReportTwoPdf.new(@property, @activity_types, @current_user)
+        pdf = ReportTwoPdf.new(@property, @current_user, @start_date, @end_date)
         send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", disposition: 'inline'
         end
        end

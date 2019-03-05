@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-info text-uppercase">
+      Report Generator
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+
+    <div class="text-center font-weight-light">
+    Choose report settings to create a custom report. To hide specific fields (Details, Subject, Outcome etc..) go to 
+    the property settings page first and hide that field for the corresponding activity type.
+    </div>
+    <hr>
+
+  </div>
+</div>
+
+ <form action="../properties/<%=@property.id%>/report.pdf" method="post">
+
+<div class="row">
+  
+  <div class="col-lg-6 offset-lg-3">
+
+    <div class="text-info mb-3">
+      Report for <%= @property.address %>:
+    </div>
+
+  </div>
+
+
+      <div class="col-lg-3 offset-lg-3">
+        <div class="form-group">
+          <label for="start_date">
+            Start Date
+          </label>
+          <input class="form-control" type="date" id="start_date" name="start_date" value="<%= @property.activities.order(date: :asc).first.date.strftime('%Y-%m-%d') %>">
+        </div>
+      </div>
+      
+      <div class="col-lg-3">
+        <div class="form-group">
+          <label for="end_date">
+            End Date
+          </label>
+          <input class="form-control" type="date" id="end_date" name="end_date" value="<%=  @property.activities.order(date: :asc).last.date.strftime('%Y-%m-%d') %>">
+        </div>
+      </div>
+      
+      <div class="col-lg-6 offset-lg-3">
+      <p class="text-secondary font-weight-light text-center"><small>
+        The default dates encompass all activities for this property.
+      </small></p>
+      </div>
+
+      
+      <div class="col-lg-6 offset-lg-3">
+      <button class="btn btn-block btn-outline-secondary">
+        Generate Report
+      </button>
+      
+            </div>
+      </div>
+      
+    </form>
+    
+
