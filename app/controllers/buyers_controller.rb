@@ -97,6 +97,40 @@ class BuyersController < ApplicationController
     end
   end
 
+  def add_to_archive
+    @buyer = Buyer.find(params.fetch("id_to_modify"))
+    @buyer.user_id = params.fetch("user_id")
+    @buyer.name = params.fetch("name")
+    @buyer.funds = params.fetch("funds")
+    @buyer.downpayment = params.fetch("downpayment")
+    @buyer.preapproval = params.fetch("preapproval")
+    @buyer.buyer_type = params.fetch("buyer_type")
+    @buyer.status = params.fetch("status")
+    if @buyer.valid?
+      @buyer.save
+      redirect_to("/archive", :notice => "Customer moved to archive.")
+    else
+      render("buyer_templates/edit_form_with_errors.html.erb")
+    end
+  end
+
+  def restore_from_archive
+    @buyer = Buyer.find(params.fetch("id_to_modify"))
+    @buyer.user_id = params.fetch("user_id")
+    @buyer.name = params.fetch("name")
+    @buyer.funds = params.fetch("funds")
+    @buyer.downpayment = params.fetch("downpayment")
+    @buyer.preapproval = params.fetch("preapproval")
+    @buyer.buyer_type = params.fetch("buyer_type")
+    @buyer.status = params.fetch("status")
+    if @buyer.valid?
+      @buyer.save
+      redirect_to("/buyers", :notice => "Customer restored successfully.")
+    else
+      render("buyer_templates/edit_form_with_errors.html.erb")
+    end
+  end
+
   def destroy_row
     @buyer = Buyer.find(params.fetch("id_to_remove"))
 

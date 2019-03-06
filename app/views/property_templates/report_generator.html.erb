@@ -35,7 +35,7 @@
       <div class="col-lg-3 offset-lg-3">
         <div class="form-group">
           <label for="start_date">
-            Start Date
+            Start Date*
           </label>
           <input class="form-control" type="date" id="start_date" name="start_date" value="<%= @property.activities.order(date: :asc).first.date.strftime('%Y-%m-%d') %>">
         </div>
@@ -44,16 +44,16 @@
       <div class="col-lg-3">
         <div class="form-group">
           <label for="end_date">
-            End Date
+            End Date*
           </label>
           <input class="form-control" type="date" id="end_date" name="end_date" value="<%=  @property.activities.order(date: :asc).last.date.strftime('%Y-%m-%d') %>">
         </div>
       </div>
       
       <div class="col-lg-6 offset-lg-3">
-      <p class="text-secondary font-weight-light text-center"><small>
-        The default dates encompass all activities for this property.
-      </small></p>
+      <p class="text-secondary text-center">
+        *The default dates encompass all activities for this property.
+      </p>
       </div>
 
       

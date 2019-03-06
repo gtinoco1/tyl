@@ -83,7 +83,6 @@ class PropertiesController < ApplicationController
 
   def update_row
     @property = Property.find(params.fetch("id_to_modify"))
-
     @property.address = params.fetch("address")
     @property.realtor_id = params.fetch("realtor_id")
     @property.city = params.fetch("city")
@@ -103,7 +102,6 @@ class PropertiesController < ApplicationController
 
   def add_to_archive
     @property = Property.find(params.fetch("id_to_modify"))
-
     @property.address = params.fetch("address")
     @property.realtor_id = params.fetch("realtor_id")
     @property.city = params.fetch("city")

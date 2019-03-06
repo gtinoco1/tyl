@@ -108,6 +108,8 @@ Rails.application.routes.draw do
   get("/buyers/:prefill_with_id/edit", {:controller => "buyers", :action => "edit_form"})
   post("/update_buyer/:id_to_modify", {:controller => "buyers", :action => "update_row"})
   get("/buyers/:id_to_display/report", {:controller => "buyers", :action => "create_pdf"})
+  post("/add_to_archive/:id_to_modify", {:controller => "buyers", :action => "add_to_archive"})
+  post("/restore_from_archive/:id_to_modify", {:controller => "buyers", :action => "restore_from_archive"})
 
   # DELETE
   get("/delete_buyer/:id_to_remove", {:controller => "buyers", :action => "destroy_row"})
@@ -174,7 +176,7 @@ Rails.application.routes.draw do
   get("/properties/:id_to_display/report_html", {:controller => "properties", :action => "report_html"})
   post("/add_to_archive/:id_to_modify", {:controller => "properties", :action => "add_to_archive"})
   post("/restore_from_archive/:id_to_modify", {:controller => "properties", :action => "restore_from_archive"})
-  
+
   # DELETE
   get("/delete_property/:id_to_remove", {:controller => "properties", :action => "destroy_row"})
 
@@ -185,11 +187,9 @@ Rails.application.routes.draw do
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
   get("/updates", {:controller => "buyers", :action => "updates"})
-    
 
   devise_for :users
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
 
 end
