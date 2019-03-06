@@ -117,7 +117,7 @@
 
 <div class="row mb-3">
   <div class="col-lg-3 offset-lg-3">
-    <form action="/update_property/<%= @property.id %>" method="post">
+    <form action="/add_to_archive/<%= @property.id %>" method="post">
       <div class="form-group">
         <input type="hidden" name="status" class="form-control" value="Archive">
         <input type="hidden" name="realtor_id" class="form-control" value="<%= @property.realtor_id %>">
@@ -145,7 +145,7 @@
 
 <div class="row mb-3">
   <div class="col-lg-3 offset-lg-3">
-    <form action="/update_property/<%= @property.id %>" method="post">
+    <form action="/restore_from_archive/<%= @property.id %>" method="post">
       <div class="form-group">
         <input type="hidden" name="status" class="form-control" value="Active">
         <input type="hidden" name="realtor_id" class="form-control" value="<%= @property.realtor_id %>">

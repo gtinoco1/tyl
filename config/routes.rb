@@ -172,7 +172,9 @@ Rails.application.routes.draw do
   post("/update_property/:id_to_modify", {:controller => "properties", :action => "update_row"})
   post("/properties/:id_to_display/report", {:controller => "properties", :action => "create_pdf"})
   get("/properties/:id_to_display/report_html", {:controller => "properties", :action => "report_html"})
-
+  post("/add_to_archive/:id_to_modify", {:controller => "properties", :action => "add_to_archive"})
+  post("/restore_from_archive/:id_to_modify", {:controller => "properties", :action => "restore_from_archive"})
+  
   # DELETE
   get("/delete_property/:id_to_remove", {:controller => "properties", :action => "destroy_row"})
 
@@ -182,7 +184,7 @@ Rails.application.routes.draw do
   get("/terms", {:controller => "buyers", :action => "terms"})
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
-    get("/updates", {:controller => "buyers", :action => "updates"})
+  get("/updates", {:controller => "buyers", :action => "updates"})
     
 
   devise_for :users
