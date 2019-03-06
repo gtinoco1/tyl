@@ -1,0 +1,49 @@
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-info text-uppercase">
+      My Account
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-3 offset-lg-3 col-6">
+    <h5 class="text-uppercase font-weight-light">
+      <%= current_user.first_name + " " + current_user.last_name %>
+    </h5>
+    <p>
+      <%= current_user.email %>
+    </p>
+  </div>
+
+  <div class="col-lg-3 col-6">
+    <% if current_user.headshot.blank? %>
+      <div class="card">
+        <div class="card-body text-center font-weight-light text-uppercase">
+          To add a headshot to your profile go to edit profile.
+        </div>
+      </div>
+    <% else %>
+      <img src="<%= current_user.headshot %>" class="img-fluid img-thumbnail">
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3 col-12">
+    <hr>
+    <a href="/users/edit">
+      <button type="button" class="btn btn-outline-secondary btn-block text-uppercase">Edit Profile</button>
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3 col-12">
+    <a href="/settings">
+      <button type="button" class="btn btn-outline-secondary btn-block text-uppercase">Go Back</button>
+    </a>
+  </div>
+</div>

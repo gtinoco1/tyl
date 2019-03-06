@@ -147,4 +147,8 @@ class PropertiesController < ApplicationController
 
     redirect_to("/all_properties", :notice => "Property deleted successfully.")
   end
+  
+    def my_account
+    render("users/my_account.html.erb")
+  end
 end

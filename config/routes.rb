@@ -187,6 +187,8 @@ Rails.application.routes.draw do
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
   get("/updates", {:controller => "buyers", :action => "updates"})
+  
+  get("/my_account", {:controller => "properties", :action => "my_account"})
 
   devise_for :users
   ActiveAdmin.routes(self)
