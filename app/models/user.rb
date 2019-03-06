@@ -12,6 +12,7 @@
 #  last_name              :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  headshot               :string
 #
 # Indexes
 #
@@ -36,6 +37,8 @@ class User < ApplicationRecord
   validates :first_name, :presence => true
 
   after_create :add_types
+
+  mount_uploader :headshot, HeadshotUploader
 
   def add_types
     ActivityType.create(user: self, title: "Showing",

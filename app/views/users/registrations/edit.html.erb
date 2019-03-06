@@ -10,7 +10,7 @@
 
         <% form_html_options = { method: :put, novalidate: true, class: "mb-3" } %>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: form_html_options, :html => { :multipart => true }) do |f| %>
           <% if flash[:notice].present? %>
             <div class="alert alert-info" role="alert">
               <%= flash[:notice] %>
@@ -22,6 +22,62 @@
               <%= flash[:alert] %>
             </div>
           <% end %>
+
+          <!-- Devise Input for first_name start -->
+          <div class="form-group">
+            <% first_name_was_invalid = resource.errors.include?(:first_name) %>
+
+            <% first_name_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if first_name_was_invalid %>
+                <% first_name_class << " is-invalid" %>
+              <% else %>
+                <% first_name_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :first_name %>
+
+            <%= f.text_field :first_name, :class => first_name_class, :placeholder => "Enter first name" %>
+
+            <% if first_name_was_invalid %>
+              <% resource.errors.full_messages_for(:first_name).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for first_name end -->
+
+          <!-- Devise Input for last_name start -->
+          <div class="form-group">
+            <% last_name_was_invalid = resource.errors.include?(:last_name) %>
+
+            <% last_name_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if last_name_was_invalid %>
+                <% last_name_class << " is-invalid" %>
+              <% else %>
+                <% last_name_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :last_name %>
+
+            <%= f.text_field :last_name, :class => last_name_class, :placeholder => "Enter last name" %>
+
+            <% if last_name_was_invalid %>
+              <% resource.errors.full_messages_for(:last_name).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for last_name end -->
 
           <div class="form-group">
             <% email_was_invalid = resource.errors.include?(:email) %>
@@ -55,6 +111,16 @@
             <% end %>
           </div>
 
+          <div class="row">
+            <div class="col-lg-8 col-8">
+              <%= f.label :headshot %>
+              <%= f.file_field :headshot, :class => "form-control" %>
+            </div>
+            <div class="col-lg-3 col-3 mx-auto">
+              <img src="<%= current_user.headshot %>" class="img-fluid">
+            </div>
+
+          </div>
           <div class="form-group">
             <% password_was_invalid = resource.errors.include?(:password) %>
 
@@ -145,66 +211,16 @@
             </small>
           </div>
 
-          
-          <!-- Devise Input for first_name start -->
-          <div class="form-group">
-            <% first_name_was_invalid = resource.errors.include?(:first_name) %>
 
-            <% first_name_class = "form-control" %>
-
-            <% if was_validated %>
-              <% if first_name_was_invalid %>
-                <% first_name_class << " is-invalid" %>
-              <% else %>
-                <% first_name_class << " is-valid" %>
-              <% end %>
-            <% end %>
-
-            <%= f.label :first_name %>
-
-            <%= f.text_field :first_name, :class => first_name_class, :placeholder => "Enter first name" %>
-
-            <% if first_name_was_invalid %>
-              <% resource.errors.full_messages_for(:first_name).each do |message| %>
-                <div class="invalid-feedback d-flex">
-                  <%= message %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <!-- Devise Input for first_name end -->
-          
-          <!-- Devise Input for last_name start -->
-          <div class="form-group">
-            <% last_name_was_invalid = resource.errors.include?(:last_name) %>
-
-            <% last_name_class = "form-control" %>
-
-            <% if was_validated %>
-              <% if last_name_was_invalid %>
-                <% last_name_class << " is-invalid" %>
-              <% else %>
-                <% last_name_class << " is-valid" %>
-              <% end %>
-            <% end %>
-
-            <%= f.label :last_name %>
-
-            <%= f.text_field :last_name, :class => last_name_class, :placeholder => "Enter last name" %>
-
-            <% if last_name_was_invalid %>
-              <% resource.errors.full_messages_for(:last_name).each do |message| %>
-                <div class="invalid-feedback d-flex">
-                  <%= message %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <!-- Devise Input for last_name end -->
           <%= f.submit "Update", class: "btn btn-block btn-outline-primary" %>
         <% end %>
+        
+        <div class="row mt-3">
+          <div class="col-12">
+          <%= link_to "Go Back", :back, class: "btn btn-block btn-outline-secondary" %>
+        </div>
+        </div>
 
-        <%= link_to "Back", :back, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
       <div class="card-footer">

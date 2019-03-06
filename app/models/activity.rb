@@ -29,3 +29,5 @@ class Activity < ApplicationRecord
   mount_uploader :flyer_img, FlyerImgUploader
   mount_uploader :postcard__img, PostcardImgUploader
 end
+
+

@@ -25,6 +25,7 @@ class PropertiesController < ApplicationController
   #   @call_type = ActivityType.where(title: "Call").first
   #   render("property_templates/report_html.html.erb")
   # end
+  
   def report_settings
     @property = Property.find(params.fetch("id_to_display"))
 
