@@ -101,7 +101,7 @@ class PropertiesController < ApplicationController
     end
   end
 
-  def add_to_archive
+  def add_property_to_archive
     @property = Property.find(params.fetch("id_to_modify"))
     @property.address = params.fetch("address")
     @property.realtor_id = params.fetch("realtor_id")
@@ -120,7 +120,7 @@ class PropertiesController < ApplicationController
     end
   end
 
-  def restore_from_archive
+  def restore_property_from_archive
     @property = Property.find(params.fetch("id_to_modify"))
 
     @property.address = params.fetch("address")

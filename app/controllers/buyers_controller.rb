@@ -97,7 +97,7 @@ class BuyersController < ApplicationController
     end
   end
 
-  def add_to_archive
+  def add_buyer_to_archive
     @buyer = Buyer.find(params.fetch("id_to_modify"))
     @buyer.user_id = params.fetch("user_id")
     @buyer.name = params.fetch("name")
@@ -114,7 +114,7 @@ class BuyersController < ApplicationController
     end
   end
 
-  def restore_from_archive
+  def restore_buyer_from_archive
     @buyer = Buyer.find(params.fetch("id_to_modify"))
     @buyer.user_id = params.fetch("user_id")
     @buyer.name = params.fetch("name")

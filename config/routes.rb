@@ -108,8 +108,8 @@ Rails.application.routes.draw do
   get("/buyers/:prefill_with_id/edit", {:controller => "buyers", :action => "edit_form"})
   post("/update_buyer/:id_to_modify", {:controller => "buyers", :action => "update_row"})
   get("/buyers/:id_to_display/report", {:controller => "buyers", :action => "create_pdf"})
-  post("/add_to_archive/:id_to_modify", {:controller => "buyers", :action => "add_to_archive"})
-  post("/restore_from_archive/:id_to_modify", {:controller => "buyers", :action => "restore_from_archive"})
+  post("/add_buyer_to_archive/:id_to_modify", {:controller => "buyers", :action => "add_buyer_to_archive"})
+  post("/restore_buyer_from_archive/:id_to_modify", {:controller => "buyers", :action => "restore_buyer_from_archive"})
 
   # DELETE
   get("/delete_buyer/:id_to_remove", {:controller => "buyers", :action => "destroy_row"})
@@ -174,8 +174,8 @@ Rails.application.routes.draw do
   post("/update_property/:id_to_modify", {:controller => "properties", :action => "update_row"})
   post("/properties/:id_to_display/report", {:controller => "properties", :action => "create_pdf"})
   get("/properties/:id_to_display/report_html", {:controller => "properties", :action => "report_html"})
-  post("/add_to_archive/:id_to_modify", {:controller => "properties", :action => "add_to_archive"})
-  post("/restore_from_archive/:id_to_modify", {:controller => "properties", :action => "restore_from_archive"})
+  post("/add_property_to_archive/:id_to_modify", {:controller => "properties", :action => "add_property_to_archive"})
+  post("/restore_property_from_archive/:id_to_modify", {:controller => "properties", :action => "restore_property_from_archive"})
 
   # DELETE
   get("/delete_property/:id_to_remove", {:controller => "properties", :action => "destroy_row"})
