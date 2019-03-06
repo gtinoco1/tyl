@@ -7,7 +7,7 @@ class PostcardImgUploader < CarrierWave::Uploader::Base
   process :tags => ["postcard_img"]
 
   def public_id
-    return model.property.address.gsub('#', 'UNIT') + "_" + model.subject.gsub('#', '') + "_" + model.date.strftime("%m_%d_%Y")
+   return "activities/" +  Base64.encode64(model.property.address + "_" + model.subject + "_" + model.date.strftime("%m_%d_%Y")).strip
   end 
   
   # Provide a default URL as a default if there hasn't been a file uploaded:

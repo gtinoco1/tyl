@@ -7,9 +7,9 @@ class FlyerImgUploader < CarrierWave::Uploader::Base
   process :tags => ["flyer_img"]
 
   def public_id
-    return "activities/" + model.property.address.gsub('#', 'UNIT') + "_" + model.subject.gsub('#', '') + "_" + model.date.strftime("%m_%d_%Y")
+    return "activities/" +  Base64.encode64(model.property.address + "_" + model.subject + "_" + model.date.strftime("%m_%d_%Y")).strip
   end  
- 
+
   # version :standard do
   #   process :resize_to_fill => [100, 150, :north]
   # end

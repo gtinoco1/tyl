@@ -12,7 +12,7 @@ require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 require "csv"
-
+require "base64"
 
 
 # Require the gems listed in Gemfile, including any gems

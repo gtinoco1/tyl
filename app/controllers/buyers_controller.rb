@@ -65,7 +65,7 @@ class BuyersController < ApplicationController
 
     if @buyer.valid?
       @buyer.save
-      redirect_to("/buyers", :notice => "Buyer updated successfully.")
+      redirect_to("/buyers", :notice => "Customer created successfully.")
     else
       render("buyer_templates/new_form_with_errors.html.erb")
     end
@@ -91,7 +91,7 @@ class BuyersController < ApplicationController
     if @buyer.valid?
       @buyer.save
 
-      redirect_to("/buyers/#{@buyer.id}", :notice => "Buyer updated successfully.")
+      redirect_to("/buyers/#{@buyer.id}", :notice => "Customer updated successfully.")
     else
       render("buyer_templates/edit_form_with_errors.html.erb")
     end
@@ -136,6 +136,6 @@ class BuyersController < ApplicationController
 
     @buyer.destroy
 
-    redirect_to("/buyers", :notice => "Buyer deleted successfully.")
+    redirect_to("/buyers", :notice => "Customer deleted successfully.")
   end
 end
