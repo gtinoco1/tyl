@@ -1,23 +1,49 @@
-<div class="row mb-3">
-  <div class="col-md-6 offset-md-2">
-    <h4 class="text-secondary text-uppercase">
+<div class="row mb-0">
+  <div class="col-lg-5 offset-lg-2 col-9">
+    <h5 class="text-info text-left text-uppercase mb-0">
       <%= @property.address %>
-    </h4>
+    </h5>
+    <p class="text-secondary mt-0 pb-0"><small><%= @property.city + ", " + @property.state + " " + @property.zipcode %></small></p>
   </div>
-
-  <div class="col-md-2">
-    <a href="../report_generator/<%=@property.id%>" class="btn btn-block btn-outline-secondary">
-      Generate Report
-    </a>
+  <div class="col-lg-3 col-3">
+    <!--<p class="text-success text-center font-weight-bold mb-0"> $XXX,XXX </p>-->
+    <!--<p class="text-secondary text-center pt-0"> <small>-->
+    <!--    <a href="/" class="link">-->
+    <!--      Price</a>-->
+    <!--  </small></p>-->
   </div>
 </div>
 
 <div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <a href="/activities/new/<%= @property.id %>" class="btn btn-block btn-outline-secondary">
+  <div class="col-lg-8 offset-lg-2">
+    <a class="btn btn-outline-secondary pt-0 pb-0" style="border-color: #e6e6e6" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <i class="fas fa-ellipsis-h"></i>
+    </a>
+
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body border-white">
+        <a href="../report_generator/<%=@property.id%>" class="btn btn-block btn-outline-secondary">
+          Generate Report
+        </a>
+        <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-secondary">
+          Edit Property
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-4 offset-md-2 col-6">
+    <h5 class="text-secondary font-weight-light text-left pt-2">Activity Log </h5>
+  </div>
+  <div class="col-lg-4 col-6 text-center">
+    <a href="/activities/new/<%= @property.id %>" class="btn btn-block btn-outline-info">
       Add Activity
     </a>
   </div>
+  <hr>
 </div>
 
 <div class="row mb-3">
@@ -32,13 +58,13 @@
               <%= activity.activity_type.title %>
             </div>
             <div class="col text-center">
-              
-      <% if activity.activity_type.subject_toggle == "Show" %>
-          <%= activity.subject %>
-      <% else %>
-          <%= activity.detail %>
-      <% end %>
-      
+
+              <% if activity.activity_type.subject_toggle == "Show" %>
+                <%= activity.subject %>
+              <% else %>
+                <%= activity.detail %>
+              <% end %>
+
             </div>
             <div class="col text-center">
               <%= activity.date.strftime("%b %d")  %>
@@ -61,9 +87,6 @@
 
     <div class="row mb-3">
       <div class="col">
-        <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-secondary">
-          Edit Property
-        </a>
         <a href="/all_properties" class="btn btn-block btn-outline-secondary">
           Go back
         </a>

@@ -13,3 +13,19 @@
  *= require_self
 *= require bootstrap-datetimepicker
  */
+ 
+ html { font-size: 1rem; }
+
+@media (min-width: 300px) {
+    html { font-size: .9rem; }
+}
+@media (min-width: 768px) {
+    html { font-size: 1rem; }
+}
+@media (min-width: 992px) {
+    html { font-size: 1rem; }
+}
+@media (min-width: 1200px) {
+    html { font-size: 1rem; }
+}
+
