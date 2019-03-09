@@ -6,11 +6,17 @@
     <p class="text-secondary mt-0 pb-0"><small><%= @property.city + ", " + @property.state + " " + @property.zipcode %></small></p>
   </div>
   <div class="col-lg-3 col-3">
-    <!--<p class="text-success text-center font-weight-bold mb-0"> $XXX,XXX </p>-->
-    <!--<p class="text-secondary text-center pt-0"> <small>-->
-    <!--    <a href="/" class="link">-->
-    <!--      Price</a>-->
-    <!--  </small></p>-->
+    <p class="text-dark text-center font-weight-bold mb-0">
+    <% if  @property.prices.count == 0 %>
+    <a href="/prices/new/<%= @property.id %>">add</a>
+    <% else %>
+    <%= number_to_currency(@property.prices.first.amount, precision: 0) %> 
+    <% end %>
+    </p>
+    <p class="text-secondary text-center pt-0 pb-0"> <small>
+        <a href="/properties/<%= @property.id %>/prices">
+          view/change</a>
+      </small></p>
   </div>
 </div>
 

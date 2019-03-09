@@ -148,7 +148,13 @@ class PropertiesController < ApplicationController
     redirect_to("/all_properties", :notice => "Property deleted successfully.")
   end
   
-    def my_account
+  def my_account
     render("users/my_account.html.erb")
+  end
+  
+  def prices
+    @property = Property.find(params.fetch("id_to_display"))
+
+    render("property_templates/property_prices.html.erb")
   end
 end

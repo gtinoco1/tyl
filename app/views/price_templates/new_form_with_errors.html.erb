@@ -1,0 +1,62 @@
+<!-- Validation failure messages -->
+<% if @price.present? %>
+  <% if @price.errors.any? %>
+    <% @price.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new price
+</h1>
+
+
+<hr>
+
+<form action="/create_price" method="post">
+
+  <div class="form-group">
+    <label for="property_id">
+      Property
+    </label>
+
+    <input type="text" id="property_id" name="property_id" class="form-control" value="<%= @price.property_id %>">
+  </div>
+
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control" value="<%= @price.amount %>">
+  </div>
+
+  <div class="form-group">
+    <label for="detail">
+      Detail
+    </label>
+
+    <textarea id="detail" name="detail" class="form-control" rows="3"><%= @price.detail %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="date">
+      Date
+    </label>
+
+    <input type="text" id="date" name="date" class="form-control" value="<%= @price.date %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create price
+  </button>
+</form>
+
+<hr>
+
+<a href="/prices">
+  Go back
+</a>

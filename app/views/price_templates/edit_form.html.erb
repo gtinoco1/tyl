@@ -1,0 +1,64 @@
+<div class="row mb-0">
+  <div class="col-lg-6 offset-lg-3">
+    <h5 class="text-info text-left text-uppercase mb-0">
+      Price Change
+    </h5>
+    <hr>
+  </div>
+</div>
+
+
+<form action="/update_price/<%= @price.id %>" method="post">
+
+  <div class="form-group">
+    <input type="hidden" name="property_id" class="form-control" value="<%= @price.property_id %>">
+  </div>
+
+  <div class="row mb-0">
+    <div class="col-lg-3 offset-lg-3 col-6">
+      <div class="form-group">
+        <label for="date">
+          Date
+        </label>
+        <input type="date" id="date" name="date" class="form-control" value="<%= @price.date %>">
+      </div>
+    </div>
+    <div class="col-lg-3 col-6">
+      <div class="form-group">
+        <label for="amount">
+          Amount
+        </label>
+        <input type="text" id="amount" name="amount" class="form-control" value="<%= number_to_currency(@price.amount, precision: 0) %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-0">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="form-group">
+        <label for="detail">
+          Detail
+        </label>
+        <textarea id="detail" name="detail" class="form-control" rows="3" ><%= @price.detail %></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-0">
+    <div class="col-lg-6 offset-lg-3">
+      <button class="btn btn-block btn-outline-success">
+        Save price
+      </button>
+    </form>
+    <a href="/delete_price/<%= @price.id %>" class="btn btn-block btn-outline-danger">
+      Delete
+    </a>
+    
+    <hr>
+
+    <a href="/properties/<%= @price.property_id %>/prices" class="btn btn-block btn-outline-secondary">
+      Go back
+    </a>
+
+  </div>
+</div>

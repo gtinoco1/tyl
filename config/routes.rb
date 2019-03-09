@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # Routes for the Price resource:
+
+  # CREATE
+  get("/prices/new/:id_of_property", { :controller => "prices", :action => "new_form" })
+  post("/create_price", { :controller => "prices", :action => "create_row" })
+
+  # READ
+  get("/prices", { :controller => "prices", :action => "index" })
+  get("/prices/:id_to_display", { :controller => "prices", :action => "show" })
+
+  # UPDATE
+  get("/prices/:prefill_with_id/edit", { :controller => "prices", :action => "edit_form" })
+  post("/update_price/:id_to_modify", { :controller => "prices", :action => "update_row" })
+
+  # DELETE
+  get("/delete_price/:id_to_remove", { :controller => "prices", :action => "destroy_row" })
+
+  #------------------------------
+
   # Routes for the Reply resource:
 
   # CREATE
@@ -82,7 +101,7 @@ Rails.application.routes.draw do
   post("/create_buyer_activity", {:controller => "buyer_activities", :action => "create_row"})
 
   # READ
-  get("/buyer_activities", {:controller => "buyer_activities", :action => "index"})
+  # get("/buyer_activities", {:controller => "buyer_activities", :action => "index"})
   get("/buyer_activities/:id_to_display", {:controller => "buyer_activities", :action => "show"})
 
   # UPDATE
@@ -143,7 +162,7 @@ Rails.application.routes.draw do
   post("/create_activity", {:controller => "activities", :action => "create_row"})
 
   # READ
-  get("/activities", {:controller => "activities", :action => "index"})
+  # get("/activities", {:controller => "activities", :action => "index"})
   get("/activities/:id_to_display", {:controller => "activities", :action => "show"})
 
   # UPDATE
@@ -168,6 +187,7 @@ Rails.application.routes.draw do
   get("/properties/:id_to_display", {:controller => "properties", :action => "show"})
   get("/all_properties", {:controller => "properties", :action => "all"})
   get("/report_generator/:id_to_display", {:controller => "properties", :action => "report_settings"})
+  get("/properties/:id_to_display/prices", {:controller => "properties", :action => "prices"})
 
   # UPDATE
   get("/properties/:prefill_with_id/edit", {:controller => "properties", :action => "edit_form"})

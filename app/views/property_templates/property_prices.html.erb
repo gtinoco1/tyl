@@ -1,0 +1,78 @@
+<div class="row mb-0">
+  <div class="col-lg-5 offset-lg-2 col-9">
+    <h5 class="text-info text-left text-uppercase mb-0">
+      <%= @property.address %>
+    </h5>
+    <p class="text-secondary mt-0 pb-0"><small><%= @property.city + ", " + @property.state + " " + @property.zipcode %></small></p>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-4 offset-md-2 col-6">
+    <h5 class="text-dark font-weight-light text-left pt-2">Current Listing Price: 
+    <% if  @property.prices.count ==0 %>
+    add a price
+    <% else %>
+    <%= number_to_currency(@property.prices.order(date: :desc).first.amount, precision: 0) %>
+    <% end %>
+    </h5>
+  </div>
+  <hr>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-4 offset-md-2 col-6">
+    <h5 class="text-secondary font-weight-light text-left pt-2">Price History </h5>
+  </div>
+
+  <hr>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-8 offset-md-2">
+
+    <table class="table table-striped">
+      <thead>
+        <tr class="text-info">
+          <th scope="col">Date</th>
+          <th scope="col">Price</th>
+          <th scope="col">Details</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @property.prices.order(date: :desc).each do |price| %>
+          <tr>
+            <th> <%= price.date.strftime("%b %d")  %> </th>
+              <td><%= number_to_currency(price.amount, precision: 0) %></td>
+              <td><%= price.detail.truncate_words(5, omission: '...') %></td>
+              <td><a href="/prices/<%= price.id %>/edit"> edit </a> </td>
+            </tr>
+          <% end  %>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <a href="/prices/new/<%= @property.id %>" class="btn btn-block btn-outline-info">
+        Enter Price Change
+      </a>
+    </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <div class="col-md-8 offset-md-2">
+      <div class="row mb-3">
+        <div class="col">
+          <a href="/properties/<%= @property.id %>" class="btn btn-block btn-outline-secondary">
+            Go back
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
