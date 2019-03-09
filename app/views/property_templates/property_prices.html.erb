@@ -45,7 +45,7 @@
       <tbody>
         <% @property.prices.order(date: :desc).each do |price| %>
           <tr>
-            <th> <%= price.date.strftime("%b %d")  %> </th>
+            <td> <%= price.date.strftime("%b %d")  %> </td>
               <td><%= number_to_currency(price.amount, precision: 0) %></td>
               <td><%= price.detail.truncate_words(5, omission: '...') %></td>
               <td><a href="/prices/<%= price.id %>/edit"> edit </a> </td>
