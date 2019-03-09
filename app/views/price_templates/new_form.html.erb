@@ -20,7 +20,7 @@
         <label for="date">
           Date
         </label>
-        <input type="date" id="date" name="date" class="form-control">
+        <input type="date" id="date" name="date" class="form-control" value="<%= Date.current.strftime('%Y-%m-%d') %>">
       </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -39,7 +39,7 @@
         <label for="detail">
           Detail
         </label>
-        <textarea id="detail" name="detail" class="form-control" rows="3"></textarea>
+        <textarea id="detail" name="detail" class="form-control" rows="3" placeholder="original listing price, reduction ... etc"></textarea>
       </div>
     </div>
   </div>

@@ -22,7 +22,7 @@
     <form action="/create_activity" method="post">
 
       <div class="form-row">
-        
+
         <div class="form-group col-lg-4 mb-3">
           <label for="activity_type_id">
             Activity Type
@@ -33,12 +33,38 @@
           </a>
         </div>
 
-        <div class="form-group col-lg-4 mb-0">
+        <div class="form-group col-lg-4 mb-3">
           <label for="date">
             Date
           </label>
-          <input type="date" id="date" name="date" class="form-control">
+          <input class="form-control" type="date" id="date" name="date" value="<%= Date.current.strftime('%Y-%m-%d') %>">
         </div>
+
+<!--<div class="container">-->
+<!--    <div class="col-sm-6" style="height:130px;">-->
+<!--        <div class="form-group">-->
+<!--            <div class='input-group date' id='datetimepicker8'>-->
+<!--                <input type='text' class="form-control" />-->
+<!--                <span class="input-group-addon">-->
+<!--                    <span class="fa fa-calendar">-->
+<!--                    </span>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <script type="text/javascript">-->
+<!--        $(function () {-->
+<!--            $('#datetimepicker8').datetimepicker({-->
+<!--                icons: {-->
+<!--                    time: "fas fa-clock",-->
+<!--                    date: "far fa-calendar",-->
+<!--                    up: "fa fa-arrow-up",-->
+<!--                    down: "fa fa-arrow-down"-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+<!--</div>-->
 
         <div class="form-group">
           <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
@@ -46,16 +72,19 @@
 
       </div>
 
-      <button class="btn btn-block btn-outline-secondary">
+      <button class="btn btn-block btn-outline-success">
         Next
       </button>
     </form>
 
     <hr>
 
-    <a href="/properties/<%= @property_id %> ">
-      Go back
-    </a>
+
+        <a href="/all_properties" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+
 
   </div>
 </div>
+
