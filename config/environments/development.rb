@@ -1,4 +1,6 @@
 Rails.application.configure do
+  
+    config.force_ssl = true
   path = Rails.root.join("whitelist.yml")
   default_whitelist_path = Rails.root.join("default_whitelist.yml")
   whitelisted_ips = []
