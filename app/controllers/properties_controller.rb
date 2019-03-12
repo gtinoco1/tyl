@@ -34,7 +34,7 @@ class PropertiesController < ApplicationController
 
   def create_pdf
     @property = Property.find(params.fetch("id_to_display"))
-    @current_user_id = current_user.id
+    @current_user = current_user
     @start_date = Date.strptime(params.fetch("start_date"), "%Y-%m-%d")
     @end_date = Date.strptime(params.fetch("end_date"), "%Y-%m-%d")
 
