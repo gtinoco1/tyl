@@ -23,7 +23,12 @@ class PropertiesController < ApplicationController
   def report_xlsx
     @property = Property.find(params.fetch("id_to_display"))
     @properties = current_user.properties
+    
+    if @property.prices.count == 0
+       redirect_to("/properties/#{@property.id}", :notice => "Make sure your property has a listing price!")
+    else
     render("/property_templates/report.xlsx.axlsx")
+  end
   end
   
   def report_settings

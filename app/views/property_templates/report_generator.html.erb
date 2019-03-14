@@ -59,12 +59,28 @@
       
       <div class="col-lg-6 offset-lg-3">
       <button class="btn btn-block btn-outline-secondary">
-        Generate Report
+        Generate PDF Report
       </button>
-      
-            </div>
+      <hr>
       </div>
       
     </form>
     
+</div>
 
+<div class="row">
+
+  <div class="col-lg-6 offset-lg-3">
+    <div class="text-center font-weight-light">
+    Download all your activity data in spreadsheet format and make your own report. Open download with Microsoft Excel.
+    </div>
+    <hr>
+
+  </div>
+
+    <div class="col-lg-6 offset-lg-3">
+        <a href="/properties/<%= @property.id %>/report_spreadsheet/" class="btn btn-block btn-outline-secondary">
+          Download Spreadsheet
+        </a>
+    </div>
+        </div>
