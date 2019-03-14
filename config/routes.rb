@@ -187,13 +187,14 @@ Rails.application.routes.draw do
   get("/properties/:id_to_display", {:controller => "properties", :action => "show"})
   get("/all_properties", {:controller => "properties", :action => "all"})
   get("/report_generator/:id_to_display", {:controller => "properties", :action => "report_settings"})
-  get("/properties/:id_to_display/prices", {:controller => "properties", :action => "prices"})
+  get("/properties/prices/:id_to_display", {:controller => "properties", :action => "prices"})
 
   # UPDATE
   get("/properties/:prefill_with_id/edit", {:controller => "properties", :action => "edit_form"})
   post("/update_property/:id_to_modify", {:controller => "properties", :action => "update_row"})
   post("/properties/:id_to_display/report", {:controller => "properties", :action => "create_pdf"})
-  get("/properties/:id_to_display/report_html", {:controller => "properties", :action => "report_html"})
+  
+  get("/properties/:id_to_display/report_spreadsheet", {:controller => "properties", :action => "report_xlsx"})
   post("/add_property_to_archive/:id_to_modify", {:controller => "properties", :action => "add_property_to_archive"})
   post("/restore_property_from_archive/:id_to_modify", {:controller => "properties", :action => "restore_property_from_archive"})
 

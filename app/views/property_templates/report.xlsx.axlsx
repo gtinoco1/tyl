@@ -1,0 +1,163 @@
+wb = xlsx_package.workbook
+
+header = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "17a2b8",
+                             alignment: {horizontal: :left}, :sz => 13, :font_name => "Calibri")
+
+type = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "",
+                           alignment: {horizontal: :left}, :sz => 15, :u => true)
+
+left_title = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "000000",
+                            alignment: {horizontal: :center, vertical: :center}, :sz => 11, :font_name => "Calibri",
+                            :border => { :style => :medium, :color =>"000000", :edges => [:top, :bottom, :left] })
+
+mid_title = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "000000",
+                            alignment: {horizontal: :center, vertical: :center}, :sz => 11, :font_name => "Calibri",
+                            :border => { :style => :medium, :color =>"000000", :edges => [:top, :bottom] })
+                            
+right_title = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "000000",
+                            alignment: {horizontal: :center, vertical: :center}, :sz => 11, :font_name => "Calibri",
+                            :border => { :style => :medium, :color =>"000000", :edges => [:top, :bottom, :right] })
+
+price_format = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "000000",
+                             alignment: {horizontal: :center}, :sz => 13, :font_name => "Calibri",  num_fmt: 5)
+
+
+price_label = wb.styles.add_style(b: true, bg_color: "ffffff", fg_color: "17a2b8",
+                             alignment: {horizontal: :right}, :sz => 13, :font_name => "Calibri")
+                             
+price_even = wb.styles.add_style(bg_color: "ffffff", :sz => 12, :font_name => "Calibri",
+                             alignment: {horizontal: :center, vertical: :center},  num_fmt: 5)
+price_odd = wb.styles.add_style(bg_color: "dddddd", :sz => 12, :font_name => "Calibri",
+                             alignment: {horizontal: :center, vertical: :center},  num_fmt: 5)
+                             
+time_even = wb.styles.add_style(bg_color: "ffffff", fg_color: "000000",
+                             alignment: {horizontal: :center, vertical: :center}, :sz => 12, :font_name => "Calibri",  num_fmt: 1)
+time_odd = wb.styles.add_style(bg_color: "dddddd", fg_color: "000000",
+                             alignment: {horizontal: :center, vertical: :center}, :sz => 12, :font_name => "Calibri",  num_fmt: 1)
+date_even = wb.styles.add_style(bg_color: "ffffff", alignment: {horizontal: :center, vertical: :center},:sz => 12, :font_name => "Calibri",
+                                  num_fmt: 14)
+date_odd = wb.styles.add_style(bg_color: "dddddd", alignment: {horizontal: :center, vertical: :center},:sz => 12, :font_name => "Calibri",
+                                  num_fmt: 14)
+
+row_even = wb.styles.add_style(bg_color: "ffffff",alignment: {horizontal: :left, vertical: :center, :wrap_text => true}, :sz => 12, :font_name => "Calibri")
+row_odd = wb.styles.add_style(bg_color: "dddddd",alignment: {horizontal: :left, vertical: :center, :wrap_text => true}, :sz => 12, :font_name => "Calibri")
+
+white = wb.styles.add_style :bg_color => "ffffff"
+
+# all activities worksheet ---------------------------------------------------------------------------------------------------------
+
+wb.add_worksheet(name: "All Activities") do |sheet|
+sheet.sheet_view.zoom_scale = 80  
+  sheet.add_row [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil], style: header, height: 25
+  sheet.add_row [nil, @property.address, nil, nil, "Price:", @property.prices.order(date: :desc).first.amount, nil, nil, nil, nil], style: header
+  sheet['F2:F2'].each { |c| c.style = price_format }
+  sheet['E2:E2'].each { |c| c.style = price_label }
+  sheet.merge_cells("B1:D1")
+
+  sheet.add_row [nil, "#{@property.city} #{@property.state}, #{@property.zipcode}", nil, nil, nil, nil, nil, nil, nil], style: header
+  sheet.merge_cells("B2:D2")
+  sheet.add_row [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil], style: header
+
+  sheet.add_row ["Date", "Type", "Subject", "Duration (min)", "Details", "Outcome", "Customer", "Contact", "Agent", "Cost"],
+ :style => [left_title, mid_title, mid_title, mid_title, mid_title, mid_title, mid_title, mid_title, mid_title, right_title], height: 25
+
+even_bg = [date_even, row_even, row_even, time_even, row_even, row_even, row_even, row_even, row_even, row_even]
+odd_bg =  [date_odd, row_odd, row_odd, time_odd, row_odd, row_odd, row_odd, row_odd, row_odd, row_odd]
+
+  @property.activities.order(date: :asc).each_with_index do |activity, index|
+        sheet.add_row [activity.date, activity.activity_type.title, activity.subject, activity.duration, activity.detail, activity.outcome,
+                   activity.contact, activity.agent, activity.customer, activity.cost], 
+                   :style => (index.even? ? even_bg:odd_bg), height: 25
+  end
+
+
+
+    sheet.row_style 0, header
+    sheet.column_widths 15, 30, nil, nil, 40
+
+    img = File.expand_path(Rails.root + "app/assets/images/logo/logo1.jpg")
+    sheet.add_image(:image_src => img) do |image|
+      image.width = 80
+      image.height = 70
+      image.anchor.from.rowOff = 100000
+      image.anchor.from.colOff = 100000
+      image.start_at 0, 0
+    end
+    
+# sheet.sheet_view.pane do |pane|
+# pane.top_left_cell = "A6"
+# pane.state = :frozen
+# pane.y_split = 5
+# pane.x_split = 0
+# pane.active_pane = :bottom_right
+# end
+
+end
+
+# next worksheet------------------------------------------------------------------------------------------------------
+
+# wb.add_worksheet(name: "Activities (by type)") do |sheet|
+#   current_user.activity_types.each do |type|
+#     sheet.add_row [type.title]
+#     type.subject_toggle == "Show" ? subject_header = "Subject" : subject_header = nil
+#     type.contact_toggle == "Show" ? contact_header = "Contact" : contact_header = nil
+#     type.agent_toggle == "Show" ? agent_header = "Agent" : agent_header = nil
+#     type.customer_toggle == "Show" ? customer_header = "Customer" : customer_header = nil
+#     type.detail_toggle == "Show" ? detail_header = "Detail" : detail_header = nil
+#     type.outcome_toggle == "Show" ? outcome_header = "Outcome" : outcome_header = nil
+#     type.cost_toggle == "Show" ? cost_header = "Cost" : cost_header = nil
+#     type.duration_toggle == "Show" ? duration_header = "Time (min)" : duration_header = nil
+
+#     sheet.add_row ["Date", subject_header, contact_header, agent_header, customer_header, detail_header, outcome_header, cost_header, duration_header].compact
+
+#     type.activities.where(property_id: @property.id).order(date: :asc).each do |activity|
+#       sheet.add_row [activity.date.strftime("%b %d"),
+#                      type.subject_toggle == "Show" ? activity.subject : nil,
+#                      type.contact_toggle == "Show" ? activity.contact : nil,
+#                      type.agent_toggle == "Show" ? activity.agent : nil,
+#                      type.customer_toggle == "Show" ? activity.customer : nil,
+#                      type.detail_toggle == "Show" ? activity.detail : nil,
+#                      type.outcome_toggle == "Show" ? activity.outcome : nil,
+#                      type.cost_toggle == "Show" ? activity.cost.to_i : nil,
+#                      type.duration_toggle == "Show" ? activity.duration.to_i : nil].compact
+#     end
+#   end
+# end
+
+# price history
+
+wb.add_worksheet(name: "Price History") do |sheet|
+ sheet.add_row [nil, nil, nil, nil, nil], style: header, height: 25
+  sheet.add_row [nil, @property.address, nil, "Price:", @property.prices.order(date: :desc).first.amount], style: header
+  sheet['E2:E2'].each { |c| c.style = price_format }
+  sheet['D2:D2'].each { |c| c.style = price_label }
+  sheet.merge_cells("B1:C1")
+
+  sheet.add_row [nil, "#{@property.city} #{@property.state}, #{@property.zipcode}", nil, nil, nil], style: header
+  sheet.merge_cells("B2:C2")
+  sheet.add_row [nil, nil, nil, nil, nil], style: header
+
+    sheet.add_row [nil, "Date", "Price", "Details"],
+ :style => [white,left_title, mid_title, right_title, white], height: 25
+
+p_even_bg = [white, date_even, price_even, row_even, white]
+p_odd_bg =  [white, date_odd, price_odd, row_odd, white]
+
+  @property.prices.order(date: :asc).each_with_index do |price, index|
+        sheet.add_row [nil, price.date, price.amount, price.detail, nil], 
+                   :style => (index.even? ? p_even_bg:p_odd_bg), height: 25
+end
+
+sheet.column_widths 14, 15, nil
+
+    img = File.expand_path(Rails.root + "app/assets/images/logo/logo1.jpg")
+    sheet.add_image(:image_src => img) do |image|
+      image.width = 80
+      image.height = 70
+      image.anchor.from.rowOff = 100000
+      image.anchor.from.colOff = 100000
+      image.start_at 0, 0
+    end
+
+
+end

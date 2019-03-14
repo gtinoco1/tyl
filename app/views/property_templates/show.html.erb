@@ -7,23 +7,23 @@
   </div>
   <div class="col-lg-3 col-3">
     <p class="text-dark text-center font-weight-bold mb-0">
-    <% if  @property.prices.count == 0 %>
-    <a href="/prices/new/<%= @property.id %>">add price</a>
-    <% else %>
-    <%= number_to_currency(@property.prices.order(date: :desc).first.amount, precision: 0) %> 
-    <% end %>
+      <% if  @property.prices.count == 0 %>
+        <a href="/prices/new/<%= @property.id %>">add price</a>
+      <% else %>
+        <%= number_to_currency(@property.prices.order(date: :desc).first.amount, precision: 0) %>
+      <% end %>
     </p>
     <p class="text-secondary text-center pt-0 pb-0"> <small>
-        <a href="/properties/<%= @property.id %>/prices">
+        <a href="/properties/prices/<%= @property.id %>">
           view/change</a>
       </small></p>
   </div>
 </div>
 
-<div class="row mb-3">
+<div class="row mb-1">
   <div class="col-lg-8 offset-lg-2">
     <a class="btn btn-outline-info pt-0 pb-1 pr-2 pl-2" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      <span><small> more options...</small></span> 
+      <span><small> more options...</small></span>
     </a>
 
     <div class="collapse" id="collapseExample">
@@ -31,12 +31,20 @@
         <a href="../report_generator/<%=@property.id%>" class="btn btn-block btn-outline-secondary">
           Generate Report
         </a>
+        <% if current_user.id == 1 %>
+        <a href="/properties/<%= @property.id %>/report_spreadsheet/" class="btn btn-block btn-outline-secondary">
+          Download Spreadsheet
+        </a>
+        <% else %>
+        <% end %>
+        
         <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-secondary">
           Edit Property
         </a>
+
       </div>
     </div>
-
+<hr>
   </div>
 </div>
 
@@ -49,7 +57,6 @@
       Add Activity
     </a>
   </div>
-  <hr>
 </div>
 
 <div class="row mb-3">

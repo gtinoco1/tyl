@@ -20,11 +20,11 @@ class PropertiesController < ApplicationController
     render("property_templates/archive.html.erb")
   end
 
-  # def report_html
-  #   @property = Property.find(params.fetch("id_to_display"))
-  #   @call_type = ActivityType.where(title: "Call").first
-  #   render("property_templates/report_html.html.erb")
-  # end
+  def report_xlsx
+    @property = Property.find(params.fetch("id_to_display"))
+    @properties = current_user.properties
+    render("/property_templates/report.xlsx.axlsx")
+  end
   
   def report_settings
     @property = Property.find(params.fetch("id_to_display"))
@@ -37,12 +37,10 @@ class PropertiesController < ApplicationController
     @current_user = current_user
     @start_date = Date.strptime(params.fetch("start_date"), "%Y-%m-%d")
     @end_date = Date.strptime(params.fetch("end_date"), "%Y-%m-%d")
+    @user = current_user
 
     respond_to do |format|
       format.html
-      # format.csv {render text: Property.all.to_csv}
-      format.xls { send_data Property.all.to_csv(col_sep: "\t") }
-
       format.pdf do
         pdf = ReportTwoPdf.new(@property, @current_user, @start_date, @end_date)
         send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", disposition: "inline"

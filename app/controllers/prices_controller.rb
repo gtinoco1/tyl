@@ -29,7 +29,7 @@ class PricesController < ApplicationController
     if @price.valid?
       @price.save
 
-    redirect_to("/properties/#{@price.property_id}/prices/")
+    redirect_to("/properties/prices/#{@price.property_id}")
     else
       render("price_templates/new_form_with_errors.html.erb")
     end
@@ -52,7 +52,7 @@ class PricesController < ApplicationController
     if @price.valid?
       @price.save
 
-    redirect_to("/properties/#{@price.property_id}/prices/")
+    redirect_to("/properties/prices/#{@price.property_id}")
     else
       render("price_templates/edit_form_with_errors.html.erb")
     end
@@ -63,6 +63,6 @@ class PricesController < ApplicationController
 
     @price.destroy
 
-    redirect_to("/properties/#{@price.property_id}/prices", :notice => "Price deleted successfully.")
+    redirect_to("/properties/prices/#{@price.property_id}", :notice => "Price deleted successfully.")
   end
 end
