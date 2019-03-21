@@ -137,7 +137,18 @@
 
       <div class="col-lg-8 pl-0 pt-3">
         <div class="form-group mt-1 mb-0">
-          <img src="<%= @activity.flyer_img %>" alt="flyer" class="img-thumbnail">
+
+          <% if @activity.flyer_img.blank? %>
+          <% else %>
+            <% len = @activity.flyer_img.to_s.length %>
+            <% if @activity.flyer_img.to_s.slice(len-3..len) == "pdf"%>
+              <a href="<%=@activity.flyer_img %>" class="">
+                click to open pdf
+              </a>
+            <% else %>
+              <img src="<%= @activity.flyer_img %>" alt="flyer" class="img-thumbnail">
+            <% end %>
+          <% end %>
         </div>
       </div>
 
@@ -168,14 +179,14 @@
           Edit activity
         </a>
       </div>
-      
+
       <div class="col-lg-4 mb-3">
         <a href="/delete_activity/<%= @activity.id %>" class="btn btn-block btn-outline-danger">
           Delete activity
         </a>
       </div>
-      
-            <div class="col-lg-4 mb-3">
+
+      <div class="col-lg-4 mb-3">
         <a href="/properties/<%= @activity.property_id %>" class="btn btn-block btn-outline-secondary">
           Go back
         </a>
