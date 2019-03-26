@@ -1,0 +1,98 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h1>
+      All property attachments
+    </h1>
+
+    <a href="/property_attachments/new" class="btn btn-block btn-outline-secondary">
+      Add a new property attachment
+    </a>
+  </div>
+</div>
+
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-md-12">
+    <table class="table">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Property
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Activity
+        </th>
+
+        <th>
+          Image
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @property_attachments.each do |property_attachment| %>
+      <tr>
+        <td>
+          <%= property_attachment.id %>
+        </td>
+
+        <td>
+          <%= property_attachment.property_id %>
+        </td>
+
+        <td>
+          <%= property_attachment.user_id %>
+        </td>
+
+        <td>
+          <%= property_attachment.activity_id %>
+        </td>
+
+        <td>
+          <%= property_attachment.image %>
+        </td>
+
+        <td>
+          <%= property_attachment.title %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(property_attachment.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(property_attachment.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/property_attachments/<%= property_attachment.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :buyer_activity_types, :dependent => :destroy
   has_many :replies, :dependent => :destroy
   has_many :likes, :dependent => :destroy
+  has_many :property_attachments, :dependent => :destroy
   validates :last_name, :presence => true
   validates :first_name, :presence => true
 

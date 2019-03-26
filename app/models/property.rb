@@ -18,6 +18,7 @@ class Property < ApplicationRecord
   belongs_to :user, :foreign_key => "realtor_id"
   has_many :activities, :dependent => :destroy
   has_many :prices, :dependent => :destroy
+  has_many :property_attachments, :dependent => :destroy
 
   # def self.to_csv
   #   attributes = ["subject"]

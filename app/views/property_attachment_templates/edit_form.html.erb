@@ -1,0 +1,69 @@
+<div class="row mb-0">
+  <div class="col-lg-6 offset-lg-3">
+    <h5 class="text-info text-left text-uppercase mb-0">
+      Edit Attachment
+    </h5>
+    <hr>
+  </div>
+</div>
+
+
+<form action="/update_property_attachment/<%= @property_attachment.id %>" method="post" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <input type="hidden" name="property_id" class="form-control" value="<%= @property_attachment.property_id %>">
+  </div>
+  <div class="form-group">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+  </div>
+
+  <div class="row mb-0">
+    <div class="col-lg-6 offset-lg-3 col-6">
+
+      <div class="form-group">
+        <label for="title">
+          Title
+        </label>
+        <input type="text" id="title" name="title" class="form-control" value="<%= @property_attachment.title %>">
+      </div>
+
+      <div class="form-group">
+        <label for="activity_id">
+          Activity
+        </label>
+        <input type="text" id="activity_id" name="activity_id" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="attachment">
+          Attachment
+        </label>
+        <input type="file" id="attachment" name="attachment" class="form-control" value="<%= @property_attachment.attachment %>">
+      </div>
+
+
+      <button class="btn btn-block btn-outline-success">
+        Upload Attachment
+      </button>
+    </form>
+
+    <hr>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <a href="/delete_property_attachment/<%= @property_attachment.id %>" class="btn btn-block btn-outline-danger">
+      Delete Attachment
+    </a>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <a href="/properties/<%= @property_id %>/attachments" class="btn btn-block btn-outline-secondary">
+      Go back
+    </a>
+  </div>
+</div>
+

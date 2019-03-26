@@ -1,0 +1,60 @@
+<div class="row mb-0">
+  <div class="col-lg-5 offset-lg-2 col-9">
+    <h5 class="text-info text-left text-uppercase mb-0">
+      <%= @property.address %>
+    </h5>
+    <p class="text-secondary mt-0 pb-0"><small><%= @property.city + ", " + @property.state + " " + @property.zipcode %></small></p>
+  </div>
+</div>
+
+
+<div class="row mb-0">
+
+  <div class="col-lg-4 offset-md-2 col-6">
+    <h5 class="text-dark font-weight-light text-left pt-2"> Attachments
+    </h5>
+  </div>
+
+  <div class="col-lg-4 col-6">
+    <a href="/property_attachments/new/<%= @property.id %>" class="btn btn-block btn-outline-info">
+      Add Attachment
+    </a>
+  </div>
+  </div>
+  
+  <div class="row mb-0">
+    <div class=" offset-md-2 col-lg-8">
+      <hr>
+    </div>
+  </div>
+
+
+<% @property.property_attachments.each do |attachment| %>
+  <div class="row mb-0">
+
+    <div class=" offset-md-2 col-lg-4 col-7">
+      <h5 class="text-center align-middle"><%= attachment.title %></h5>
+    </div>
+
+    <div class="col-lg-2 col-5">
+      <a href="/property_attachments/<%= attachment.id %>"> <img src="<%= attachment.attachment %>" class="img-fluid" alt="..."></a>
+    </div>
+  </div>
+  <div class="row mb-0">
+    <div class=" offset-md-2 col-lg-8">
+      <hr>
+    </div>
+  </div>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <div class="row mb-3">
+      <div class="col">
+        <a href="/properties/<%= @property.id %>" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

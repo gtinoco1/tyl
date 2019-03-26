@@ -23,6 +23,7 @@
 class Activity < ApplicationRecord
   belongs_to :property
   belongs_to :activity_type
+  has_many :property_attachments, :dependent => :nullify
 
   validates :date, :presence => true
 

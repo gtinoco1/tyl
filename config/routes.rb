@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # Routes for the Property attachment resource:
+
+  # CREATE
+  get("/property_attachments/new/:id_of_property", { :controller => "property_attachments", :action => "new_form" })
+  post("/create_property_attachment", { :controller => "property_attachments", :action => "create_row" })
+
+  # READ
+  get("/property_attachments", { :controller => "property_attachments", :action => "index" })
+  get("/property_attachments/:id_to_display", { :controller => "property_attachments", :action => "show" })
+
+  # UPDATE
+  get("/property_attachments/:prefill_with_id/edit", { :controller => "property_attachments", :action => "edit_form" })
+  post("/update_property_attachment/:id_to_modify", { :controller => "property_attachments", :action => "update_row" })
+
+  # DELETE
+  get("/delete_property_attachment/:id_to_remove", { :controller => "property_attachments", :action => "destroy_row" })
+
+  #------------------------------
+
   # Routes for the Price resource:
 
   # CREATE
@@ -188,7 +207,8 @@ Rails.application.routes.draw do
   get("/all_properties", {:controller => "properties", :action => "all"})
   get("/report_generator/:id_to_display", {:controller => "properties", :action => "report_settings"})
   get("/properties/prices/:id_to_display", {:controller => "properties", :action => "prices"})
-
+  get("/properties/:id_to_display/attachments", {:controller => "properties", :action => "attachments"})
+  
   # UPDATE
   get("/properties/:prefill_with_id/edit", {:controller => "properties", :action => "edit_form"})
   post("/update_property/:id_to_modify", {:controller => "properties", :action => "update_row"})

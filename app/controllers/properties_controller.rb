@@ -160,4 +160,10 @@ class PropertiesController < ApplicationController
 
     render("property_templates/property_prices.html.erb")
   end
+  
+    def attachments
+    @property = Property.find(params.fetch("id_to_display"))
+
+    render("property_templates/property_attachments.html.erb")
+  end
 end
