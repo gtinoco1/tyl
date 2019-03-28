@@ -20,24 +20,39 @@
       Add Attachment
     </a>
   </div>
+</div>
+
+<div class="row mb-0">
+  <div class=" offset-md-2 col-lg-8">
+    <hr>
   </div>
-  
-  <div class="row mb-0">
-    <div class=" offset-md-2 col-lg-8">
-      <hr>
-    </div>
-  </div>
+</div>
 
 
 <% @property.property_attachments.each do |attachment| %>
   <div class="row mb-0">
 
-    <div class=" offset-md-2 col-lg-4 col-7">
-      <h5 class="text-center align-middle"><%= attachment.title %></h5>
+    <div class=" offset-md-2 col-lg-4 col-7 my-auto">
+      <p class="text-center"><%= attachment.title %></p>
     </div>
-
+    <% len = attachment.attachment.to_s.length %>
     <div class="col-lg-2 col-5">
-      <a href="/property_attachments/<%= attachment.id %>"> <img src="<%= attachment.attachment %>" class="img-fluid" alt="..."></a>
+      <div class="text-center">
+        <% if attachment.attachment.blank? %>
+          <a href="/property_attachments/<%= attachment.id %>/edit>click to add</a>
+       
+        <% elsif attachment.attachment.to_s.slice(len-3..len) == "pdf" %>
+          <a href="/property_attachments/<%= attachment.id %>">
+            <img src="<%= attachment.attachment.to_s.slice(0..-4) << "jpg" %>" class="img-fluid" alt="...">
+          </a>
+        
+        <% else %>
+          <a href="/property_attachments/<%= attachment.id %>">
+            <img src="<%= attachment.attachment %>" class="img-fluid" alt="...">
+          </a>
+       
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row mb-0">

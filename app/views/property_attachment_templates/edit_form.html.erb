@@ -16,9 +16,12 @@
   <div class="form-group">
     <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
   </div>
+    <div class="form-group">
+    <input type="hidden" name="activity_id" class="form-control" value="<%= @property_attachment.activity_id %>">
+  </div>
 
   <div class="row mb-0">
-    <div class="col-lg-6 offset-lg-3 col-6">
+    <div class="col-lg-6 offset-lg-3 col-12">
 
       <div class="form-group">
         <label for="title">
@@ -27,16 +30,16 @@
         <input type="text" id="title" name="title" class="form-control" value="<%= @property_attachment.title %>">
       </div>
 
-      <div class="form-group">
-        <label for="activity_id">
-          Activity
-        </label>
-        <input type="text" id="activity_id" name="activity_id" class="form-control">
-      </div>
+      <!--<div class="form-group">-->
+      <!--  <label for="activity_id">-->
+      <!--    Activity-->
+      <!--  </label>-->
+      <!--  <input type="text" id="activity_id" name="activity_id" class="form-control">-->
+      <!--</div>-->
 
       <div class="form-group">
         <label for="attachment">
-          Attachment
+          Attachment (jpg, png, bmp, pdf) 
         </label>
         <input type="file" id="attachment" name="attachment" class="form-control" value="<%= @property_attachment.attachment %>">
       </div>
@@ -61,7 +64,7 @@
 
 <div class="row mb-3">
   <div class="col-md-6 offset-md-3">
-    <a href="/properties/<%= @property_id %>/attachments" class="btn btn-block btn-outline-secondary">
+    <a href="/properties/<%= @property_attachment.property_id %>/attachments" class="btn btn-block btn-outline-secondary">
       Go back
     </a>
   </div>

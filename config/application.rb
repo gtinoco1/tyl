@@ -13,7 +13,7 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 require "csv"
 require "base64"
-
+require "cloudinary"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

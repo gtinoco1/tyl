@@ -7,10 +7,22 @@
   </div>
 </div>
 
+<% len = @property_attachment.attachment.to_s.length %>
+
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    <div class="card bg-dark text-white">
-      <img src="<%= @property_attachment.attachment %>" class="card-img" alt="...">
+    <div class="card text-white">
+      <% if @property_attachment.attachment.blank? %>
+          <a href="/property_attachments/<%= @property_attachment.id %>/edit">click to add</a>
+        <% elsif @property_attachment.attachment.to_s.slice(len-3..len) == "pdf" %>
+        <a href="<%= @property_attachment.attachment %>" class="btn btn-block btn-info">click to view pdf</a>
+<!--@property_attachment.attachment %>-->
+<!--@link_img = @property_attachment.attachment.to_s.slice(0..-4) << "jpg" %>-->
+<!--cl_image_tag(@link_img, :type => "fetch", :page => 2, :crop => "fill") %>-->
+        
+          <% else %>
+          <img src="<%= @link_img %>" class="img-fluid" alt="...">
+        <% end %>
     </div>
   </div>
 </div>

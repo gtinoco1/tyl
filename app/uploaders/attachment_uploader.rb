@@ -3,6 +3,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   include Cloudinary::CarrierWave
+  include CloudinaryHelper
 
   process :tags => ["attachment"]
 
@@ -13,7 +14,6 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     version :thumbnail do
     resize_to_fit(100, 100)
   end
-
 
   # Choose what kind of storage to use for this uploader:
   # storage :file

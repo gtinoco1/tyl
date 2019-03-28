@@ -23,7 +23,7 @@ class PropertyAttachmentsController < ApplicationController
     @property_attachment.property_id = params.fetch("property_id")
     @property_attachment.user_id = params.fetch("user_id")
     @property_attachment.activity_id = params.fetch("activity_id")
-    @property_attachment.attachment = params.fetch("attachment")
+    @property_attachment.attachment = params.fetch("attachment","")
     @property_attachment.title = params.fetch("title")
 
     if @property_attachment.valid?
@@ -46,7 +46,7 @@ class PropertyAttachmentsController < ApplicationController
     @property_attachment.property_id = params.fetch("property_id")
     @property_attachment.user_id = params.fetch("user_id")
     @property_attachment.activity_id = params.fetch("activity_id")
-    @property_attachment.attachment = params.fetch("attachment")
+    @property_attachment.attachment = params.fetch("attachment","")
     @property_attachment.title = params.fetch("title")
 
     if @property_attachment.valid?

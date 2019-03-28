@@ -9,62 +9,70 @@
   <% end %>
 <% end %>
 
-<h1>
-  Add a new property attachment
-</h1>
+<div class="row mb-0">
+  <div class="col-lg-6 offset-lg-3">
+    <h5 class="text-info text-left text-uppercase mb-0">
+      New Attachment
+    </h5>
+    <hr>
+  </div>
+</div>
 
 
-<hr>
-
-<form action="/create_property_attachment" method="post">
+<form action="/create_property_attachment" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
-    <label for="property_id">
-      Property
-    </label>
-
-    <input type="text" id="property_id" name="property_id" class="form-control" value="<%= @property_attachment.property_id %>">
+    <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
+  </div>
+  <div class="form-group">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
   </div>
 
   <div class="form-group">
-    <label for="user_id">
-      User
-    </label>
-
-    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @property_attachment.user_id %>">
+    <input type="hidden" name="activity_id" class="form-control">
   </div>
 
-  <div class="form-group">
-    <label for="activity_id">
-      Activity
-    </label>
+  <div class="row mb-0">
+    <div class="col-lg-6 offset-lg-3 col-12">
 
-    <input type="text" id="activity_id" name="activity_id" class="form-control" value="<%= @property_attachment.activity_id %>">
-  </div>
+      <div class="form-group">
+        <label for="title">
+          Title
+        </label>
+        <input type="text" id="title" name="title" class="form-control">
+      </div>
 
-  <div class="form-group">
-    <label for="image">
-      Image
-    </label>
+      <!--<div class="form-group">-->
+      <!--  <label for="activity_id">-->
+      <!--    Activity-->
+      <!--  </label>-->
+      <!--  <input type="text" id="activity_id" name="activity_id" class="form-control">-->
+      <!--</div>-->
 
-    <input type="text" id="image" name="image" class="form-control" value="<%= @property_attachment.image %>">
-  </div>
+      <div class="form-group">
+        <label for="attachment">
+          Attachment
+        </label>
+        <input type="file" id="attachment" name="attachment" class="form-control">
+      </div>
 
-  <div class="form-group">
-    <label for="title">
-      Title
-    </label>
 
-    <input type="text" id="title" name="title" class="form-control" value="<%= @property_attachment.title %>">
-  </div>
+      <button class="btn btn-block btn-outline-success">
+        Upload Attachment
+      </button>
+    </form>
 
-  <button class="btn btn-block btn-outline-secondary">
-    Create property attachment
-  </button>
-</form>
+    <hr>
+    
+      </div>
+</div>
 
-<hr>
+    <div class="row mb-3">
+      <div class="col-md-6 offset-md-3">
+        <a href="/properties/<%= @property_id %>/attachments" class="btn btn-block btn-outline-secondary">
+          Go back
+        </a>
+      </div>
+    </div>
 
-<a href="/property_attachments">
-  Go back
-</a>
+

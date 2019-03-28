@@ -6,61 +6,75 @@
   <% end %>
 <% end %>
 
-<h1>
-  Edit property attachment #<%= @property_attachment.id %>
-</h1>
+<div class="row mb-0">
+  <div class="col-lg-6 offset-lg-3">
+    <h5 class="text-info text-left text-uppercase mb-0">
+      Edit Attachment
+    </h5>
+    <hr>
+  </div>
+</div>
 
-<hr>
 
-<form action="/update_property_attachment/<%= @property_attachment.id %>" method="post">
+<form action="/update_property_attachment/<%= @property_attachment.id %>" method="post" enctype="multipart/form-data">
 
   <div class="form-group">
-    <label for="property_id">
-      Property
-    </label>
-
-    <input type="text" id="property_id" name="property_id" class="form-control" value="<%= @property_attachment.property_id %>">
+    <input type="hidden" name="property_id" class="form-control" value="<%= @property_attachment.property_id %>">
   </div>
-
   <div class="form-group">
-    <label for="user_id">
-      User
-    </label>
-
-    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @property_attachment.user_id %>">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+  </div>
+    <div class="form-group">
+    <input type="hidden" name="activity_id" class="form-control" value="<%= @property_attachment.activity_id %>">
   </div>
 
-  <div class="form-group">
-    <label for="activity_id">
-      Activity
-    </label>
+  <div class="row mb-0">
+    <div class="col-lg-6 offset-lg-3 col-12">
 
-    <input type="text" id="activity_id" name="activity_id" class="form-control" value="<%= @property_attachment.activity_id %>">
+      <div class="form-group">
+        <label for="title">
+          Title
+        </label>
+        <input type="text" id="title" name="title" class="form-control" value="<%= @property_attachment.title %>">
+      </div>
+
+      <!--<div class="form-group">-->
+      <!--  <label for="activity_id">-->
+      <!--    Activity-->
+      <!--  </label>-->
+      <!--  <input type="text" id="activity_id" name="activity_id" class="form-control">-->
+      <!--</div>-->
+
+      <div class="form-group">
+        <label for="attachment">
+          Attachment (jpg, png, bmp, pdf) 
+        </label>
+        <input type="file" id="attachment" name="attachment" class="form-control" value="<%= @property_attachment.attachment %>">
+      </div>
+
+
+      <button class="btn btn-block btn-outline-success">
+        Upload Attachment
+      </button>
+    </form>
+
+    <hr>
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="image">
-      Image
-    </label>
-
-    <input type="text" id="image" name="image" class="form-control" value="<%= @property_attachment.image %>">
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <a href="/delete_property_attachment/<%= @property_attachment.id %>" class="btn btn-block btn-outline-danger">
+      Delete Attachment
+    </a>
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="title">
-      Title
-    </label>
-
-    <input type="text" id="title" name="title" class="form-control" value="<%= @property_attachment.title %>">
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <a href="/properties/<%= @property_attachment.property_id %>/attachments" class="btn btn-block btn-outline-secondary">
+      Go back
+    </a>
   </div>
+</div>
 
-  <button class="btn btn-block btn-outline-secondary">
-    Update property attachment
-  </button>
-</form>
-
-<hr>
-
-<a href="/property_attachments">
-  Go back
-</a>
