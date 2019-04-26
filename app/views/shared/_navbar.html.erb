@@ -1,21 +1,21 @@
 <% if current_user.blank? %>
   <nav class="navbar navbar-expand-md navbar-light bg-white mb-4">
     <div class="container">
-      
+
       <a class="navbar-brand" href="/">
-        <img src="/logos/logo4.jpg" width="300" class="img-fluid" alt="Responsive image">
+        <img src="/logos/logo4.jpg" width="280" class="img-fluid" alt="Responsive image">
       </a>
 
-  
+
       <button class="navbar-toggler navbar-right" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
+
       <div class="collapse navbar-collapse" id="collapsible-nav-links">
         <ul class="navbar-nav mr-auto">
         </ul>
         <ul class="navbar-nav mt-4">
-          
+
           <li class="nav-item">
             <a class="nav-link" href="/users/sign_in">
               <i class="fas fa-sign-in-alt"></i>
@@ -29,66 +29,73 @@
           </li>
 
         <% else %>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img src="/logos/logo4.jpg" width="300" class="img-fluid" alt="Responsive image">
-      </a>
+          <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
+            <div class="container">
+              <a class="navbar-brand" href="/">
+                <img src="/logos/logo4.jpg" width="280" class="img-fluid" alt="Responsive image">
+              </a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
-      <div class="collapse navbar-collapse" id="collapsible-nav-links">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <ul class="navbar-nav mt-4">
+              <div class="collapse navbar-collapse" id="collapsible-nav-links">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav mt-4">
 
-          <li class="nav-item">
-            <a class="nav-link" href="/all_properties">
-              <i class="fas fa-home"></i>
-              <span class="hidden-sm">Properties</span></a>
-          </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/all_properties">
+                      <i class="fas fa-home"></i>
+                      <span class="hidden-sm">Properties</span></a>
+                  </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="/buyers">
-              <i class="fas fa-users"></i>
-              <span class="hidden-sm">Customers</span></a>
-          </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/buyers">
+                      <i class="fas fa-users"></i>
+                      <span class="hidden-sm">Customers</span></a>
+                  </li>
 
-          <li class="nav-item">
-            <a href="/comments" class="nav-link">
-              <i class="fas fa-edit"> </i>
-              Feedback
-            </a>
-          </li>
+                  <li class="nav-item">
+                    <a href="/comments" class="nav-link">
+                      <i class="fas fa-edit"> </i>
+                      Feedback
+                    </a>
+                  </li>
 
-          <li class="nav-item">
-            <a href="/settings" class="nav-link">
-              <i class="fas fa-cog"> </i>
-              Settings
-            </a>
-          </li>
+                  <li class="nav-item">
+                    <a href="/help" class="nav-link">
+                      <i class="fas fa-info-circle"> </i>
+                      Help
+                    </a>
+                  </li>
 
-          <!--<li class="nav-item">-->
-          <!--  <a href="/users/edit" class="nav-link">-->
-          <!--    <i class="fas fa-edit"> </i>-->
-          <!--    <%= current_user.first_name%>-->
-          <!--  </a>-->
-          <!--</li>-->
+                  <li class="nav-item">
+                    <a href="/settings" class="nav-link">
+                      <i class="fas fa-cog"> </i>
+                      Settings
+                    </a>
+                  </li>
+
+                  <!--<li class="nav-item">-->
+                  <!--  <a href="/users/edit" class="nav-link">-->
+                  <!--    <i class="fas fa-edit"> </i>-->
+                  <!--    <%= current_user.first_name%>-->
+                  <!--  </a>-->
+                  <!--</li>-->
 
 
-          <li class="nav-item">
-            <a href="/users/sign_out" data-method="delete" class="nav-link">
-              <i class="fas fa-sign-out-alt"> </i>
-              Sign out
-            </a>
-          </li>
+                  <li class="nav-item">
+                    <a href="/users/sign_out" data-method="delete" class="nav-link">
+                      <i class="fas fa-sign-out-alt"> </i>
+                      Sign out
+                    </a>
+                  </li>
 
-        <% end %>
-      </ul>
-    </div>
-    <!-- .navbar-collapse -->
-  </div>
-  <!-- .container -->
-</nav>
+                <% end %>
+              </ul>
+            </div>
+            <!-- .navbar-collapse -->
+          </div>
+          <!-- .container -->
+        </nav>
