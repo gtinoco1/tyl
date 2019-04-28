@@ -129,31 +129,31 @@
         <% end %>
       </div>
       
-       
+       <!--removing ability to upload flyer to activity-->
 
-      <% if @activity.activity_type.flyer_img_toggle == "Show" %>
+      <!-- if @activity.activity_type.flyer_img_toggle == "Show" %>-->
 
-        <div class="form-group">
-          <label for="flyer_img">
-            Upload Flyer Image            
-          </label>
-          <input type="file" id="flyer_img" name="flyer_img" class="form-control" value=" <%= @activity.flyer_img %>">
-        </div>
+      <!--  <div class="form-group">-->
+      <!--    <label for="flyer_img">-->
+      <!--      Upload Flyer Image            -->
+      <!--    </label>-->
+      <!--    <input type="file" id="flyer_img" name="flyer_img" class="form-control" value=" <%= @activity.flyer_img %>">-->
+      <!--  </div>-->
 
-      <% else %>
-      <% end %>
+      <!-- else %>-->
+      <!-- end %>-->
 
-      <% if @activity.activity_type.postcard_img_toggle == "Show" %>
+      <!-- if @activity.activity_type.postcard_img_toggle == "Show" %>-->
 
-        <div class="form-group">
-          <label for="postcard__img">
-            Upload Postcard Image            
-          </label>
-          <input type="file" id="postcard__img" name="postcard__img" class="form-control" value="<%= @activity.postcard__img %>">
-        </div>
+      <!--  <div class="form-group">-->
+      <!--    <label for="postcard__img">-->
+      <!--      Upload Postcard Image            -->
+      <!--    </label>-->
+      <!--    <input type="file" id="postcard__img" name="postcard__img" class="form-control" value="<%= @activity.postcard__img %>">-->
+      <!--  </div>-->
 
-      <% else %>
-      <% end %>
+      <!-- else %>-->
+      <!-- end %>-->
 
       <% if @activity.activity_type.detail_toggle == "Show" %>
 

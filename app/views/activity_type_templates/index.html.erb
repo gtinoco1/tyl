@@ -111,14 +111,20 @@
                   </div>
                 </div>
                 <div class = "row mb-2">
-                  <div class="col-lg-3 offset-lg-3 col-6 col-sm-6">
-                    Flyer Image
-                    <%= select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"], type.flyer_img_toggle), :class => "form-control") %>
-                  </div>
-                  <div class="col-lg-3 col-6 col-sm-6">
-                    Postcard Image
-                    <%= select_tag(:postcard_img_toggle, options_for_select(["Show", "Hide"], type.postcard_img_toggle), :class => "form-control") %>
-                  </div>
+                  <!--<div class="col-lg-3 offset-lg-3 col-6 col-sm-6">-->
+                  <!--  Flyer Image-->
+                  <!--   select_tag(:flyer_img_toggle, options_for_select(["Show", "Hide"], type.flyer_img_toggle), :class => "form-control") %>-->
+                  <!--</div>-->
+                  <div class="form-group">
+                   <input type="hidden" name="flyer_img_toggle" class="form-control" value="Hide">
+                 </div>
+                  <!--<div class="col-lg-3 col-6 col-sm-6">-->
+                  <!--  Postcard Image-->
+                  <!--   select_tag(:postcard_img_toggle, options_for_select(["Show", "Hide"], type.postcard_img_toggle), :class => "form-control") %>-->
+                  <!--</div>-->
+              <div class="form-group">
+                <input type="hidden" name="postcard_img_toggle" class="form-control" value="Hide">
+              </div>
                 </div>
 
                 <button class="btn btn-block btn-outline-success">
