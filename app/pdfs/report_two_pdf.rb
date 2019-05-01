@@ -29,7 +29,6 @@ class ReportTwoPdf < Prawn::Document
 
 
     current_user.activity_types.each do |type|
-      
       if @property.activities.where(activity_type_id: type.id).where(:date => (@start_date..@end_date)).count > 0
         eval("method_#{type.id}")
       else

@@ -53,7 +53,7 @@ class PropertiesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ReportTwoPdf.new(@property, @current_user, @start_date, @end_date)
+        pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", disposition: "inline"
       end
     end
