@@ -135,6 +135,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap3-datetimepicker-rails (4.17.47)
       momentjs-rails (>= 2.8.1)
+    browser (2.5.3)
     builder (3.2.3)
     byebug (10.0.2)
     callsite (0.0.11)
@@ -434,6 +435,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap3-datetimepicker-rails (~> 4.17.47)
+  browser
   byebug
   capybara
   carrierwave

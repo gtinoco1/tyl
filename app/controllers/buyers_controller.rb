@@ -33,6 +33,16 @@ class BuyersController < ApplicationController
     render("shared/help_page.html.erb")
   end
 
+  def help_home
+    @buyer = Buyer.all
+    render("shared/help_home.html.erb")
+  end
+
+  def contact_us
+    @buyer = Buyer.all
+    render("shared/contact.html.erb")
+  end
+
   def terms
     @buyer = Buyer.all
     render("shared/terms.html.erb")

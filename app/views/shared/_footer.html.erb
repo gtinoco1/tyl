@@ -1,18 +1,11 @@
-<nav class="navbar navbar-expand navbar-light bg-white mb-3">
+<nav class="navbar navbar-expand navbar-light bg-white mb-3 d-none d-lg-block">
 
-<!--<nav class="navbar navbar-expand navbar-light bg-white fixed-bottom ">-->
+<div>
+  <hr>
+</div>
+
   <div class="container justify-content-center">
-
     <ul class="navbar-nav mt-1">
-
-      <li class="nav-item">
-        <small> <a class="nav-link text-muted" href="/help">
-            <span class="hidden-sm">Help</span></a> </small>
-      </li>
-
-      <li class="nav-item pt-1 text-secondary">
-        <p><small> • </small></p>
-      </li>
 
       <li class="nav-item">
         <small><a class="nav-link text-muted" href="/terms">
@@ -45,3 +38,69 @@
   <!-- .container -->
 </nav>
 
+<!-------------------------------------------------------------------------------------------------------------------------------->
+<nav class="d-block">
+  <div>
+    &nbsp;
+  </div>
+    <div>
+    
+  </div>
+</nav>
+
+<div class="fixed-bottom d-lg-none d-xl-none border border-bottom-0 border-left-0 border-right-0 border-secondary bg-white " style="">
+  <div class="row text-center flex-nowrap mt-0 mb-0 pb-0 pt-1">
+    
+    <div class="col">
+      <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href='javascript:history.back()'>
+        <i class="fas fa-chevron-left fa-lg pb-0 mb-0" style="-webkit-text-stroke: 1px #797D7F;color:transparent;"></i>
+        <div class="py-0"><small><span class="align-top font-weight-bold">Back</span></small></div>
+      </a>
+    </div>
+
+    <div class="col">
+      <% if current_page?('/all_properties') %>
+        <a class="btn text-info pt-1 pb-0" onclick="this.blur();" href="/all_properties">
+          <i class="fas fa-home fa-lg py-0"></i>
+          <div class="py-0"><small><span class="align-top font-weight-bold">Properties</span></small></div>
+        </a>
+      <% else %>
+        <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href="/all_properties">
+          <i class="fas fa-home fa-lg py-0" style="-webkit-text-stroke: 1px #797D7F;color:transparent;"></i>
+          <div class="py-0"><small><span class="align-top font-weight-bold">Properties</span></small></div>
+        </a>
+      <% end %>
+    </div>
+    
+        <div class="col">
+      <% if current_page?('/buyers') %>
+        <a class="btn text-info pt-1 pb-0" onclick="this.blur();" href="/buyers">
+          <i class="fas fa-users fa-lg py-0"></i>
+          <div class="py-0"><small><span class="align-top font-weight-bold">Customers</span></small></div>
+        </a>
+      <% else %>
+        <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href="/buyers">
+          <i class="fas fa-users fa-lg py-0" style="-webkit-text-stroke: 1px #797D7F;color:transparent;"></i>
+          <div class="py-0"><small><span class="align-top font-weight-bold">Customers</span></small></div>
+        </a>
+      <% end %>
+    </div>
+
+    <div class="col">
+      <% if current_page?("/help_home") %>
+        <a class="btn text-info pt-1 pb-0" onclick="this.blur();" href="/help_home">
+          <i class="fas fa-info fa-lg py-0"></i>
+          <div class="py-0"><small><span class="align-top font-weight-bold">Help</span></small></div>
+        </a>
+      <% else %>
+        <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href="/help_home">
+          <i class="fas fa-info fa-lg py-0" style="-webkit-text-stroke: 1px #797D7F;color:transparent;"></i>
+          <div class="py-0"><small><span class="align-top font-weight-bold">Help</span></small></div>
+        </a>
+      <% end %>
+
+
+    </div>
+
+  </div>
+</div>

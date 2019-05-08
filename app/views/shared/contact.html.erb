@@ -1,0 +1,48 @@
+<div class="row mb-2">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-info text-uppercase">
+      Contact Us
+    </h4>
+    <hr>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <% if  browser.platform.ios?(true) %>
+      <h5 class="text-center font-weight-light">
+        Email us at: <a class="text-primary"> info@trackyourlisting.com</a>
+      </h5>
+    <% else %>
+      <h5 class="text-center font-weight-light">
+        Email us at: <a href="mailto:info@trackyourlisting.com">info@trackyourlisting.com</a>
+      </h5>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <% if  browser.platform.ios?(true) %>
+      <h5 class="text-center font-weight-light">
+        Text us at: <a class="text-primary" href=""> 786-547-9601</a>
+      </h5>
+    <% else %>
+      <h5 class="text-center font-weight-light">
+        Text us at: <a href="sms:786-547-9601">786-547-9601</a>
+      </h5>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+
+    <h5 class="text-center font-weight-light">
+      Call us at: <a href="tel:786-547-9601">786-547-9601</a>
+    </h5>
+  </div>
+</div>

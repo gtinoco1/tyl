@@ -161,7 +161,7 @@
           <label for="detail">
             Detail            
           </label>
-          <textarea id="detail" name="detail" class="form-control" rows="3" value="<%= @activity.detail %>"> <%= @activity.detail %> </textarea>
+          <textarea id="detail" name="detail" class="form-control" type="text" rows="3" value="<%= @activity.detail %>"> <%= @activity.detail %> </textarea>
         </div>
 
       <% else %>
@@ -174,7 +174,7 @@
           <label for="outcome">
             Outcome            
           </label>
-          <textarea id="outcome" name="outcome" class="form-control" rows="3" value="<%= @activity.outcome %>"></textarea>
+          <textarea id="outcome" name="outcome" class="form-control" type="text" rows="3" value="<%= @activity.outcome %>"></textarea>
         </div>
 
       <% else %>
@@ -184,7 +184,7 @@
         <input type="hidden" name="property_id" class="form-control" value="<%= @activity.property_id %>">
       </div>
 
-      <button class="btn btn-block btn-outline-secondary">
+      <button class="btn btn-block btn-outline-success">
         Save activity
       </button>
     </form>

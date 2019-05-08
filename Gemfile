@@ -17,6 +17,9 @@ gem "uglifier", ">= 1.3.0"
 gem "prawn"
 gem 'prawn-table'
 
+gem "browser"
+
+
 gem "carrierwave"
 gem "cloudinary"
 

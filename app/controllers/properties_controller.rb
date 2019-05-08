@@ -54,7 +54,8 @@ class PropertiesController < ApplicationController
       format.html
       format.pdf do
         pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
-        send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", disposition: "inline"
+        send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", :layout => false
+
       end
     end
   end

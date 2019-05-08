@@ -224,6 +224,8 @@ Rails.application.routes.draw do
   get("/archive", {:controller => "properties", :action => "archive"})
   #------------------------------
   get("/help", {:controller => "buyers", :action => "help_page"})
+  get("/help_home", {:controller => "buyers", :action => "help_home"})
+  get("/contact_us", {:controller => "buyers", :action => "contact_us"})
   get("/terms", {:controller => "buyers", :action => "terms"})
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
