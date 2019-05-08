@@ -39,6 +39,10 @@
 </nav>
 
 <!-------------------------------------------------------------------------------------------------------------------------------->
+<% if current_user.blank? %>
+<% else %>
+
+
 <nav class="d-block">
   <div>
     &nbsp;
@@ -52,7 +56,13 @@
   <div class="row text-center flex-nowrap mt-0 mb-0 pb-0 pt-1">
     
     <div class="col">
+      
+      <% if current_page?('/') %>
+      <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href='/'>
+      <% else %>
       <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href='javascript:history.back()'>
+      <% end %>
+        
         <i class="fas fa-chevron-left fa-lg pb-0 mb-0" style="-webkit-text-stroke: 1px #797D7F;color:transparent;"></i>
         <div class="py-0"><small><span class="align-top font-weight-bold">Back</span></small></div>
       </a>
@@ -104,3 +114,5 @@
 
   </div>
 </div>
+
+<% end %>
