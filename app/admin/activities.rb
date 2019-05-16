@@ -21,6 +21,31 @@ ActiveAdmin.register Activity do
     column(:property_id) { |activity| activity.property.address }
     column(:activity_type_id) { |activity| activity.activity_type.title }
     column(:date) { |activity| activity.date }
+    column(:duration) { |activity| activity.duration }
+    column(:cost) { |activity| activity.cost }
+    column(:detail) { |activity| activity.detail }
+    column(:outcome) { |activity| activity.outcome }
+    column(:contact) { |activity| activity.contact }
+    column(:subject) { |activity| activity.subject }
+    column(:agent) { |activity| activity.agent }
+    column(:customer) { |activity| activity.customer }
   end
 
 end
+
+#  id               :integer          not null, primary key
+#  activity_type_id :integer
+#  date             :date
+#  duration         :float
+#  cost             :float
+#  property_id      :integer
+#  detail           :text
+#  outcome          :text
+#  contact          :string
+#  subject          :text
+#  flyer_img        :string
+#  postcard__img    :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  agent            :string
+#  customer         :string
