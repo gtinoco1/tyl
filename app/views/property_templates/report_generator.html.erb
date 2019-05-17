@@ -11,73 +11,88 @@
   <div class="col-lg-6 offset-lg-3">
 
     <div class="text-center font-weight-light">
-    Choose report settings to create a custom report. To hide specific fields (Details, Subject, Outcome etc..) go to 
-    the property settings page first and hide that field for the corresponding activity type.
+      Choose report settings to create a custom report. To hide specific fields (Details, Subject, Outcome etc..) go to 
+      the property settings page first and hide that field for the corresponding activity type.
     </div>
     <hr>
 
   </div>
 </div>
 
- <form action="../properties/<%=@property.id%>/report.pdf" method="post">
+<form action="../properties/<%=@property.id%>/report.pdf" method="post">
+  <div class="row">
 
-<div class="row">
-  
-  <div class="col-lg-6 offset-lg-3">
-    <div class="text-info mb-3">
-      Report for <%= @property.address %>:
+    <div class="col-lg-6 offset-lg-3">
+      <div class="text-info mb-3">
+        Report for <%= @property.address %>:
+      </div>
     </div>
+
+    <div class="col-lg-3 offset-lg-3 col-6">
+      <div class="form-group">
+        <label for="start_date">
+          Start Date*
+        </label>
+        <input class="form-control" type="date" id="start_date" name="start_date" value="<%= @property.activities.order(date: :asc).first.date.strftime('%Y-%m-%d') %>">
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+      <div class="form-group">
+        <label for="end_date">
+          End Date*
+        </label>
+        <input class="form-control" type="date" id="end_date" name="end_date" value="<%=  @property.activities.order(date: :asc).last.date.strftime('%Y-%m-%d') %>">
+      </div>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3">
+      <p class="text-secondary text-center">
+        *The default dates encompass all activities for this property.
+      </p>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3 col-4">
+      <div class="form-group">
+        <label for="report_type">
+          Order by:
+        </label>
+        <%= select_tag(:report_type, options_for_select(["Date", "Activity Type"], "Date"), :class => "form-control") %>
+      </div>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3">
+      <div class="mb-2">Columns to Include:</div>
+      <div class="form-group">
+    <div class="custom-control custom-checkbox mr-sm-2">
+      <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+      <label class="custom-control-label" for="customControlAutosizing">Cost</label>
+    </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3">
+      <button class="btn btn-block btn-outline-secondary">
+        Generate PDF Report
+      </button>
+      <hr>
+    </div>
+
   </div>
-
-      <div class="col-lg-3 offset-lg-3 col-6">
-        <div class="form-group">
-          <label for="start_date">
-            Start Date*
-          </label>
-          <input class="form-control" type="date" id="start_date" name="start_date" value="<%= @property.activities.order(date: :asc).first.date.strftime('%Y-%m-%d') %>">
-        </div>
-      </div>
-      
-      <div class="col-lg-3 col-6">
-        <div class="form-group">
-          <label for="end_date">
-            End Date*
-          </label>
-          <input class="form-control" type="date" id="end_date" name="end_date" value="<%=  @property.activities.order(date: :asc).last.date.strftime('%Y-%m-%d') %>">
-        </div>
-      </div>
-      
-      <div class="col-lg-6 offset-lg-3">
-        <p class="text-secondary text-center">
-          *The default dates encompass all activities for this property.
-        </p>
-      </div>
-
-      
-      <div class="col-lg-6 offset-lg-3">
-         <button class="btn btn-block btn-outline-secondary">
-           Generate PDF Report
-         </button>
-        <hr>
-      </div>
-      
-    </form>
-    
-</div>
+</form>
 
 <div class="row mb-3">
 
   <div class="col-lg-6 offset-lg-3">
     <div class="text-center font-weight-light">
-    Download all your activity data in spreadsheet format and make your own report. Open download with Microsoft Excel.
+      Download all your activity data in spreadsheet format and make your own report. Open download with Microsoft Excel.
     </div>
     <hr>
-
   </div>
 
-    <div class="col-lg-6 offset-lg-3">
-        <a href="/properties/<%= @property.id %>/report_spreadsheet/" class="btn btn-block btn-outline-secondary">
-          Download Spreadsheet
-        </a>
-    </div>
-        </div>
+  <div class="col-lg-6 offset-lg-3">
+    <a href="/properties/<%= @property.id %>/report_spreadsheet/" class="btn btn-block btn-outline-secondary">
+      Download Spreadsheet
+    </a>
+  </div>
+</div>

@@ -23,20 +23,18 @@ class PropertiesController < ApplicationController
   def report_xlsx
     @property = Property.find(params.fetch("id_to_display"))
     @properties = current_user.properties
-    
+
     # respond_to do |format|
     #   format.xlsx
     # end
 
-
     if @property.prices.count == 0
       redirect_to("/properties/#{@property.id}", :notice => "Make sure your property has a listing price!")
     else
-    render xlsx: "Report_#{@property.address}", disposition: "download", template: "/property_templates/report.xlsx.axlsx"
+      render xlsx: "Report_#{@property.address}", disposition: "download", template: "/property_templates/report.xlsx.axlsx"
+    end
   end
-  
-  end
-  
+
   def report_settings
     @property = Property.find(params.fetch("id_to_display"))
 
@@ -49,13 +47,17 @@ class PropertiesController < ApplicationController
     @start_date = Date.strptime(params.fetch("start_date"), "%Y-%m-%d")
     @end_date = Date.strptime(params.fetch("end_date"), "%Y-%m-%d")
     @user = current_user
+    @report_type = params.fetch("report_type")
 
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
+        if @report_type == "Date"
+         pdf = ReportByDatePdf.new(@property, @current_user, @start_date, @end_date)
+        elsif @report_type == "Activity Type"
+         pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
+        end
         send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", :layout => false
-
       end
     end
   end
@@ -157,18 +159,18 @@ class PropertiesController < ApplicationController
 
     redirect_to("/all_properties", :notice => "Property deleted successfully.")
   end
-  
+
   def my_account
     render("users/my_account.html.erb")
   end
-  
+
   def prices
     @property = Property.find(params.fetch("id_to_display"))
 
     render("property_templates/property_prices.html.erb")
   end
-  
-    def attachments
+
+  def attachments
     @property = Property.find(params.fetch("id_to_display"))
 
     render("property_templates/property_attachments.html.erb")
