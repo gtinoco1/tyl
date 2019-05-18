@@ -20,39 +20,42 @@
   </div>
 </div>
 
-<div class="row mb-1">
+<div class="row mb-0">
   <div class="col-lg-8 offset-lg-2">
     <a class="btn btn-outline-info pt-0 pb-1 pr-2 pl-2" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
       <span><small> more options...</small></span>
     </a>
-    
+
     <div class="collapse" id="collapseExample">
       <div class="card card-body border-white">
-<div class="row mb-4">
-  <div class="col-lg-4 offset-lg-2 col-6">
-    <a class="btn btn-outline-info btn-block text-center custom-info-button" href="../report_type/<%=@property.id%>">
-      <i class="far fa-file-alt fa-2x my-2"></i>
-      <h5 class="font-weight-light">Reports</h5>
-    </a>
-  </div>
+        <div class="row mb-4">
+          <div class="col-lg-4 offset-lg-2 col-6">
+            <a class="btn btn-outline-info btn-block text-center custom-info-button" href="../report_type/<%=@property.id%>">
+              <i class="far fa-file-alt fa-2x my-2"></i>
+              <h5 class="font-weight-light">Reports</h5>
+            </a>
+          </div>
 
-  <div class="col-lg-4 col-6">
-    <a class="btn btn-outline-info btn-block text-center custom-info-button" href="/properties/<%= @property.id %>/attachments">
-      <i class="far fa-images fa-2x my-2"></i>
-      <h5 class="font-weight-light">Attachments</h5>
-    </a>
-  </div>
-  
-  </div>
+          <div class="col-lg-4 col-6">
+            <a class="btn btn-outline-info btn-block text-center custom-info-button" href="/properties/<%= @property.id %>/attachments">
+              <i class="far fa-images fa-2x my-2"></i>
+              <h5 class="font-weight-light">Attachments</h5>
+            </a>
+          </div>
+        </div>
 
-        <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-info">
-          Edit Property
-        </a>
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2 col-12">
+            <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-info">
+              Edit Property
+            </a>
+          </div>
+        </div>
 
       </div>
     </div>
-    
-    
+
+
     <hr>
   </div>
 </div>

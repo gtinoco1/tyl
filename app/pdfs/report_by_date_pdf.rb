@@ -75,8 +75,8 @@ class ReportByDatePdf < Prawn::Document
       @property.activities.order(date: :asc).where(:date => (@start_date..@end_date)).map do |activity|
         [activity.date.strftime("%b %d"),
          activity.activity_type.title,
-         @subject_check == "on" ? "#{activity.subject} - #{activity.detail} #{activity.outcome}" : nil,
-         @contact_check == "on" ? "#{activity.contact} - #{activity.agent} - #{activity.customer}" : nil,
+         @subject_check == "on" ? activity.subject + "\n" + activity.detail + "\n" + activity.outcome : nil,
+         @contact_check == "on" ? activity.contact + "\n" + activity.agent + "\n" + activity.customer : nil,
          @cost_check == "on" ? activity.cost.to_i : nil,
          @duration_check == "on" ? activity.duration.to_i : nil].compact
       end
