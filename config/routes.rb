@@ -205,13 +205,16 @@ Rails.application.routes.draw do
   get("/", {:controller => "properties", :action => "index"})
   get("/properties/:id_to_display", {:controller => "properties", :action => "show"})
   get("/all_properties", {:controller => "properties", :action => "all"})
-  get("/report_generator/:id_to_display", {:controller => "properties", :action => "report_settings"})
+  get("/report_type/:id_to_display", {:controller => "properties", :action => "report_type"})
+  get("/report_generator_pdf/:id_to_display", {:controller => "properties", :action => "report_generator_pdf"})
+
   get("/properties/prices/:id_to_display", {:controller => "properties", :action => "prices"})
   get("/properties/:id_to_display/attachments", {:controller => "properties", :action => "attachments"})
   
   # UPDATE
   get("/properties/:prefill_with_id/edit", {:controller => "properties", :action => "edit_form"})
   post("/update_property/:id_to_modify", {:controller => "properties", :action => "update_row"})
+  
   post("/properties/:id_to_display/report", {:controller => "properties", :action => "create_pdf"})
   
   get("/properties/:id_to_display/report_spreadsheet", {:controller => "properties", :action => "report_xlsx"})

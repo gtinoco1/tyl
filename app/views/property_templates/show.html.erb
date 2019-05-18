@@ -25,24 +25,34 @@
     <a class="btn btn-outline-info pt-0 pb-1 pr-2 pl-2" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
       <span><small> more options...</small></span>
     </a>
-
+    
     <div class="collapse" id="collapseExample">
       <div class="card card-body border-white">
+<div class="row mb-4">
+  <div class="col-lg-4 offset-lg-2 col-6">
+    <a class="btn btn-outline-info btn-block text-center custom-info-button" href="../report_type/<%=@property.id%>">
+      <i class="far fa-file-alt fa-2x my-2"></i>
+      <h5 class="font-weight-light">Reports</h5>
+    </a>
+  </div>
 
-        <a href="/properties/<%= @property.id %>/attachments" class="btn btn-block btn-outline-secondary">
-          Attachments
-        </a>
+  <div class="col-lg-4 col-6">
+    <a class="btn btn-outline-info btn-block text-center custom-info-button" href="/properties/<%= @property.id %>/attachments">
+      <i class="far fa-images fa-2x my-2"></i>
+      <h5 class="font-weight-light">Attachments</h5>
+    </a>
+  </div>
+  
+  </div>
 
-        <a href="../report_generator/<%=@property.id%>" class="btn btn-block btn-outline-secondary">
-          Generate Report
-        </a>
-
-        <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-secondary">
+        <a href="/properties/<%= @property.id %>/edit" class="btn btn-block btn-outline-info">
           Edit Property
         </a>
 
       </div>
     </div>
+    
+    
     <hr>
   </div>
 </div>
@@ -96,14 +106,6 @@
 
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
-
-    <div class="row mb-3">
-      <div class="col">
-        <a href="/all_properties" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-      </div>
-    </div>
 
   </div>
 </div>

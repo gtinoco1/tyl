@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h4 class="text-info text-uppercase">
+      PDf Report for:
+    </h4>
+      <h4 class="font-weight-light text-center">
+        <%= @property.address %>
+      </h4>
+    
+    <hr>
+  </div>
+</div>
+
+<form action="/properties/<%=@property.id%>/report.pdf" method="post">
+
+  <div class="row">
+    <div class="col-lg-3 offset-lg-3">
+      <h5 class="font-weight-light mb-3">
+        Date Range:
+      </h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 offset-lg-3 col-6">
+
+      <div class="form-group">
+        <label for="start_date">
+          Start Date*
+        </label>
+        <input class="form-control" type="date" id="start_date" name="start_date" value="<%= @property.activities.order(date: :asc).first.date.strftime('%Y-%m-%d') %>">
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+      <div class="form-group">
+        <label for="end_date">
+          End Date*
+        </label>
+        <input class="form-control" type="date" id="end_date" name="end_date" value="<%=  @property.activities.order(date: :asc).last.date.strftime('%Y-%m-%d') %>">
+      </div>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3">
+      <p class="text-secondary text-center">
+        *The default dates encompass all activities for this property.
+      </p>
+    <hr>
+    </div>
+    
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+
+      <h5 class="font-weight-light mb-3 text-center">
+        Arrange by:
+      </h5>
+      <div class="text-center">
+
+        <label class="radio-inline">
+          <input type="radio" value="date" name="report_type" id="report_type" class="mr-1" checked>
+          <span class="mr-3">Date</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="activity_type" name="report_type" id="report_type" class="mr-1">
+          <span class="mr-3">Activity Type</span>
+        </label>
+      </div>
+
+<hr>
+    </div>
+    
+  </div>
+
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+
+      <h5 class="font-weight-light mb-3 text-center">
+        Columns to Include:
+      </h5>
+      <div class="text-center">
+
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="subject" id="subject" class="mr-1" checked>
+          <span class="mr-3">Subject</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="contact" id="contact" class="mr-1" checked>
+          <span class="mr-3">Contact</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="duration" id="duration" class="mr-1" checked>
+          <span class="mr-3">Duration</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="cost" id="cost" class="mr-1">
+          <span class="">Cost</span>
+        </label>
+      </div>
+<hr>
+    </div>
+  </div>
+
+
+  <div class="col-lg-6 offset-lg-3 mb-3">
+    <button class="btn btn-lg btn-block btn-outline-success">
+      Generate PDF Report
+    </button>
+  </div>
+
+
+</form>

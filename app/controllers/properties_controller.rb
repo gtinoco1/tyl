@@ -35,10 +35,14 @@ class PropertiesController < ApplicationController
     end
   end
 
-  def report_settings
+  def report_type
     @property = Property.find(params.fetch("id_to_display"))
+    render("property_templates/report_type.html.erb")
+  end
 
-    render("property_templates/report_generator.html.erb")
+  def report_generator_pdf
+    @property = Property.find(params.fetch("id_to_display"))
+    render("property_templates/report_generator_pdf.html.erb")
   end
 
   def create_pdf
@@ -47,15 +51,19 @@ class PropertiesController < ApplicationController
     @start_date = Date.strptime(params.fetch("start_date"), "%Y-%m-%d")
     @end_date = Date.strptime(params.fetch("end_date"), "%Y-%m-%d")
     @user = current_user
-    @report_type = params.fetch("report_type")
+    @subject_check = params.fetch("subject","")
+    @contact_check = params.fetch("contact","")
+    @duration_check = params.fetch("duration","")
+    @cost_check = params.fetch("cost","")
+    @report_type = params.fetch("report_type","")
 
     respond_to do |format|
       format.html
       format.pdf do
-        if @report_type == "Date"
-         pdf = ReportByDatePdf.new(@property, @current_user, @start_date, @end_date)
-        elsif @report_type == "Activity Type"
-         pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
+        if @report_type == "date"
+          pdf = ReportByDatePdf.new(@property, @current_user, @start_date, @end_date, @subject_check, @contact_check, @duration_check, @cost_check)
+        elsif @report_type == "activity_type"
+          pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         end
         send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", :layout => false
       end
