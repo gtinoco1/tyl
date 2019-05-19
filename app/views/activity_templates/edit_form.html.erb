@@ -2,16 +2,16 @@
   <div class="col-lg-4 offset-lg-2">
     <h4 class="text-secondary text-uppercase">
       Creating new activity for:
-      <div class="text-success">
+      <div class="text-info">
         <%= @activity.property.address %>
       </div>
     </h4>
   </div>
 
   <div class="col-lg-2 offset-lg-1">
-        <a href="/delete_activity/<%= @activity.id %>" data-confirm="Delete: Are you sure?" class="btn btn-block btn-outline-danger">
-          Delete activity
-        </a>
+    <a href="/delete_activity/<%= @activity.id %>" data-confirm="Delete: Are you sure?" class="btn btn-block btn-outline-danger">
+      Delete activity
+    </a>
   </div>
 </div>
 
@@ -60,7 +60,7 @@
         <% else %>
         <% end %>
       </div>
-      
+
       <div class="form-row">
 
         <% if @activity.activity_type.agent_toggle == "Show" %>
@@ -109,7 +109,7 @@
             <label for="duration">
               Duration (minutes)            
             </label>
-            <input type="text" id="duration" name="duration" class="form-control" value="<%= @activity.duration %>">
+            <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @activity.duration %>">
           </div>
 
         <% else %>
@@ -128,32 +128,6 @@
         <% else %>
         <% end %>
       </div>
-      
-       <!--removing ability to upload flyer to activity-->
-
-      <!-- if @activity.activity_type.flyer_img_toggle == "Show" %>-->
-
-      <!--  <div class="form-group">-->
-      <!--    <label for="flyer_img">-->
-      <!--      Upload Flyer Image            -->
-      <!--    </label>-->
-      <!--    <input type="file" id="flyer_img" name="flyer_img" class="form-control" value=" <%= @activity.flyer_img %>">-->
-      <!--  </div>-->
-
-      <!-- else %>-->
-      <!-- end %>-->
-
-      <!-- if @activity.activity_type.postcard_img_toggle == "Show" %>-->
-
-      <!--  <div class="form-group">-->
-      <!--    <label for="postcard__img">-->
-      <!--      Upload Postcard Image            -->
-      <!--    </label>-->
-      <!--    <input type="file" id="postcard__img" name="postcard__img" class="form-control" value="<%= @activity.postcard__img %>">-->
-      <!--  </div>-->
-
-      <!-- else %>-->
-      <!-- end %>-->
 
       <% if @activity.activity_type.detail_toggle == "Show" %>
 
@@ -191,10 +165,4 @@
 
     <hr>
   </div>
-</div>
-
-<div class="col-lg-2 offset-lg-2 pl-0 pr-0">
-  <a href="/properties/<%= @activity.property_id %>" class="btn btn-block btn-outline-secondary">
-    Go back
-  </a>
 </div>

@@ -48,8 +48,6 @@ class User < ApplicationRecord
                         detail_toggle: "Show",
                         outcome_toggle: "Hide",
                         contact_toggle: "Hide",
-                        flyer_img_toggle: "Hide",
-                        postcard_img_toggle: "Hide",
                         subject_toggle: "Show",
                         agent_toggle: "Show",
                         customer_toggle: "Show")
@@ -72,8 +70,6 @@ class User < ApplicationRecord
                         detail_toggle: "Show",
                         outcome_toggle: "Show",
                         contact_toggle: "Show",
-                        flyer_img_toggle: "Show",
-                        postcard_img_toggle: "Show",
                         subject_toggle: "Show",
                         agent_toggle: "Show",
                         customer_toggle: "Show")

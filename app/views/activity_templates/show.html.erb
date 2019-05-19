@@ -132,38 +132,6 @@
     <% else %>
     <% end %>
 
-    <% if @activity.activity_type.flyer_img_toggle == "Show" %>
-
-      <div class="col-lg-8 pl-0 pt-3">
-        <div class="form-group mt-1 mb-0">
-
-          <% if @activity.flyer_img.blank? %>
-          <% else %>
-            <% len = @activity.flyer_img.to_s.length %>
-            <% if @activity.flyer_img.to_s.slice(len-3..len) == "pdf"%>
-              <a href="<%=@activity.flyer_img %>" class="">
-                click to open pdf
-              </a>
-            <% else %>
-              <img src="<%= @activity.flyer_img %>" alt="flyer" class="img-thumbnail">
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-
-    <% else %>
-    <% end %>
-
-    <% if @activity.activity_type.postcard_img_toggle == "Show" %>
-
-      <div class="col-lg-8 pl-0 pt-3">
-        <div class="form-group mt-1 mb-0">
-          <img src="<%= @activity.postcard__img %>" alt="postcard" class="img-thumbnail">
-        </div>
-      </div>
-
-    <% else %>
-    <% end %>
 
     <hr>
   </div>

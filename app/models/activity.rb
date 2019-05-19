@@ -12,8 +12,6 @@
 #  outcome          :text
 #  contact          :string
 #  subject          :text
-#  flyer_img        :string
-#  postcard__img    :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  agent            :string
@@ -27,8 +25,6 @@ class Activity < ApplicationRecord
 
   validates :date, :presence => true
 
-  mount_uploader :flyer_img, FlyerImgUploader
-  mount_uploader :postcard__img, PostcardImgUploader
 end
 
 
