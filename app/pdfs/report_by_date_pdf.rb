@@ -48,15 +48,27 @@ class ReportByDatePdf < Prawn::Document
     font "Nunito"
     move_down 5
 
+    @subject_check == "on" ? subject_header = "Subject" : subject_header = nil
+    @contact_check == "on" ? contact_header = "Contact" : contact_header = nil
+    @duration_check == "on" ? duration_header = "Duration" : duration_header = nil
+    @cost_check == "on" ? cost_header = "Cost" : cost_header = nil
 
-    if @duration_check == "" and @cost_check == ""
-      a = 10
-    elsif
-        a = 1 + [@subject_check, @contact_check,  @duration_check, @cost_check ].count { |toggle| toggle == "on" }
+    header_array = ["Date", "Activity", subject_header, contact_header, cost_header, duration_header].compact
+
+    if @cost_check == "on"
+      c = header_array.index("Cost")
+    elsif cost_header == nil
+      c=10
     end
-  
+
+    if @duration_check == "on"
+      d = header_array.index("Duration")
+    elsif duration_header == nil
+      d=10
+    end
+    
     table rows_by_date, position: :center, width: 540,
-                        column_widths: {0 => 50, 1 => @min_width, a => 50},
+                        column_widths: {0 => 50, 1 => @min_width, c => 35, d => 35},
                         cell_style: {font: "Nunito", size: 9} do
       row(0).font_style = :bold
       columns(0..8).align = :center
@@ -68,7 +80,7 @@ class ReportByDatePdf < Prawn::Document
   def rows_by_date
     @subject_check == "on" ? subject_header = "Subject/Details" : subject_header = nil
     @contact_check == "on" ? contact_header = "Contact" : contact_header = nil
-    @duration_check == "on" ? duration_header = "Duration" : duration_header = nil
+    @duration_check == "on" ? duration_header = "Time\n(min)" : duration_header = nil
     @cost_check == "on" ? cost_header = "Cost" : cost_header = nil
 
     [["Date", "Activity", subject_header, contact_header, cost_header, duration_header].compact] +
