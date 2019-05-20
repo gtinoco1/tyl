@@ -24,6 +24,4 @@ class ActivityType < ApplicationRecord
   validates :title, :presence => {:message => "Title can't be blank."}
   validates :title, :uniqueness => {:scope => [:user_id], :message => "already exists."}
   
-  
-  
 end
