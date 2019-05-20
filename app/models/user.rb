@@ -42,73 +42,95 @@ class User < ApplicationRecord
   mount_uploader :headshot, HeadshotUploader
 
   def add_types
-    ActivityType.create(user: self, title: "Showing",
-                        cost_toggle: "Hide",
+    ActivityType.create(user: self, title: "Call",
                         duration_toggle: "Show",
-                        detail_toggle: "Show",
-                        outcome_toggle: "Hide",
-                        contact_toggle: "Hide",
                         subject_toggle: "Show",
-                        agent_toggle: "Show",
-                        customer_toggle: "Show")
-
-    ActivityType.create(user: self, title: "Postcard",
-                        cost_toggle: "Show",
-                        duration_toggle: "Show",
+                        contact_toggle: "Show",
                         detail_toggle: "Hide",
                         outcome_toggle: "Hide",
-                        contact_toggle: "Show",
-                        flyer_img_toggle: "Hide",
-                        postcard_img_toggle: "Show",
-                        subject_toggle: "Show",
                         agent_toggle: "Hide",
-                        customer_toggle: "Hide")
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
 
-    ActivityType.create(user: self, title: "Other",
-                        cost_toggle: "Show",
+    ActivityType.create(user: self, title: "Showing",
                         duration_toggle: "Show",
-                        detail_toggle: "Show",
-                        outcome_toggle: "Show",
-                        contact_toggle: "Show",
                         subject_toggle: "Show",
-                        agent_toggle: "Show",
-                        customer_toggle: "Show")
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
+
+    ActivityType.create(user: self, title: "MLS Input",
+                        duration_toggle: "Show",
+                        subject_toggle: "Show",
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
+
+    ActivityType.create(user: self, title: "Photography",
+                        duration_toggle: "Show",
+                        subject_toggle: "Show",
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
+
+    ActivityType.create(user: self, title: "Promotion & Advertising",
+                        duration_toggle: "Show",
+                        subject_toggle: "Show",
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
 
     ActivityType.create(user: self, title: "Listing Agreement Paperwork",
-                        cost_toggle: "Hide",
                         duration_toggle: "Show",
-                        detail_toggle: "Show",
-                        outcome_toggle: "Hide",
-                        contact_toggle: "Hide",
-                        flyer_img_toggle: "Hide",
-                        postcard_img_toggle: "Hide",
-                        subject_toggle: "Hide",
-                        agent_toggle: "Hide",
-                        customer_toggle: "Hide")
-
-    ActivityType.create(user: self, title: "Flyer",
-                        cost_toggle: "Show",
-                        duration_toggle: "Show",
+                        subject_toggle: "Show",
+                        contact_toggle: "Show",
                         detail_toggle: "Hide",
                         outcome_toggle: "Hide",
-                        contact_toggle: "Show",
-                        flyer_img_toggle: "Show",
-                        postcard_img_toggle: "Hide",
-                        subject_toggle: "Show",
                         agent_toggle: "Hide",
-                        customer_toggle: "Hide")
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
 
-    ActivityType.create(user: self, title: "Call",
-                        cost_toggle: "Hide",
+    ActivityType.create(user: self, title: "Report",
                         duration_toggle: "Show",
-                        detail_toggle: "Show",
-                        outcome_toggle: "Hide",
-                        contact_toggle: "Show",
-                        flyer_img_toggle: "Hide",
-                        postcard_img_toggle: "Hide",
                         subject_toggle: "Show",
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
                         agent_toggle: "Hide",
-                        customer_toggle: "Hide")
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
+
+    ActivityType.create(user: self, title: "Send/Receive Offer",
+                        duration_toggle: "Show",
+                        subject_toggle: "Show",
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
+
+    ActivityType.create(user: self, title: "Showing Request",
+                        duration_toggle: "Show",
+                        subject_toggle: "Show",
+                        contact_toggle: "Show",
+                        detail_toggle: "Hide",
+                        outcome_toggle: "Hide",
+                        agent_toggle: "Hide",
+                        customer_toggle: "Hide",
+                        cost_toggle: "Hide")
 
     BuyerActivityType.create(user: self, title: "Showing",
                              zipcode_toggle: "Show",

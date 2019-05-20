@@ -1,165 +1,142 @@
 <div class="row">
-  <div class="col-lg-8 offset-lg-2">
-    <h4 class="text-uppercase text-secondary">
+  <div class="col-lg-4 offset-lg-2">
+    <h4 class="text-secondary text-uppercase">
       Activity Details
+      <div class="text-info">
+        <%= @activity.property.address %>
+      </div>
     </h4>
     <hr>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-8 offset-lg-2">
 
-    <div class="form-row">
+<form action="/update_activity/<%= @activity.id %>" method="post" enctype="multipart/form-data">
 
-      <div class="form-group col-lg-5 mb-2">
-        <div class="mb-1 mt-0">
-          Activity Type            
-        </div>
-        <input type="text" id="activity_type_id" name="activity_type_id" class="form-control" value="<%= @activity.activity_type.title %>" disabled>
-      </div>
-
-      <div class="form-group col-lg-3 mb-2">
-        <div class="mb-1">
-          Date            
-        </div>
-        <input type="date" id="date" name="date" class="form-control" value="<%= @activity.date %>" disabled>
-      </div>
-
-      <% if @activity.activity_type.subject_toggle == "Show" %>
-        <div class="form-group col-lg-4 mb-2">
-          <div class="mb-1">
-            Subject
-          </div>
-          <input type="text" id="subject" name="subject" class="form-control" value="<%= @activity.subject %>" disabled>
-        </div>
-
-      <% else %>
-      <% end %>
-
+  <div class="row mb-2">
+    <div class="col-lg-3 offset-lg-3 mb-2">
+      <label for="activity_type_id">
+        Activity Type            
+      </label>
+      <input type="text" id="activity_type_id" name="activity_type_id" class="form-control" value="<%= @activity.activity_type.title %>" disabled>
     </div>
 
-    <div class="form-row">
-
-      <% if @activity.activity_type.agent_toggle == "Show" %>
-
-        <div class="form-group col-lg-6">
-          <label for="agent">
-            Agent            
-          </label>
-          <input type="text" id="agent" name="agent" class="form-control" value="<%= @activity.agent %>" disabled>
-        </div>
-
-      <% else %>
-      <% end %>
-
-      <% if @activity.activity_type.customer_toggle == "Show" %>
-
-        <div class="form-group col-lg-4 mb-0">
-          <label for="customer">
-            Customer            
-          </label>
-          <input type="text" id="customer" name="customer" class="form-control" value="<%= @activity.customer %>" disabled>
-        </div>
-
-      <% else %>
-      <% end %>
-
+    <div class="form-group">
+      <input type="hidden" name="activity_type_id" class="form-control" value="<%= @activity.activity_type_id %>">
     </div>
 
-    <div class="form-row">
-
-      <% if @activity.activity_type.contact_toggle == "Show" %>
-
-        <div class="form-group col-lg-8 mb-2">
-          <div class="mb-1">
-            Contact            
-          </div>
-          <input type="text" id="contact" name="contact" class="form-control" value="<%= @activity.contact %>" disabled>
-        </div>
-
-      <% else %>
-      <% end %>
-
-      <% if @activity.activity_type.duration_toggle == "Show" %>
-
-        <div class="form-group col-lg-4 mb-2">
-          <div class="mb-1">
-            Duration (minutes)            
-          </div>
-
-          <input type="text" id="duration" name="duration" class="form-control" value="<%= @activity.duration %>" disabled>
-        </div>
-
-      <% else %>
-      <% end %>
-
-
-      <% if @activity.activity_type.cost_toggle == "Show" %>
-
-        <div class="form-group col-lg-3 mb-2">
-          <div class="mb-1">
-            Cost            
-          </div>
-          <input type="text" id="cost" name="cost" class="form-control" value="<%= @activity.cost %>" disabled>
-        </div>
-
-      <% else %>
-      <% end %>
+    <div class="col-lg-3 mb-2">
+      <label for="date">
+        Date
+      </label>
+      <input type="date" id="date" name="date" class="form-control" value="<%= @activity.date %>" disabled>
     </div>
 
-    <% if @activity.activity_type.detail_toggle == "Show" %>
-
-      <div class="form-group mt-1 mb-2">
-        <div class="mb-1">
-          Detail            
-        </div>
-        <textarea disabled id="detail" name="detail" class="form-control" rows="3"><%= @activity.detail %></textarea>
-
-      </div>
-
-    <% else %>
-    <% end %>
-
-    <% if @activity.activity_type.outcome_toggle == "Show" %>
-
-      <div class="form-group mt-1 mb-2">
-        <div class="mb-1">
-          Outcome            
-        </div>
-
-      </div>
-    <% else %>
-    <% end %>
-
-
-    <hr>
   </div>
-</div>
+
+
+  <div class="row mb-2">
+
+    <% if @activity.activity_type.contact_toggle == "Show" %>
+
+      <div class="col-lg-4 offset-lg-3 mb-2">
+        <label for="contact">
+          Contact            
+        </label>
+        <input type="text" id="contact" name="contact" class="form-control" value="<%= @activity.contact %>" disabled>
+      </div>
+
+    <% else %>
+    <% end %>
+
+    <div class="col-lg-2 mb-0">
+      <label for="duration">
+        Time (minutes)            
+      </label>
+      <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @activity.duration %>" disabled>
+    </div>
+
+  </div>
+
+  <div class="row mb-3">
+
+    <div class="col-lg-6 offset-lg-3 mb-0">
+      <label for="subject">
+        Subject/Details
+      </label>
+      <textarea id="detail" name="subject" class="form-control" type="text" rows="3" value="<%= @activity.detail %>" disabled> <%= @activity.subject + ' ' + @activity.detail %></textarea>
+    </div>
+
+  </div>
+
+  <% if @activity.activity_type.outcome_toggle == "Show" %>
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 mb-2">
+        <label for="outcome">
+          Outcome            
+        </label>
+        <textarea id="outcome" name="outcome" class="form-control" type="text" rows="3" value="<%= @activity.outcome %>"disabled><%= @activity.outcome %></textarea>
+      </div>
+    </div>
+
+  <% else %>
+  <% end %>
+
+  <div class="row mb-3">
+    <% if @activity.activity_type.agent_toggle == "Show" %>
+
+      <div class="col-lg-3 offset-lg-3 mb-2">
+        <label for="agent">
+          Agent            
+        </label>
+        <input type="text" id="agent" name="agent" class="form-control" value="<%= @activity.agent %>" disabled>
+      </div>
+
+    <% else %>
+    <% end %>
+
+    <% if @activity.activity_type.customer_toggle == "Show" %>
+
+      <div class="col-lg-3 mb-0">
+        <label for="customer">
+          Customer            
+        </label>
+        <input type="text" id="customer" name="customer" class="form-control" value="<%= @activity.customer %>" disabled>
+      </div>
+
+    <% else %>
+    <% end %>
+  </div>
+
+  <% if @activity.activity_type.cost_toggle == "Show" %>
+    <div class="row mb-3">
+      <div class="col-lg-3 offset-lg-3">
+        <label for="cost">
+          Cost            
+        </label>
+        <input type="number" pattern="\d*"/ id="cost" name="cost" class="form-control" value="<%= @activity.cost %>" disabled>
+      </div>
+    </div>
+  <% else %>
+  <% end %>
+
+
+  <div class="form-group">
+    <input type="hidden" name="property_id" class="form-control" value="<%= @activity.property_id %>">
+  </div>
+
+</form>
 
 <div class="row mb-3">
-  <div class="col-lg-8 offset-lg-2">
-    <div class="row">
+  <div class="offset-lg-3 col-lg-3 mb-3">
+    <a href="/activities/<%= @activity.id %>/edit" class="btn btn-block btn-outline-secondary">
+      Edit activity
+    </a>
+  </div>
 
-      <div class="col-lg-4 mb-3">
-        <a href="/activities/<%= @activity.id %>/edit" class="btn btn-block btn-outline-secondary">
-          Edit activity
-        </a>
-      </div>
-
-      <div class="col-lg-4 mb-3">
-        <a href="/delete_activity/<%= @activity.id %>" data-confirm="Delete: Are you sure?" class="btn btn-block btn-outline-danger">
-          Delete activity
-        </a>
-        
-      </div>
-
-      <div class="col-lg-4 mb-3">
-        <a href="/properties/<%= @activity.property_id %>" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-      </div>
-    </div>
-
+  <div class="col-lg-3 mb-3">
+    <a href="/delete_activity/<%= @activity.id %>" data-confirm="Delete: Are you sure?" class="btn btn-block btn-outline-danger">
+      Delete activity
+    </a>
   </div>
 </div>
