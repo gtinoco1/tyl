@@ -1,6 +1,6 @@
 ActiveAdmin.register ActivityType do
   permit_params :title, :cost_toggle, :duration_toggle, :detail_toggle, :outcome_toggle, 
-                 :contact_toggle, :agent_toggle, :customer_toggle, :subject_toggle
+                 :contact_toggle, :agent_toggle, :customer_toggle, :subject_toggle, :user_id
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
