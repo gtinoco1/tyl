@@ -37,6 +37,8 @@ class User < ApplicationRecord
   validates :last_name, :presence => true
   validates :first_name, :presence => true
 
+# validates_format_of :email, :with => /floridamoves\.com|example\.com/, :message => "Must register with a floridamoves.com email."
+ 
   after_create :add_types
 
   mount_uploader :headshot, HeadshotUploader

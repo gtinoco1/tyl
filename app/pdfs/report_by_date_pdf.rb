@@ -68,7 +68,7 @@ class ReportByDatePdf < Prawn::Document
     end
     
     table rows_by_date, position: :center, width: 540,
-                        column_widths: {0 => 50, 1 => @min_width, c => 35, d => 35},
+                        column_widths: {0 => 50, c => 35, d => 35},
                         cell_style: {font: "Nunito", size: 9} do
       row(0).font_style = :bold
       columns(0..8).align = :center
