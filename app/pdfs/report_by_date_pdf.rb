@@ -1,5 +1,6 @@
+require "open-uri"
 class ReportByDatePdf < Prawn::Document
-  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check)
+  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle)
     super(top_margin: 50)
 
     font_families.update("Nunito" => {:normal => Rails.root.join("app/assets/fonts/Nunito-Regular.ttf"),
@@ -15,11 +16,14 @@ class ReportByDatePdf < Prawn::Document
     @contact_check = contact_check
     @duration_check = duration_check
     @cost_check = cost_check
+    @attachment_toggle = attachment_toggle
 
     logo
     header
     move_down 10
     new_table
+    move_down 10
+    attachments
     footer
   end
 
@@ -37,10 +41,40 @@ class ReportByDatePdf < Prawn::Document
       horizontal_rule
     end
   end
+  
+  def attachments
+    if @attachment_toggle == "yes" && @property.property_attachments.count > 0
+      font "Nunito"
+       
+      @property.property_attachments.each do |loop|
+      len = loop.attachment.to_s.length
+      
+      start_new_page
+      text "#{loop.title}"
+      move_down 25
+      bounding_box([0, cursor], :width => 540, :height => 650) do
+        
+      if loop.attachment.to_s.slice(len-3..len) == "pdf"
+      
+      (1..loop.pages).each do |i|
+        @pos = "#{loop.attachment}".index("upload") + 7
+        image open("#{loop.attachment}".insert(@pos, "pg_#{i}/").to_s.slice(0..-4) << 'jpg'), :fit => [540, 650]  
+      end
+
+      else
+      image open("#{loop.attachment}"), :fit => [540, 650] 
+      end  
+      
+      stroke_bounds
+    end
+      end
+    else
+    end
+  end
 
   def footer
     repeat(:all, :dynamic => true) do
-      draw_text page_number, :at => [530, 0]
+      draw_text page_number, :at => [530, -10]
     end
   end
 
