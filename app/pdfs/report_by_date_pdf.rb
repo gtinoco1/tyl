@@ -52,21 +52,20 @@ class ReportByDatePdf < Prawn::Document
       start_new_page
       text "#{loop.title}"
       move_down 25
-      bounding_box([0, cursor], :width => 540, :height => 650) do
+     
         
       if loop.attachment.to_s.slice(len-3..len) == "pdf"
-      
+      @pos = "#{loop.attachment}".index("upload") + 7
+
       (1..loop.pages).each do |i|
-        @pos = "#{loop.attachment}".index("upload") + 7
-        image open("#{loop.attachment}".insert(@pos, "pg_#{i}/").to_s.slice(0..-4) << 'jpg'), :fit => [540, 650]  
+      image open("#{loop.attachment}".insert(@pos, "pg_#{i}/").to_s.slice(0..-4) << 'jpg'), :fit => [540, 650], :position => :center  
       end
 
       else
       image open("#{loop.attachment}"), :fit => [540, 650] 
       end  
       
-      stroke_bounds
-    end
+      
       end
     else
     end
