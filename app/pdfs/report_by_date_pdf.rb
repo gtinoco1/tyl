@@ -62,7 +62,7 @@ class ReportByDatePdf < Prawn::Document
       end
 
       else
-      image open("#{loop.attachment}"), :fit => [540, 650] 
+      image open("#{loop.attachment}"), :fit => [540, 650], :position => :center
       end  
       
       
