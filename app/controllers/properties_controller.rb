@@ -31,7 +31,7 @@ class PropertiesController < ApplicationController
     if @property.prices.count == 0
       redirect_to("/properties/#{@property.id}", :notice => "Make sure your property has a listing price!")
     else
-      render xlsx: "Report_#{@property.address}", disposition: "download", template: "/property_templates/report.xlsx.axlsx"
+      render xlsx: "Report_#{@property.address}", disposition: "inline", template: "/property_templates/report.xlsx.axlsx"
     end
   end
 

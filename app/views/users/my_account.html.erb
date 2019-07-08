@@ -13,7 +13,10 @@
       <%= current_user.first_name + " " + current_user.last_name %>
     </h5>
     <p>
-      <%= current_user.email %>
+      <div>  <%= current_user.email %> </div>
+      <div> <%= number_to_phone(current_user.phone, area_code: true) %>  </div>
+      <div> <%= current_user.agency %>  </div>
+      <div> <%= current_user.website %>  </div>
     </p>
   </div>
 

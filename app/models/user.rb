@@ -13,6 +13,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  headshot               :string
+#  phone                  :string
+#  agency                 :string
+#  website                :text
 #
 # Indexes
 #

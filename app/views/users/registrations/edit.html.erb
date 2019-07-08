@@ -81,7 +81,6 @@
 
           <div class="form-group">
             <% email_was_invalid = resource.errors.include?(:email) %>
-
             <% email_class = "form-control" %>
 
             <% if was_validated %>
@@ -93,7 +92,6 @@
             <% end %>
 
             <%= f.label :email %>
-
             <%= f.email_field :email, autofocus: true, class: email_class %>
 
             <% if email_was_invalid %>
@@ -110,17 +108,83 @@
               </small>
             <% end %>
           </div>
+          
+                 <!-- Devise Input for phone -->
+          <div class="form-group">
+            <% phone_was_invalid = resource.errors.include?(:phone) %>
 
-          <div class="row">
-            <div class="col-lg-8 col-8">
+            <% phone_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if phone_was_invalid %>
+                <% phone_class << " is-invalid" %>
+              <% else %>
+                <% phone_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :phone %>
+
+            <%= f.telephone_field :phone, :class => phone_class, :placeholder => "Enter phone number" %>
+
+            <% if phone_was_invalid %>
+              <% resource.errors.full_messages_for(:phone).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for phone end -->
+
+          <!-- Devise Input for Headshot -->
+          <div class="row mb-2">
+            <div class="col-lg-8 col-8 mb-2">
               <%= f.label :headshot %>
               <%= f.file_field :headshot, :class => "form-control" %>
             </div>
             <div class="col-lg-3 col-3 mx-auto">
               <img src="<%= current_user.headshot %>" class="img-fluid">
             </div>
-
           </div>
+          <!-- Devise Input for Headshot End-->
+                    
+                           <!-- Devise Input for Agency -->
+          <div class="form-group">
+            <% agency_was_invalid = resource.errors.include?(:agency) %>
+
+            <% agency_class = "form-control" %>
+
+            <% if was_validated %>
+              <% if agency_was_invalid %>
+                <% agency_class << " is-invalid" %>
+              <% else %>
+                <% agency_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <label for="agency">Real Estate Agency</label>
+
+            <%= f.select(:agency, ["Coldwell Banker","Other"], {}, :class => "form-control") %>
+            
+            <% if agency_was_invalid %>
+              <% resource.errors.full_messages_for(:agency).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- Devise Input for agency end -->
+          
+          <div class="row mb-2">
+            <div class="col-12">
+              <%= f.label :website %>
+              <%= f.text_field :website, :class => "form-control" %>
+            </div>
+          </div>
+          
+          
           <div class="form-group">
             <% password_was_invalid = resource.errors.include?(:password) %>
 
@@ -217,7 +281,7 @@
         
         <div class="row mt-3">
           <div class="col-12">
-          <%= link_to "Go Back", :back, class: "btn btn-block btn-outline-secondary" %>
+          <%= link_to "Go Back", "/my_account/", class: "btn btn-block btn-outline-secondary" %>
         </div>
         </div>
 
