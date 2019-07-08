@@ -236,8 +236,15 @@ Rails.application.routes.draw do
   
   get("/my_account", {:controller => "properties", :action => "my_account"})
 
-  devise_for :users
+   devise_for :users
+  # devise_for :users, :controllers => {registrations: 'registrations'}
+  # devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
+  
+  as :user do
+  get '/my_account', :to => 'devise/registrations#edit', :as => :user_root
+  end
+  
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+  
 end
