@@ -14,7 +14,10 @@
     </h5>
     <p>
       <div>  <%= current_user.email %> </div>
+      <% if current_user.phone.blank? == true %>
+      <% else %>
       <div> <%= number_to_phone(current_user.phone, area_code: true) %>  </div>
+      <% end %>
       <div> <%= current_user.agency %>  </div>
       <div> <%= current_user.website %>  </div>
     </p>
