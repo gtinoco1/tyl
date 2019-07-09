@@ -1,5 +1,5 @@
 require "open-uri"
-class ReportByDatePdf < Prawn::Document
+class ReportByDateHeader < Prawn::Document
   def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle)
     super(top_margin: 50, bottom_margin: 55)
 
