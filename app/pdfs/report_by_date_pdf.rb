@@ -1,7 +1,7 @@
 require "open-uri"
 class ReportByDatePdf < Prawn::Document
   def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle)
-    super(top_margin: 50)
+    super(top_margin: 50, bottom_margin: 55)
 
     font_families.update("Nunito" => {:normal => Rails.root.join("app/assets/fonts/Nunito-Regular.ttf"),
                                       :italic => Rails.root.join("app/assets/fonts/Nunito-Italic.ttf"),
@@ -18,28 +18,64 @@ class ReportByDatePdf < Prawn::Document
     @cost_check = cost_check
     @attachment_toggle = attachment_toggle
 
-    logo
+
+    move_down 80
     header
-    move_down 10
+    
+      # ... draw your first-page header here
+  # Store away the y-position below the header on the first page
+  old_y = 610
+  # Start a bounding box the size of the page (excluding the footer)
+  bounding_box([bounds.left, bounds.top],
+      :width => bounds.width, :height => bounds.height - 10) do
+    # Restore the old y-position for the first page
+    self.y = old_y
     new_table
+  end
+  
+    move_down 3
+    # new_table
     move_down 10
     attachments
     footer
   end
 
-  def logo
-    repeat([1]) do
-      image "#{Rails.root}/app/assets/logos/logo1.jpg", :height => 75, :at => [450, 745]
-    end
-  end
-
   def header
+    
     font "Nunito"
-    text "#{@property.address.upcase}", size: 15, style: :bold, :color => "60b0f4"
-    text "This report documents all activity between #{@start_date.strftime("%b %d, %Y")} and #{@end_date.strftime("%b %d, %Y")}."
-    stroke do
-      horizontal_rule
+    text "Listing Acitivity Report", size: 15, style: :bold
+    text "#{@property.address.upcase}", size: 12, style: :bold, :color => "60b0f4"
+    text "Date Range: #{@start_date.strftime("%b %d, %Y")} to #{@end_date.strftime("%b %d, %Y")}.", size: 10
+    # stroke do
+    #   horizontal_rule
+    # end
+    image open("https://images.static-ziprealty.com/images_broker/v3/CB/12629/company_logo_Vertical.png"), :height => 60, :at => [0, 720]
+    
+    if @current_user.headshot.blank?
+    else
+    image open("#{@current_user.headshot}"), :height => 110, :at => [430, 725]
     end
+    
+    # text_ "#{@current_user.first_name} #{@current_user.last_name}", :at => [400,700],:align => :right
+    text_box "#{@current_user.first_name} #{@current_user.last_name}",  :at => [340, 610],
+                                        :width => 200,
+                                        :align => :right,
+                                        size: 12,
+                                        style: :bold
+    text_box "#{@current_user.phone}",  :at => [340, 596],
+                                        :width => 200,
+                                        size: 10,
+                                        :align => :right
+    text_box "#{@current_user.email}",  :at => [340, 583],
+                                        :width => 200,
+                                        size: 10,
+                                        :align => :right
+    text_box "#{@current_user.website}",  :at => [340, 571],
+                                        :width => 200,
+                                        size: 10,
+                                        :align => :right
+                                        
+                                       
   end
   
   def attachments
@@ -73,8 +109,10 @@ class ReportByDatePdf < Prawn::Document
 
   def footer
     repeat(:all, :dynamic => true) do
-      draw_text page_number, :at => [530, -10]
+      draw_text page_number, :at => [530, -17]
+      image open("https://res.cloudinary.com/hnx8y80mv/image/upload/v1562032416/main/logo_horizontal.png"), :height => 25, :at => [200, 0]
     end
+    
   end
 
   def new_table
