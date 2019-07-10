@@ -49,7 +49,7 @@ class ReportByDateHeader < Prawn::Document
     # stroke do
     #   horizontal_rule
     # end
-    image open("https://images.static-ziprealty.com/images_broker/v3/CB/12629/company_logo_Vertical.png"), :height => 60, :at => [0, 720]
+    image open("https://res.cloudinary.com/hnx8y80mv/image/upload/v1562762929/main/Coldwell_Banker_Logo1.png"), :height => 60, :at => [0, 720]
     
     if @current_user.headshot.blank?
     else
