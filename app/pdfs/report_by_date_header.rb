@@ -1,5 +1,6 @@
 require "open-uri"
 class ReportByDateHeader < Prawn::Document
+  include ActionView::Helpers::NumberHelper
   def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle)
     super(top_margin: 50, bottom_margin: 55)
 
@@ -56,16 +57,19 @@ class ReportByDateHeader < Prawn::Document
     image open("#{@current_user.headshot}"), :height => 110, :at => [430, 725]
     end
     
-    # text_ "#{@current_user.first_name} #{@current_user.last_name}", :at => [400,700],:align => :right
     text_box "#{@current_user.first_name} #{@current_user.last_name}",  :at => [340, 610],
                                         :width => 200,
                                         :align => :right,
                                         size: 12,
                                         style: :bold
-    text_box "#{@current_user.phone}",  :at => [340, 596],
+    if @current_user.phone.blank? == true
+    else
+    text_box "#{number_to_phone(@current_user.phone, area_code: true)}",  :at => [340, 596],
                                         :width => 200,
                                         size: 10,
                                         :align => :right
+    end 
+    
     text_box "#{@current_user.email}",  :at => [340, 583],
                                         :width => 200,
                                         size: 10,
