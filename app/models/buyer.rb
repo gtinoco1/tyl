@@ -17,4 +17,11 @@
 class Buyer < ApplicationRecord
   belongs_to :user
   has_many :buyer_activities, :dependent => :destroy
+  
+  
+  
+  def to_s
+    "#{name}"
+  end
+  
 end

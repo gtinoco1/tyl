@@ -25,6 +25,7 @@ class BuyersController < ApplicationController
         pdf = BuyerReportPdf.new(@buyer, @buyer_activity_types, @current_user)
         send_data pdf.render, :filename => "Report: #{@buyer.name}.pdf", :type => "application/pdf", disposition: "inline"
       end
+      
     end
   end
 

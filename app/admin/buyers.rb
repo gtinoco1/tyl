@@ -13,4 +13,6 @@ ActiveAdmin.register Buyer do
 #   permitted
 # end
 
+
+
 end
