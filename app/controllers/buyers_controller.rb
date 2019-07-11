@@ -17,9 +17,9 @@ class BuyersController < ApplicationController
     @current_user_id = current_user.id
 
     respond_to do |format|
-      format.html
+      # format.html
       # format.csv {render text: Property.all.to_csv}
-      format.xls { send_data Buyer.all.to_csv(col_sep: "\t") }
+      # format.xls { send_data Buyer.all.to_csv(col_sep: "\t") }
 
       format.pdf do
         pdf = BuyerReportPdf.new(@buyer, @buyer_activity_types, @current_user)
