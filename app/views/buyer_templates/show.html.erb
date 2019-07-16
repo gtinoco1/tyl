@@ -1,8 +1,16 @@
 <div class="row mb-3">
   <div class="col-md-6 offset-md-2">
-    <h4 class="text-secondary text-uppercase">
+    <h5 class="text-info text-left text-uppercase mb-0">
       <%= @buyer.name %>
-    </h4>
+    </h5>
+    <div>
+      <%= @buyer.buyer_type %> looking for <%= @buyer.bed == nil ? "" : "#{@buyer.bed} bed(s), " %> <%= @buyer.bath == nil ? "" : "#{@buyer.bath} bath(s), " %> <%= @buyer.house == "on" ? "House" : "" %> <%= @buyer.condo == "on" && @buyer.house == "on" ? "or" : "" %> <%= @buyer.condo == "on" ? "Condo / Townhouse" : "" %>
+    </div>
+    <div>
+      Price Range: <%= @buyer.price_min.blank? ? "0" : @buyer.price_min %>  to <%= @buyer.price_max %>
+    </div>
+
+    
   </div>
 
   <div class="col-md-2">

@@ -1,82 +1,194 @@
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
-      Add a new customer
+      Add a new <%= @customer_type %>
     </h4>
     <hr>
   </div>
 </div>
 
 <form action="/create_buyer" method="post">
-  <div class="row">
-    <div class="col-lg-2 offset-lg-3">
-      <div class="form-group">
-        <label for="listing_type">
-          Customer Type
-        </label>
-        <%= select_tag(:buyer_type, options_for_select(["Buyer", "Tenant"], @buyer.buyer_type), :class => "form-control") %>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
       <div class="form-group">
         <label for="name">
-          Customer Name
+        <h5 class="font-weight-light">  
+          <%= @customer_type %> Name
+        </h5>
         </label>
         <input type="text" id="name" name="name" class="form-control">
       </div>
     </div>
   </div>
+  
+
+  
+   <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+
+      <h5 class="font-weight-light mb-3">
+        Looking for:
+      </h5>
+      <div class="text-center">
+
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="house" id="house" class="mr-1">
+          <span class="mr-3">House</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="condo" id="condo" class="mr-1">
+          <% if @customer_type == "Buyer" %>
+          <span class="mr-3">Condo / Townhouse</span>
+          <% elsif @customer_type == "Tenant" %>
+          <span class="mr-3">Apartment / Condo / Townhouse</span>
+          <% else %>
+          <% end %>
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+  
+    <div class="row mb-3">
+    <div class="col-lg-1 offset-lg-5 col-6">
+      <label for="bed"> Bed </label>
+      <%= select_tag(:bed, options_for_select(["1", "2","3","4","5","6+"]), :class => "form-control") %>
+    </div>
+    <div class="col-lg-1 col-6">
+      <label for="bed"> Bath </label>
+      <%= select_tag(:bath, options_for_select(["1", "2","3","4","5","6+"]), :class => "form-control") %>
+    </div>
+  </div>
+  
+  <div class="row mb-2">
+      <div class="col-lg-2 offset-lg-4">
+        Price Range
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-2 offset-lg-4 col-6">
+      <div class="form-group">
+        <input type="text" id="price_min" name="price_min" class="form-control" placeholder="min">
+      </div>
+    </div>
+    <div class="col-lg-2 col-6">
+      <div class="form-group">
+        <input type="text" id="price_max" name="price_max" class="form-control" placeholder="max">
+      </div>
+    </div>
+  </div>
+  
+    <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+
+      <h5 class="font-weight-light mb-3 text-center">
+        Must have:
+      </h5>
+      <div class="text-center">
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="wd" id="wd" class="mr-1">
+          <span class="mr-3">Unit W/D</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="parking" id="parking" class="mr-1">
+          <span class="mr-3">Parking</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="garage" id="garage" class="mr-1">
+          <span class="mr-3">Garage</span>
+        </label>
+      </div>
+      <div class="text-center">
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="balcony" id="balcony" class="mr-1">
+          <span class="mr-3">Balcony</span>
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="on" name="pool" id="pool" class="mr-1">
+          <span class="">Pool</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+  
+    <% if @customer_type == "Buyer" %>
 
   <div class="row">
     <div class="col-lg-3 offset-lg-3">
       <div class="form-group">
+        <h5 class="font-weight-light">
         <label for="funds">
-          Funds
+          Type of Funds
         </label>
-        <input type="text" id="funds" name="funds" class="form-control">
+        </h5>
+        <%= select_tag(:funds, options_for_select(["Financing", "Cash", "Not sure"]), :class => "form-control") %>
       </div>
     </div>
+    </div>
+    
+    <% else %>
+    <% end %>
+  
+      <div class="row">
+      <div class="col-lg-6 offset-lg-3 mb-2">
+        <h5 class="font-weight-light">
+        <label for="notes">
+          Additional Notes            
+        </label>
+        </h5>
+        <textarea id="notes" name="notes" class="form-control" type="text" rows="3"></textarea>
+      </div>
+    </div>
+  
+  
 
-    <div class="col-lg-3">
-      <div class="form-group">
-        <label for="downpayment">
-          Downpayment
-        </label>
-        <input type="text" id="downpayment" name="downpayment" class="form-control">
-      </div>
-    </div>
+
+  <!--  <div class="col-lg-3">-->
+  <!--    <div class="form-group">-->
+  <!--      <label for="downpayment">-->
+  <!--        Downpayment-->
+  <!--      </label>-->
+  <!--      <input type="text" id="downpayment" name="downpayment" class="form-control">-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+
+  <!--<div class="row">-->
+  <!--  <div class="col-lg-6 offset-lg-3">-->
+  <!--      <div class="form-group">-->
+  <!--        <label for="preapproval">-->
+  <!--          Preapproval?-->
+  <!--        </label>-->
+  <!--        <input type="text" id="preapproval" name="preapproval" class="form-control">-->
+  <!--      </div>-->
+  <!--   </div>-->
+  <!--</div>-->
+  
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+          
+  <div class="form-group">
+    <input type="hidden" name="buyer_type" class="form-control" value="<%= @customer_type %>">
   </div>
 
-  <div class="row">
-    <div class="col-lg-6 offset-lg-3">
-      <div class="form-group">
-        <label for="preapproval">
-          Preapproval?
-        </label>
-        <input type="text" id="preapproval" name="preapproval" class="form-control">
-      </div>
+  <div class="form-group">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+  </div>
 
+  <div class="form-group">
+    <input type="hidden" name="status" class="form-control" value="Active">
+  </div>
 
-      <div class="form-group">
-        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
-      </div>
-
-      <div class="form-group">
-        <input type="hidden" name="status" class="form-control" value="Active">
-      </div>
-
-      <button class="btn btn-block btn-outline-success">
+  <button class="btn btn-block btn-outline-success">
         Create customer
-      </button>
-    </form>
-
-    <hr>
-
-    <a href="/all_properties" class="btn btn-block btn-outline-secondary">
-      Go back
-    </a>
-  </div>
+  </button>
 </div>
+</div>
+
+</form>
+
+

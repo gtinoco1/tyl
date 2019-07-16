@@ -135,12 +135,13 @@ Rails.application.routes.draw do
   # Routes for the Buyer resource:
 
   # CREATE
-  get("/buyers/new", {:controller => "buyers", :action => "new_form"})
-  post("/create_buyer", {:controller => "buyers", :action => "create_row"})
+  get("/buyers/new/:customer_type", {:controller => "buyers", :action => "new_form"})
+  post("/create_buyer/", {:controller => "buyers", :action => "create_row"})
 
   # READ
   get("/buyers", {:controller => "buyers", :action => "index"})
   get("/buyers/:id_to_display", {:controller => "buyers", :action => "show"})
+  get("/customer_type", {:controller => "buyers", :action => "customer_type"})
 
   # UPDATE
   get("/buyers/:prefill_with_id/edit", {:controller => "buyers", :action => "edit_form"})

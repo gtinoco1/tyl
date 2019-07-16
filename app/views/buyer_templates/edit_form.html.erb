@@ -1,131 +1,233 @@
 <div class="row">
-  <div class="col-lg-6 offset-lg-3 mb-2">
+  <div class="col-lg-6 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
-      Edit Customer Details
+      Edit <%= @buyer.buyer_type %> Details
     </h4>
     <hr>
   </div>
-
 </div>
 
 <form action="/update_buyer/<%= @buyer.id %>" method="post">
-  <div class="row">
-    <div class="col-lg-2 offset-lg-3">
-      <div class="form-group">
-        <label for="listing_type">
-          Customer Type
-        </label>
-        <%= select_tag(:buyer_type, options_for_select(["Buyer", "Tenant"], @buyer.buyer_type), :class => "form-control") %>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
       <div class="form-group">
         <label for="name">
-          Customer Name
+        <h5 class="font-weight-light">  
+          <%= @buyer.buyer_type %> Name
+        </h5>
         </label>
         <input type="text" id="name" name="name" class="form-control" value="<%= @buyer.name %>">
       </div>
     </div>
   </div>
+  
+
+  
+   <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+
+      <h5 class="font-weight-light mb-3">
+        Looking for:
+      </h5>
+      <div class="text-center">
+
+        <label class="checkbox-inline">
+          <% if @buyer.house == "on" %>
+          <input type="checkbox" value="on" name="house" id="house" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="house" id="house" class="mr-1" unchecked>
+          <% end %>
+          <span class="mr-3">House</span>
+        </label>
+        <label class="checkbox-inline">
+          <% if @buyer.condo == "on" %>
+          <input type="checkbox" value="on" name="condo" id="condo" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="condo" id="condo" class="mr-1" unchecked>
+          <% end %>
+          
+          <% if @buyer.buyer_type == "Buyer" %>
+          <span class="mr-3">Condo / Townhouse</span>
+          <% elsif @buyer.buyer_type == "Tenant" %>
+          <span class="mr-3">Apartment / Condo / Townhouse</span>
+          <% else %>
+          <% end %>
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+  
+    <div class="row mb-3">
+    <div class="col-lg-1 offset-lg-5 col-6">
+      <label for="bed"> Bed </label>
+      <%= select_tag(:bed, options_for_select(["1", "2","3","4","5","6+"], @buyer.bed), :class => "form-control") %>
+    </div>
+    <div class="col-lg-1 col-6">
+      <label for="bed"> Bath </label>
+      <%= select_tag(:bath, options_for_select(["1", "2","3","4","5","6+"], @buyer.bath), :class => "form-control") %>
+    </div>
+  </div>
+  
+  <div class="row mb-2">
+      <div class="col-lg-2 offset-lg-4">
+        Price Range
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-2 offset-lg-4 col-6">
+      <div class="form-group">
+        <input type="text" id="price_min" name="price_min" class="form-control" placeholder="min" value="<%= @buyer.price_min %>">
+      </div>
+    </div>
+    <div class="col-lg-2 col-6">
+      <div class="form-group">
+        <input type="text" id="price_max" name="price_max" class="form-control" placeholder="max" value="<%= @buyer.price_max %>">
+      </div>
+    </div>
+  </div>
+  
+    <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+
+      <h5 class="font-weight-light mb-3">
+        Must have:
+      </h5>
+      <div class="text-center">
+        <label class="checkbox-inline">
+          <% if @buyer.wd == "on" %>
+          <input type="checkbox" value="on" name="wd" id="wd" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="wd" id="wd" class="mr-1" unchecked>
+          <% end %>
+          <span class="mr-3">Unit W/D</span>
+        </label>
+        <label class="checkbox-inline">
+          <% if @buyer.parking == "on" %>
+          <input type="checkbox" value="on" name="parking" id="parking" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="parking" id="parking" class="mr-1" unchecked>
+          <% end %>
+          <span class="mr-3">Parking</span>
+        </label>
+        <label class="checkbox-inline">          
+          <% if @buyer.garage == "on" %>
+          <input type="checkbox" value="on" name="garage" id="garage" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="garage" id="garage" class="mr-1" unchecked>
+          <% end %>
+          <span class="mr-3">Garage</span>
+        </label>
+      </div>
+      <div class="text-center">
+        <label class="checkbox-inline">
+          <% if @buyer.balcony == "on" %>
+          <input type="checkbox" value="on" name="balcony" id="balcony" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="balcony" id="balcony" class="mr-1" unchecked>
+          <% end %>
+          <span class="mr-3">Balcony</span>
+        </label>
+        <label class="checkbox-inline">
+          <% if @buyer.pool == "on" %>
+          <input type="checkbox" value="on" name="pool" id="pool" class="mr-1" checked>
+          <% else %>
+          <input type="checkbox" value="on" name="pool" id="pool" class="mr-1" unchecked>
+          <% end %>
+          <span class="">Pool</span>
+        </label>
+      </div>
+
+    </div>
+  </div>
+  
+    <% if @buyer.buyer_type == "Buyer" %>
 
   <div class="row">
     <div class="col-lg-3 offset-lg-3">
       <div class="form-group">
+        <h5 class="font-weight-light">
         <label for="funds">
-          Funds
+          Type of Funds
         </label>
-        <input type="text" id="funds" name="funds" class="form-control" value="<%= @buyer.funds %>">
+        </h5>
+        <%= select_tag(:funds, options_for_select(["Financing", "Cash", "Not sure"], @buyer.funds), :class => "form-control") %>
       </div>
     </div>
-
-    <div class="col-lg-3">
-      <div class="form-group">
-        <label for="downpayment">
-          Downpayment
+    </div>
+    
+    <% else %>
+    <% end %>
+  
+      <div class="row">
+      <div class="col-lg-6 offset-lg-3 mb-2">
+        <h5 class="font-weight-light">
+        <label for="notes">
+          Additional Notes            
         </label>
-        <input type="text" id="downpayment" name="downpayment" class="form-control" value="<%= @buyer.downpayment %>">
+        </h5>
+        <textarea id="notes" name="notes" class="form-control" type="text" rows="3" value="<%= @buyer.notes %>"><%= @buyer.notes %></textarea>
       </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-6 offset-lg-3">
-      <div class="form-group">
-        <label for="preapproval">
-          Preapproval?
-        </label>
-        <input type="text" id="preapproval" name="preapproval" class="form-control" value="<%= @buyer.preapproval %>">
-      </div>
+  
+  
 
 
-      <div class="form-group">
-        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
-      </div>
-    </div>
-  </div>
+  <!--  <div class="col-lg-3">-->
+  <!--    <div class="form-group">-->
+  <!--      <label for="downpayment">-->
+  <!--        Downpayment-->
+  <!--      </label>-->
+  <!--      <input type="text" id="downpayment" name="downpayment" class="form-control">-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
 
-  <div class="row mb-5">
-    <div class="col-lg-6 offset-lg-3">
-      <button class="btn btn-block btn-outline-success">
-        Save Changes
-      </button>
-    </form>
-  </div>
-</div>
-
-
-<% if @buyer.buyer_activities.count == 0 %>
-
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <a href="/delete_buyer/<%= @buyer.id %>" class="btn btn-block btn-outline-danger">
-        Delete Customer
-      </a>
-    </div>
-  </div>
-
-<% else %>
-
-  <div class="row mb-3">
-    <div class="col-lg-3 offset-lg-3">
-      <a href="/delete_buyer/<%= @buyer.id %>" class="btn disabled btn-block btn-outline-secondary mb-2">
-        Delete Customer
-      </a>
-    </div>
-
-    <div class="col-lg-3">
-      <p class="text-secondary text-center">
-        You can only delete a customer that does not contain any activities.
-      </p>
-    </div>
-  </div>
-
-<% end %>
-
+  <!--<div class="row">-->
+  <!--  <div class="col-lg-6 offset-lg-3">-->
+  <!--      <div class="form-group">-->
+  <!--        <label for="preapproval">-->
+  <!--          Preapproval?-->
+  <!--        </label>-->
+  <!--        <input type="text" id="preapproval" name="preapproval" class="form-control">-->
+  <!--      </div>-->
+  <!--   </div>-->
+  <!--</div>-->
+  
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    <hr>
+          
+  <div class="form-group">
+    <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
   </div>
+
+  <div class="form-group">
+    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+  </div>
+
+  <div class="form-group">
+    <input type="hidden" name="status" class="form-control" value="Active">
+  </div>
+
+  <button class="btn btn-block btn-outline-success">
+        Save customer
+  </button>
+  <hr>
 </div>
+
+</div>
+
+</form>
 
 <% if @buyer.status == "Active" or @buyer.status == "" %>
 
-<div class="row mb-3">
-  <div class="col-lg-3 offset-lg-3">
+<div class="row mb-1">
+  <div class="col-lg-3 offset-lg-3 col-12">
     <form action="/add_buyer_to_archive/<%= @buyer.id %>" method="post">
-      <div class="form-group">
-        <input type="hidden" name="status" class="form-control" value="Archive">
-        <input type="hidden" name="user_id" class="form-control" value="<%= @buyer.user_id %>">
-        <input type="hidden" name="name" class="form-control" value="<%= @buyer.name %>">
-        <input type="hidden" name="funds" class="form-control" value="<%= @buyer.funds %>">
-        <input type="hidden" name="downpayment" class="form-control" value="<%= @buyer.downpayment %>">
-        <input type="hidden" name="preapproval" class="form-control" value="<%= @buyer.preapproval %>">
-        <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
-      </div>
-      <button class="btn btn-block btn-outline-warning">
+      <button class="btn btn-block btn-outline-warning mb-3">
         Archive Customer
       </button>
     </form>
@@ -144,15 +246,6 @@
 <div class="row mb-3">
   <div class="col-lg-3 offset-lg-3">
     <form action="/restore_buyer_from_archive/<%= @buyer.id %>" method="post">
-      <div class="form-group">
-        <input type="hidden" name="status" class="form-control" value="Active">
-        <input type="hidden" name="user_id" class="form-control" value="<%= @buyer.user_id %>">
-        <input type="hidden" name="name" class="form-control" value="<%= @buyer.name %>">
-        <input type="hidden" name="funds" class="form-control" value="<%= @buyer.funds %>">
-        <input type="hidden" name="downpayment" class="form-control" value="<%= @buyer.downpayment %>">
-        <input type="hidden" name="preapproval" class="form-control" value="<%= @buyer.preapproval %>">
-        <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
-      </div>
       <button class="btn btn-block btn-outline-success">
         Restore Customer
       </button>
@@ -168,11 +261,39 @@
 
 <% end %>
 
-<div class="row mb-5">
-  <div class="col-lg-6 offset-lg-3">
-    <hr>
-    <a href="/buyers" class="btn btn-block btn-outline-secondary">
-      Go back
-    </a>
+<% if @buyer.buyer_activities.count == 0 %>
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <hr>
+      <a href="/delete_buyer/<%= @buyer.id %>" class="btn btn-block btn-outline-danger">
+        Delete Customer
+      </a>
+    </div>
   </div>
-</div>
+
+<% else %>
+
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <hr>
+    </div>
+  </div>
+    
+   <div class="row mb-3">
+    <div class="col-lg-3 offset-lg-3">
+      <a href="/delete_buyer/<%= @buyer.id %>" class="btn disabled btn-block btn-outline-secondary mb-2">
+        Delete Customer
+      </a>
+    </div>
+
+    <div class="col-lg-3">
+      <p class="text-secondary text-center">
+        You can only delete a customer that does not contain any activities.
+      </p>
+    </div>
+  </div>
+
+<% end %>
+
+

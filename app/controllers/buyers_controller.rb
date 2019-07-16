@@ -10,6 +10,10 @@ class BuyersController < ApplicationController
 
     render("buyer_templates/show.html.erb")
   end
+  
+  def customer_type
+    render("buyer_templates/customer_type.html.erb")
+  end
 
   def create_pdf
     @buyer = Buyer.find(params.fetch("id_to_display"))
@@ -60,6 +64,7 @@ class BuyersController < ApplicationController
 
   def new_form
     @buyer = Buyer.new
+    @customer_type = params.fetch("customer_type")
     render("buyer_templates/new_form.html.erb")
   end
 
@@ -68,12 +73,24 @@ class BuyersController < ApplicationController
 
     @buyer.user_id = params.fetch("user_id")
     @buyer.name = params.fetch("name")
-    @buyer.funds = params.fetch("funds")
-    @buyer.downpayment = params.fetch("downpayment")
-    @buyer.preapproval = params.fetch("preapproval")
+    @buyer.funds = params.fetch("funds","")
+    @buyer.downpayment = params.fetch("downpayment","")
+    @buyer.preapproval = params.fetch("preapproval","")
     @buyer.buyer_type = params.fetch("buyer_type")
     @buyer.status = params.fetch("status")
-
+    @buyer.price_min = params.fetch("price_min","")
+    @buyer.price_max = params.fetch("price_max","")
+    @buyer.bed = params.fetch("bed")
+    @buyer.bath = params.fetch("bath")
+    @buyer.house = params.fetch("house","")
+    @buyer.condo = params.fetch("condo","")
+    @buyer.wd = params.fetch("wd","")
+    @buyer.balcony = params.fetch("balcony","")
+    @buyer.parking = params.fetch("parking","")
+    @buyer.garage = params.fetch("garage","")
+    @buyer.pool = params.fetch("pool","")
+    @buyer.notes = params.fetch("notes","")
+    
     if @buyer.valid?
       @buyer.save
       redirect_to("/buyers", :notice => "Customer created successfully.")
@@ -93,11 +110,23 @@ class BuyersController < ApplicationController
 
     @buyer.user_id = params.fetch("user_id")
     @buyer.name = params.fetch("name")
-    @buyer.funds = params.fetch("funds")
-    @buyer.downpayment = params.fetch("downpayment")
-    @buyer.preapproval = params.fetch("preapproval")
+    @buyer.funds = params.fetch("funds","")
+    @buyer.downpayment = params.fetch("downpayment","")
+    @buyer.preapproval = params.fetch("preapproval","")
     @buyer.buyer_type = params.fetch("buyer_type")
     @buyer.status = params.fetch("status")
+    @buyer.price_min = params.fetch("price_min","")
+    @buyer.price_max = params.fetch("price_max","")
+    @buyer.bed = params.fetch("bed")
+    @buyer.bath = params.fetch("bath")
+    @buyer.house = params.fetch("house","")
+    @buyer.condo = params.fetch("condo","")
+    @buyer.wd = params.fetch("wd","")
+    @buyer.balcony = params.fetch("balcony","")
+    @buyer.parking = params.fetch("parking","")
+    @buyer.garage = params.fetch("garage","")
+    @buyer.pool = params.fetch("pool","")
+    @buyer.notes = params.fetch("notes","")
 
     if @buyer.valid?
       @buyer.save
@@ -107,16 +136,12 @@ class BuyersController < ApplicationController
       render("buyer_templates/edit_form_with_errors.html.erb")
     end
   end
+  
 
   def add_buyer_to_archive
     @buyer = Buyer.find(params.fetch("id_to_modify"))
-    @buyer.user_id = params.fetch("user_id")
-    @buyer.name = params.fetch("name")
-    @buyer.funds = params.fetch("funds")
-    @buyer.downpayment = params.fetch("downpayment")
-    @buyer.preapproval = params.fetch("preapproval")
-    @buyer.buyer_type = params.fetch("buyer_type")
-    @buyer.status = params.fetch("status")
+    @buyer.update_attribute(:status, "Archive")
+
     if @buyer.valid?
       @buyer.save
       redirect_to("/archive", :notice => "Customer moved to archive.")
@@ -127,13 +152,8 @@ class BuyersController < ApplicationController
 
   def restore_buyer_from_archive
     @buyer = Buyer.find(params.fetch("id_to_modify"))
-    @buyer.user_id = params.fetch("user_id")
-    @buyer.name = params.fetch("name")
-    @buyer.funds = params.fetch("funds")
-    @buyer.downpayment = params.fetch("downpayment")
-    @buyer.preapproval = params.fetch("preapproval")
-    @buyer.buyer_type = params.fetch("buyer_type")
-    @buyer.status = params.fetch("status")
+    @buyer.update_attribute(:status, "Active")
+
     if @buyer.valid?
       @buyer.save
       redirect_to("/buyers", :notice => "Customer restored successfully.")
