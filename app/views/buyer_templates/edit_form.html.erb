@@ -144,10 +144,10 @@
     </div>
   </div>
   
-    <% if @buyer.buyer_type == "Buyer" %>
+        <% if @buyer.buyer_type == "Buyer" %>
 
   <div class="row">
-    <div class="col-lg-3 offset-lg-3">
+    <div class="col-lg-2 offset-lg-3 col-6 col-md-6">
       <div class="form-group">
         <h5 class="font-weight-light">
         <label for="funds">
@@ -157,8 +157,30 @@
         <%= select_tag(:funds, options_for_select(["Financing", "Cash", "Not sure"], @buyer.funds), :class => "form-control") %>
       </div>
     </div>
-    </div>
+
+      <div class="col-xl-2 col-lg-2 col-6 col-md-6">
+        <div class="form-group">
+          <h5 class="font-weight-light">
+          <label for="preapproval">
+            Preapproval?
+          </label>
+          </h5>
+          <%= select_tag(:preapproval, options_for_select(["","Yes", "No", "Not sure"], @buyer.preapproval), :class => "form-control") %>
+        </div>
+      </div>
     
+      <div class="col-lg-2 col-6">
+        <div class="form-group">
+          <h5 class="font-weight-light">
+          <label for="downpayment">
+            Downpayment
+          </label>
+          </h5>
+          <input type="text" id="downpayment" name="downpayment" class="form-control" placeholder="%" value="<%= @buyer.downpayment %>">
+        </div>
+      </div>
+    </div>
+
     <% else %>
     <% end %>
   
