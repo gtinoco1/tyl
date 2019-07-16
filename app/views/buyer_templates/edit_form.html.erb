@@ -11,26 +11,24 @@
 
   <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
-          <div class="card bg-light mb-3">
-
-
-        <h5 class="card-header font-weight-light mb-0">  
+      <div class="form-group">
+        <label for="name">
+        <h5 class="font-weight-light">  
           <%= @buyer.buyer_type %> Name
         </h5>
-
-        <input type="text" id="name" name="name" style="border: none" class="form-control" value="<%= @buyer.name %>">
-
+        </label>
+        <input type="text" id="name" name="name" class="form-control" value="<%= @buyer.name %>">
+      </div>
     </div>
   </div>
-    </div>
   
 <div class="row">
   <div class="col-lg-6 offset-lg-3 col-12">
-    <div class="card bg-light mb-3">
+    <div class="card bg-white mb-3">
      <div class="row mb-3">
       <div class="col-lg-12">
   
-        <h5 class=" card-header font-weight-light mb-3">
+        <h5 class="card-header font-weight-light mb-3">
           Looking for:
         </h5>
         <div class="text-center">
@@ -192,15 +190,14 @@
     
   <div class="row">
   <div class="col-lg-6 offset-lg-3 col-12">
-    <div class="card bg-light">
-        <div class=" card-header">
-        <label class="mb-0" for="notes">
-          <h5 class = "mb-0 font-weight-light">Additional Notes   </h5>        
+
+        <label for="notes">
+          <h5 class="font-weight-light">Additional Notes   </h5>        
         </label>
-        </div>
-        <textarea id="notes" name="notes" class="form-control" style="border: none" type="text" rows="3" value="<%= @buyer.notes %>"><%= @buyer.notes %></textarea>
+
+        <textarea id="notes" name="notes" class="form-control" type="text" rows="3" value="<%= @buyer.notes %>"><%= @buyer.notes %></textarea>
       </div>
-    </div>
+
     </div>
   
 <div class="row mb-3">

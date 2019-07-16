@@ -23,11 +23,13 @@
   </div>
   
 
-  
-   <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 col-12">
+    <div class="card bg-white mb-3">
+     <div class="row mb-3">
+      <div class="col-lg-12">
 
-      <h5 class="font-weight-light mb-3">
+      <h5 class="card-header font-weight-light mb-3">
         Looking for:
       </h5>
       <div class="text-center">
@@ -52,29 +54,29 @@
   </div>
   
     <div class="row mb-3">
-    <div class="col-lg-1 offset-lg-5 col-6">
+    <div class="col-lg-3 offset-lg-3 col-5 offset-1">
       <label for="bed"> Bed </label>
       <%= select_tag(:bed, options_for_select(["1", "2","3","4","5","6+"]), :class => "form-control") %>
     </div>
-    <div class="col-lg-1 col-6">
+    <div class="col-lg-3 col-5">
       <label for="bed"> Bath </label>
       <%= select_tag(:bath, options_for_select(["1", "2","3","4","5","6+"]), :class => "form-control") %>
     </div>
   </div>
   
   <div class="row mb-2">
-      <div class="col-lg-2 offset-lg-4">
+        <div class="col-lg-3 offset-lg-3 col-5 offset-1">
         Price Range
       </div>
   </div>
   
   <div class="row">
-    <div class="col-lg-2 offset-lg-4 col-6">
+     <div class="col-lg-3 offset-lg-3 col-5 offset-1">
       <div class="form-group">
         <input type="text" id="price_min" name="price_min" class="form-control" placeholder="min">
       </div>
     </div>
-    <div class="col-lg-2 col-6">
+    <div class="col-lg-3 col-5">
       <div class="form-group">
         <input type="text" id="price_max" name="price_max" class="form-control" placeholder="max">
       </div>
@@ -82,11 +84,11 @@
   </div>
   
     <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-10 offset-lg-1 col-12">
 
-      <h5 class="font-weight-light mb-3 text-center">
+      <h6 class="font-weight-light mb-3 text-center">
         Must have:
-      </h5>
+      </h6>
       <div class="text-center">
         <label class="checkbox-inline">
           <input type="checkbox" value="on" name="wd" id="wd" class="mr-1">
@@ -112,9 +114,12 @@
         </label>
       </div>
 
-    </div>
+          </div>
+         </div>
+      </div>
   </div>
-  
+</div>
+    
     <% if @customer_type == "Buyer" %>
 
   <div class="row">
