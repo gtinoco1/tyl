@@ -1,5 +1,5 @@
 ActiveAdmin.register Buyer do
-  permit_params :user_id, :name, :funds, :downpayment, :preapproval, :buyer_type, :status
+  permit_params :user_id, :name, :funds, :downpayment, :preapproval, :buyer_type, :status, :price_min, :price_max, :bed, :bath, :house, :condo, :wd, :balcony, :parking, :garage, :pool, :notes
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
