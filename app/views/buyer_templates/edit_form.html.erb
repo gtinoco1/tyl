@@ -11,16 +11,18 @@
 
   <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
-      <div class="form-group">
-        <label for="name">
-        <h5 class="font-weight-light">  
+          <div class="card bg-light mb-3">
+
+
+        <h5 class="card-header font-weight-light mb-0">  
           <%= @buyer.buyer_type %> Name
         </h5>
-        </label>
-        <input type="text" id="name" name="name" class="form-control" value="<%= @buyer.name %>">
-      </div>
+
+        <input type="text" id="name" name="name" style="border: none" class="form-control" value="<%= @buyer.name %>">
+
     </div>
   </div>
+    </div>
   
 <div class="row">
   <div class="col-lg-6 offset-lg-3 col-12">
