@@ -26,8 +26,8 @@ class BuyerActivityTypesController < ApplicationController
     @buyer_activity_type.zipcode_toggle = params.fetch("zipcode_toggle","")
     @buyer_activity_type.detail_toggle = params.fetch("detail_toggle")
     @buyer_activity_type.comment_toggle = params.fetch("comment_toggle")
-    @buyer_activity_type.image_toggle = params.fetch("image_toggle")
-    @buyer_activity_type.subject_toggle = params.fetch("subject_toggle")
+    @buyer_activity_type.image_toggle = params.fetch("image_toggle","")
+    @buyer_activity_type.subject_toggle = params.fetch("subject_toggle","")
     @buyer_activity_type.agent_toggle = params.fetch("agent_toggle")
     @buyer_activity_type.title = params.fetch("title")
     @buyer_activity_type.city_toggle = params.fetch("city_toggle","")
@@ -36,7 +36,9 @@ class BuyerActivityTypesController < ApplicationController
     if @buyer_activity_type.valid?
       @buyer_activity_type.save
 
-      redirect_to("/buyer_activity_types", :notice => "Activity type created successfully.")
+      redirect_back fallback_location:  "/buyers"
+      # redirect_back("/buyers", :notice => "Type created successfully")
+      # redirect_to("/buyer_activity_types", :notice => "Activity type created successfully.")
     else
       render("buyer_activity_type_templates/new_form_with_errors.html.erb")
     end

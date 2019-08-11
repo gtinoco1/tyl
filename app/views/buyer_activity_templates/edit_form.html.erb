@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-md-8 offset-md-2">
+  <div class="col-lg-6 offset-lg-3">
     <h4 class="text-uppercase text-secondary">
-      Activity Details
+      Edit Activity Details
     </h4>
     <hr>
   </div>
@@ -9,144 +9,120 @@
 
 <form action="/update_buyer_activity/<%= @buyer_activity.id %>" method="post" enctype="multipart/form-data">
 
-  <div class="form-row">
-
-    <div class="form-group offset-lg-2 col-lg-3 mb-0">
-      <div class="mb-1 mt-0">
+  <div class="row mb-2">
+    <div class="col-lg-4 offset-lg-3 mb-2">
+      <label for="buyer_activity_type_id">
         Activity Type            
-      </div>
-      <input type="text" id="buyer_activity_type_id" name="buyer_activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type.title %>" disabled>
+      </label>
+    <%= select_tag(:buyer_activity_type_id, options_from_collection_for_select(BuyerActivityType.order("title ASC").where(user_id: current_user.id), :id, :title, @buyer_activity.buyer_activity_type.id), :class => "form-control", :prompt => "Select type" ) %>    
+    
+    <a href="/buyer_activity_types/new" class="">
+        Add a type 
+    </a>
     </div>
+    <div class="col-lg-2 mb-2">
+      <label for="date">
+        Date
+      </label>
+      <input type="date" id="date" name="date" class="form-control" value="<%= @buyer_activity.date %>">
+    </div>
+
+  </div>
 
     <div class="form-group">
       <input type="hidden" name="buyer_activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type_id %>">
     </div>
+    
+     <div class="row mb-2">
 
-    <div class="form-group col-lg-2 mb-0">
-      <div class="mb-1">
-        Date            
+      <div class="col-lg-4 offset-lg-3 mb-2">
+        <label for="agent">
+          Contact            
+        </label>
+        <input type="text" id="agent" name="agent" class="form-control" value="<%= @buyer_activity.agent %>">
       </div>
-      <input type="date" id="date" name="date" class="form-control" value="<%= @buyer_activity.date %>" >
+
+    <div class="col-lg-2 mb-0">
+      <label for="duration">
+        Time (minutes)            
+      </label>
+      <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>">
     </div>
-
-
-    <% if @buyer_activity.buyer_activity_type.duration_toggle == "Show" %>
-
-      <div class="form-group col-lg-3 mb-0">
-        <div class="mb-1">
-          Duration (minutes)            
-        </div>
-        <input type="text" id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>">
-      </div>
-
-    <% else %>
-    <% end %>
 
   </div>
-
-
-  <% if @buyer_activity.buyer_activity_type.subject_toggle == "Show" %>
-    <div class="form-row">
-
-      <div class="form-group col-lg-4 offset-lg-2 mb-1">
-        Subject
-        <input type="text" id="subject" name="subject" class="form-control" value="<%= @buyer_activity.subject %>" >
-      </div>
-
-    </div>
-
-  <% else %>
-  <% end %>
-
-
-  <% if @buyer_activity.buyer_activity_type.agent_toggle == "Show" %>
-    <div class="form-row">
-      <div class="form-group col-lg-4 offset-lg-2">
-        <label for="agent">
-          Agent            
-        </label>
-        <input type="text" id="agent" name="agent" class="form-control" value="<%= @buyer_activity.agent %>" >
+  
+      <div class="row">
+      <div class="offset-lg-3 col-lg-6 mb-3">
+        <div class="mb-2">Subject/Detail</div>            
+        <textarea id="detail" name="detail" class="form-control mt-2" rows="3"><%= @buyer_activity.detail %></textarea>
       </div>
     </div>
-  <% else %>
-  <% end %>
+    
+  <div id="accordion" class="col-lg-6 offset-lg-3 px-1">
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+          
+            <h5 class="font-weight-light mb-0"> Property</h5>
 
+      </div>
 
-  <% if @buyer_activity.buyer_activity_type.property_address_toggle == "Show" %>
-    <div class="form-row">
-      <div class="form-group col-lg-5 offset-lg-2 mb-0">
-        <div class="mb-1">
-          Property Address            
-        </div>
+      <div class="card-body">
+        <div class="row mb-2">
+          <div class="col-lg-12">
+          <label class="mb-1">
+          Street Address            
+          </label>
         <input type="text" id="property_address" name="property_address" class="form-control" value="<%= @buyer_activity.property_address %>" >
       </div>
+    </div>
 
-      <div class="form-group col-lg-3 mb-0">
+
+    <div class="row">
+      <div class="col-lg-6 mb-0">
         <div class="mb-1">
           City            
         </div>
-        <input type="text" id="city" name="city" class="form-control" value="<%= @buyer_activity.city %>" >
+        <input type="text" id="city" name="city" class="form-control mb-2" value="<%= @buyer_activity.city %>" >
       </div>
 
-    </div>
-
-
-    <div class="form-row">
-      <div class="form-group offset-lg-2 col-lg-4 mb-0">
+      <div class="form-group col-lg-2 col-4">
         <div class="mb-1">
           State            
         </div>
         <input type="text" id="state" name="state" class="form-control" value="<%= @buyer_activity.state %>" >
       </div>
 
-      <div class="form-group col-lg-2 mb-0">
+      <div class="form-group col-lg-4 col-8">
         <div class="mb-1">
           Zipcode            
         </div>
         <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%= @buyer_activity.zipcode %>" >
       </div>
     </div>
-
-
-  <% else %>
-  <% end %>
-
-
-  <% if @buyer_activity.buyer_activity_type.comment_toggle == "Show" %>
-
-    <div class="form-row">
-      <div class="form-group offset-lg-2 col-lg-8 mb-0">
-        <label for="comment">
-          Comments            
-        </label>
-        <textarea id="comment" name="comment" class="form-control" rows="3" value="<%= @buyer_activity.comment %>"> <%= @buyer_activity.comment %> </textarea>
+        
       </div>
-    </div>
+
+  </div>
+  </div>
+  
+  <% if @buyer_activity.buyer_activity_type.property_address_toggle == "Show" %>
+
+
 
   <% else %>
   <% end %>
 
 
-  <% if @buyer_activity.buyer_activity_type.detail_toggle == "Show" %>
-    <div class="form-row">
-      <div class="form-group offset-lg-2 col-lg-8 mt-1 mb-1">
-        Detail            
-        <textarea id="detail" name="detail" class="form-control" rows="3"><%= @buyer_activity.detail %></textarea>
-      </div>
-    </div>
-
-  <% else %>
-  <% end %>
 
   <div class="form-group">
     <input type="hidden" name="buyer_id" class="form-control" value="<%= @buyer_activity.buyer_id %>">
   </div>
 
-  <hr>
-  <div class="row">
-    <div class="col-lg-8 offset-lg-2">
 
-      <button class="btn btn-block btn-outline-secondary">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+  <hr>
+      <button class="btn btn-block btn-lg btn-outline-success">
         Save activity
       </button>
     </div>

@@ -59,7 +59,7 @@
               <% else %>
                 <li class="list-inline-item text-dark font-weight-bold"><%= comment.user.first_name %></li>
               <% end %>
-              <li class="list-inline-item"><%= comment.body %></li>
+              <p class="list-inline-item"><%= simple_format(comment.body) %></p>
             </ul>
           </div>
         </div>
@@ -138,7 +138,7 @@
                       <div class="card-body">
                         <ul class="list-inline">
                           <li class="list-inline-item text-dark font-weight-bold"><%= reply.user.first_name %></li>
-                          <li class="list-inline-item"><%= reply.body %></li>
+                          <li class="list-inline-item"><%= simple_format(reply.body) %></li>
                         </ul>
                       </div>
                     </div>

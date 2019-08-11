@@ -43,7 +43,7 @@
               <%= buyer_activity.buyer_activity_type.title %>
             </div>
             <div class="col text-center">
-              <%= buyer_activity.property_address %>
+              <%= buyer_activity.detail.first(80) %>
             </div>
             <div class="col text-center">
               <%= buyer_activity.date.strftime("%b %d")  %>
