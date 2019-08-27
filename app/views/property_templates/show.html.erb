@@ -1,3 +1,5 @@
+<% if @property.user.id == current_user.id %>
+
 <div class="row mb-0">
   <div class="col-lg-5 offset-lg-2 col-9">
     <h5 class="text-info text-left text-uppercase mb-0">
@@ -118,3 +120,15 @@
   From here you are able to add new activities, add attachments, edit the property,
   and create reports for your listing.
 </div>
+
+<% else %>
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 text-center">
+    <h4>
+      Oops! You do not have access to this page. Please check that you are logged in with the correct username.
+    </h4>
+  </div>
+</div>
+
+<% end %>
