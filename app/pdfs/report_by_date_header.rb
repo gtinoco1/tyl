@@ -94,7 +94,9 @@ class ReportByDateHeader < Prawn::Document
       text "#{loop.title}"
       move_down 25
      
-        
+    if loop.attachment.nil? || loop.attachment.blank?
+    else
+
       if loop.attachment.to_s.slice(len-3..len) == "pdf"
       @pos = "#{loop.attachment}".index("upload") + 7
 
@@ -103,9 +105,11 @@ class ReportByDateHeader < Prawn::Document
       end
 
       else
+        
       image open("#{loop.attachment}"), :fit => [540, 650], :position => :center
       end  
-      
+    end
+    
       
       end
     else
