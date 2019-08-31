@@ -33,7 +33,7 @@ class PropertyAttachmentsController < ApplicationController
 
       redirect_to("/properties/#{@property_attachment.property_id}/attachments", :notice => "Attachment uploaded successfully.")
     else
-      redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :notice => "Make sure you have attached an accepted file format.")
+      redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
     end
   end
 
