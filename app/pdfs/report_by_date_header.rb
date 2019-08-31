@@ -1,7 +1,7 @@
 require "open-uri"
 class ReportByDateHeader < Prawn::Document
   include ActionView::Helpers::NumberHelper
-  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle)
+  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type)
     super(top_margin: 50, bottom_margin: 55)
 
     font_families.update("Nunito" => {:normal => Rails.root.join("app/assets/fonts/Nunito-Regular.ttf"),
@@ -18,6 +18,7 @@ class ReportByDateHeader < Prawn::Document
     @duration_check = duration_check
     @cost_check = cost_check
     @attachment_toggle = attachment_toggle
+    @report_type = report_type
 
 
     move_down 80
@@ -159,6 +160,7 @@ class ReportByDateHeader < Prawn::Document
     @cost_check == "on" ? cost_header = "Cost" : cost_header = nil
 
     [["Date", "Activity", subject_header, contact_header, cost_header, duration_header].compact] +
+     if @report_type == "date_asc"
       @property.activities.order(date: :asc).where(:date => (@start_date..@end_date)).map do |activity|
         [activity.date.strftime("%b %d"),
          activity.activity_type.title,
@@ -167,5 +169,15 @@ class ReportByDateHeader < Prawn::Document
          @cost_check == "on" ? activity.cost.to_i : nil,
          @duration_check == "on" ? activity.duration.to_i : nil].compact
       end
+     else
+      @property.activities.order(date: :desc).where(:date => (@start_date..@end_date)).map do |activity|
+        [activity.date.strftime("%b %d"),
+         activity.activity_type.title,
+         @subject_check == "on" ? activity.subject + "\n" + activity.detail + "\n" + activity.outcome : nil,
+         @contact_check == "on" ? activity.contact + "\n" + activity.agent + "\n" + activity.customer : nil,
+         @cost_check == "on" ? activity.cost.to_i : nil,
+         @duration_check == "on" ? activity.duration.to_i : nil].compact
+      end
+    end
   end
 end

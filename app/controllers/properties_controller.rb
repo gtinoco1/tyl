@@ -61,9 +61,9 @@ class PropertiesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        if @report_type == "date"
+        if @report_type == "date_asc" || @report_type == "date_desc"
           pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check, 
-                                    @contact_check, @duration_check, @cost_check, @attachment_toggle)
+                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type)
         elsif @report_type == "activity_type"
           pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         end
