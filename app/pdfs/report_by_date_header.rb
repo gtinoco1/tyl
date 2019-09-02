@@ -85,33 +85,29 @@ class ReportByDateHeader < Prawn::Document
   
   def attachments
     if @attachment_toggle == "yes" && @property.property_attachments.count > 0
-      font "Nunito"
-       
-      @property.property_attachments.each do |loop|
-      len = loop.attachment.to_s.length
-      
-      start_new_page
-      text "#{loop.title}"
-      move_down 25
-     
-    if loop.attachment.nil? || loop.attachment.blank?
-    else
-
-      if loop.attachment.to_s.slice(len-3..len) == "pdf"
-      @pos = "#{loop.attachment}".index("upload") + 7
-
-      (1..loop.pages).each do |i|
-      image open("#{loop.attachment}".insert(@pos, "pg_#{i}/").to_s.slice(0..-4) << 'jpg'), :fit => [540, 650], :position => :center  
-      end
-
-      else
+        font "Nunito"
+         
+        @property.property_attachments.each do |loop|
+        len = loop.attachment.to_s.length
         
-      image open("#{loop.attachment}"), :fit => [540, 650], :position => :center
-      end  
-    end
-    
+        start_new_page
+        text "#{loop.title}"
+        move_down 25
+       
+          if loop.attachment.nil? || loop.attachment.blank?
+          
+          elsif loop.attachment.to_s.slice(len-3..len) == "pdf"
+            @pos = "#{loop.attachment}".index("upload") + 7
+
+            (1..loop.pages.to_i).each do |i|
+            image open("#{loop.attachment}".insert(@pos, "pg_#{i}/").to_s.slice(0..-4) << 'jpg'), :fit => [540, 650], :position => :center  
+            end
       
-      end
+          else
+            image open("#{loop.attachment}"), :fit => [540, 650], :position => :center
+          end
+    
+        end
     else
     end
   end

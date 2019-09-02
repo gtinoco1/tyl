@@ -22,19 +22,27 @@ class PropertyAttachmentsController < ApplicationController
     @property_attachment.property_id = params.fetch("property_id")
     @property_attachment.user_id = params.fetch("user_id")
     @property_attachment.activity_id = params.fetch("activity_id")
-    @property_attachment.attachment = params.fetch("attachment", "")
+    @property_attachment.attachment = params.fetch("attachment","")
     @property_attachment.title = params.fetch("title")
 
+ if @property_attachment.attachment.blank?
+   redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
+ else
+    
     if @property_attachment.valid?
-      @property_attachment.save
-
-      @property_attachment.pages = @property_attachment.attachment.metadata.fetch("pages", "")
+     @property_attachment.save
+    
+      @property_attachment.pages = @property_attachment.attachment.metadata.fetch("pages","")
       @property_attachment.save
 
       redirect_to("/properties/#{@property_attachment.property_id}/attachments", :notice => "Attachment uploaded successfully.")
     else
-      redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
+     redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
+    # render("property_attachment_templates/new_form_with_errors.html.erb")
     end
+    
+  end
+  
   end
 
   def edit_form
