@@ -45,7 +45,7 @@ class ReportByDateHeader < Prawn::Document
   def header
     
     font "Nunito"
-    text "Listing Acitivity Report", size: 15, style: :bold
+    text "Listing Activity Report", size: 15, style: :bold
     text "#{@property.address.upcase}", size: 12, style: :bold, :color => "60b0f4"
     text "Date Range: #{@start_date.strftime("%b %d, %Y")} to #{@end_date.strftime("%b %d, %Y")}.", size: 10
     # stroke do
