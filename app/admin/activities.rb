@@ -18,6 +18,7 @@ ActiveAdmin.register Activity do
     column :id
     column(:user_id) { |activity| activity.property.user.first_name }
     column(:user_id) { |activity| activity.property.user.last_name }
+    column(:email) { |activity| activity.property.user.email }
     column(:property_id) { |activity| activity.property.address }
     column(:activity_type_id) { |activity| activity.activity_type.title }
     column(:date) { |activity| activity.date }

@@ -18,6 +18,7 @@ ActiveAdmin.register BuyerActivity do
     column :id
     column(:user_id) { |buyer_activity| buyer_activity.buyer.user.first_name }
     column(:user_id) { |buyer_activity| buyer_activity.buyer.user.last_name }
+    column(:email) { |buyer_activity| buyer_activity.buyer.user.email }
     column(:buyer) { |buyer_activity| buyer_activity.buyer.name }
     column(:buyer_activity_type_id) { |buyer_activity| buyer_activity.buyer_activity_type.title }
     column(:date) { |buyer_activity| buyer_activity.date }
