@@ -26,7 +26,7 @@ gem "cloudinary"
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
-gem 'rubyzip', '>= 1.2.1'
+gem 'rubyzip', '~> 1.3.0'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'acts_as_xlsx'
