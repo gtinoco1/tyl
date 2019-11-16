@@ -57,13 +57,14 @@ class PropertiesController < ApplicationController
     @cost_check = params.fetch("cost","")
     @report_type = params.fetch("report_type","")
     @attachment_toggle = params.fetch("attachment_toggle","")
+    @show_total_toggle = params.fetch("total_toggle","")
 
     respond_to do |format|
       format.html
       format.pdf do
         if @report_type == "date_asc" || @report_type == "date_desc"
-          pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check, 
-                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type)
+          pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
+                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle)
         elsif @report_type == "activity_type"
           pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         end
