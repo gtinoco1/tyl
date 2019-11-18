@@ -87,11 +87,35 @@
             <div class="col text-center">
 
               <% if activity.activity_type.subject_toggle == "Show" %>
-                <%= activity.subject %>
-              <% else %>
-                <%= activity.detail %>
-              <% end %>
 
+                  <% if activity.subject.length > 40 %>
+                    <%= truncate(activity.subject, length: 40) %>
+                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2">Show more</div>
+                    <script>
+                      $(".read-more-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(this).parent().html('<%= escape_javascript activity.subject %>')
+                      })
+                    </script>
+                  <% else %>
+                    <%= activity.subject %>
+                  <% end %>
+              <% else %>
+                <div>
+                  <% if activity.detail.length > 40 %>
+                    <%= truncate(activity.detail, length: 40) %>
+                    <div class="read-more-#{activity.id} text-primary" style="z-index: 2">Show more</div>
+                    <script>
+                      $(".read-more-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(this).parent().html('<%= escape_javascript activity.detail %>')
+                      })
+                    </script>
+                  <% else %>
+                    <%= activity.detail %>
+                  <% end %>
+                <div>
+              <% end %>
             </div>
             <div class="col text-center">
               <%= activity.date.strftime("%b %d")  %>
@@ -116,7 +140,7 @@
 </div>
 
 <div style="display: none;">
-  The page shows all the activities related to a particular property. 
+  The page shows all the activities related to a particular property.
   From here you are able to add new activities, add attachments, edit the property,
   and create reports for your listing.
 </div>
