@@ -53,6 +53,14 @@ class ReportByDateHeader < Prawn::Document
     # new_table
     move_down 10
     attachments
+
+    g = Gruff::Pie.new
+    g.theme = Gruff::Themes::THIRTYSEVEN_SIGNALS
+    g.title = 'Total Time Spent in different activities'
+    @property.activities.group(:activity_type_id).sum(:duration).map do |activity|
+      g.data ActivityType.find(activity[0]).title, activity[1]
+    end
+    image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     footer
   end
 
@@ -176,7 +184,7 @@ class ReportByDateHeader < Prawn::Document
     [["Date", "Activity", subject_header, contact_header, cost_header, duration_header].compact] +
      if @report_type == "date_asc"
       @total_min = 0
-        @data = @property.activities.order(date: :asc).where(:date => (@start_date..@end_date)).map do |activity|
+        @property.activities.order(date: :asc).where(:date => (@start_date..@end_date)).map do |activity|
         @total_min = @total_min + activity.duration.to_i
         [activity.date.strftime("%b %d"),
          activity.activity_type.title,
@@ -184,9 +192,11 @@ class ReportByDateHeader < Prawn::Document
          @contact_check == "on" ? activity.contact + "\n" + activity.agent + "\n" + activity.customer : nil,
          @cost_check == "on" ? activity.cost.to_i : nil,
          @duration_check == "on" ? activity.duration.to_i : nil].compact
-      end
+        end
      else
+      @total_min = 0
       @property.activities.order(date: :desc).where(:date => (@start_date..@end_date)).map do |activity|
+        @total_min = @total_min + activity.duration.to_i
         [activity.date.strftime("%b %d"),
          activity.activity_type.title,
          @subject_check == "on" ? activity.subject + "\n" + activity.detail + "\n" + activity.outcome : nil,
