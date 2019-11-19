@@ -1,7 +1,7 @@
 require "open-uri"
 class ReportByDateHeader < Prawn::Document
   include ActionView::Helpers::NumberHelper
-  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type, show_total_toggle)
+  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type, show_total_toggle,show_chart_toggle)
     super(top_margin: 50, bottom_margin: 55)
 
     font_families.update("Nunito" => {:normal => Rails.root.join("app/assets/fonts/Nunito-Regular.ttf"),
@@ -19,6 +19,7 @@ class ReportByDateHeader < Prawn::Document
     @cost_check = cost_check
     @attachment_toggle = attachment_toggle
     @report_type = report_type
+    @show_chart_toggle = show_chart_toggle
     @show_total_toggle = show_total_toggle
     @total_min = 0
 
@@ -54,13 +55,35 @@ class ReportByDateHeader < Prawn::Document
     move_down 10
     attachments
 
-    g = Gruff::Pie.new
-    g.theme = Gruff::Themes::THIRTYSEVEN_SIGNALS
-    g.title = 'Total Time Spent in different activities'
-    @property.activities.group(:activity_type_id).sum(:duration).map do |activity|
-      g.data ActivityType.find(activity[0]).title, activity[1]
+    if @show_chart_toggle == "yes"
+      g = Gruff::Pie.new
+      g.theme = {
+                :colors => [
+                  '#FDD84E',
+                  '#6886B4',
+                  '#72AE6E',
+                  '#D1695E',
+                  '#8A6EAF',
+                  '#EFAA43',
+                  'white',
+                  '#FFF804',
+                  '#336699',
+                  '#339933',
+                  '#ff0000',
+                  '#cc99cc',
+                  '#cf5910',
+                  'black'
+                ],
+                :marker_color => 'black',
+                :font_color => 'black',
+                :background_colors => %w(#d1edf5 white)
+              }
+      g.title = 'Total Time Spent in different activities'
+      @property.activities.group(:activity_type_id).sum(:duration).map do |activity|
+        g.data ActivityType.find(activity[0]).title, activity[1]
+      end
+      image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     end
-    image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     footer
   end
 
