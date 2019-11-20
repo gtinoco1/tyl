@@ -45,8 +45,8 @@ class ReportByDateHeader < Prawn::Document
       @time_str = (mins == 0) ? "#{hrs} hours" : "#{hrs} hours: #{mins.to_s.rjust(2, '0')}mins"
     end
     if @show_total_toggle == "yes"
-      table [ ["Total Time Spent","#{@time_str}"] ], position: :right,
-                                                  cell_style: {font: "Nunito", size: 9}
+      move_down 10
+      text "Total Time Spent: #{@time_str}", align: :right, size: 10
     end
   end
 
@@ -76,11 +76,13 @@ class ReportByDateHeader < Prawn::Document
                 ],
                 :marker_color => 'black',
                 :font_color => 'black',
-                :background_colors => %w(#d1edf5 white)
+                :background_colors => 'white'
               }
       g.title = 'Total Time Spent in different activities'
-      @property.activities.group(:activity_type_id).sum(:duration).map do |activity|
-        g.data ActivityType.find(activity[0]).title, activity[1]
+      @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).map do |activity|
+        if activity[1] > 0
+          g.data ActivityType.find(activity[0]).title, activity[1]
+        end
       end
       image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     end
