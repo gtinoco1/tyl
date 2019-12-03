@@ -89,12 +89,24 @@
               <% if activity.activity_type.subject_toggle == "Show" %>
 
                   <% if activity.subject.length > 40 %>
-                    <%= truncate(activity.subject, length: 40) %>
-                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2">Show more</div>
+                    <div class="activity-content-<%= activity.id %>">
+                      <%= truncate(activity.subject, length: 40) %>
+                    </div>
+                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2; display: block;">Show more</div>
+                    <div class="read-less-<%= activity.id %> text-primary" style="z-index: 2; display: none;">Show less</div>
+
                     <script>
                       $(".read-more-<%= activity.id %>").on('click', function(e) {
                         e.preventDefault()
-                        $(this).parent().html('<%= escape_javascript activity.subject %>')
+                        $(".activity-content-<%= activity.id %>").html('<%= escape_javascript activity.subject %>')
+                        $(".read-less-<%= activity.id %>").css({"display": "block"});
+                        $(".read-more-<%= activity.id %>").css({"display": "none"});
+                      })
+                      $(".read-less-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(".activity-content-<%= activity.id %>").html('<%= escape_javascript truncate(activity.subject, length: 40) %>')
+                        $(".read-more-<%= activity.id %>").css({"display": "block"});
+                        $(".read-less-<%= activity.id %>").css({"display": "none"});
                       })
                     </script>
                   <% else %>
@@ -103,12 +115,24 @@
               <% else %>
                 <div>
                   <% if activity.detail.length > 40 %>
-                    <%= truncate(activity.detail, length: 40) %>
-                    <div class="read-more-#{activity.id} text-primary" style="z-index: 2">Show more</div>
+                    <div class="subject-content-<%= activity.id %>">
+                      <%= truncate(activity.detail, length: 40) %>
+                    </div>
+                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2; display: block;">Show more</div>
+                    <div class="read-less-<%= activity.id %> text-primary" style="z-index: 2; display: none;">Show less</div>
+
                     <script>
                       $(".read-more-<%= activity.id %>").on('click', function(e) {
                         e.preventDefault()
-                        $(this).parent().html('<%= escape_javascript activity.detail %>')
+                        $(".subject-content-<%= activity.id %>").html('<%= escape_javascript activity.detail %>')
+                        $(".read-less-<%= activity.id %>").css({"display": "block"});
+                        $(".read-more-<%= activity.id %>").css({"display": "none"});
+                      })
+                      $(".read-less-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(".subject-content-<%= activity.id %>").html('<%= escape_javascript truncate(activity.detail, length: 40) %>')
+                        $(".read-more-<%= activity.id %>").css({"display": "block"});
+                        $(".read-less-<%= activity.id %>").css({"display": "none"});
                       })
                     </script>
                   <% else %>

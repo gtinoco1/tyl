@@ -53,7 +53,6 @@ class ReportByDateHeader < Prawn::Document
     move_down 3
     # new_table
     move_down 10
-    attachments
 
     if @show_chart_toggle == "yes"
       g = Gruff::Pie.new
@@ -86,6 +85,7 @@ class ReportByDateHeader < Prawn::Document
       end
       image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     end
+    attachments
     footer
   end
 
