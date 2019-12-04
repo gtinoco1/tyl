@@ -1,4 +1,5 @@
 ActiveAdmin.register Property do
+  actions :all, :except => [:destroy]
   permit_params :address, :realtor_id, :city, :state, :zipcode, :status
 
 # See permitted parameters documentation:

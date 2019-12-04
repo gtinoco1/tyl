@@ -1,5 +1,6 @@
 ActiveAdmin.register ActivityType do
-  permit_params :title, :cost_toggle, :duration_toggle, :detail_toggle, :outcome_toggle, 
+  actions :all, :except => [:destroy]
+  permit_params :title, :cost_toggle, :duration_toggle, :detail_toggle, :outcome_toggle,
                  :contact_toggle, :agent_toggle, :customer_toggle, :subject_toggle, :user_id, :created_at, :updated_at
 
 # See permitted parameters documentation:

@@ -31,6 +31,7 @@ gem 'rubyzip', '~> 1.3.0'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'acts_as_xlsx'
+gem 'cancancan'
 
 group :production do
   gem "pg", "~> 0.18"

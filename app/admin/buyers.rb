@@ -1,4 +1,5 @@
 ActiveAdmin.register Buyer do
+  actions :all, :except => [:destroy]
   permit_params :user_id, :name, :funds, :downpayment, :preapproval, :buyer_type, :status, :price_min, :price_max, :bed, :bath, :house, :condo, :wd, :balcony, :parking, :garage, :pool, :notes
 
 # See permitted parameters documentation:

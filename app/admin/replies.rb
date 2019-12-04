@@ -1,4 +1,5 @@
 ActiveAdmin.register Reply do
+  actions :all, :except => [:destroy]
   permit_params :comment_id, :user_id, :body
 
 # See permitted parameters documentation:

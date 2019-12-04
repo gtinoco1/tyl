@@ -1,4 +1,5 @@
 class PropertiesController < ApplicationController
+
   def index
     render("property_templates/index.html.erb")
   end
@@ -12,6 +13,7 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find(params.fetch("id_to_display"))
 
+    authorize! :manage, @property
     render("property_templates/show.html.erb")
   end
 
@@ -37,11 +39,13 @@ class PropertiesController < ApplicationController
 
   def report_type
     @property = Property.find(params.fetch("id_to_display"))
+    authorize! :manage, @property
     render("property_templates/report_type.html.erb")
   end
 
   def report_generator_pdf
     @property = Property.find(params.fetch("id_to_display"))
+    authorize! :manage, @property
     render("property_templates/report_generator_pdf.html.erb")
   end
 
@@ -102,7 +106,7 @@ class PropertiesController < ApplicationController
 
   def edit_form
     @property = Property.find(params.fetch("prefill_with_id"))
-
+    authorize! :manage, @property
     render("property_templates/edit_form.html.erb")
   end
 
@@ -166,7 +170,7 @@ class PropertiesController < ApplicationController
 
   def destroy_row
     @property = Property.find(params.fetch("id_to_remove"))
-
+    authorize! :manage, @property
     @property.destroy
 
     redirect_to("/all_properties", :notice => "Property deleted successfully.")
@@ -178,13 +182,13 @@ class PropertiesController < ApplicationController
 
   def prices
     @property = Property.find(params.fetch("id_to_display"))
-
+    authorize! :manage, @property
     render("property_templates/property_prices.html.erb")
   end
 
   def attachments
     @property = Property.find(params.fetch("id_to_display"))
-
+    authorize! :manage, @property
     render("property_templates/property_attachments.html.erb")
   end
 end

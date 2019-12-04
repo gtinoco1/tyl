@@ -1,4 +1,5 @@
 ActiveAdmin.register Comment do
+  actions :all, :except => [:destroy]
   permit_params :user_id, :body
 
 # See permitted parameters documentation:

@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_many :properties, :foreign_key => "realtor_id", :dependent => :destroy
   has_many :activity_types, :dependent => :destroy
   has_many :buyers, :dependent => :destroy
+  has_many :buyer_activities, through: :buyers
   has_many :comments, :dependent => :destroy
   has_many :buyer_activity_types, :dependent => :destroy
   has_many :replies, :dependent => :destroy
@@ -41,7 +42,6 @@ class User < ApplicationRecord
   validates :first_name, :presence => true
 
 # validates_format_of :email, :with => /floridamoves\.com|example\.com/, :message => "Must register with a floridamoves.com email."
- 
   after_create :add_types
 
   mount_uploader :headshot, HeadshotUploader

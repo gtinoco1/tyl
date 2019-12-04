@@ -1,3 +1,4 @@
+<% if can? :manage, @property %>
 <div class="row mb-0">
   <div class="col-lg-5 offset-lg-2 col-9">
     <h5 class="text-info text-left text-uppercase mb-0">
@@ -35,23 +36,23 @@
     <div class=" offset-md-2 col-lg-4 col-7 my-auto">
       <p class="text-center"><%= attachment.title %></p>
     </div>
-    
+
     <% len = attachment.attachment.to_s.length %>
     <div class="col-lg-2 col-5">
       <div class="text-center">
         <% if attachment.attachment.blank? %>
           <a href="/property_attachments/<%= attachment.id %>/edit">click to add</a>
-       
+
         <% elsif attachment.attachment.to_s.slice(len-3..len) == "pdf" %>
           <a href="/property_attachments/<%= attachment.id %>">
             <img src="<%= attachment.attachment.to_s.slice(0..-4) << 'jpg' %>" class="img-fluid" alt="...">
           </a>
-        
+
         <% else %>
           <a href="/property_attachments/<%= attachment.id %>">
             <img src="<%= attachment.attachment %>" class="img-fluid" alt="...">
           </a>
-       
+
         <% end %>
       </div>
     </div>
@@ -61,4 +62,5 @@
       <hr>
     </div>
   </div>
+<% end %>
 <% end %>

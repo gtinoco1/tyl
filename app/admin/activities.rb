@@ -1,4 +1,5 @@
 ActiveAdmin.register Activity do
+  actions :all, :except => [:destroy]
   permit_params :activity_type_id, :date, :duration, :cost, :property_id, :detail, :outcome, :contact, :subject, :flyer_img, :postcard__img
 
 # See permitted parameters documentation:

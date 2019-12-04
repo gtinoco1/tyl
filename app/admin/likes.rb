@@ -1,4 +1,5 @@
 ActiveAdmin.register Like do
+  actions :all, :except => [:destroy]
   permit_params :comment_id, :user_id
 
 # See permitted parameters documentation:

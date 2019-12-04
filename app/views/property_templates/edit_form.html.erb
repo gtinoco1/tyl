@@ -1,3 +1,4 @@
+<% if can? :manage, @property %>
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
@@ -65,7 +66,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="form-group">
     <input type="hidden" name="realtor_id" class="form-control" value="<%= current_user.id %>">
   </div>
@@ -135,7 +136,7 @@
 
   <div class="col-lg-3">
     <p class="text-secondary text-center">
-      Archived Properties will be saved on the <a href="/archive"> Archive </a> page for future reference. 
+      Archived Properties will be saved on the <a href="/archive"> Archive </a> page for future reference.
       All activity information will be saved with the property.
     </p>
   </div>
@@ -183,3 +184,4 @@
 
   </div>
 </div>
+<% end %>

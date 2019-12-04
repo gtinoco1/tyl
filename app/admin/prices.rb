@@ -1,4 +1,5 @@
 ActiveAdmin.register Price do
+  actions :all, :except => [:destroy]
   permit_params :property_id, :amount, :detail, :date
 
 # See permitted parameters documentation:

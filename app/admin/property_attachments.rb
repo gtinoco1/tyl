@@ -1,5 +1,5 @@
 ActiveAdmin.register PropertyAttachment do
-
+  actions :all, :except => [:destroy]
   permit_params :property_id, :user_id, :activity_id, :image, :title, :pages, :attachment
 
 
