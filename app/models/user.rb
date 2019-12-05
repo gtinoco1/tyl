@@ -16,9 +16,13 @@
 #  phone                  :string
 #  agency                 :string
 #  website                :text
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 # Indexes
 #
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
@@ -27,7 +31,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :properties, :foreign_key => "realtor_id", :dependent => :destroy
   has_many :activity_types, :dependent => :destroy
