@@ -55,7 +55,7 @@ class ReportByDateHeader < Prawn::Document
     move_down 10
 
     if @show_chart_toggle == "yes"
-      g = Gruff::Pie.new
+      g = Gruff::Mini::Pie.new
       g.theme = {
                 :colors => [
                   '#FDD84E',
@@ -64,7 +64,6 @@ class ReportByDateHeader < Prawn::Document
                   '#D1695E',
                   '#8A6EAF',
                   '#EFAA43',
-                  'white',
                   '#FFF804',
                   '#336699',
                   '#339933',
@@ -77,12 +76,17 @@ class ReportByDateHeader < Prawn::Document
                 :font_color => 'black',
                 :background_colors => 'white'
               }
-      g.title = 'Total Time Spent in different activities'
+      g.title = 'Activity Summary'
       @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).map do |activity|
         if activity[1] > 0
-          g.data ActivityType.find(activity[0]).title, activity[1]
+          g.data "#{ActivityType.find(activity[0]).title.truncate(20, omission: '...')} - (#{number_with_precision((activity[1]/60.0).to_s.rjust(2, '0'), precision: 2)} Hours)", activity[1]
         end
       end
+      g.text_offset_percentage = 0.05
+      g.marker_font_size = 25
+      g.legend_font_size = 25
+      g.legend_position = :right
+      text "Activity Summary", size: 20, :align => :center
       image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     end
     attachments
