@@ -1,5 +1,6 @@
 ActiveAdmin.register PropertyAttachment do
   actions :all, :except => [:destroy]
+  index :download_links => [:csv, :xml, :json]
   permit_params :property_id, :user_id, :activity_id, :image, :title, :pages, :attachment
 
 

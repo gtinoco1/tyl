@@ -1,5 +1,6 @@
 ActiveAdmin.register BuyerActivityType do
   actions :all, :except => [:destroy]
+  index :download_links => [:csv, :xml, :json]
   permit_params :user_id, :duration_toggle, :property_address_toggle, :zipcode_toggle, :detail_toggle, :comment_toggle, :image_toggle, :subject_toggle, :agent_toggle, :title
 
 # See permitted parameters documentation:

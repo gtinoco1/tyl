@@ -1,5 +1,6 @@
 ActiveAdmin.register Property do
   actions :all, :except => [:destroy]
+  index :download_links => [:csv, :xml, :json]
   permit_params :address, :realtor_id, :city, :state, :zipcode, :status
 
 # See permitted parameters documentation:

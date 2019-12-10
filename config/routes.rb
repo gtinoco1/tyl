@@ -211,13 +211,13 @@ Rails.application.routes.draw do
 
   get("/properties/prices/:id_to_display", {:controller => "properties", :action => "prices"})
   get("/properties/:id_to_display/attachments", {:controller => "properties", :action => "attachments"})
-  
+
   # UPDATE
   get("/properties/:prefill_with_id/edit", {:controller => "properties", :action => "edit_form"})
   post("/update_property/:id_to_modify", {:controller => "properties", :action => "update_row"})
-  
+
   post("/properties/:id_to_display/report", {:controller => "properties", :action => "create_pdf"})
-  
+
   get("/properties/:id_to_display/report_spreadsheet", {:controller => "properties", :action => "report_xlsx"})
   post("/add_property_to_archive/:id_to_modify", {:controller => "properties", :action => "add_property_to_archive"})
   post("/restore_property_from_archive/:id_to_modify", {:controller => "properties", :action => "restore_property_from_archive"})
@@ -234,18 +234,22 @@ Rails.application.routes.draw do
   get("/settings", {:controller => "activity_types", :action => "settings"})
   get("/privacy", {:controller => "buyers", :action => "privacy"})
   get("/updates", {:controller => "buyers", :action => "updates"})
-  
+
   get("/my_account", {:controller => "properties", :action => "my_account"})
 
    devise_for :users
   # devise_for :users, :controllers => {registrations: 'registrations'}
   # devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
-  
+
   as :user do
   get '/my_account', :to => 'devise/registrations#edit', :as => :user_root
   end
-  
+
+  get("/contact_list_download", { :controller => "application", :action => "contact_list_download" })
+
+
+
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
+
 end

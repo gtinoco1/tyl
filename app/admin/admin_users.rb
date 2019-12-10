@@ -1,5 +1,6 @@
 ActiveAdmin.register AdminUser do
   actions :all, :except => [:destroy]
+  index :download_links => [:csv, :xml, :json]
   permit_params :email, :password, :password_confirmation
 
   index do
