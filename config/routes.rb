@@ -237,8 +237,8 @@ Rails.application.routes.draw do
 
   get("/my_account", {:controller => "properties", :action => "my_account"})
 
-   devise_for :users
-  # devise_for :users, :controllers => {registrations: 'registrations'}
+  # devise_for :users
+  devise_for :users, :controllers => {registrations: 'registrations'}
   # devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
 
   as :user do

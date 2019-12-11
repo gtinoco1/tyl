@@ -79,7 +79,7 @@ class ReportByDateHeader < Prawn::Document
       g.title = 'Activity Summary'
       @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).map do |activity|
         if activity[1] > 0
-          g.data "#{ActivityType.find(activity[0]).title.truncate(20, omission: '...')} - (#{number_with_precision((activity[1]/60.0).to_s.rjust(2, '0'), precision: 2)} Hours)", activity[1]
+          g.data "#{ActivityType.find(activity[0]).title.truncate(27, omission: '...')} - (#{number_with_precision((activity[1]/60.0).to_s.rjust(2, '0'), precision: 2)} Hours)", activity[1]
         end
       end
       g.text_offset_percentage = 0.05
