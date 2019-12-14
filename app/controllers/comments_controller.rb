@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
 
   def destroy_row
     @comment = Comment.find(params.fetch("id_to_remove"))
-
+    authorize! :destroy, @comment
     @comment.destroy
 
     redirect_to("/comments", :notice => "Comment deleted successfully.")

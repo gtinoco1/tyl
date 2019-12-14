@@ -1,4 +1,5 @@
 class PropertiesController < ApplicationController
+
   def index
     render("property_templates/index.html.erb")
   end
@@ -12,6 +13,7 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find(params.fetch("id_to_display"))
 
+    authorize! :manage, @property
     render("property_templates/show.html.erb")
   end
 
@@ -37,11 +39,13 @@ class PropertiesController < ApplicationController
 
   def report_type
     @property = Property.find(params.fetch("id_to_display"))
+    authorize! :manage, @property
     render("property_templates/report_type.html.erb")
   end
 
   def report_generator_pdf
     @property = Property.find(params.fetch("id_to_display"))
+    authorize! :manage, @property
     render("property_templates/report_generator_pdf.html.erb")
   end
 
@@ -57,13 +61,15 @@ class PropertiesController < ApplicationController
     @cost_check = params.fetch("cost","")
     @report_type = params.fetch("report_type","")
     @attachment_toggle = params.fetch("attachment_toggle","")
+    @show_total_toggle = params.fetch("total_toggle","")
+    @show_chart_toggle = params.fetch("chart_toggle","")
 
     respond_to do |format|
       format.html
       format.pdf do
         if @report_type == "date_asc" || @report_type == "date_desc"
-          pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check, 
-                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type)
+          pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
+                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle)
         elsif @report_type == "activity_type"
           pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         end
@@ -100,7 +106,7 @@ class PropertiesController < ApplicationController
 
   def edit_form
     @property = Property.find(params.fetch("prefill_with_id"))
-
+    authorize! :manage, @property
     render("property_templates/edit_form.html.erb")
   end
 
@@ -164,7 +170,7 @@ class PropertiesController < ApplicationController
 
   def destroy_row
     @property = Property.find(params.fetch("id_to_remove"))
-
+    authorize! :manage, @property
     @property.destroy
 
     redirect_to("/all_properties", :notice => "Property deleted successfully.")
@@ -176,13 +182,13 @@ class PropertiesController < ApplicationController
 
   def prices
     @property = Property.find(params.fetch("id_to_display"))
-
+    authorize! :manage, @property
     render("property_templates/property_prices.html.erb")
   end
 
   def attachments
     @property = Property.find(params.fetch("id_to_display"))
-
+    authorize! :manage, @property
     render("property_templates/property_attachments.html.erb")
   end
 end

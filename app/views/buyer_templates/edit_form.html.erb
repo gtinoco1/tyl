@@ -1,3 +1,4 @@
+<% if can? :manage, @buyer %>
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
@@ -13,7 +14,7 @@
     <div class="col-lg-6 offset-lg-3">
       <div class="form-group">
         <label for="name">
-        <h5 class="font-weight-light">  
+        <h5 class="font-weight-light">
           <%= @buyer.buyer_type %> Name
         </h5>
         </label>
@@ -21,18 +22,18 @@
       </div>
     </div>
   </div>
-  
+
 <div class="row">
   <div class="col-lg-6 offset-lg-3 col-12">
     <div class="card bg-white mb-3">
      <div class="row mb-3">
       <div class="col-lg-12">
-  
+
         <h5 class="card-header font-weight-light mb-3">
           Looking for:
         </h5>
         <div class="text-center">
-  
+
           <label class="checkbox-inline">
             <% if @buyer.house == "on" %>
             <input type="checkbox" value="on" name="house" id="house" class="mr-1" checked>
@@ -47,7 +48,7 @@
             <% else %>
             <input type="checkbox" value="on" name="condo" id="condo" class="mr-1" unchecked>
             <% end %>
-            
+
             <% if @buyer.buyer_type == "Buyer" %>
             <span class="mr-3">Condo / Townhouse</span>
             <% elsif @buyer.buyer_type == "Tenant" %>
@@ -55,12 +56,12 @@
             <% else %>
             <% end %>
           </label>
-  
+
         </div>
-  
+
       </div>
     </div>
-    
+
       <div class="row mb-3">
       <div class="col-lg-3 offset-lg-3 col-5 offset-1">
         <label for="bed"> Bed </label>
@@ -71,13 +72,13 @@
         <%= select_tag(:bath, options_for_select(["1", "2","3","4","5","6+"], @buyer.bath), :class => "form-control") %>
       </div>
     </div>
-    
+
     <div class="row mb-2">
         <div class="col-lg-3 offset-lg-3 col-5 offset-1">
           Price Range
         </div>
     </div>
-    
+
     <div class="row">
       <div class="col-lg-3 offset-lg-3 col-5 offset-1">
         <div class="form-group">
@@ -90,10 +91,10 @@
         </div>
       </div>
     </div>
-    
+
       <div class="row mb-3">
       <div class="col-lg-10 offset-lg-1 col-12">
-  
+
         <h6 class="font-weight-light mb-3 text-center">
           Must have:
         </h6>
@@ -114,7 +115,7 @@
             <% end %>
             <span class="mr-3">Parking</span>
           </label>
-          <label class="checkbox-inline">          
+          <label class="checkbox-inline">
             <% if @buyer.garage == "on" %>
             <input type="checkbox" value="on" name="garage" id="garage" class="mr-1" checked>
             <% else %>
@@ -141,13 +142,13 @@
             <span class="">Pool</span>
           </label>
         </div>
-  
+
       </div>
     </div>
     </div>
   </div>
   </div>
-  
+
         <% if @buyer.buyer_type == "Buyer" %>
 
   <div class="row">
@@ -172,7 +173,7 @@
           <%= select_tag(:preapproval, options_for_select(["","Yes", "No", "Not sure"], @buyer.preapproval), :class => "form-control") %>
         </div>
       </div>
-    
+
       <div class="col-lg-2 col-6">
         <div class="form-group">
           <h5 class="font-weight-light">
@@ -187,22 +188,22 @@
 
     <% else %>
     <% end %>
-    
+
   <div class="row">
   <div class="col-lg-6 offset-lg-3 col-12">
 
         <label for="notes">
-          <h5 class="font-weight-light">Additional Notes   </h5>        
+          <h5 class="font-weight-light">Additional Notes   </h5>
         </label>
 
         <textarea id="notes" name="notes" class="form-control" type="text" rows="3" value="<%= @buyer.notes %>"><%= @buyer.notes %></textarea>
       </div>
 
     </div>
-  
+
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-          
+
   <div class="form-group">
     <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
   </div>
@@ -238,7 +239,7 @@
 
   <div class="col-lg-3">
     <p class="text-secondary text-center">
-      Archived Customers will be saved on the <a href="/archive"> Archive </a> page for future reference. 
+      Archived Customers will be saved on the <a href="/archive"> Archive </a> page for future reference.
       All activity information will be saved with the customer.
     </p>
   </div>
@@ -282,7 +283,7 @@
       <hr>
     </div>
   </div>
-    
+
    <div class="row mb-3">
     <div class="col-lg-3 offset-lg-3">
       <a href="/delete_buyer/<%= @buyer.id %>" class="btn disabled btn-block btn-outline-secondary mb-2">
@@ -298,5 +299,4 @@
   </div>
 
 <% end %>
-
-
+<% end %>

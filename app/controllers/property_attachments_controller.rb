@@ -7,6 +7,8 @@ class PropertyAttachmentsController < ApplicationController
 
   def show
     @property_attachment = PropertyAttachment.find(params.fetch("id_to_display"))
+    @property = Property.find_by(id: @property_attachment.property_id)
+    authorize! :manage, @property, @property_attachment
     render("property_attachment_templates/show.html.erb")
   end
 
@@ -28,10 +30,10 @@ class PropertyAttachmentsController < ApplicationController
  if @property_attachment.attachment.blank?
    redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
  else
-    
+
     if @property_attachment.valid?
      @property_attachment.save
-    
+
       @property_attachment.pages = @property_attachment.attachment.metadata.fetch("pages","")
       @property_attachment.save
 
@@ -40,14 +42,15 @@ class PropertyAttachmentsController < ApplicationController
      redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
     # render("property_attachment_templates/new_form_with_errors.html.erb")
     end
-    
+
   end
-  
+
   end
 
   def edit_form
     @property_attachment = PropertyAttachment.find(params.fetch("prefill_with_id"))
-
+    @property = Property.find_by(id: @property_attachment.property_id)
+    authorize! :manage, @property, @property_attachment
     render("property_attachment_templates/edit_form.html.erb")
   end
 
@@ -74,7 +77,8 @@ class PropertyAttachmentsController < ApplicationController
 
   def destroy_row
     @property_attachment = PropertyAttachment.find(params.fetch("id_to_remove"))
-
+    @property = Property.find_by(id: @property_attachment.property_id)
+    authorize! :manage, @property, @property_attachment
     @property_attachment.destroy
 
     redirect_to("/properties/#{@property_attachment.property_id}/attachments", :notice => "Attachment deleted successfully.")

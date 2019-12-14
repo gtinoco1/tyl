@@ -1,10 +1,11 @@
+<% if can? :manage, @buyer %>
 <div class="row">
   <div class="col-lg-4 offset-lg-3 col-7">
     <h4 class="text-uppercase text-secondary">
       Activity Details
     </h4>
   </div>
-  
+
         <div class="col-lg-2 col-5">
         <a href="/buyer_activities/<%= @buyer_activity.id %>/edit" class="btn btn-block btn-outline-secondary">
           Edit activity
@@ -21,7 +22,7 @@
   <div class="row mb-2">
     <div class="col-lg-4 offset-lg-3 mb-2">
       <label for="buyer_activity_type_id">
-        Activity Type            
+        Activity Type
       </label>
       <input type="text" id="buyer_activity_type_id" name="buyer_activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type.title %>" disabled>
     </div>
@@ -42,36 +43,36 @@
     <div class="form-group">
       <input type="hidden" name="buyer_activity_type_id" class="form-control" value="<%= @buyer_activity.buyer_activity_type_id %>" disabled>
     </div>
-    
+
      <div class="row mb-2">
 
       <div class="col-lg-4 offset-lg-3 mb-2">
         <label for="agent">
-          Contact            
+          Contact
         </label>
         <input type="text" id="agent" name="agent" class="form-control" value="<%= @buyer_activity.agent %>" disabled>
       </div>
 
     <div class="col-lg-2 mb-0">
       <label for="duration">
-        Time (minutes)            
+        Time (minutes)
       </label>
       <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @buyer_activity.duration %>" disabled>
     </div>
 
   </div>
-  
+
       <div class="row">
       <div class="offset-lg-3 col-lg-6 mb-3">
-        <div class="mb-2">Subject/Detail</div>            
+        <div class="mb-2">Subject/Detail</div>
         <textarea id="detail" name="detail" class="form-control mt-2" rows="3" disabled><%= @buyer_activity.detail %></textarea>
       </div>
     </div>
-    
+
   <div id="accordion" class="col-lg-6 offset-lg-3 px-1">
     <div class="card">
       <div class="card-header" id="headingTwo">
-          
+
             <h5 class="font-weight-light mb-0"> Property</h5>
 
       </div>
@@ -80,7 +81,7 @@
         <div class="row mb-2">
           <div class="col-lg-12">
           <label class="mb-1">
-          Street Address            
+          Street Address
           </label>
         <input type="text" id="property_address" name="property_address" class="form-control" value="<%= @buyer_activity.property_address %>" disabled>
       </div>
@@ -89,31 +90,31 @@
     <div class="row">
       <div class="col-lg-6 mb-0">
         <div class="mb-1">
-          City            
+          City
         </div>
         <input type="text" id="city" name="city" class="form-control mb-2" value="<%= @buyer_activity.city %>" disabled>
       </div>
 
       <div class="form-group col-lg-2 col-4">
         <div class="mb-1">
-          State            
+          State
         </div>
         <input type="text" id="state" name="state" class="form-control" value="<%= @buyer_activity.state %>" disabled>
       </div>
 
       <div class="form-group col-lg-4 col-8">
         <div class="mb-1">
-          Zipcode            
+          Zipcode
         </div>
         <input type="text" id="zipcode" name="zipcode" class="form-control" value="<%= @buyer_activity.zipcode %>" disabled>
       </div>
     </div>
-        
+
       </div>
 
   </div>
   </div>
-  
+
   <div class="form-group">
     <input type="hidden" name="buyer_id" class="form-control" value="<%= @buyer_activity.buyer_id %>">
   </div>
@@ -128,3 +129,4 @@
 
   </div>
 </div>
+<% end %>

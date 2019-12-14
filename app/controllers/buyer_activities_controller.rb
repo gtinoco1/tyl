@@ -7,7 +7,8 @@ class BuyerActivitiesController < ApplicationController
 
   def show
     @buyer_activity = BuyerActivity.find(params.fetch("id_to_display"))
-
+    @buyer = Buyer.find_by(id: @buyer_activity.buyer_id)
+    authorize! :manage, @buyer
     render("buyer_activity_templates/show.html.erb")
   end
 
@@ -46,7 +47,8 @@ class BuyerActivitiesController < ApplicationController
 
   def edit_form
     @buyer_activity = BuyerActivity.find(params.fetch("prefill_with_id"))
-
+    @buyer = Buyer.find_by(id: @buyer_activity.buyer_id)
+    authorize! :manage, @buyer
     render("buyer_activity_templates/edit_form.html.erb")
   end
 
@@ -78,7 +80,8 @@ class BuyerActivitiesController < ApplicationController
 
   def destroy_row
     @buyer_activity = BuyerActivity.find(params.fetch("id_to_remove"))
-
+    @buyer = Buyer.find_by(id: @buyer_activity.buyer_id)
+    authorize! :manage, @buyer
     @buyer_activity.destroy
 
     redirect_to("/buyers/#{@buyer_activity.buyer_id}", :notice => "Activity deleted successfully.")

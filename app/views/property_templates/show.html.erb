@@ -1,4 +1,4 @@
-<% if @property.user.id == current_user.id %>
+<% if can? :manage, @property %>
 
 <div class="row mb-0">
   <div class="col-lg-5 offset-lg-2 col-9">
@@ -87,11 +87,59 @@
             <div class="col text-center">
 
               <% if activity.activity_type.subject_toggle == "Show" %>
-                <%= activity.subject %>
-              <% else %>
-                <%= activity.detail %>
-              <% end %>
 
+                  <% if activity.subject.length > 40 %>
+                    <div class="activity-content-<%= activity.id %>">
+                      <%= truncate(activity.subject, length: 40) %>
+                    </div>
+                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2; display: block;">Show more</div>
+                    <div class="read-less-<%= activity.id %> text-primary" style="z-index: 2; display: none;">Show less</div>
+
+                    <script>
+                      $(".read-more-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(".activity-content-<%= activity.id %>").html('<%= escape_javascript activity.subject %>')
+                        $(".read-less-<%= activity.id %>").css({"display": "block"});
+                        $(".read-more-<%= activity.id %>").css({"display": "none"});
+                      })
+                      $(".read-less-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(".activity-content-<%= activity.id %>").html('<%= escape_javascript truncate(activity.subject, length: 40) %>')
+                        $(".read-more-<%= activity.id %>").css({"display": "block"});
+                        $(".read-less-<%= activity.id %>").css({"display": "none"});
+                      })
+                    </script>
+                  <% else %>
+                    <%= activity.subject %>
+                  <% end %>
+              <% else %>
+                <div>
+                  <% if activity.detail.length > 40 %>
+                    <div class="subject-content-<%= activity.id %>">
+                      <%= truncate(activity.detail, length: 40) %>
+                    </div>
+                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2; display: block;">Show more</div>
+                    <div class="read-less-<%= activity.id %> text-primary" style="z-index: 2; display: none;">Show less</div>
+
+                    <script>
+                      $(".read-more-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(".subject-content-<%= activity.id %>").html('<%= escape_javascript activity.detail %>')
+                        $(".read-less-<%= activity.id %>").css({"display": "block"});
+                        $(".read-more-<%= activity.id %>").css({"display": "none"});
+                      })
+                      $(".read-less-<%= activity.id %>").on('click', function(e) {
+                        e.preventDefault()
+                        $(".subject-content-<%= activity.id %>").html('<%= escape_javascript truncate(activity.detail, length: 40) %>')
+                        $(".read-more-<%= activity.id %>").css({"display": "block"});
+                        $(".read-less-<%= activity.id %>").css({"display": "none"});
+                      })
+                    </script>
+                  <% else %>
+                    <%= activity.detail %>
+                  <% end %>
+                <div>
+              <% end %>
             </div>
             <div class="col text-center">
               <%= activity.date.strftime("%b %d")  %>
@@ -116,19 +164,9 @@
 </div>
 
 <div style="display: none;">
-  The page shows all the activities related to a particular property. 
+  The page shows all the activities related to a particular property.
   From here you are able to add new activities, add attachments, edit the property,
   and create reports for your listing.
-</div>
-
-<% else %>
-
-<div class="row">
-  <div class="col-lg-6 offset-lg-3 text-center">
-    <h4>
-      Oops! You do not have access to this page. Please check that you are logged in with the correct username.
-    </h4>
-  </div>
 </div>
 
 <% end %>

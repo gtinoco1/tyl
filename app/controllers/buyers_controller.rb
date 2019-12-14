@@ -7,10 +7,10 @@ class BuyersController < ApplicationController
 
   def show
     @buyer = Buyer.find(params.fetch("id_to_display"))
-
+    authorize! :manage, @buyer
     render("buyer_templates/show.html.erb")
   end
-  
+
   def customer_type
     render("buyer_templates/customer_type.html.erb")
   end
@@ -29,7 +29,7 @@ class BuyersController < ApplicationController
         pdf = BuyerReportPdf.new(@buyer, @buyer_activity_types, @current_user)
         send_data pdf.render, :filename => "Report: #{@buyer.name}.pdf", :type => "application/pdf", disposition: "inline"
       end
-      
+
     end
   end
 
@@ -90,7 +90,7 @@ class BuyersController < ApplicationController
     @buyer.garage = params.fetch("garage","")
     @buyer.pool = params.fetch("pool","")
     @buyer.notes = params.fetch("notes","")
-    
+
     if @buyer.valid?
       @buyer.save
       redirect_to("/buyers", :notice => "Customer created successfully.")
@@ -101,7 +101,7 @@ class BuyersController < ApplicationController
 
   def edit_form
     @buyer = Buyer.find(params.fetch("prefill_with_id"))
-
+    authorize! :manage, @buyer
     render("buyer_templates/edit_form.html.erb")
   end
 
@@ -136,7 +136,7 @@ class BuyersController < ApplicationController
       render("buyer_templates/edit_form_with_errors.html.erb")
     end
   end
-  
+
 
   def add_buyer_to_archive
     @buyer = Buyer.find(params.fetch("id_to_modify"))
@@ -164,7 +164,7 @@ class BuyersController < ApplicationController
 
   def destroy_row
     @buyer = Buyer.find(params.fetch("id_to_remove"))
-
+    authorize! :manage, @buyer
     @buyer.destroy
 
     redirect_to("/buyers", :notice => "Customer deleted successfully.")

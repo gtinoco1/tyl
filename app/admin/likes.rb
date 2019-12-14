@@ -1,4 +1,6 @@
 ActiveAdmin.register Like do
+  actions :all, :except => [:destroy]
+  index :download_links => [:csv, :xml, :json]
   permit_params :comment_id, :user_id
 
 # See permitted parameters documentation:

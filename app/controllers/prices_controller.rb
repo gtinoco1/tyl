@@ -37,7 +37,8 @@ class PricesController < ApplicationController
 
   def edit_form
     @price = Price.find(params.fetch("prefill_with_id"))
-
+    @property = Property.find_by(id: @price.property_id)
+    authorize! :manage, @property, @price
     render("price_templates/edit_form.html.erb")
   end
 
@@ -60,7 +61,7 @@ class PricesController < ApplicationController
 
   def destroy_row
     @price = Price.find(params.fetch("id_to_remove"))
-
+    authorize! :manage, @price
     @price.destroy
 
     redirect_to("/properties/prices/#{@price.property_id}", :notice => "Price deleted successfully.")

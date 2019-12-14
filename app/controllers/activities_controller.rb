@@ -7,7 +7,8 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find(params.fetch("id_to_display"))
-
+    @property = Property.find_by(id: @activity.property_id)
+    authorize! :manage, @property, @activity
     render("activity_templates/show.html.erb")
   end
 
@@ -45,7 +46,8 @@ class ActivitiesController < ApplicationController
 
   def edit_form
     @activity = Activity.find(params.fetch("prefill_with_id"))
-
+    @property = Property.find_by(id: @activity.property_id)
+    authorize! :manage, @property, @activity
     render("activity_templates/edit_form.html.erb")
   end
 
@@ -75,7 +77,8 @@ class ActivitiesController < ApplicationController
 
   def destroy_row
     @activity = Activity.find(params.fetch("id_to_remove"))
-
+    @property = Property.find_by(id: @activity.property_id)
+    authorize! :manage, @property, @activity
     @activity.destroy
 
     redirect_to("/properties/#{@activity.property_id}", :notice => "Activity deleted successfully.")

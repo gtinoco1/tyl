@@ -8,6 +8,7 @@ ActiveAdmin.setup do |config|
 
   config.comments_registration_name = "AdminComment"
 
+
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
@@ -239,19 +240,19 @@ ActiveAdmin.setup do |config|
   #
   # To disable/customize for the :admin namespace:
   #
-  #   config.namespace :admin do |admin|
+    config.namespace :admin do |admin|
   #
   #     # Disable the links entirely
   #     admin.download_links = false
   #
   #     # Only show XML & PDF options
-  #     admin.download_links = [:xml, :pdf]
+      admin.download_links = [:csv, :xml, :json, :contact_list]
   #
   #     # Enable/disable the links based on block
   #     #   (for example, with cancan)
-  #     admin.download_links = proc { can?(:view_download_links) }
+      # admin.download_links = proc { can?(:contact_list) }
   #
-  #   end
+    end
 
   # == Pagination
   #
@@ -292,4 +293,20 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+end
+module ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
+  def build_download_format_links(formats = self.class.formats)
+    params = request.query_parameters.except :format, :commit
+
+    div class: "download_links" do
+      span I18n.t('active_admin.download')
+      formats.each do |format|
+        if format == :contact_list
+          a("Contact List".upcase, href: contact_list_download_path(format: :csv))
+        else
+          a format.upcase, href: url_for(params: params, format: format)
+        end
+      end
+    end
+  end
 end
