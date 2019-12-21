@@ -13,12 +13,13 @@
  *= require_self
 *= require bootstrap-datetimepicker
  */
- 
+
  html { font-size: 1rem; }
 
 @media (min-width: 300px) {
     html { font-size: .9rem; }
 }
+
 @media (min-width: 768px) {
     html { font-size: 1rem; }
 }
@@ -82,3 +83,29 @@
   top: 20%;
   transform: translateY(-50%);
 }
+
+
+/*filter*/
+.icon-more {font-size: 20px;color: #17a2b8;line-height: 1;}
+.icon-more:hover {color: #0f6674;}
+.filter-bx .icon-add {font-size: 40px;line-height: 1;}
+.filter-bx .icon-add:hover {text-decoration: none;}
+.filter-bx .icon-add i{font-style: normal;}
+.filter-bx .fb-actions a {display: block;line-height: 1; color: #727373;cursor: pointer;}
+.filter-bx .fb-actions a:hover {color: #0f6674;}
+
+/*accordian*/
+.accordion-bx .card {border-color: #9e9494;}
+.accordion-bx .card .card-header {display: block;position: relative;background-color: #fff;border-bottom:0;border-radius: 5px;}
+.accordion-bx .card .card-header h4 {display: block;font-size: 16px;font-weight: 400;margin: 0 0 10px 30px;padding-right: 25px;}
+.accordion-bx .card .card-header p {display: block;font-size: 16px;font-weight: 400;margin: 0 0 0px 30px;padding: 10px;background-color: #fff;border: 1px solid #ddd;}
+.accordion-bx .card .card-header .icon{position: absolute;color: #727373;}
+.accordion-bx .card .card-header .icon.icon-edit{right: 20px;}
+.accordion-bx .card .card-header .icon:hover {color: #0f6674;}
+.rotate{
+-webkit-transform: rotate(90deg);  /* Chrome, Safari, Opera */
+  -moz-transform: rotate(90deg);  /* Firefox */
+  -ms-transform: rotate(90deg);  /* IE 9 */
+    transform: rotate(90deg);  /* Standard syntax */
+}
+.accordion-bx .card .collapse label {color: #17a2b8}

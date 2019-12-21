@@ -1,0 +1,108 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <% activities.each do |activity| %>
+      <div id="accordion" class="accordion-bx">
+        <div class="card">
+          <div class="card-header">
+            <a data-toggle="collapse" class="icon icon-arrow" data-parent="#accordion" href="#activity_<%= activity.id%>"><span class="fas fa-chevron-right"></span> </a>
+            <a href="/activities/<%= activity.id %>/edit" class="icon icon-edit" href="#"><span class="fas fa-edit"></span> </a>
+            <h4><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
+            <p><%= activity.subject + ' ' + activity.detail %></p>
+          </div>
+          <div id="activity_<%= activity.id %>" class="card-collapse collapse">
+              <div class="card-body">
+                  <div class="row">
+                    <% if activity.activity_type.contact_toggle == "Show" %>
+                      <div class="col-lg-6 d-flex flex-wrap align-content-center">
+                        <div class="form-group  w-100" >
+                          <label for="contact">
+                            Contact
+                          </label>
+                          <% if activity.activity_type.cost_toggle == "Show" %>
+                            <textarea rows="3" name="contact" class="form-control" disabled><%= activity.contact %></textarea>
+                          <% else %>
+                            <input type="text" name="contact" class="form-control" value="<%= activity.contact %>" disabled>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% else %>
+                    <% end %>
+                    <div class="col-lg-6  ">
+                      <div class="form-group" >
+                        <label for="duration">
+                          Time (minutes)
+                        </label>
+                        <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= activity.duration %>" disabled>
+                      </div>
+                      <% if activity.activity_type.cost_toggle == "Show" %>
+                        <div class="form-group">
+                          <label for="cost">
+                            Cost
+                          </label>
+                          <input type="number" pattern="\d*"/ id="cost" name="cost" class="form-control" value="<%= activity.cost %>" disabled>
+                        </div>
+                      <% else %>
+                      <% end %>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group mb-0" >
+                        <label for="subject">
+                          Details
+                        </label>
+                        <textarea id="detail" name="subject" class="form-control" type="text" rows="3" value="<%= activity.detail %>" disabled> <%= activity.subject + ' ' + activity.detail %></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <% if activity.activity_type.outcome_toggle == "Show" %>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group mb-0" >
+                          <label for="outcome">
+                            Outcome
+                          </label>
+                          <textarea id="outcome" name="outcome" class="form-control" type="text" rows="3" value="<%= activity.outcome %>"disabled><%= activity.outcome %></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                  <% else %>
+                  <% end %>
+
+                  <div class="row ">
+                    <% if activity.activity_type.agent_toggle == "Show" %>
+                      <div class="col-lg-3 offset-lg-3 mb-2">
+                        <label for="agent">
+                          Agent
+                        </label>
+                        <input type="text" id="agent" name="agent" class="form-control" value="<%= activity.agent %>" disabled>
+                      </div>
+                    <% else %>
+                    <% end %>
+                    <% if activity.activity_type.customer_toggle == "Show" %>
+                      <div class="col-lg-3 mb-0">
+                        <div class="form-group mb-0" >
+                          <label for="customer">
+                            Customer
+                          </label>
+                          <input type="text" id="customer" name="customer" class="form-control" value="<%= activity.customer %>" disabled>
+                        </div>
+                      </div>
+                    <% else %>
+                    <% end %>
+                    <div class="col-12">
+                      <input type="hidden" name="property_id" class="form-control" value="<%= activity.property_id %>">
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div style="display: none;">
+  The page shows all the activities related to a particular property.
+  From here you are able to add new activities, add attachments, edit the property,
+  and create reports for your listing.
+  </div>
+</div>
