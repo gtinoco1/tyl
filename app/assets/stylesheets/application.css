@@ -108,4 +108,7 @@
   -ms-transform: rotate(90deg);  /* IE 9 */
     transform: rotate(90deg);  /* Standard syntax */
 }
-.accordion-bx .card .collapse label {color: #17a2b8}
+.accordion-bx .card label {color: #17a2b8}
+.card-padding{
+  padding: 0rem 1.25rem 1.25rem;
+}

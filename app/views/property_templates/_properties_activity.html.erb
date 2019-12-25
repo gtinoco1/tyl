@@ -3,14 +3,14 @@
     <% activities.each do |activity| %>
       <div id="accordion" class="accordion-bx">
         <div class="card">
-          <div class="card-header">
-            <a data-toggle="collapse" class="icon icon-arrow" data-parent="#accordion" href="#activity_<%= activity.id%>"><span class="fas fa-chevron-right"></span> </a>
-            <a href="/activities/<%= activity.id %>/edit" class="icon icon-edit" href="#"><span class="fas fa-edit"></span> </a>
+          <div data-toggle="collapse" data-parent="#accordion" data-target="#activity_<%= activity.id%>" class="card-header">
+            <a class="icon icon-arrow" ><span class="fas fa-chevron-right"></span> </a>
+            <a href="/activities/<%= activity.id %>/edit" class="icon icon-edit activity_edit"><span class="fas fa-edit"></span> </a>
             <h4><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
-            <p><%= activity.subject + ' ' + activity.detail %></p>
+            <p><%= activity.subject.truncate(116) + ' ' + activity.detail.truncate(116) %></p>
           </div>
           <div id="activity_<%= activity.id %>" class="card-collapse collapse">
-              <div class="card-body">
+              <div class="card-body card-padding">
                   <div class="row">
                     <% if activity.activity_type.contact_toggle == "Show" %>
                       <div class="col-lg-6 d-flex flex-wrap align-content-center">
@@ -106,3 +106,8 @@
   and create reports for your listing.
   </div>
 </div>
+<script type="text/javascript">
+  $('.activity_edit').click(function(){
+    $(this).parent().removeAttr('data-target');
+  })
+</script>
