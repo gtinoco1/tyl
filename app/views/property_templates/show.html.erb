@@ -5,7 +5,7 @@
     <h5 class="text-info text-left text-uppercase mb-0">
       <%= @property.address %>
     </h5>
-    <p class="text-secondary mt-0 pb-0"><small><%= @property.city + ", " + @property.state + " " + @property.zipcode %></small></p>
+    <p class="text-secondary mt-0 mb-2 pb-0"><small><%= @property.city + ", " + @property.state + " " + @property.zipcode %></small></p>
   </div>
   <div class="col-lg-3 col-3">
     <p class="text-dark text-center font-weight-bold mb-0">
@@ -15,7 +15,7 @@
         <%= number_to_currency(@property.prices.order(date: :desc).first.amount, precision: 0) %>
       <% end %>
     </p>
-    <p class="text-secondary text-center pt-0 pb-0"> <small>
+    <p class="text-secondary text-center mb-2 pt-0 pb-0"> <small>
         <a href="/properties/prices/<%= @property.id %>">
           view/change</a>
       </small></p>
@@ -24,8 +24,8 @@
 
 <div class="row mb-0">
   <div class="col-lg-8 offset-lg-2">
-    <a class="btn btn-outline-info pt-0 pb-1 pr-2 pl-2" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      <span><small> more options...</small></span>
+    <a data-toggle="collapse" class="icon-more" href="#collapseExample" role="button">
+      <i class="fas fa-ellipsis-h"  data-toggle="tooltip" title="More Options"></i>
     </a>
 
     <div class="collapse" id="collapseExample">
@@ -53,120 +53,60 @@
             </a>
           </div>
         </div>
-
       </div>
     </div>
-
-
     <hr>
   </div>
 </div>
-
-<div class="row mb-3">
-  <div class="col-lg-4 offset-md-2 col-6">
-    <h5 class="text-secondary font-weight-light text-left pt-2">Activity Log </h5>
-  </div>
-  <div class="col-lg-4 col-6 text-center">
-    <a href="/activities/new/<%= @property.id %>" class="btn btn-block btn-outline-info">
-      Add Activity
-    </a>
-  </div>
-</div>
-
-<div class="row mb-3">
+ <div class="row mb-0">
   <div class="col-md-8 offset-md-2">
-
-    <div class="list-group">
-      <% @property.activities.order(date: :desc).each do |activity| %>
-
-        <a href="../activities/<%= activity.id %>/" class="list-group-item list-group-item-action">
-          <div class="row">
-            <div class="col text-center">
-              <%= activity.activity_type.title %>
-            </div>
-            <div class="col text-center">
-
-              <% if activity.activity_type.subject_toggle == "Show" %>
-
-                  <% if activity.subject.length > 40 %>
-                    <div class="activity-content-<%= activity.id %>">
-                      <%= truncate(activity.subject, length: 40) %>
-                    </div>
-                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2; display: block;">Show more</div>
-                    <div class="read-less-<%= activity.id %> text-primary" style="z-index: 2; display: none;">Show less</div>
-
-                    <script>
-                      $(".read-more-<%= activity.id %>").on('click', function(e) {
-                        e.preventDefault()
-                        $(".activity-content-<%= activity.id %>").html('<%= escape_javascript activity.subject %>')
-                        $(".read-less-<%= activity.id %>").css({"display": "block"});
-                        $(".read-more-<%= activity.id %>").css({"display": "none"});
-                      })
-                      $(".read-less-<%= activity.id %>").on('click', function(e) {
-                        e.preventDefault()
-                        $(".activity-content-<%= activity.id %>").html('<%= escape_javascript truncate(activity.subject, length: 40) %>')
-                        $(".read-more-<%= activity.id %>").css({"display": "block"});
-                        $(".read-less-<%= activity.id %>").css({"display": "none"});
-                      })
-                    </script>
-                  <% else %>
-                    <%= activity.subject %>
-                  <% end %>
-              <% else %>
-                <div>
-                  <% if activity.detail.length > 40 %>
-                    <div class="subject-content-<%= activity.id %>">
-                      <%= truncate(activity.detail, length: 40) %>
-                    </div>
-                    <div class="read-more-<%= activity.id %> text-primary" style="z-index: 2; display: block;">Show more</div>
-                    <div class="read-less-<%= activity.id %> text-primary" style="z-index: 2; display: none;">Show less</div>
-
-                    <script>
-                      $(".read-more-<%= activity.id %>").on('click', function(e) {
-                        e.preventDefault()
-                        $(".subject-content-<%= activity.id %>").html('<%= escape_javascript activity.detail %>')
-                        $(".read-less-<%= activity.id %>").css({"display": "block"});
-                        $(".read-more-<%= activity.id %>").css({"display": "none"});
-                      })
-                      $(".read-less-<%= activity.id %>").on('click', function(e) {
-                        e.preventDefault()
-                        $(".subject-content-<%= activity.id %>").html('<%= escape_javascript truncate(activity.detail, length: 40) %>')
-                        $(".read-more-<%= activity.id %>").css({"display": "block"});
-                        $(".read-less-<%= activity.id %>").css({"display": "none"});
-                      })
-                    </script>
-                  <% else %>
-                    <%= activity.detail %>
-                  <% end %>
-                <div>
-              <% end %>
-            </div>
-            <div class="col text-center">
-              <%= activity.date.strftime("%b %d")  %>
-            </div>
-
-          </div>
-        </a>
-
-
-      <% end  %>
+    <div class="filter-bx d-flex flex-wrap mb-4">
+      <h4 class="my-auto">Activity Log</h4>
+      <div class="d-block fb-actions my-auto ml-3">
+        <a id = "asc" data-toggle="tooltip" title="Ascending" class="pb-2"><span class="fas fa-chevron-up"></span> </a>
+        <a id = "desc" data-toggle="tooltip" data-placement="bottom" title="Descending"><span class="fas fa-chevron-down"></span> </a>
+      </div>
+      <a class="d-block ml-auto text-center icon-add text-info my-auto" href="/activities/new/<%= @property.id %>" data-toggle="tooltip" title="Add a new activity">
+        <i>+</i>
+      </a>
     </div>
-
-
   </div>
 </div>
 
-
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-
-  </div>
-</div>
-
-<div style="display: none;">
-  The page shows all the activities related to a particular property.
-  From here you are able to add new activities, add attachments, edit the property,
-  and create reports for your listing.
+<div id="order_manage">
+  <%= render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>
 </div>
 
 <% end %>
+<script>
+    $('[data-toggle="tooltip"]').tooltip();
+    $('#asc').click(function(){
+      $('#order_manage').empty();
+      $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :asc)} %>");
+      for_collapse();
+    })
+    $('#desc').click(function(){
+      $('#order_manage').empty();
+      $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>");
+      for_collapse();
+    })
+    for_collapse();
+
+    function for_collapse() {
+      $(".collapse.in").each(function(){
+        $(this).siblings(".card-heading").find(".icon-arrow").addClass("rotate");
+      });
+
+      // Toggle plus minus icon on show hide of collapse element
+      $(".collapse").on('show.bs.collapse', function(){
+        $(".collapse").parent().find(".rotate").removeClass("rotate");
+        $(".collapse").removeClass("show");
+        $(".collapse").siblings().children('p').show();
+        $(this).siblings().children('p').hide();
+        $(this).parent().find(".icon-arrow").addClass("rotate");
+      }).on('hide.bs.collapse', function(){
+        $(this).parent().find(".icon-arrow").removeClass("rotate");
+        $(this).siblings().children('p').show();
+      });
+    }
+</script>
