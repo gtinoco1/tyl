@@ -67,14 +67,14 @@ Rails.application.configure do
   
     config.action_mailer.delivery_method = :smtp
   
-  config.action_mailer.smtp_settings = {
-    authentication: "plain",
-    address: "smtp.mailgun.org",
-    port: 587,
-    domain: "mg.trackyourlisting.com",
-    :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
-    :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
-  }
+#   config.action_mailer.smtp_settings = {
+#     authentication: "plain",
+#     address: "smtp.mailgun.org",
+#     port: 587,
+#     domain: "mg.trackyourlisting.com",
+#     :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
+#     :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
+#   }
   
   # config.action_mailer.delivery_method = :letter_opener
   # config.action_mailer.perform_deliveries = true
