@@ -20,12 +20,12 @@
         Activity Type
       </label>
       <!-- <input type="text" id="activity_type_id" name="activity_type_id" class="form-control" value="<%= @activity.activity_type.title %>" > -->
-    <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title, @activity.activity_type_id), :class => "form-control", :type => "text" ) %>
-    </div>
+     <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title, @activity.activity_type_id), :class => "form-control", :type => "text" ) %>
+      </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <input type="hidden" name="activity_type_id" class="form-control" value="<%= @activity.activity_type_id %>">
-    </div>
+    </div> -->
 
     <div class="col-lg-3 mb-2">
       <label for="date">
