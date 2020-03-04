@@ -8,7 +8,7 @@ end
 gem "activeadmin"
 gem "devise"
 gem "jbuilder", "~> 2.5"
-gem "puma", "~> 3.7"
+gem "puma", "~> 3.12"
 gem "rails", "~> 5.1.6.2"
 gem "sass-rails", "~> 5.0"
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
