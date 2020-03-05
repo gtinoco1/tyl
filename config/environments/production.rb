@@ -83,24 +83,34 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  
+
   config.action_mailer.default_url_options = { :host => 'www.trackyourlisting.com',
   protocol: 'https'}
-  
+
   Rails.application.routes.default_url_options[:host] = 'track-your-listing.herokuapp.com'
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = false
 config.action_mailer.default :charset => "utf-8"
-  
+
+  # config.action_mailer.smtp_settings = {
+  #   authentication: "plain",
+  #   address: "smtp.mailgun.org",
+  #   port: 587,
+  #   enable_starttls_auto: true,
+  #   domain: "mg.trackyourlisting.com",
+  #   :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
+  #   :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
+  # }
+
   config.action_mailer.smtp_settings = {
-    authentication: "plain",
-    address: "smtp.mailgun.org",
-    port: 587,
-    enable_starttls_auto: true,
-    domain: "mg.trackyourlisting.com",
-    :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
-    :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
+    address: ENV['SENDGRID_ADDRESS'],
+    domain: ENV['SENDGRID_DOMAIN'],
+    port: ENV['SENDGRID_PORT'],
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    authentication: :login,
+    enable_starttls_auto: true
   }
 end

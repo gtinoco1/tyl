@@ -1,5 +1,5 @@
 Rails.application.configure do
-  
+
     config.force_ssl = true
   path = Rails.root.join("whitelist.yml")
   default_whitelist_path = Rails.root.join("default_whitelist.yml")
@@ -11,7 +11,7 @@ Rails.application.configure do
     whitelisted_ips = whitelisted_ips.concat(YAML.load_file(default_whitelist_path))
   end
   config.web_console.whitelisted_ips = whitelisted_ips
-  config.action_mailer.default_url_options = { host: "tyl-gtinoco1.c9users.io" }
+  # config.action_mailer.default_url_options = { host: "tyl-gtinoco1.c9users.io" }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -64,18 +64,27 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  
+
     config.action_mailer.delivery_method = :smtp
-  
+    config.action_mailer.default_url_options = { host: "localhost:3000" }
+  # config.action_mailer.smtp_settings = {
+  #   authentication: "plain",
+  #   address: "smtp.mailgun.org",
+  #   port: 587,
+  #   domain: "mg.trackyourlisting.com",
+  #   :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
+  #   :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
+  # }
   config.action_mailer.smtp_settings = {
-    authentication: "plain",
-    address: "smtp.mailgun.org",
-    port: 587,
-    domain: "mg.trackyourlisting.com",
-    :user_name => ENV.fetch("MAILGUN_SMTP_LOGIN"),
-    :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
+    address: ENV['SENDGRID_ADDRESS'],
+    domain: ENV['SENDGRID_DOMAIN'],
+    port: ENV['SENDGRID_PORT'],
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    authentication: :login,
+    enable_starttls_auto: true
   }
-  
+
   # config.action_mailer.delivery_method = :letter_opener
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.default_url_options = { host: "localhost:3000" }
