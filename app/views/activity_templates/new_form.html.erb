@@ -11,8 +11,7 @@
 
 <form action="/create_activity" method="post">
 
-  <div class="row mb-3">
-
+  <div class="row mb-1">
 
     <div class="col-lg-4 offset-lg-3 mb-3">
       <label for="activity_type_id">
@@ -30,19 +29,55 @@
       </label>
       <input class="form-control" type="date" id="date" name="date" value="<%= Date.current.strftime('%Y-%m-%d') %>">
     </div>
+</div>
 
-    <div class="form-group">
-      <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
+ <div class="row mb-3">
+
+       <div class="col-lg-4 offset-lg-3 mb-2">
+        <label for="contact">
+          Contact
+        </label>
+        <input type="text" id="contact" name="contact" class="form-control" value="<%= @activity.contact %>">
+      </div>
+
+    <div class="col-lg-2 mb-0">
+      <label for="duration">
+        Time (minutes)
+      </label>
+      <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @activity.duration %>">
     </div>
 
-  </div>
+</div>
 
-  <div class="row">
-    <div class="col-lg-6 offset-lg-3">
-      <button class="btn btn-block btn-outline-success">
-        Next
-      </button>
+    <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
+ 
+
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3 mb-0">
+      <label for="subject">
+        Subject/Details
+      </label>
+      <textarea id="detail" name="subject" class="form-control" type="text" rows="3" value=""> </textarea>
     </div>
   </div>
+
+
+  <div class="row mb-4">
+        <div class="col-lg-3 offset-lg-3">
+        <label for="cost">
+          Cost 
+        </label>
+        <input type="number" pattern="\d*"/ id="cost" placeholder="optional" name="cost" class="form-control" value="<%= @activity.cost %>">
+      </div>
+  </div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <button class="btn btn-block btn-outline-success">
+      Save activity
+    </button>
+  </div>
+</div>
+
 </form>
 
