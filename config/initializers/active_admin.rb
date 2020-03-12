@@ -302,11 +302,12 @@ module ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
       span I18n.t('active_admin.download')
       formats.each do |format|
         if format == :contact_list
-          a("Contact List".upcase, href: contact_list_download_path(format: :csv))
+          a("Contact List".upcase, href: contact_list_download_path(format: :csv), class: "download-url")
         else
-          a format.upcase, href: url_for(params: params, format: format)
+          a format.upcase, href: url_for(params: params, format: format), class: "download-url"
         end
       end
     end
+
   end
 end
