@@ -18,62 +18,18 @@
       <input type="text" id="title" name="title" class="form-control">
     </div>
 
-  </div>
-</div>
-
   <div class="form-group">
     <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
   </div>
   
-  <div class="form-group">
+    <input type="hidden" name="subject_toggle" class="form-control" value="Show">
+    <input type="hidden" name="contact_toggle" class="form-control" value="Show">
+    <input type="hidden" name="duration_toggle" class="form-control" value="Show">
+    <input type="hidden" name="cost_toggle" class="form-control" value="Show">
     <input type="hidden" name="detail_toggle" class="form-control" value="Hide">
-  </div>
-  
-  <div class="row">
-    <div class="col-lg-8 offset-lg-2">
-
-      <div class = "row mb-2">
-
-        <div class="col-lg-3 col-6 col-sm-6">
-          Subject/Details
-          <%= select_tag(:subject_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
-        </div>
-        <div class="col-lg-3 col-6 col-sm-6">
-          Contact
-          <%= select_tag(:contact_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
-        </div>
-        <div class="col-lg-3 col-6 col-sm-6">
-          Duration
-          <%= select_tag(:duration_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
-        </div>
-        <div class="col-lg-3 col-6 col-sm-6">
-          Cost
-          <%= select_tag(:cost_toggle, options_for_select(["Hide", "Show"]), :class => "form-control") %>
-        </div>
-
-
-      </div>
-
-      <div class = "row mb-2">
-
-        <!--<div class="col-lg-3 col-6 col-sm-6">-->
-        <!--  Details-->
-        <!--  %= select_tag(:detail_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>-->
-        <!--</div>-->
-        
-        <div class="col-lg-3 col-6 col-sm-6">
-          Outcome
-          <%= select_tag(:outcome_toggle, options_for_select(["Hide", "Show"]), :class => "form-control") %>
-        </div>
-        <div class="col-lg-3 col-6 col-sm-6">
-          Agent
-          <%= select_tag(:agent_toggle, options_for_select(["Hide", "Show"]), :class => "form-control") %>
-        </div>
-        <div class="col-lg-3 col-6 col-sm-6">
-          Customer
-          <%= select_tag(:customer_toggle, options_for_select(["Hide", "Show"]), :class => "form-control") %>
-        </div>
-      </div>
+    <input type="hidden" name="outcome_toggle" class="form-control" value="Hide">
+    <input type="hidden" name="agent_toggle" class="form-control" value="Hide">
+    <input type="hidden" name="customer_toggle" class="form-control" value="Hide">
 
       <button class="btn btn-block btn-outline-success">
         Save
@@ -81,10 +37,6 @@
 
     </form>
     <hr>
-
-    <a href="/activity_types">
-      Go back
-    </a>
 
   </div>
 </div>
