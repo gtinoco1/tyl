@@ -15,7 +15,7 @@ module ActiveAdmin
 
 
         div :id => "loader-div", :class => "loader" do
-          image_tag "/assets/loader/loading.gif"
+          image_tag "/logos/loading.gif"
         end
       end
 
