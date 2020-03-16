@@ -9,14 +9,26 @@ module ActiveAdmin
         @menu = menu
         @utility_menu = @namespace.fetch_menu(:utility_navigation)
 
-        site_title @namespace
-        global_navigation @menu, class: 'header-item tabs'
-        utility_navigation @utility_menu, id: "utility_nav", class: 'header-item tabs'
-
+        build_site_title
+        build_global_navigation
+        build_utility_navigation
 
         div :id => "loader-div", :class => "loader" do
           image_tag "/logos/loading.gif"
         end
+      end
+
+
+      def build_site_title
+        insert_tag view_factory.site_title, @namespace
+      end
+
+      def build_global_navigation
+        insert_tag view_factory.global_navigation, @menu, class: 'header-item tabs'
+      end
+
+      def build_utility_navigation
+        insert_tag view_factory.utility_navigation, @utility_menu, id: "utility_nav", class: 'header-item tabs'
       end
 
     end
