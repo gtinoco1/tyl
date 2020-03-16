@@ -13,8 +13,8 @@ module ActiveAdmin
         build_global_navigation
         build_utility_navigation
 
-        div :id => "loader-div", :class => "loader" do
-          image_tag "/logos/loading.gif"
+        div :id => "loader-div", :class => "loader"  do
+          image_tag "/logos/loading.gif", width: "30px", height: "30px"
         end
       end
 
