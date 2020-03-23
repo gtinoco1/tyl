@@ -6,7 +6,7 @@
       </h5>
 
       <div class="card-body">
-      
+
         <% form_html_options = { novalidate: true, class: "mb-3" } %>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: form_html_options) do |f| %>
@@ -28,7 +28,7 @@
             </div>
           <% end -%>
 
-          <%= f.submit "Log in", class: "btn btn-outline-primary btn-block" %>
+          <%= f.submit "Log in", class: "btn btn-outline-primary btn-block show-loader" %>
 
           <hr>
 
