@@ -1,0 +1,2 @@
+$('#search_result').empty();
+ $("#search_result").append("<%= j render partial: 'property_templates/show_all_properties_list', locals: {properties_active: @search} %>");

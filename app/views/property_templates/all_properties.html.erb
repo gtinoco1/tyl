@@ -4,15 +4,21 @@
       ALL Properties
     </h4>
   </div>
-
-  <div class="col-lg-1 offset-lg-1 col-2 mb-0">
-    <section class="vert-custom">
-    <a class="text-center text-info" href="/properties/new">
-      <h1 class="font-weight-light mb-0">+</h1>
-    </a>
-    </section>
+  <div class="col-lg-2 col-2 mb-0">
+    <div class="d-flex align-items-center justify-content-end ">
+      <div class="search-box">
+        <input type="text" name="seach" placeholder="Search..." class="hide form-control" id="search_txt" />
+        <a class="text-center text-info remove-loader" id="search_icon">
+          <i class="fas fa-search"></i>
+        </a>
+      </div>
+      <span class="vert-custom">
+      <a class="text-center text-info" href="/properties/new">
+        <i class="fas fa-plus"></i>
+      </a>
+      </span>
+    </div>
   </div>
-
 </div>
 
 <div class="row">
@@ -20,85 +26,18 @@
     <hr class="mt-0 mb-2" style="height:10px">
   </div>
 </div>
-
-
-<% if @properties_active.count == 0 %>
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <h5 class="font-weight-light text-center text-uppercase">
-        Add a property to get started.
-      </h5>
-    </div>
-  </div>
-<% else %>
-<% end %>
-
-<% if @properties_active.where(listing_type: "For Sale").count > 0 %>
-
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <h5 class="text-secondary text-uppercase">
-        For Sale
-      </h5>
-    </div>
-  </div>
-
-<% else %>
-<% end %>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-
-    <% @properties_active.where(listing_type: "For Sale").each do |property| %>
-
-      <div>
-        <a href="properties/<%= property.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
-        </a>
-      </div>
-
-    <% end %>
-
-  </div>
+<div id="search_result">
+  <%= render partial: 'property_templates/show_all_properties_list', locals: {properties_active: @properties_active} %>
 </div>
-
-<% if @properties_active.where(listing_type: "For Rent").count > 0 %>
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <h5 class="text-secondary text-uppercase">
-        For Rent
-      </h5>
-    </div>
-  </div>
-<% else %>
-<% end %>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-
-    <% @properties_active.where(listing_type: "For Rent").each do |property| %>
-
-      <div>
-        <a href="properties/<%= property.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
-        </a>
-      </div>
-
-    <% end %>
-
-  </div>
-</div>
-
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <hr>
     <h5>
       <a href="/properties/new" class="btn btn-block btn-outline-secondary">
         Add a new property
+        <%= @search %>
       </a>
-
     </h5>
-
   </div>
 </div>
 
@@ -110,3 +49,28 @@
     </a>
   </div>
 </div>
+
+<script type="text/javascript">
+  $( "#search_icon" ).click(function() {
+    if ($("#search_txt").hasClass("hide"))
+    {
+      $("#search_txt").removeClass("hide")
+      $("#search_txt").addClass("show")
+    }
+    else{
+      $("#search_txt").removeClass("show")
+      $("#search_txt").addClass("hide")
+    }
+
+  });
+  $(window).on('load', function() {
+    $( "#search_txt" ).keyup(function(e) {
+      $.ajax({
+        url: "/search",
+        data: {
+          keyword: this.value
+        }
+      });
+    });
+  });
+</script>

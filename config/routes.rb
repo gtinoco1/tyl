@@ -205,6 +205,7 @@ Rails.application.routes.draw do
   # READ
   get("/", {:controller => "properties", :action => "index"})
   get("/properties/:id_to_display", {:controller => "properties", :action => "show"})
+  get("/search", {:controller => "properties", :action => "search"})
   get("/all_properties", {:controller => "properties", :action => "all"})
   get("/report_type/:id_to_display", {:controller => "properties", :action => "report_type"})
   get("/report_generator_pdf/:id_to_display", {:controller => "properties", :action => "report_generator_pdf"})

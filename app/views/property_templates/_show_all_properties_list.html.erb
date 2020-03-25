@@ -1,0 +1,57 @@
+<% if  properties_active.count == 0  %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="font-weight-light text-center text-uppercase">
+        <% if @search.nil? %> Add a property to get started. <% end %>
+        <% if !@search.nil?  && @search.count == 0 %> No search result found <% end %>
+      </h5>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<% if properties_active.where(listing_type: "For Sale").count > 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="text-secondary text-uppercase">
+        For Sale
+      </h5>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <% properties_active.where(listing_type: "For Sale").each do |property| %>
+      <div>
+        <a href="properties/<%= property.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% if properties_active.where(listing_type: "For Rent").count > 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="text-secondary text-uppercase">
+        For Rent
+      </h5>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <% properties_active.where(listing_type: "For Rent").each do |property| %>
+      <div>
+        <a href="properties/<%= property.id %>">
+          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>

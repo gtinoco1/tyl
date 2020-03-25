@@ -6,7 +6,6 @@ class PropertiesController < ApplicationController
 
   def all
     @properties_active = current_user.properties.where(status: "Active")
-
     render("property_templates/all_properties.html.erb")
   end
 
@@ -190,5 +189,13 @@ class PropertiesController < ApplicationController
     @property = Property.find(params.fetch("id_to_display"))
     authorize! :manage, @property
     render("property_templates/property_attachments.html.erb")
+  end
+
+  def search
+    @parameter = params[:keyword]
+    @search = current_user.properties.where("lower(address) LIKE :search", search: "%#{@parameter}%")
+    respond_to do |format|
+      format.js { render "property_templates/search.js.erb" }
+    end
   end
 end
