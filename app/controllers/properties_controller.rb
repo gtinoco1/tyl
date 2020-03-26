@@ -5,7 +5,7 @@ class PropertiesController < ApplicationController
   end
 
   def all
-    @properties_active = current_user.properties.where(status: "Active")
+    @properties_active = current_user.properties.where(status: "Active").order(:sort)
     render("property_templates/all_properties.html.erb")
   end
 
@@ -96,7 +96,7 @@ class PropertiesController < ApplicationController
 
     if @property.valid?
       @property.save
-
+      @property.update(sort: @property.id)
       redirect_to("/all_properties", :notice => "Property created successfully.")
     else
       render("property_templates/new_form_with_errors.html.erb")
@@ -193,7 +193,7 @@ class PropertiesController < ApplicationController
 
   def search
     @parameter = params[:keyword]
-    @search = current_user.properties.where("lower(address) LIKE :search", search: "%#{@parameter}%")
+    @search = current_user.properties.where("lower(address) LIKE :search", search: "%#{@parameter}%").order(:sort)
     respond_to do |format|
       format.js { render "property_templates/search.js.erb" }
     end

@@ -1,5 +1,8 @@
-$('#loader-div').hide();
 
+$('#loader-div').hide();
+$(function() {
+  $('.sortable').railsSortable();
+});
 $(window).on('load', function() {
   $('button').addClass('show-loader');
   $('a').addClass('show-loader');
@@ -8,7 +11,6 @@ $(window).on('load', function() {
   $('.show-loader').on("click",function(){
     $('#loader-div').show();
   });
-
 })
 $(window).bind('load', function() {
  $('#loader-div').hide();

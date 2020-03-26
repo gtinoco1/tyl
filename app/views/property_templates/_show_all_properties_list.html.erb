@@ -23,13 +23,13 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    <% properties_active.where(listing_type: "For Sale").each do |property| %>
-      <div>
-        <a href="properties/<%= property.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
-        </a>
-      </div>
-    <% end %>
+    <div class="sortable">
+      <% properties_active.where(listing_type: "For Sale").each_with_sortable_id do |property, sortable_id| %>
+        <div id="<%= sortable_id %>">
+            <div class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color"> <a href="properties/<%= property.id %>"> <%= property.address %></a></div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -46,12 +46,12 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    <% properties_active.where(listing_type: "For Rent").each do |property| %>
-      <div>
-        <a href="properties/<%= property.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
-        </a>
-      </div>
-    <% end %>
+    <div class="sortable">
+      <% properties_active.where(listing_type: "For Rent").each_with_sortable_id do |property, sortable_id| %>
+          <div id="<%= sortable_id %>">
+            <div type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color"> <a href="properties/<%= property.id %>"><%= property.address %>  </a></div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

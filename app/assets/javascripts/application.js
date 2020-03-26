@@ -10,7 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery_ujs
+//= require rails-ujs
+//= require jquery-ui/widgets/sortable
+//= require rails_sortable
 //= require moment
 //= require bootstrap-datetimepicker
-//= require rails-ujs
 //= require loading
+//= require touch-patch

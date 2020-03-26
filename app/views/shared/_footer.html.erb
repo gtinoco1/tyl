@@ -48,13 +48,13 @@
     &nbsp;
   </div>
     <div>
-    
+
   </div>
 </nav>
 
-<div class="fixed-bottom d-lg-none d-xl-none border border-bottom-0 border-left-0 border-right-0 border-secondary bg-white " style="">
+<div class="fixed-bottom d-lg-none d-xl-none border border-bottom-0 border-left-0 border-right-0 border-secondary bg-white resize-bottom" style="">
   <div class="row text-center flex-nowrap mt-0 mb-0 pb-0 pt-1">
-    
+
     <div class="col">
       
       <% if current_page?('/') %>
@@ -62,7 +62,7 @@
       <% else %>
       <a class="btn text-secondary pt-1 pb-0" onclick="this.blur();" href='javascript:history.back()'>
       <% end %>
-        
+
         <i class="fas fa-chevron-left fa-lg pb-0 mb-0" style="-webkit-text-stroke: 1px #797D7F;color:transparent;"></i>
         <div class="py-0"><small><span class="align-top font-weight-bold">Back</span></small></div>
       </a>
@@ -81,7 +81,7 @@
         </a>
       <% end %>
     </div>
-    
+
         <div class="col">
       <% if current_page?('/buyers') %>
         <a class="btn text-info pt-1 pb-0" onclick="this.blur();" href="/buyers">

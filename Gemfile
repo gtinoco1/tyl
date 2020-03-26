@@ -33,6 +33,9 @@ gem 'axlsx_rails'
 gem 'acts_as_xlsx'
 gem 'cancancan'
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'rails_sortable'
 group :production do
   gem "pg", "~> 0.18"
   gem "rails_12factor"
