@@ -193,7 +193,7 @@ class PropertiesController < ApplicationController
 
   def search
     @parameter = params[:keyword]
-    @search = current_user.properties.where("lower(address) LIKE :search", search: "%#{@parameter}%").order(:sort)
+    @search = current_user.properties.where("lower(address) LIKE lower(:search)", search: "%#{@parameter}%").order(:sort)
     respond_to do |format|
       format.js { render "property_templates/search.js.erb" }
     end

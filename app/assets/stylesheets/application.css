@@ -137,13 +137,12 @@
 }
 .search-box{
   position: relative;
-  padding-right: 10px;
-
+  padding-left: 5px;
 }
 .search-box .form-control{
   position: absolute;
   bottom: 0;
-  right: 30px;
+  left: 30px;
   width: 200px;
   background: #fff;
   z-index: 9;
@@ -159,9 +158,29 @@
 .text-color a{
   color: #fff
 }
+.custom-plus-icon{
+  display: block !important;
+}
+.custom-plus-image{
+  display: none !important;
+}
 @media screen and (max-width:575px){
   .search-box .form-control{
     width: 147px;
+  }
+  .custom-plus-image{
+    position: fixed;
+    bottom: 65px;
+    right: 16px;
+    z-index: 99;
+    display: block !important;
+  }
+
+  .custom-plus-image img{
+    width: 50px;
+  }
+  .custom-plus-icon{
+    display: none !important;
   }
 }
 @media screen and (max-width:390px){
