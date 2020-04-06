@@ -189,7 +189,7 @@
     width: 120px;
   }
   .resize-bottom.fixed-bottom {
-    bottom: 1px;
+    bottom: 2px;
   }
 }
 @media screen and (max-width:360px){
