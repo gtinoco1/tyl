@@ -334,7 +334,6 @@ GEM
       rails
       rubyzip (~> 1)
     rails_serve_static_assets (0.0.5)
-    rails_sortable (1.4.0)
     rails_stdout_logging (0.0.5)
     railties (5.1.6.2)
       actionpack (= 5.1.6.2)
@@ -352,6 +351,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    recaptcha (5.5.0)
+      json
     regexp_parser (1.7.0)
     responders (3.0.0)
       actionpack (>= 5.0)
@@ -507,14 +508,14 @@ DEPENDENCIES
   rails (~> 5.1.6.2)
   rails_12factor
   rails_real_favicon
-  rails_sortable
+  recaptcha
   rspec-html-matchers
   rspec-rails
   rubyzip (~> 1.3.0)
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0f)
-  sqlite3
+  sqlite3 (~> 1.3.6)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)

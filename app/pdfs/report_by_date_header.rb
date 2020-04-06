@@ -222,7 +222,7 @@ class ReportByDateHeader < Prawn::Document
          @cost_check == "on" ? activity.cost.to_i : nil,
          @duration_check == "on" ? activity.duration.to_i : nil].compact
         end
-     else
+     elsif @report_type == "date_desc"
       @total_min = 0
       @property.activities.order(date: :desc).where(:date => (@start_date..@end_date)).map do |activity|
         @total_min = @total_min + activity.duration.to_i
@@ -232,7 +232,18 @@ class ReportByDateHeader < Prawn::Document
          @contact_check == "on" ? activity.contact + "\n" + activity.agent + "\n" + activity.customer : nil,
          @cost_check == "on" ? activity.cost.to_i : nil,
          @duration_check == "on" ? activity.duration.to_i : nil].compact
-      end
+       end
+     elsif @report_type == "custom"
+      @total_min = 0
+      @property.activities.order(:sort).where(:date => (@start_date..@end_date)).map do |activity|
+        @total_min = @total_min + activity.duration.to_i
+        [activity.date.strftime("%b %d"),
+         activity.activity_type.title,
+         @subject_check == "on" ? activity.subject + "\n" + activity.detail + "\n" + activity.outcome : nil,
+         @contact_check == "on" ? activity.contact + "\n" + activity.agent + "\n" + activity.customer : nil,
+         @cost_check == "on" ? activity.cost.to_i : nil,
+         @duration_check == "on" ? activity.duration.to_i : nil].compact
+       end
     end
   end
 end

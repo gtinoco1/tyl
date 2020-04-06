@@ -35,8 +35,7 @@ gem 'cancancan'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'rails_sortable'
-
+gem "recaptcha"
 gem 'coffee-rails'
 group :production do
   gem "pg", "~> 0.18"
@@ -52,7 +51,7 @@ group :development, :test do
   gem "draft_log", github: "firstdraft/draft_log"
   gem "grade_runner", github: "firstdraft/grade_runner"
   gem "pry-rails"
-   gem "sqlite3"
+   gem "sqlite3", '~> 1.3.6'
   gem "web_git", github: "firstdraft/web_git"
 end
 

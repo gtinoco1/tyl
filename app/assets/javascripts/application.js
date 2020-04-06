@@ -13,7 +13,6 @@
 //= require jquery_ujs
 //= require rails-ujs
 //= require jquery-ui/widgets/sortable
-//= require rails_sortable
 //= require moment
 //= require bootstrap-datetimepicker
 //= require loading

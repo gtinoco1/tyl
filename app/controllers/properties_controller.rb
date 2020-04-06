@@ -66,7 +66,7 @@ class PropertiesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        if @report_type == "date_asc" || @report_type == "date_desc"
+        if @report_type == "date_asc" || @report_type == "date_desc" || @report_type == "custom"
           pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
                                     @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle)
         elsif @report_type == "activity_type"
@@ -193,9 +193,40 @@ class PropertiesController < ApplicationController
 
   def search
     @parameter = params[:keyword]
-    @search = current_user.properties.where("lower(address) LIKE lower(:search)", search: "%#{@parameter}%").order(:sort)
+    @properties_active = current_user.properties.where("lower(address) LIKE lower(:search)", search: "%#{@parameter}%").order(:sort)
     respond_to do |format|
       format.js { render "property_templates/search.js.erb" }
+    end
+  end
+
+  def sort_properties
+    @sorted_order_array = params[:keyword]
+    @properties = current_user.properties.where(status: "Active").where(listing_type: params[:listing_type].split("-").map(&:capitalize)*' ').order(:sort)
+      p "----",current_user.properties.where(status: "Active").where(listing_type: params[:listing_type].split("-").map(&:capitalize)*' ').order(:sort).pluck(:id, :sort)
+      @sorted_order_array.each do |ary|
+        @properties.find_by(id: @sorted_order_array[ary][0].to_i).update(sort: @sorted_order_array[ary][1].to_i)
+      end
+  end
+
+  def sort_properties_activity
+    @sorted_order_array = params[:keyword]
+    @property_id = params[:property_id]
+    @activities = Property.find_by(id: @property_id).activities.order(:sort)
+    @activities.each_with_index do |activity, index|
+      activity.update(sort: @sorted_order_array[index].to_i)
+    end
+    @sorted_order_array.each do |ary|
+      @activities.find_by(id: @sorted_order_array[ary][0].to_i).update(sort: @sorted_order_array[ary][1].to_i)
+    end
+
+    @property = Property.find_by(id: @property_id)
+  end
+
+  def sort_custom_activity
+    @parameter = params[:keyword]
+    @property = Property.find_by(id: @parameter)
+    respond_to do |format|
+      format.js { render "property_templates/activity_custom_sort.js.erb" }
     end
   end
 end

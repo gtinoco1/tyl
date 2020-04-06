@@ -6,4 +6,10 @@ namespace :update do
        prop.update_attribute :sort, prop.id
     end
   end
+
+  task :update_activity_sort_field => :environment  do
+    Activity.all.each do |activity|
+       activity.update_attribute :sort, activity.id
+    end
+  end
 end

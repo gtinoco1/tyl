@@ -58,20 +58,22 @@
     <hr>
   </div>
 </div>
- <div class="row mb-0">
-  <div class="col-md-8 offset-md-2">
+ <div class="row mb-0 change-rowSize">
+  <div class="col-md-8 offset-md-2 for-uper-section">
     <div class="filter-bx d-flex flex-wrap mb-4">
       <h4 class="my-auto">Activity Log</h4>
-      <div class="d-block fb-actions my-auto ml-3">
-        <a id = "asc" data-toggle="tooltip" title="Ascending" class="pb-2 remove-loader"><span class="fas fa-chevron-up"></span> </a>
-        <a id = "desc" data-toggle="tooltip" data-placement="bottom" title="Descending" class="remove-loader"><span class="fas fa-chevron-down"></span> </a>
+      <div class="master-icon" id="show_sort_option" data-toggle="modal" data-target="#myModal">
+        <img src="/logos/master_icon.png" />
       </div>
-      <a class="d-block ml-auto text-center icon-add text-info my-auto custom-plus-icon" href="/activities/new/<%= @property.id %>" data-toggle="tooltip" title="Add a new activity">
+      <a class="ml-auto text-center icon-add text-info my-auto custom-plus-icon plus-icon" href="/activities/new/<%= @property.id %>" data-toggle="tooltip" title="Add a new activity">
         <i>+</i>
       </a>
-      <a class="d-block ml-auto text-center icon-add text-info my-auto custom-plus-image" href="/activities/new/<%= @property.id %>" data-toggle="tooltip" title="Add a new activity">
+      <a class="ml-auto text-center icon-add text-info my-auto custom-plus-image plus-icon" href="/activities/new/<%= @property.id %>" data-toggle="tooltip" title="Add a new activity">
         <img src="/logos/pluse_icon.png" alt=""/>
       </a>
+      <button class="ml-auto btn text-uppercase remove-loader sort-btn">
+        Save
+      </button>
     </div>
   </div>
 </div>
@@ -81,17 +83,101 @@
 </div>
 
 <% end %>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Select any one option</h4>
+        <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <label class="radio-inline mr-3"><input id="asc" type="radio" name="optradio" class="mr-1" checked >Ascending</label>
+        <label class="radio-inline mr-3"><input id="desc" type="radio" name="optradio" class="mr-1">Descending</label>
+        <label class="radio-inline mr-3"><input id="custom"type="radio" name="optradio" class="mr-1">Custom</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn custom-info-button remove-loader close_btn" data-dismiss="modal">Select</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal-message">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+       Custom order of activities saved successfully.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn custom-info-button remove-loader" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <script>
     $('[data-toggle="tooltip"]').tooltip();
-    $('#asc').click(function(){
-      $('#order_manage').empty();
-      $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :asc)} %>");
-      for_collapse();
+    $('.master-icon-edit').hide();
+    $('.sort-btn').hide();
+    $('.close_btn').click(function(){
+      if($('#asc').is(":checked")) {
+        $('#order_manage').empty();
+        $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :asc)} %>");
+        $('.master-icon-edit').hide();
+        for_collapse();
+      }
+      if($('#desc').is(":checked")) {
+        $('#order_manage').empty();
+        $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>");
+        $('.master-icon-edit').hide();
+        for_collapse();
+      }
+      if($('#custom').is(":checked")) {
+        $('#order_manage').empty();
+        $.ajax({
+          url: "/sort_custom_activity",
+          data: {
+            keyword: "<%= @property.id %>"
+          }
+        });
+
+        $('.change-rowSize').addClass('alter-row-margin');
+        $('body').addClass('body-bg');
+        $('nav').removeClass('bg-white');
+        for_collapse();
+      }
     })
-    $('#desc').click(function(){
-      $('#order_manage').empty();
-      $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>");
-      for_collapse();
+    $('.sort-btn').click(function(){
+      console.log("sort-btnt clickrs")
+      if( response_ary != null ){
+        var merged = []
+        for (i = 0; i < sortable_activity_array.length; i++) {
+          merged.push([sortable_activity_array[i], response_ary[i]]);
+        }
+        $.ajax({
+          url: "/sort_properties_activity",
+          data: {
+            keyword: merged,
+            property_id: "<%= @property.id %>"
+          }
+        });
+        $('#myModal-message').modal('show');
+      }
+      $(this).hide();
+      $('.plus-icon').show();
+      $('#show_sort_option').show();
+      $('.activity_edit').show();
+      $('.master-icon-edit').hide();
+      $('body').removeClass('body-bg');
+      $('nav').addClass('bg-white');
+      $('.change-rowSize').removeClass('alter-row-margin');
     })
     for_collapse();
 
