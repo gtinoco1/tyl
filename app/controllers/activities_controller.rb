@@ -37,7 +37,7 @@ class ActivitiesController < ApplicationController
 
     if @activity.valid?
       @activity.save
-
+      @activity.update(sort: @activity.id)
       redirect_to("/properties/#{@activity.property_id}")
     else
       redirect_to("/properties/#{@activity.property_id}", :notice => "Type and Date cannot be blank.")
