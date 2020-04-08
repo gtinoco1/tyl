@@ -323,10 +323,11 @@
             <% end %>
           </div>
           <!-- Devise Input for last_name end -->
-          <%= f.button class: "btn btn-outline-primary btn-block" %>
-
+          <div class="form-group">
+            <%= recaptcha_tags %>
+          </div>
+          <%= f.button class: "btn btn-outline-primary btn-block submit-form" %>
           <hr>
-
           <%= render "users/shared/links" %>
         <% end %>
       </div>
