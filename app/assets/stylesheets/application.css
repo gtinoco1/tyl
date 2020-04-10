@@ -177,7 +177,7 @@
   }
 
   .custom-plus-image img{
-    width: 50px;
+    width: 75px;
   }
   .custom-plus-icon{
     display: none !important;
@@ -188,8 +188,11 @@
   .search-box .form-control{
     width: 120px;
   }
+
+}
+@media screen and (max-width:575px){
   .resize-bottom.fixed-bottom {
-    bottom: 2px;
+    padding-bottom: 20px;
   }
 }
 @media screen and (max-width:360px){

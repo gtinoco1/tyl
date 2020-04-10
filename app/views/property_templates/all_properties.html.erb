@@ -1,4 +1,11 @@
-<div class="row mb-0">
+<div class="alert alert-success alert-dismissable show-property-order-msg" role="alert">
+  Custom order of properties saved successfully.
+  <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row mb-0 d-flex align-items-center">
   <div class="col-lg-4 offset-lg-3 col-10">
     <div class="d-flex">
       <h4 class="text-info text-uppercase">
@@ -12,12 +19,10 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-1 offset-lg-1 col-2 mb-0">
-   <section class="vert-custom">
-   <a class="text-center text-info" href="/properties/new">
-     <h1 class="font-weight-light mb-0">+</h1>
+  <div class="col-lg-1 offset-lg-1 col-2">
+   <a class="text-right text-info" href="/properties/new">
+     <h1 class="font-weight-light">+</h1>
    </a>
-   </section>
  </div>
 </div>
 
@@ -51,6 +56,7 @@
 </div>
 
 <script type="text/javascript">
+  $('.show-property-order-msg').hide();
   $( "#search_icon" ).click(function() {
     if ($("#search_txt").hasClass("hide"))
     {

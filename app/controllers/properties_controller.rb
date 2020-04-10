@@ -202,7 +202,6 @@ class PropertiesController < ApplicationController
   def sort_properties
     @sorted_order_array = params[:keyword]
     @properties = current_user.properties.where(status: "Active").where(listing_type: params[:listing_type].split("-").map(&:capitalize)*' ').order(:sort)
-      p "----",current_user.properties.where(status: "Active").where(listing_type: params[:listing_type].split("-").map(&:capitalize)*' ').order(:sort).pluck(:id, :sort)
       @sorted_order_array.each do |ary|
         @properties.find_by(id: @sorted_order_array[ary][0].to_i).update(sort: @sorted_order_array[ary][1].to_i)
       end

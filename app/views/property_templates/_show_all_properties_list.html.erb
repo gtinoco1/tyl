@@ -19,7 +19,7 @@
       <button class="for-sale btn text-uppercase remove-loader sort-btn ml-auto ">
         Save
       </button>
-      <div class="master-icon ml-auto" id="master-icon-sale">
+      <div class="master-icon ml-auto" style="padding-top:0px" id="master-icon-sale">
         <img src="/logos/master_icon.png" />
       </div>
     </div>
@@ -77,29 +77,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="myModal-message">
-  <div class="modal-dialog">
-    <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <!-- <h4 class="modal-title">Select any one option</h4> -->
-        <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-       Custom order of properties saved successfully.
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn custom-info-button remove-loader" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 <script type="text/javascript">
   $("#master-icon-sale").show();
   $("#master-icon-rent").show();
@@ -170,7 +148,8 @@
           listing_type: className
         }
       });
-      $('#myModal-message').modal('show');
+      $('.check-for-exist').hide();
+      $('.show-property-order-msg').show();
     }
 
     $('body').removeClass('body-bg');
