@@ -192,12 +192,16 @@
 }
 @media screen and (max-width:575px){
   .resize-bottom.fixed-bottom {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    z-index: 99999;
   }
 }
 @media screen and (max-width:360px){
   .search-box .form-control{
     width: 107px;
+  }
+  .custom-plus-image{
+    bottom: 65px;
   }
 }
 @media screen and (max-width:320px){

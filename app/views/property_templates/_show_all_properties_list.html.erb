@@ -29,13 +29,13 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3 sale-lower">
-    <div class="sortable for-sale-sort ">
+    <div class="sortable for-sale-sort connectedSortable">
       <% properties_active.where(listing_type: "For Sale").each do |property| %>
-        <div class="d-flex" id='<%= property.sort %>' data-id="<%= property.id %>">
-          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color no-sort">
+        <div class="d-flex sortable-item" id='<%= property.sort %>' data-id="<%= property.id %>">
+          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color">
             <%= property.address %>
          </a>
-          <div class="master-icon icon master-icon-sale">
+          <div class="master-icon icon master-icon-sale handle">
             <img src="/logos/master_icon.png" />
           </div>
         </div>
@@ -63,13 +63,13 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3 rent-lower">
-    <div class="sortable for-rent-sort">
+    <div class="sortable for-rent-sort connectedSortable">
       <% properties_active.where(listing_type: "For Rent").each do |property| %>
-        <div class="d-flex" id='<%= property.sort %>' data-id="<%= property.id %>">
-          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color no-sort">
+        <div class="d-flex sortable-item" id='<%= property.sort %>' data-id="<%= property.id %>">
+          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color">
             <%= property.address %>
          </a>
-          <div class="master-icon icon master-icon-rent">
+          <div class="master-icon icon master-icon-rent handle">
             <img src="/logos/master_icon.png" />
           </div>
         </div>
@@ -86,7 +86,9 @@
   $(".sort-btn").hide();
   var sortable_array, response_ary = null;
   $( ".sortable" ).sortable({
-    cancel: ".no-sort",
+    connectWith: ".connectedSortable",
+    items: '.sortable-item',
+    handle: '.handle',
     cursor: "move",
     axis: "y",
     classes: {

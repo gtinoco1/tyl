@@ -209,6 +209,7 @@ Rails.application.routes.draw do
   get("/sort_properties", {:controller => "properties", :action => "sort_properties"})
   get("/sort_properties_activity", {:controller => "properties", :action => "sort_properties_activity"})
   get("/sort_custom_activity", {:controller => "properties", :action => "sort_custom_activity"})
+  get("/set_defalt_sort_for_activity", {:controller => "properties", :action => "defalt_sort_for_activity"})
   get("/all_properties", {:controller => "properties", :action => "all"})
   get("/report_type/:id_to_display", {:controller => "properties", :action => "report_type"})
   get("/report_generator_pdf/:id_to_display", {:controller => "properties", :action => "report_generator_pdf"})

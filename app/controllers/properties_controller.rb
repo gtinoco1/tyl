@@ -227,5 +227,10 @@ class PropertiesController < ApplicationController
     respond_to do |format|
       format.js { render "property_templates/activity_custom_sort.js.erb" }
     end
+    current_user.update(activiy_order: params[:sort_order])
+  end
+
+  def defalt_sort_for_activity
+    current_user.update(activiy_order: params[:sort_order])
   end
 end

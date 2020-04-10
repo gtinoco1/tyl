@@ -86,7 +86,14 @@
 </div>
 
 <div id="order_manage">
-  <%= render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>
+  <% if current_user.activiy_order == "custom" %>
+    <%= render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(:sort)} %>
+  <% elsif current_user.activiy_order == "desc" %>
+    <%= render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>
+  <% else %>
+    <%= render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :asc)} %>
+  <% end %>
+
 </div>
 
 <% end %>
@@ -98,9 +105,9 @@
         <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <label class="radio-inline mr-3"><input id="asc" type="radio" name="optradio" class="mr-1" checked >Ascending</label>
-        <label class="radio-inline mr-3"><input id="desc" type="radio" name="optradio" class="mr-1">Descending</label>
-        <label class="radio-inline mr-3"><input id="custom"type="radio" name="optradio" class="mr-1">Custom</label>
+        <label class="radio-inline mr-3"><input id="asc" type="radio" name="optradio" class="mr-1" <% if current_user.activiy_order == "asc" %>  checked <% end %> >Ascending</label>
+        <label class="radio-inline mr-3"><input id="desc" type="radio" name="optradio" class="mr-1"<% if current_user.activiy_order == "desc" %>  checked <% end %>>Descending</label>
+        <label class="radio-inline mr-3"><input id="custom"type="radio" name="optradio" class="mr-1" <% if current_user.activiy_order == "custom" %>  checked <% end %>>Custom</label>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn custom-info-button remove-loader close_btn" data-dismiss="modal">Select</button>
@@ -119,12 +126,24 @@
         $('#order_manage').empty();
         $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :asc)} %>");
         $('.master-icon-edit').hide();
+        $.ajax({
+          url: "/set_defalt_sort_for_activity",
+          data: {
+            sort_order: "asc"
+          }
+        });
         for_collapse();
       }
       if($('#desc').is(":checked")) {
         $('#order_manage').empty();
         $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(date: :desc)} %>");
         $('.master-icon-edit').hide();
+        $.ajax({
+          url: "/set_defalt_sort_for_activity",
+          data: {
+            sort_order: "desc"
+          }
+        });
         for_collapse();
       }
       if($('#custom').is(":checked")) {
@@ -132,7 +151,8 @@
         $.ajax({
           url: "/sort_custom_activity",
           data: {
-            keyword: "<%= @property.id %>"
+            keyword: "<%= @property.id %>",
+            sort_order: "custom"
           }
         });
 
