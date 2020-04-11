@@ -1,0 +1,176 @@
+<% if  properties_active.count == 0  %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="font-weight-light text-center text-uppercase">
+        <% if @search.nil? %> Add a property to get started. <% end %>
+        <% if !@search.nil?  && @search.count == 0 %> No search result found <% end %>
+      </h5>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<% if properties_active.where(listing_type: "For Sale").count > 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3 d-flex sale-uper">
+      <h5 class="text-secondary text-uppercase">
+        For Sale
+      </h5>
+      <button class="for-sale btn text-uppercase remove-loader sort-btn ml-auto ">
+        Save
+      </button>
+      <div class="master-icon ml-auto" style="padding-top:0px" id="master-icon-sale">
+        <img src="/logos/master_icon.png" />
+      </div>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3 sale-lower">
+    <div class="sortable for-sale-sort connectedSortable">
+      <% properties_active.where(listing_type: "For Sale").each do |property| %>
+        <div class="d-flex sortable-item" id='<%= property.sort %>' data-id="<%= property.id %>">
+          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color">
+            <%= property.address %>
+         </a>
+          <div class="master-icon icon master-icon-sale handle">
+            <img src="/logos/master_icon.png" />
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if properties_active.where(listing_type: "For Rent").count > 0 %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3 d-flex rent-uper">
+      <h5 class="text-secondary text-uppercase">
+        For Rent
+      </h5>
+      <button class="for-rent btn text-uppercase remove-loader sort-btn ml-auto">
+        Save
+      </button>
+      <div class="master-icon ml-auto" id="master-icon-rent">
+        <img src="/logos/master_icon.png" />
+      </div>
+    </div>
+  </div>
+<% else %>
+<% end %>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3 rent-lower">
+    <div class="sortable for-rent-sort connectedSortable">
+      <% properties_active.where(listing_type: "For Rent").each do |property| %>
+        <div class="d-flex sortable-item" id='<%= property.sort %>' data-id="<%= property.id %>">
+          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color">
+            <%= property.address %>
+         </a>
+          <div class="master-icon icon master-icon-rent handle">
+            <img src="/logos/master_icon.png" />
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#master-icon-sale").show();
+  $("#master-icon-rent").show();
+  $(".master-icon-sale").hide();
+  $(".master-icon-rent").hide();
+  $(".sort-btn").hide();
+  var sortable_array, response_ary = null;
+  $( ".sortable" ).sortable({
+    connectWith: ".connectedSortable",
+    items: '.sortable-item',
+    handle: '.handle',
+    cursor: "move",
+    axis: "y",
+    classes: {
+      "ui-sortable": "highlight"
+    },
+    connectWith: $(this).attr("id"),
+    update: function( event, ui ) {
+      sortable_array = $(this).sortable('toArray', { attribute: 'id' });
+      response_ary = sortable_array.map(function(v) {
+        return parseInt(v, 10);
+      })
+      response_ary.sort(function(a, b){
+          return a - b;
+      });
+      console.log(response_ary)
+    }
+  });
+
+  $('#master-icon-sale').on('click', function() {
+    $(this).hide();
+    $(".master-icon-sale").show();
+    $('.for-sale.sort-btn').show();
+    $('.sale-lower').addClass('for-lower-content')
+    $('.sale-uper').addClass('for-uper-section')
+    $('.sale-uper').parent().removeClass('mb-3')
+    $('body').addClass('body-bg');
+    $('nav').removeClass('bg-white');
+  })
+  $('#master-icon-rent').on('click', function() {
+    $(this).hide();
+    $(".master-icon-rent").show();
+    $('.for-rent.sort-btn').show();
+    $('.rent-lower').addClass('for-lower-content')
+    $('.rent-uper').addClass('for-uper-section')
+    $('.rent-uper').parent().removeClass('mb-3')
+    $('body').addClass('body-bg');
+    $('nav').removeClass('bg-white');
+  })
+  $('.sort-btn').on('click', function() {
+    className = $(this).attr('class').split(' ')[0];
+    if( response_ary != null ){
+      var array = $("."+className+"-sort > div[data-id]").map(function(){
+        return $(this).data('id');
+      }).get();
+
+      console.log(array)
+      var merged = []
+      console.log(array.length)
+      for (i = 0; i < array.length; i++) {
+        console.log("==")
+        merged.push([array[i], response_ary[i]]);
+      }
+      console.log(merged);
+
+      $.ajax({
+        url: "/sort_properties",
+        data: {
+          keyword: merged,
+          listing_type: className
+        }
+      });
+      $('.check-for-exist').hide();
+      $('.show-property-order-msg').show();
+    }
+
+    $('body').removeClass('body-bg');
+    $('nav').addClass('bg-white');
+
+    if(className == "for-sale"){
+      $(".master-icon-sale").hide();
+      $("#master-icon-sale").show();
+      $('.sale-lower').removeClass('for-lower-content')
+      $('.sale-uper').removeClass('for-uper-section')
+      $('.sale-uper').parent().addClass('mb-3')
+    }
+    else{
+      $(".master-icon-rent").hide();
+      $("#master-icon-rent").show();
+      $('.rent-lower').removeClass('for-lower-content')
+      $('.rent-uper').removeClass('for-uper-section')
+      $('.rent-uper').parent().addClass('mb-3')
+    }
+    $('.sort-btn').hide();
+  })
+</script>

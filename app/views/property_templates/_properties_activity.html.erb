@@ -1,15 +1,18 @@
-<div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
+<div class="row mb-3 change-rowSize">
+  <div class="col-md-8 offset-md-2 sortable connectedSortable for-lower-content">
     <% activities.each do |activity| %>
-      <div id="accordion" class="accordion-bx">
-        <div class="card">
+      <div id="accordion" data-id="<%= activity.sort %>" activity-id="<%= activity.id %>" class="accordion-bx sortable-item">
+        <div class="card" id="<%= activity.id %>">
           <div data-toggle="collapse" data-parent="#accordion" data-target="#activity_<%= activity.id%>" class="card-header">
-            <a class="icon icon-arrow" ><span class="fas fa-chevron-right"></span> </a>
+            <a class="icon icon-arrow remove-loader" ><span class="fas fa-chevron-right"></span> </a>
             <a href="/activities/<%= activity.id %>/edit" class="icon icon-edit activity_edit"><span class="fas fa-edit"></span> </a>
-            <h4><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
-            <p><%= activity.subject.truncate(116) + ' ' + activity.detail.truncate(116) %></p>
+            <div class="master-icon-edit icon icon-edit activity_edit handle">
+              <img src="/logos/master_icon.png" />
+            </div>
+            <h4 class=""><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
+            <p class=""><%= activity.subject.truncate(116) + ' ' + activity.detail.truncate(116) %></p>
           </div>
-          <div id="activity_<%= activity.id %>" class="card-collapse collapse">
+          <div id="activity_<%= activity.id %>" class="card-collapse collapse ">
               <div class="card-body card-padding">
                   <div class="row">
                     <% if activity.activity_type.contact_toggle == "Show" %>
@@ -107,7 +110,25 @@
   </div>
 </div>
 <script type="text/javascript">
+  var response_ary = null;
   $('.activity_edit').click(function(){
     $(this).parent().removeAttr('data-target');
+  })
+  $( ".sortable" ).sortable({
+    connectWith: ".connectedSortable",
+    items: '.sortable-item',
+    handle: '.handle',
+    update: function( event, ui ) {
+      sortable_array = $(this).sortable('toArray', { attribute: 'data-id' });
+      sortable_activity_array = $(this).sortable('toArray', { attribute: 'activity-id' });
+      response_ary = sortable_array.map(function(v) {
+        return parseInt(v, 10);
+      })
+      response_ary.sort(function(a, b){
+          return a - b;
+      });
+      console.log(response_ary)
+      console.log(sortable_activity_array)
+    }
   })
 </script>

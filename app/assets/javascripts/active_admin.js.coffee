@@ -1,8 +1,13 @@
 #= require active_admin/base
 $('#loader-div').hide()
 $(window).on 'load', ->
-  $('#loader-div').show()
-  $('.download-url').click ->
+  $('button').addClass 'show-loader'
+  $('a').addClass 'show-loader'
+  $('.remove-loader').removeClass 'show-loader'
+  $('.show-loader').on 'click', ->
+    $('#loader-div').show()
+    return
+   $('.download-url').click ->
     a_href = $(this).attr('href')
     $.ajax a_href,
     type: 'GET'
@@ -12,7 +17,7 @@ $(window).on 'load', ->
     success: (data, status, xhr) ->
       $('#loader-div').hide()
   return
-
+  return
 $(window).bind 'load', ->
   $('#loader-div').hide()
   return

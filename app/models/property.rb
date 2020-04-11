@@ -38,7 +38,7 @@ class Property < ApplicationRecord
       end
     end
   end
-  
+
   def to_s
     "#{address}"
   end

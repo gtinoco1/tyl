@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<form action="/properties/<%=@property.id%>/report.pdf" method="post">
+<form action="/properties/<%=@property.id%>/report.pdf" method="post" class="remember">
 
   <div class="row">
     <div class="col-lg-3 offset-lg-3">
@@ -68,6 +68,10 @@
         <label class="radio-inline">
           <input type="radio" value="activity_type" name="report_type" id="report_type" class="mr-1">
           <span class="mr-3">Activity Type</span>
+        </label>
+        <label class="radio-inline" data-toggle="tooltip" title="Order can be customized using sort button found in activity list">
+          <input type="radio" value="custom" name="report_type" id="report_type" class="mr-1">
+          <span class="mr-3">Custom</span>
         </label>
       </div>
 
@@ -172,3 +176,11 @@
 
 
 </form>
+<script>
+  $('[data-toggle="tooltip"]').tooltip();
+  $(document).on('submit','form.remember',function(){
+    setTimeout(function(){
+    $('#loader-div').hide();
+  }, 2000);
+});
+</script>

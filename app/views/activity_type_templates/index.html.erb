@@ -11,7 +11,7 @@
   <div class="col-lg-8 offset-lg-2">
 
     <div class="text-center font-weight-light">
-    This allows you to customize what fields are shown for your activity types. 
+    This allows you to customize what fields are shown for your activity types.
     To enable a field, toggle that field to "Show" in the specific actitivity type.
     In order to delete a type there must not be any activities associated with that type.
     </div>
@@ -31,13 +31,13 @@
           <div class="card bg-white border-white">
             <div class="card-header bg-white " id="heading<%= type.id %>">
               <h2 class="mb-0">
-                <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapse<%= type.id %>" aria-expanded="true" aria-controls="collapse<%= type.id %>">
+                <button class="btn btn-outline-info btn-block remove-loader" type="button" data-toggle="collapse" data-target="#collapse<%= type.id %>" aria-expanded="true" aria-controls="collapse<%= type.id %>">
                   <%= type.title %>
                 </button>
               </h2>
             </div>
 
-            <div id="collapse<%= type.id %>" class="collapse" aria-labelledby="heading<%= type.id %>" data-parent="#accordionExample">
+            <div id="collapse<%= type.id %>" class="collapse remove-loader" aria-labelledby="heading<%= type.id %>" data-parent="#accordionExample">
               <div class="card-body">
 
                 <div class="row mb-2">
@@ -75,17 +75,17 @@
                     <input type="hidden" name="subject_toggle" class="form-control" value="<%= type.subject_toggle %>">
                     <input type="hidden" name="contact_toggle" class="form-control" value="<%= type.contact_toggle %>">
                     <input type="hidden" name="duration_toggle" class="form-control" value="<%= type.duration_toggle %>">
-                    <input type="hidden" name="cost_toggle" class="form-control" value="<%= type.cost_toggle %>">                 
+                    <input type="hidden" name="cost_toggle" class="form-control" value="<%= type.cost_toggle %>">
                     <input type="hidden" name="detail_toggle" class="form-control" value="<%= type.detail_toggle %>">
-                    <input type="hidden" name="outcome_toggle" class="form-control" value="<%= type.outcome_toggle %>">                  
-                    <input type="hidden" name="agent_toggle" class="form-control" value="<%= type.agent_toggle %>">              
-                    <input type="hidden" name="customer_toggle" class="form-control" value="<%= type.customer_toggle %>">              
+                    <input type="hidden" name="outcome_toggle" class="form-control" value="<%= type.outcome_toggle %>">
+                    <input type="hidden" name="agent_toggle" class="form-control" value="<%= type.agent_toggle %>">
+                    <input type="hidden" name="customer_toggle" class="form-control" value="<%= type.customer_toggle %>">
                     <input type="hidden" name="flyer_img_toggle" class="form-control" value="Hide">
                     <input type="hidden" name="postcard_img_toggle" class="form-control" value="Hide">
 
                     </div>
                 </div>
-                
+
                 <button class="btn btn-block btn-outline-success">
                   Save
                 </button>

@@ -1,18 +1,29 @@
-<div class="row mb-0">
+<div class="alert alert-success alert-dismissable show-property-order-msg" role="alert">
+  Custom order of properties saved successfully.
+  <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row mb-0 d-flex align-items-center">
   <div class="col-lg-4 offset-lg-3 col-10">
-    <h4 class="text-info text-uppercase">
-      ALL Properties
-    </h4>
+    <div class="d-flex">
+      <h4 class="text-info text-uppercase">
+        ALL Properties
+      </h4>
+      <div class="search-box">
+        <a class=" text-info remove-loader" id="search_icon">
+          <i class="fas fa-search"></i>
+        </a>
+        <input type="text" name="seach" placeholder="Search..." class="hide form-control" id="search_txt" />
+      </div>
+    </div>
   </div>
-
-  <div class="col-lg-1 offset-lg-1 col-2 mb-0">
-    <section class="vert-custom">
-    <a class="text-center text-info" href="/properties/new">
-      <h1 class="font-weight-light mb-0">+</h1>
-    </a>
-    </section>
-  </div>
-
+  <div class="col-lg-1 offset-lg-1 col-2">
+   <a class="text-right text-info" href="/properties/new">
+     <h1 class="font-weight-light">+</h1>
+   </a>
+ </div>
 </div>
 
 <div class="row">
@@ -20,85 +31,18 @@
     <hr class="mt-0 mb-2" style="height:10px">
   </div>
 </div>
-
-
-<% if @properties_active.count == 0 %>
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <h5 class="font-weight-light text-center text-uppercase">
-        Add a property to get started.
-      </h5>
-    </div>
-  </div>
-<% else %>
-<% end %>
-
-<% if @properties_active.where(listing_type: "For Sale").count > 0 %>
-
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <h5 class="text-secondary text-uppercase">
-        For Sale
-      </h5>
-    </div>
-  </div>
-
-<% else %>
-<% end %>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-
-    <% @properties_active.where(listing_type: "For Sale").each do |property| %>
-
-      <div>
-        <a href="properties/<%= property.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
-        </a>
-      </div>
-
-    <% end %>
-
-  </div>
+<div id="search_result">
+  <%= render partial: 'property_templates/show_all_properties_list', locals: {properties_active: @properties_active} %>
 </div>
-
-<% if @properties_active.where(listing_type: "For Rent").count > 0 %>
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <h5 class="text-secondary text-uppercase">
-        For Rent
-      </h5>
-    </div>
-  </div>
-<% else %>
-<% end %>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-
-    <% @properties_active.where(listing_type: "For Rent").each do |property| %>
-
-      <div>
-        <a href="properties/<%= property.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= property.address %></button>
-        </a>
-      </div>
-
-    <% end %>
-
-  </div>
-</div>
-
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <hr>
     <h5>
       <a href="/properties/new" class="btn btn-block btn-outline-secondary">
         Add a new property
+        <%= @search %>
       </a>
-
     </h5>
-
   </div>
 </div>
 
@@ -110,3 +54,30 @@
     </a>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('.show-property-order-msg').hide();
+  $( "#search_icon" ).click(function() {
+    if ($("#search_txt").hasClass("hide"))
+    {
+      $("#search_txt").removeClass("hide")
+      $("#search_txt").addClass("show")
+      $("#search_txt").focus();
+    }
+    else{
+      $("#search_txt").removeClass("show")
+      $("#search_txt").addClass("hide")
+    }
+
+  });
+  $(window).on('load', function() {
+    $( "#search_txt" ).keyup(function(e) {
+      $.ajax({
+        url: "/search",
+        data: {
+          keyword: this.value
+        }
+      });
+    });
+  });
+</script>

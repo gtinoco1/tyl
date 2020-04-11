@@ -1,0 +1,7 @@
+$("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(:sort)} %>");
+$('.plus-icon').hide();
+$('#show_sort_option').hide();
+$('.activity_edit').hide();
+$('.master-icon-edit').show();
+$('.sort-btn').show();
+$('.change-rowSize').addClass('alter-row-margin');

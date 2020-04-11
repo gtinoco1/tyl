@@ -4,7 +4,7 @@
   </div>
 
   <div class= "col-4 col-lg-2">
-    <a class="btn btn-lg btn-block btn-info text-center" href=#sign_up > SIGN UP</a>
+    <a class="btn btn-lg btn-block btn-info text-center remove-loader" href=#sign_up > SIGN UP</a>
   </div>
 </div>
 
@@ -15,7 +15,7 @@
 <div class="row mb-3">
   <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3">
     <h4 class="text-center" style="font-family: Montserrat, sans-serif;">
-      Track activities, create reports. Show your customers all you do for them! 
+      Track activities, create reports. Show your customers all you do for them!
     </h4>
   </div>
 </div>
@@ -31,13 +31,13 @@
 
     <div class="jumbotron bg-light pb-3" id="jumbo1">
       <h2 class="text-info">Track Listings</h2>
-      <div class="lead mb-0">Make sure your customers know all you do for their properties by 
+      <div class="lead mb-0">Make sure your customers know all you do for their properties by
         keeping track of all activities that go into getting their listing sold.
       </div>
 
       <div class="row mt-0 mb-3">
         <div class="col-4 offset-8 col-lg-4 offset-lg-8">
-          <a class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <a class="btn btn-outline-info remove-loader" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             See more...
           </a>
         </div>
@@ -81,13 +81,13 @@
   <div class="col-lg-6 offset-lg-3">
     <div class="jumbotron bg-light">
       <h2 class="text-info">Track Buyers and Tenants</h2>
-      <div class="lead mb-2">Keep track of showings, appointments and even customer preferences to better 
+      <div class="lead mb-2">Keep track of showings, appointments and even customer preferences to better
         understand their needs and get them in a home faster.
       </div>
 
       <div class="row mt-0 mb-3">
         <div class="col-4 offset-8 col-lg-4 offset-lg-8">
-          <a class="btn btn-outline-info" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+          <a class="btn btn-outline-info remove-loader" data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
             See more...
           </a>
         </div>
@@ -134,7 +134,7 @@
 
       <div class="row mt-0 mb-3">
         <div class="col-4 offset-8 col-lg-4 offset-lg-8">
-          <a class="btn btn-outline-info" data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">
+          <a class="btn btn-outline-info remove-loader" data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">
             See more...
           </a>
         </div>
@@ -323,10 +323,11 @@
             <% end %>
           </div>
           <!-- Devise Input for last_name end -->
-          <%= f.button class: "btn btn-outline-primary btn-block" %>
-
+          <div class="form-group">
+            <%= recaptcha_tags %>
+          </div>
+          <%= f.button class: "btn btn-outline-primary btn-block submit-form" %>
           <hr>
-
           <%= render "users/shared/links" %>
         <% end %>
       </div>
