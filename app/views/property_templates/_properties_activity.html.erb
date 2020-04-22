@@ -1,12 +1,12 @@
 <div class="row mb-3 change-rowSize">
-  <div class="col-md-8 offset-md-2 sortable connectedSortable for-lower-content">
+  <div class="col-md-8 offset-md-2 sortable for-lower-content">
     <% activities.each do |activity| %>
       <div id="accordion" data-id="<%= activity.sort %>" activity-id="<%= activity.id %>" class="accordion-bx sortable-item">
         <div class="card" id="<%= activity.id %>">
           <div data-toggle="collapse" data-parent="#accordion" data-target="#activity_<%= activity.id%>" class="card-header">
             <a class="icon icon-arrow remove-loader" ><span class="fas fa-chevron-right"></span> </a>
             <a href="/activities/<%= activity.id %>/edit" class="icon icon-edit activity_edit"><span class="fas fa-edit"></span> </a>
-            <div class="master-icon-edit icon icon-edit activity_edit handle">
+            <div class="master-icon-edit icon icon-edit activity_edit">
               <img src="/logos/master_icon.png" />
             </div>
             <h4 class=""><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
@@ -111,13 +111,14 @@
 </div>
 <script type="text/javascript">
   var response_ary = null;
+
   $('.activity_edit').click(function(){
     $(this).parent().removeAttr('data-target');
   })
   $( ".sortable" ).sortable({
-    connectWith: ".connectedSortable",
-    items: '.sortable-item',
-    handle: '.handle',
+    // connectWith: ".connectedSortable",
+    // items: '.sortable-item',
+    // handle: '.handle',
     update: function( event, ui ) {
       sortable_array = $(this).sortable('toArray', { attribute: 'data-id' });
       sortable_activity_array = $(this).sortable('toArray', { attribute: 'activity-id' });
@@ -131,4 +132,5 @@
       console.log(sortable_activity_array)
     }
   })
+  $(".sortable").sortable("disable");
 </script>
