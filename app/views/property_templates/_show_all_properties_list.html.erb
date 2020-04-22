@@ -189,13 +189,12 @@
     $("a").each(function () {
       $(this).on('click', function(event) {
         $('#loader-div').show();
+        return true;
       })
       $(this).attr("href", $(this).attr("rel"));
       $(this).removeAttr("rel");
      });
     $('.sort-btn').hide();
   })
-  $(window).on('load', function() {
-   $('#loader-div').hide();
-  });
+
 </script>
