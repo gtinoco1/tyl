@@ -100,27 +100,27 @@
               <div class="form-group">
                 <label><span>1<sup>st</sup><i class=" icon-info ml-1 fas fa-info-circle" data-toggle="tooltip" title="Number of first showings"></i><small>Showings</small></span></label>
                 <%#= f.number_field :showing_number_1, min: 0, disabled: false, class: 'summary-number-field form-control' %>
-                <input type="number" id="showing_number_1"  min=1 name="showing_number_1" class="summary-number-field form-control" value="<%= @property.showing_number_1 %>">
+                <input type="number" id="showing_number_1"  min=0 name="showing_number_1" class="summary-number-field form-control" value="<%= @property.showing_number_1 %>">
               </div>
               <div class="form-group">
                 <label ><span>2<sup>nd</sup><i class=" icon-info ml-1 fas fa-info-circle" data-toggle="tooltip" title="Number of second showings"></i><small>Showings</small></span></label>
                 <%#= f.number_field :showing_number_2, min: 0, disabled: false, class: 'summary-number-field form-control' %>
-                <input type="number" id="showing_number_2" min=1 name="showing_number_2" class="summary-number-field form-control" value="<%= @property.showing_number_2 %>">
+                <input type="number" id="showing_number_2" min=0 name="showing_number_2" class="summary-number-field form-control" value="<%= @property.showing_number_2 %>">
               </div>
               <div class="form-group">
                 <label ><span>3<sup>rd</sup><i class=" icon-info ml-1 fas fa-info-circle" data-toggle="tooltip" title="Number of third showings"></i><small>Showings</small></span></label>
                 <%#= f.number_field :showing_number_3, min: 0, disabled: false, class: 'summary-number-field form-control' %>
-                <input type="number" id="showing_number_3" min=1 name="showing_number_3" class="summary-number-field form-control" value="<%= @property.showing_number_3 %>">
+                <input type="number" id="showing_number_3" min=0 name="showing_number_3" class="summary-number-field form-control" value="<%= @property.showing_number_3 %>">
               </div>
               <div class="form-group">
                 <label ><span>Offers</span></label>
                 <%#= f.number_field :offer, min: 0, disabled: false, class: 'summary-number-field form-control' %>
-                <input type="number" id="offer" name="offer" min=1 class="summary-number-field form-control" value="<%= @property.offer %>">
+                <input type="number" id="offer" name="offer" min=0 class="summary-number-field form-control" value="<%= @property.offer %>">
               </div>
               <div class="form-group">
                 <label ><span>Contracts</span></label>
                 <%#= f.number_field :contract, min: 0, disabled: false, class: 'summary-number-field form-control' %>
-                <input type="number" id="contract" name="contract" min=1 class="summary-number-field form-control" value="<%= @property.contract %>">
+                <input type="number" id="contract" name="contract" min=0 class="summary-number-field form-control" value="<%= @property.contract %>">
               </div>
 
             </div>
