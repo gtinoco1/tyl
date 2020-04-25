@@ -12,6 +12,7 @@
  *
  *= require_self
 *= require bootstrap-datetimepicker
+
  */
 
  html { font-size: 1rem; }
@@ -271,3 +272,60 @@
       margin-right: 0;
     }
   }
+
+/*Upload box*/
+.card-body.p-box{padding: 0;}
+.card-body .upload-bx{min-width: 253px;min-height: 78px;padding: 0;position: relative;border-radius: .25rem;border:1px solid rgba(0,0,0,.125);}
+.card-body .upload-bx .file-upload-bx{position: absolute;display: flex;flex-wrap: wrap;align-items: center;justify-content: center;top: 0;right: 0;bottom: 0;left: 0;width: 100%;height: 100%;cursor: pointer;}
+.card-body .upload-bx .file-upload-bx .upname{display: block;margin: 0;font-size: 16px;color: #ddd;line-height: 1.2;text-transform: capitalize;color:#17a2b8;font-weight: 400;}
+.card-body .upload-bx .file-upload-bx:hover .upname{font-weight: 500;}
+.card-body .upload-bx .file-upload-bx .form-control{position: absolute;display: block;top: 0;right: 0;bottom: 0;left: 0;width: 100%;height: 100%;opacity: 0;z-index: 2;cursor: pointer;}
+.card-body .p-edit-bx {position: relative;border-radius: .25rem;border:1px solid rgba(0,0,0,.125);display: block;width: 150px;height: 150px;margin: auto;}
+.card-body .p-edit-bx .img-thumbnail{padding: 0;width: 100%;height: 100%;display: block;}
+.card-body .p-edit-bx .icon-edit{position: absolute; bottom: 1px; right: 1px; font-size: 14px; background: #17a2b8; padding: 0 5px; min-width: 35px; display: flex; height: 30px; color: #fff; justify-content: center;
+    align-items: center;}
+
+
+/*property-summary-bx*/
+.property-summary-bx{position: relative;}
+.property-summary-bx .badge.lblBadge {position: absolute;right: 0;padding: 8px 10px; background: #900; color: #fff; font-size: 14px; top: 6px;cursor: pointer;}
+.property-summary-bx .btn.btn-transparent{min-width: inherit;color: #000; font-weight: 500;font-size: 1.5rem;line-height: 1.2;}
+.property-summary-bx .btn.btn-transparent:focus{outline:0;box-shadow: none;}
+.property-summary-bx .btn.btn-transparent .icon-arrow{transform: rotate(0deg);transition: .5s all; margin-left: 10px;color: #727373;}
+.property-summary-bx .btn.btn-transparent.collapsed .icon-arrow{transform: rotate(180deg);}
+.property-summary-bx .ps-lists .form-group,.summary-bx .ps-lists .form-group{width: 16%;display: flex;flex-wrap: wrap;justify-content: center;}
+.property-summary-bx .ps-lists .form-group label,.summary-bx .ps-lists .form-group label {width: 85px;height: 55px;display: flex;justify-content: center;align-items: center;font-size: 14px;color: #000;background-color: #d0ecf0;border-radius: 5px;flex-wrap: wrap;line-height: 1.2;}
+.property-summary-bx .ps-lists .form-group label span,.summary-bx .ps-lists .form-group label span {text-align: center;}
+.property-summary-bx .ps-lists .form-group label small,.summary-bx .ps-lists .form-group label small {font-size: 14px;display: block;}
+.property-summary-bx .ps-lists .form-group .form-control,.summary-bx .ps-lists .form-group .form-control {background: #fff; max-width: 50%; text-align: center; padding: 0 5px;font-size: 20px;font-weight: 500;border: 1px solid transparent;border-radius: 5px;color: #000;}
+.property-summary-bx .ps-lists .form-group .form-control.br1 {border-color: #ced4da;}
+.summary-bx .ps-lists .form-group .form-control{border:1px solid #ced4da;}
+.property-summary-bx .ps-lists .summary_edit {color: #727373;font-size: 20px;cursor: pointer;}
+.property-summary-bx .ps-lists .summary_edit:hover {color: #0f6674;}
+
+
+.property-summary-bx .ps-lists .form-group input::-webkit-outer-spin-button,
+.summary-bx .ps-lists .form-group input::-webkit-outer-spin-button,
+.property-summary-bx .ps-lists .form-group input::-webkit-inner-spin-button,
+.summary-bx .ps-lists .form-group input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.property-summary-bx .ps-lists .form-group input[type=number],
+.summary-bx .ps-lists .form-group input[type=number] { -moz-appearance: textfield; }
+
+.summary-bx .ps-lists .form-group{border-right:2px solid #ddd;}
+.summary-bx .ps-lists .form-group .icon-info{color: #3b88fd;}
+.summary-bx .ps-lists .form-group:last-child{border-right:0;}
+h5 .icon-info{color: #3b88fd;font-size: 16px;}
+
+
+@media (max-width: 575px){
+    .card-body .upload-bx{min-width: 100%;}
+    .property-summary-bx .ps-lists .form-group {width: 33.33%;}
+    .summary-bx .ps-lists .form-group{width: 26%;}
+    .property-summary-bx .ps-lists .btn-bx {width: 100%;text-align: center;}
+
+}
+
+/* upload-btn-wrapper */
+.file-upload-bx-2 { position: relative; overflow: hidden; display: inline-block;}
+.p { border: 2px solid gray; color: gray; background-color: white; padding: 8px 20px; border-radius: 8px; font-size: 20px; font-weight: bold; }
+.file-upload-bx-2 input[type=file] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }

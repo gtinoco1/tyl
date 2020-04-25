@@ -29,13 +29,16 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3 sale-lower">
-    <div class="sortable for-sale-sort connectedSortable">
+    <div class="sortable for-sale-sort">
       <% properties_active.where(listing_type: "For Sale").each do |property| %>
-        <div class="d-flex sortable-item" id='<%= property.sort %>' data-id="<%= property.id %>">
-          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color">
+        <div class="d-flex" id='<%= property.sort %>' data-id="<%= property.id %>">
+          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color sale_a">
             <%= property.address %>
          </a>
-          <div class="master-icon icon master-icon-sale handle">
+          <a href="javascript:;" class ="btn btn-secondary btn-lg btn-block mb-2 text-uppercase text-color temp_a_sale">
+            <%= property.address %>
+         </a>
+          <div class="master-icon icon master-icon-sale">
             <img src="/logos/master_icon.png" />
           </div>
         </div>
@@ -63,13 +66,16 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3 rent-lower">
-    <div class="sortable for-rent-sort connectedSortable">
+    <div class="sortable for-rent-sort">
       <% properties_active.where(listing_type: "For Rent").each do |property| %>
-        <div class="d-flex sortable-item" id='<%= property.sort %>' data-id="<%= property.id %>">
-          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color">
+        <div class="d-flex sortable-item sort-rent" id='<%= property.sort %>' data-id="<%= property.id %>">
+          <a href="properties/<%= property.id %>" class ="btn btn-secondary btn-lg btn-block mb-3 text-uppercase text-color rent_a">
             <%= property.address %>
          </a>
-          <div class="master-icon icon master-icon-rent handle">
+         <a href="javascript:;" class ="btn btn-secondary btn-lg btn-block mb-2 text-uppercase text-color temp_a_rent">
+           <%= property.address %>
+        </a>
+          <div class="master-icon icon master-icon-rent">
             <img src="/logos/master_icon.png" />
           </div>
         </div>
@@ -79,6 +85,8 @@
 </div>
 
 <script type="text/javascript">
+  $('.temp_a_sale').hide();
+  $('.temp_a_rent').hide();
   $("#master-icon-sale").show();
   $("#master-icon-rent").show();
   $(".master-icon-sale").hide();
@@ -86,9 +94,6 @@
   $(".sort-btn").hide();
   var sortable_array, response_ary = null;
   $( ".sortable" ).sortable({
-    connectWith: ".connectedSortable",
-    items: '.sortable-item',
-    handle: '.handle',
     cursor: "move",
     axis: "y",
     classes: {
@@ -107,8 +112,18 @@
     }
   });
 
+
+  $(".sortable").sortable("disable");
   $('#master-icon-sale').on('click', function() {
+    $('.temp_a_sale').show();
+    $('.sale_a').hide();
     $(this).hide();
+    $(".sortable.for-sale-sort").sortable("enable");
+    $("a.temp_a_sale").each(function () {
+      $(this).on('click', function(event) {
+        $('#loader-div').hide();
+      })
+    });
     $(".master-icon-sale").show();
     $('.for-sale.sort-btn').show();
     $('.sale-lower').addClass('for-lower-content')
@@ -119,6 +134,14 @@
   })
   $('#master-icon-rent').on('click', function() {
     $(this).hide();
+    $('.temp_a_rent').show();
+    $('.rent_a').hide();
+    $(".sortable.for-rent-sort").sortable("enable");
+    $("a.temp_a_rent").each(function () {
+      $(this).on('click', function(event) {
+        $('#loader-div').hide();
+      })
+    });
     $(".master-icon-rent").show();
     $('.for-rent.sort-btn').show();
     $('.rent-lower').addClass('for-lower-content')
@@ -133,16 +156,12 @@
       var array = $("."+className+"-sort > div[data-id]").map(function(){
         return $(this).data('id');
       }).get();
-
-      console.log(array)
       var merged = []
       console.log(array.length)
       for (i = 0; i < array.length; i++) {
         console.log("==")
         merged.push([array[i], response_ary[i]]);
       }
-      console.log(merged);
-
       $.ajax({
         url: "/sort_properties",
         data: {
@@ -153,16 +172,17 @@
       $('.check-for-exist').hide();
       $('.show-property-order-msg').show();
     }
-
     $('body').removeClass('body-bg');
     $('nav').addClass('bg-white');
-
     if(className == "for-sale"){
       $(".master-icon-sale").hide();
       $("#master-icon-sale").show();
       $('.sale-lower').removeClass('for-lower-content')
       $('.sale-uper').removeClass('for-uper-section')
       $('.sale-uper').parent().addClass('mb-3')
+      $(".sortable.for-sale-sort").sortable("disable");
+      $('.temp_a_sale').hide();
+      $('.sale_a').show();
     }
     else{
       $(".master-icon-rent").hide();
@@ -170,7 +190,11 @@
       $('.rent-lower').removeClass('for-lower-content')
       $('.rent-uper').removeClass('for-uper-section')
       $('.rent-uper').parent().addClass('mb-3')
+      $(".sortable.for-rent-sort").sortable("disable");
+      $('.temp_a_rent').hide();
+      $('.rent_a').show();
     }
     $('.sort-btn').hide();
   })
+
 </script>

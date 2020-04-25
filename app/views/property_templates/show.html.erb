@@ -6,6 +6,12 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+<div class="alert alert-success alert-dismissable show-property-summary-msg" role="alert">
+  Property Summary updated successfully.
+  <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
 <div class="row mb-0">
   <div class="col-lg-5 offset-lg-2 col-9">
@@ -65,9 +71,54 @@
     <hr>
   </div>
 </div>
+
+<div class="row mb-0">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="property-summary-bx">
+        <span class="badge lblBadge" data-toggle="tooltip" title="This new feature allows you to keep track of key stats for your listing">New</span>
+        <button class="btn btn-transparent remove-loader collapsed" type="button" data-toggle="collapse" data-target="#propertySummary" aria-expanded="false" aria-controls="collapseExample">
+         Property Summary<span class="icon-arrow fas fa-chevron-up"></span>
+        </button>
+
+        <div class="collapse" id="propertySummary">
+            <div class="card card-body border-0 pb-0">
+                <%= form_with(model: @property, url: properties_summary_path, remote: true, method: :post) do |f| %>
+                <%= f.hidden_field :id %>
+                  <div class="ps-lists d-flex flex-wrap justify-content-center">
+                    <div class="form-group">
+                      <label><span>1<sup>st</sup><small>Showings</small></span></label>
+                      <%= f.number_field :showing_number_1, min: 0, disabled: true, class: 'summary-number-field form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <label ><span>2<sup>nd</sup><small>Showings</small></span></label>
+                      <%= f.number_field :showing_number_2, min: 0, disabled: true, class: 'summary-number-field form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <label ><span>3<sup>rd</sup><small>Showings</small></span></label>
+                      <%= f.number_field :showing_number_3, min: 0, disabled: true, class: 'summary-number-field form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <label ><span>Offers</span></label>
+                      <%= f.number_field :offer, min: 0, disabled: true, class: 'summary-number-field form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <label ><span>Contracts</span></label>
+                      <%= f.number_field :contract, min: 0, disabled: true, class: 'summary-number-field form-control' %>
+                    </div>
+                    <div class="btn-bx mb-auto mt-2 ml-3">
+                      <i class="fas fa-edit summary_edit mt-1"></i>
+                      <%= submit_tag "Save", class: 'btn custom-info-button mb-auto summary_save '%>
+                    </div>
+                  </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
  <div class="row mb-0 change-rowSize">
-  <div class="col-md-8 offset-md-2 for-uper-section">
-    <div class="filter-bx d-flex flex-wrap mb-4">
+  <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 for-uper-section pt-3">
+    <div class="filter-bx d-flex flex-wrap mb-0">
       <h4 class="my-auto">Activity Log</h4>
       <div class="master-icon" id="show_sort_option" data-toggle="modal" data-target="#myModal">
         <img src="/logos/master_icon.png" />
@@ -78,7 +129,7 @@
       <a class="ml-auto text-center icon-add text-info my-auto custom-plus-image plus-icon" href="/activities/new/<%= @property.id %>" data-toggle="tooltip" title="Add a new activity">
         <img src="/logos/pluse_icon.png" alt=""/>
       </a>
-      <button class="ml-auto btn text-uppercase remove-loader sort-btn">
+      <button class="ml-auto btn text-uppercase remove-loader sort-btn mt-1">
         Save
       </button>
     </div>
@@ -118,6 +169,7 @@
 </div>
 <script>
     $('.show-activity-order-msg').hide();
+    $('.show-property-summary-msg').hide();
     $('[data-toggle="tooltip"]').tooltip();
     $('.master-icon-edit').hide();
     $('.sort-btn').hide();
@@ -177,6 +229,7 @@
           }
         });
         $('.check-for-exist').hide();
+        $('.show-property-summary-msg').hide();
         $('.show-activity-order-msg').show();
       }
       $(this).hide();
@@ -187,6 +240,7 @@
       $('body').removeClass('body-bg');
       $('nav').addClass('bg-white');
       $('.change-rowSize').removeClass('alter-row-margin');
+      $(".sortable").sortable("disable");
     })
     for_collapse();
 
@@ -207,4 +261,16 @@
         $(this).siblings().children('p').show();
       });
     }
+
+
+   // Summary
+  $('.summary_save').hide();
+
+  $('.summary_edit').click(function(){
+    $(this).hide();
+    $('.summary-number-field').prop("disabled", false);
+    $('.summary-number-field').addClass("br1");
+    $('.summary_save').show();
+  })
+
 </script>

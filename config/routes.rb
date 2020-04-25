@@ -158,6 +158,10 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   # Routes for the Activity type resource:
 
+  # update user profile
+  post '/update_profile', :to => 'users#update_profile'
+  get '/edit_user_profile', :to => 'users#edit_user_profile'
+
   # CREATE
   get("/activity_types/new", {:controller => "activity_types", :action => "new_form"})
   post("/create_activity_type", {:controller => "activity_types", :action => "create_row"})
@@ -242,8 +246,12 @@ Rails.application.routes.draw do
 
   get("/my_account", {:controller => "properties", :action => "my_account"})
 
+
+  # propertysummary
+  post("/properties/summary", {:controller => "properties", :action => "property_summary_update"})
+
   # devise_for :users
-  devise_for :users, :controllers => {registrations: 'registrations'}
+  devise_for :users, :controllers => {registrations: 'registrations', passwords: 'passwords' }
   # devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
 
   as :user do
@@ -251,7 +259,16 @@ Rails.application.routes.draw do
   end
 
   get("/contact_list_download", { :controller => "application", :action => "contact_list_download" })
-
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
+  resource :user, only: [:edit] do
+  collection do
+    patch 'update_password'
+  end
+end
 
 
   ActiveAdmin.routes(self)
