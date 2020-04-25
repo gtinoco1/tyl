@@ -44,7 +44,6 @@
       <p class="text-secondary text-center">
         *The default dates encompass all activities for this property.
       </p>
-    <hr>
     </div>
 
   </div>
@@ -74,10 +73,61 @@
           <span class="mr-3">Custom</span>
         </label>
       </div>
-
-<hr>
+      <hr>
     </div>
+  </div>
 
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <h5 class="font-weight-light mb-3 text-center">
+        <i class="icon-info mr-1 fas fa-info-circle" data-toggle="tooltip" title="This will add the summary table to the report showing number of showings, offers and contracts"></i>
+        Include Summary Table:
+      </h5>
+      <div class="text-center">
+        <label class="radio-inline">
+          <input type="radio" value="yes" name="property_summary_table" id="property_summary_table" class="mr-1">
+          <span class="mr-3">Yes</span>
+        </label>
+        <label class="radio-inline">
+          <input type="radio" value="no" name="property_summary_table" id="property_summary_table" class="mr-1" checked>
+          <span class="mr-3">No</span>
+        </label>
+      </div>
+      <div class="card card-body summary-bx border-0">
+          <%#= form_with(model: @property, url: properties_summary_path, remote: true, method: :post) do |f| %>
+          <%#= f.hidden_field :id %>
+            <div class="ps-lists d-flex flex-wrap justify-content-center">
+              <div class="form-group">
+                <label><span>1<sup>st</sup><i class=" icon-info ml-1 fas fa-info-circle" data-toggle="tooltip" title="Number of first showings"></i><small>Showings</small></span></label>
+                <%#= f.number_field :showing_number_1, min: 0, disabled: false, class: 'summary-number-field form-control' %>
+                <input type="number" id="showing_number_1"  min=1 name="showing_number_1" class="summary-number-field form-control" value="<%= @property.showing_number_1 %>">
+              </div>
+              <div class="form-group">
+                <label ><span>2<sup>nd</sup><i class=" icon-info ml-1 fas fa-info-circle" data-toggle="tooltip" title="Number of second showings"></i><small>Showings</small></span></label>
+                <%#= f.number_field :showing_number_2, min: 0, disabled: false, class: 'summary-number-field form-control' %>
+                <input type="number" id="showing_number_2" min=1 name="showing_number_2" class="summary-number-field form-control" value="<%= @property.showing_number_2 %>">
+              </div>
+              <div class="form-group">
+                <label ><span>3<sup>rd</sup><i class=" icon-info ml-1 fas fa-info-circle" data-toggle="tooltip" title="Number of third showings"></i><small>Showings</small></span></label>
+                <%#= f.number_field :showing_number_3, min: 0, disabled: false, class: 'summary-number-field form-control' %>
+                <input type="number" id="showing_number_3" min=1 name="showing_number_3" class="summary-number-field form-control" value="<%= @property.showing_number_3 %>">
+              </div>
+              <div class="form-group">
+                <label ><span>Offers</span></label>
+                <%#= f.number_field :offer, min: 0, disabled: false, class: 'summary-number-field form-control' %>
+                <input type="number" id="offer" name="offer" min=1 class="summary-number-field form-control" value="<%= @property.offer %>">
+              </div>
+              <div class="form-group">
+                <label ><span>Contracts</span></label>
+                <%#= f.number_field :contract, min: 0, disabled: false, class: 'summary-number-field form-control' %>
+                <input type="number" id="contract" name="contract" min=1 class="summary-number-field form-control" value="<%= @property.contract %>">
+              </div>
+
+            </div>
+          <%# end %>
+      </div>
+      <hr>
+    </div>
   </div>
 
 
@@ -163,6 +213,7 @@
           <span class="mr-3">No</span>
         </label>
       </div>
+
         <hr>
      </div>
     </div>

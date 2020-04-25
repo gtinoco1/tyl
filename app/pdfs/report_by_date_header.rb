@@ -1,7 +1,7 @@
 require "open-uri"
 class ReportByDateHeader < Prawn::Document
   include ActionView::Helpers::NumberHelper
-  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type, show_total_toggle,show_chart_toggle)
+  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type, show_total_toggle,show_chart_toggle,property_summary_table)
     super(top_margin: 50, bottom_margin: 55)
 
     font_families.update("Nunito" => {:normal => Rails.root.join("app/assets/fonts/Nunito-Regular.ttf"),
@@ -22,6 +22,7 @@ class ReportByDateHeader < Prawn::Document
     @show_chart_toggle = show_chart_toggle
     @show_total_toggle = show_total_toggle
     @total_min = 0
+    @property_summary_table = property_summary_table
 
     move_down 80
     header
@@ -48,6 +49,9 @@ class ReportByDateHeader < Prawn::Document
       move_down 10
       text "Total Time Spent: #{@time_str}", align: :right, size: 10
     end
+  end
+  if @property_summary_table == "yes"
+    product_summary_new_table
   end
 
     move_down 3
@@ -245,5 +249,28 @@ class ReportByDateHeader < Prawn::Document
          @duration_check == "on" ? activity.duration.to_i : nil].compact
        end
     end
+  end
+
+  def product_summary_new_table
+    font "Nunito"
+
+    text "Property Summary", size: 16, style: :bold
+    move_down 12
+    header_array = ["1<sub>st</sub> Showing", "2nd Showing"].compact
+
+    table product_summary_table, position: :center, width: 300,
+                        column_widths: 60,
+                        cell_style: {font: "Nunito", size: 10, height: 40} do
+      row(0).font_style = :bold
+      columns(0..4).align = :center
+      self.row_colors = ["F0F0F0", "FFFFFF"]
+      self.header = true
+    end
+  end
+
+
+  def product_summary_table
+    [["1st Showings", "2nd Showings", "3rd Showings", "Offers", "Contracts"],
+    [@property.showing_number_1, @property.showing_number_2, @property.showing_number_3, @property.offer, @property.contract]]
   end
 end

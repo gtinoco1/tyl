@@ -62,13 +62,14 @@ class PropertiesController < ApplicationController
     @attachment_toggle = params.fetch("attachment_toggle","")
     @show_total_toggle = params.fetch("total_toggle","")
     @show_chart_toggle = params.fetch("chart_toggle","")
+    @property_summary_table = params.fetch("property_summary_table","")
 
     respond_to do |format|
       format.html
       format.pdf do
         if @report_type == "date_asc" || @report_type == "date_desc" || @report_type == "custom"
           pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
-                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle)
+                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle, @property_summary_table)
         elsif @report_type == "activity_type"
           pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         end
@@ -233,4 +234,18 @@ class PropertiesController < ApplicationController
   def defalt_sort_for_activity
     current_user.update(activiy_order: params[:sort_order])
   end
+
+  def property_summary_update
+    property = Property.find_by(id: params[:property][:id])
+    property.showing_number_1 = params[:property][:showing_number_1]
+    property.showing_number_2 = params[:property][:showing_number_2]
+    property.showing_number_3 = params[:property][:showing_number_3]
+    property.offer = params[:property][:offer]
+    property.contract = params[:property][:contract]
+    property.save
+    respond_to do |format|
+      format.js { render "property_templates/property_summary_update.js.erb" }
+    end
+  end
+
 end

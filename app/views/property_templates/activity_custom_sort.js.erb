@@ -1,6 +1,5 @@
 $("#order_manage").append("<%= j render partial: 'property_templates/properties_activity', locals: {activities: @property.activities.order(:sort)} %>");
 $(".sortable").sortable("enable");
-$(".accordion-bx").removeAttr("id")
 $('.plus-icon').hide();
 $('#show_sort_option').hide();
 $('.activity_edit').hide();
