@@ -21,9 +21,10 @@ gem 'gruff'
 gem "browser"
 
 
-gem "carrierwave"
-gem "cloudinary"
 
+# gem "carrierwave"
+gem 'carrierwave', '~> 1.1.0'
+gem 'cloudinary'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
@@ -51,7 +52,7 @@ group :development, :test do
   gem "draft_log", github: "firstdraft/draft_log"
   gem "grade_runner", github: "firstdraft/grade_runner"
   gem "pry-rails"
-   gem "sqlite3"
+  gem "sqlite3"
   gem "web_git", github: "firstdraft/web_git"
 end
 
