@@ -24,15 +24,33 @@
   </div>
 
   <div class="col-lg-3 col-6">
-    <% if current_user.headshot.blank? %>
-      <div class="card">
-        <div class="card-body text-center font-weight-light text-uppercase">
-          To add a headshot to your profile go to edit profile.
+      <div class="card border-0">
+        <div class="card-body p-box text-center font-weight-light text-uppercase">
+          <% if current_user.headshot.blank? %>
+            <div class=" upload-bx">
+              <%= form_with(model: @user, url: update_profile_path, method: :post, local: true, class: 'file-upload-bx',id: "new-upload-form") do |f| %>
+                <p class="upname">Upload Profile picture</p>
+                <%= f.file_field "user[headshot]", class: "form-control", accept:".jpeg, .jpg, .png", id: "headshot_fileupload" %>
+                <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+                <% %w[x y w h].each do |attribute| %>
+                  <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+                <% end %>
+                <%#= submit_tag "update", id: "upload_profile_btn", style: "display:none" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div id= "edit_profile" class="p-edit-bx">
+              <% if HeadshotCoordinate.find_by(user_headshot_id: current_user.id).present? %>
+                <%= cl_image_tag(current_user.headshot.file.filename,  :angle => HeadshotCoordinate.find_by(user_headshot_id: current_user.id).rotate, :x=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_x, :y=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_y, :width=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_w, :height=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_h, :crop=>"crop", version: current_user.headshot.file.version, class: "img-fluid img-thumbnail")  %>
+              <% else %>
+              <%= cl_image_tag(current_user.headshot.file.filename, version: current_user.headshot.file.version, class: "img-fluid img-thumbnail")  %>
+              <% end %>
+              <%#= image_tag current_user.headshot_url, class: "img-fluid img-thumbnail" %>
+              <i class="fas fa-edit icon-edit"></i>
+            </div>
+          <% end %>
         </div>
       </div>
-    <% else %>
-      <img src="<%= current_user.headshot %>" class="img-fluid img-thumbnail">
-    <% end %>
   </div>
 </div>
 
@@ -48,8 +66,148 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3 col-12">
+    <%= link_to 'Change Password', edit_user_path , class: "btn btn-outline-secondary btn-block text-uppercase" %>
+  </div>
+</div>
+
+
+<!-- <div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3 col-12">
     <a href="/settings">
       <button type="button" class="btn btn-outline-secondary btn-block text-uppercase">Go Back</button>
     </a>
   </div>
+</div> -->
+
+
+<div class="modal modal-upload-img fade" id="profileModal">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Crop Avatar</h4>
+        <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <div class='row' id="crop">
+          <div class='col-12'>
+            <div class="panel panel-primary">
+              <div class="panel-body">
+                <button type="button" id="rotate" class="btn btn-info d-block mx-auto remove-loader"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
+                <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
+                  <% if current_user.headshot.present? %>
+                    <%= image_tag current_user.headshot_url, id: "cropbox" %>
+                  <% else %>
+                  <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
+                    <%= image_tag '', id: "cropbox" %>
+                  </div>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Submit</button>
+        <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
+          <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+          <%= f.hidden_field "user[mode]", value: 'edit'%>
+          <% %w[x y w h].each do |attribute| %>
+            <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+          <% end %>
+      <% end %>
+        <%= form_with(model: @user, url: update_profile_path, method: :post, class: 'file-upload-bx-2', :html => {:multipart => true} ,id: 'change_profile_form') do |f| %>
+          <!-- <buton class="btn custom-info-button"></button> -->
+            <%= f.button "Change Profile picture", class: 'btn custom-info-button' %>
+          <%= f.file_field "user[headshot]", class: "form-control", accept:".jpeg, .jpg, .png", id: "headshot_file_change" %>
+          <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+          <%= f.hidden_field "user[mode]", value: 'update'%>
+          <% %w[x y w h].each do |attribute| %>
+            <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+          <% end %>
+          <%#= submit_tag "update", id: "update_profile_btn", style: "display:none"  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+<script>
+  var crop_div_width = parseInt($("#crop_div").width());
+  $("#headshot_fileupload").change(function(e){
+   var reader = new FileReader();
+   reader.readAsDataURL(this.files[0]);
+   reader.onload = function (e) {
+     $("#cropbox").attr('src', e.target.result);
+     // $("#preview").attr('src', e.target.result);
+     if(typeof api != 'undefined') {
+       api.destroy();
+     }
+     // resetSlider();
+     return new AvatarCrop(crop_div_width);
+   }
+   // $("#upload_profile_btn").click();
+   $('#submit_btn').addClass("new-upload");
+   $('#profileModal').modal('show');
+})
+
+$("#submit_btn").click(function(e){
+  if ($(this).hasClass('new-upload'))
+  {
+    $("#new-upload-form").submit();
+    $(this).removeClass("new-upload")
+  }
+  else if($(this).hasClass("update-upload")){
+    $("#change_profile_form").submit();
+    $(this).removeClass("update-upload")
+  }
+  else{
+    $("#edit-upload-form").submit();
+  }
+  // $("#update_test").click();
+})
+
+
+$("#headshot_file_change").change(function(e){
+ var reader = new FileReader();
+ reader.readAsDataURL(this.files[0]);
+ reader.onload = function (e) {
+   $("#cropbox").attr('src', e.target.result);
+   // $("#preview").attr('src', e.target.result);
+   if(typeof api != 'undefined') {
+     api.destroy();
+   }
+   // resetSlider();
+   $('#submit_btn').addClass("update-upload")
+   return new AvatarCrop(crop_div_width);
+ }
+
+
+ // $("#update_profile_btn").click();
+ // $('#profileModal').modal('show');
+})
+
+
+
+$("#edit_profile").click(function(e){
+   $('#profileModal').modal({show: true,backdrop: 'static', keyboard: false})
+})
+
+$("#rotate").click(function(e){
+  var jcp = $("#cropbox").Jcrop('api');
+  console.log("============",$("#cropbox"));
+  var rotate = 90;
+  if($('.user_rotate').val() == "90"){
+    rotate = 180;
+  } else if($('.user_rotate').val() == "180"){
+    rotate = 270;
+  } else if($('.user_rotate').val() == "270"){
+    rotate = 360;
+  }
+  $('.user_rotate').val(rotate);
+console.log(jcp)
+  jcp.ui.stage.setAngle(rotate).redraw();
+})
+</script>
