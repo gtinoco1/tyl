@@ -84,7 +84,7 @@
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Crop Avatar</h4>
+        <h4 class="modal-title">Upload Profile Picture</h4>
         <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
@@ -108,25 +108,23 @@
         </div>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Submit</button>
-        <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
-          <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
-          <%= f.hidden_field "user[mode]", value: 'edit'%>
-          <% %w[x y w h].each do |attribute| %>
-            <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
-          <% end %>
-      <% end %>
         <%= form_with(model: @user, url: update_profile_path, method: :post, class: 'file-upload-bx-2', :html => {:multipart => true} ,id: 'change_profile_form') do |f| %>
-          <!-- <buton class="btn custom-info-button"></button> -->
-            <%= f.button "Change Profile picture", class: 'btn custom-info-button' %>
+            <%= f.button "New Image", class: 'btn custom-info-button' %>
           <%= f.file_field "user[headshot]", class: "form-control", accept:".jpeg, .jpg, .png", id: "headshot_file_change" %>
           <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
           <%= f.hidden_field "user[mode]", value: 'update'%>
           <% %w[x y w h].each do |attribute| %>
             <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
           <% end %>
-          <%#= submit_tag "update", id: "update_profile_btn", style: "display:none"  %>
         <% end %>
+        <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
+        <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+        <%= f.hidden_field "user[mode]", value: 'edit'%>
+        <% %w[x y w h].each do |attribute| %>
+        <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+        <% end %>
+        <% end %>
+        <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Save</button>
       </div>
     </div>
   </div>
@@ -141,14 +139,11 @@
    reader.readAsDataURL(this.files[0]);
    reader.onload = function (e) {
      $("#cropbox").attr('src', e.target.result);
-     // $("#preview").attr('src', e.target.result);
      if(typeof api != 'undefined') {
        api.destroy();
      }
-     // resetSlider();
      return new AvatarCrop(crop_div_width);
    }
-   // $("#upload_profile_btn").click();
    $('#submit_btn').addClass("new-upload");
    $('#profileModal').modal('show');
 })
@@ -166,7 +161,6 @@ $("#submit_btn").click(function(e){
   else{
     $("#edit-upload-form").submit();
   }
-  // $("#update_test").click();
 })
 
 
@@ -175,21 +169,13 @@ $("#headshot_file_change").change(function(e){
  reader.readAsDataURL(this.files[0]);
  reader.onload = function (e) {
    $("#cropbox").attr('src', e.target.result);
-   // $("#preview").attr('src', e.target.result);
    if(typeof api != 'undefined') {
      api.destroy();
    }
-   // resetSlider();
    $('#submit_btn').addClass("update-upload")
    return new AvatarCrop(crop_div_width);
  }
-
-
- // $("#update_profile_btn").click();
- // $('#profileModal').modal('show');
 })
-
-
 
 $("#edit_profile").click(function(e){
    $('#profileModal').modal({show: true,backdrop: 'static', keyboard: false})
@@ -197,7 +183,6 @@ $("#edit_profile").click(function(e){
 
 $("#rotate").click(function(e){
   var jcp = $("#cropbox").Jcrop('api');
-  console.log("============",$("#cropbox"));
   var rotate = 90;
   if($('.user_rotate').val() == "90"){
     rotate = 180;
@@ -207,7 +192,6 @@ $("#rotate").click(function(e){
     rotate = 360;
   }
   $('.user_rotate').val(rotate);
-console.log(jcp)
   jcp.ui.stage.setAngle(rotate).redraw();
 })
 </script>

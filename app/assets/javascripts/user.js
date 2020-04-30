@@ -15,10 +15,8 @@ AvatarCrop = (function() {
     // height = parseInt($('#crop_div').height());
     $('#cropbox').Jcrop({
       aspectRatio: 1,
-      setSelect: [10, 10, 200, 200],
-      minSize: [0,0],
+      setSelect: [10, 10, 600, 600],
       boxWidth: width,
-      boxHeight: 400,
       onSelect: this.update,
       onChange: this.update
     },function(){api = this;});
