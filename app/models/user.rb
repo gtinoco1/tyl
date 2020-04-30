@@ -30,6 +30,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+
+  mount_uploader :headshot, HeadshotUploader
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
@@ -42,13 +46,13 @@ class User < ApplicationRecord
   has_many :replies, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :property_attachments, :dependent => :destroy
+  # belongs_to :headshot_coordinate, :foreign_key => "user_headshot_id", :dependent => :destroy
   validates :last_name, :presence => true
   validates :first_name, :presence => true
 
 # validates_format_of :email, :with => /floridamoves\.com|example\.com/, :message => "Must register with a floridamoves.com email."
   after_create :add_types
 
-  mount_uploader :headshot, HeadshotUploader
 
   def add_types
     ActivityType.create(user: self, title: "Call",

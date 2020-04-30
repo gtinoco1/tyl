@@ -24,6 +24,7 @@ gem "browser"
 
 # gem "carrierwave"
 gem 'carrierwave', '~> 1.1.0'
+gem 'rails-assets-jcrop', source: 'https://rails-assets.org'
 gem 'cloudinary'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'

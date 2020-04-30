@@ -108,7 +108,7 @@
               </small>
             <% end %>
           </div>
-          
+
                  <!-- Devise Input for phone -->
           <div class="form-group">
             <% phone_was_invalid = resource.errors.include?(:phone) %>
@@ -138,7 +138,7 @@
           <!-- Devise Input for phone end -->
 
           <!-- Devise Input for Headshot -->
-          <div class="row mb-2">
+          <!-- <div class="row mb-2">
             <div class="col-lg-8 col-8 mb-2">
               <%= f.label :headshot %>
               <%= f.file_field :headshot, :class => "form-control" %>
@@ -146,9 +146,9 @@
             <div class="col-lg-3 col-3 mx-auto">
               <img src="<%= current_user.headshot %>" class="img-fluid">
             </div>
-          </div>
+          </div> -->
           <!-- Devise Input for Headshot End-->
-                    
+
                            <!-- Devise Input for Agency -->
           <div class="form-group">
             <% agency_was_invalid = resource.errors.include?(:agency) %>
@@ -166,7 +166,7 @@
             <label for="agency">Real Estate Agency</label>
 
             <%= f.select(:agency, ["Coldwell Banker","Other"], {}, :class => "form-control") %>
-            
+
             <% if agency_was_invalid %>
               <% resource.errors.full_messages_for(:agency).each do |message| %>
                 <div class="invalid-feedback d-flex">
@@ -176,16 +176,16 @@
             <% end %>
           </div>
           <!-- Devise Input for agency end -->
-          
+
           <div class="row mb-2">
             <div class="col-12">
               <%= f.label :website %>
               <%= f.text_field :website, :class => "form-control" %>
             </div>
           </div>
-          
-          
-          <div class="form-group">
+
+
+          <!-- <div class="form-group">
             <% password_was_invalid = resource.errors.include?(:password) %>
 
             <% password_class = "form-control" %>
@@ -243,7 +243,7 @@
                 </div>
               <% end %>
             <% end %>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <% current_password_was_invalid = resource.errors.include?(:current_password) %>
@@ -277,7 +277,7 @@
 
           <%= f.submit "Update", class: "btn btn-block btn-outline-primary" %>
         <% end %>
-        
+
         <div class="row mt-3">
           <div class="col-12">
           <%= link_to "Go Back", :back, class: "btn btn-block btn-outline-secondary" %>
