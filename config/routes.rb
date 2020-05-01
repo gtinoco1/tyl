@@ -251,7 +251,7 @@ Rails.application.routes.draw do
   post("/properties/summary", {:controller => "properties", :action => "property_summary_update"})
 
   # devise_for :users
-  devise_for :users, :controllers => {registrations: 'registrations', passwords: 'passwords' }
+  devise_for :users, :controllers => {registrations: 'registrations'}
   # devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
 
   as :user do
