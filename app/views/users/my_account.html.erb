@@ -93,16 +93,17 @@
           <div class='col-12'>
             <div class="panel panel-primary">
               <div class="panel-body">
-                <button type="button" id="rotate" class="btn btn-info d-block mx-auto remove-loader"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
+                <button type="button" id="rotate" class="btn btn-info d-block mx-auto remove-loader mb-15"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
                 <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
-                  <% if current_user.headshot.present? %>
-                    <%= image_tag current_user.headshot_url, id: "cropbox" %>
+                <% if current_user.headshot.present? %>
+                    <%= image_tag current_user.headshot_url, id: "cropbox", class: "north" %>
+                  <!-- </div> -->
                   <% else %>
-                  <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
+                  <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto"> -->
                     <%= image_tag '', id: "cropbox" %>
                   </div>
-                  <% end %>
-              </div>
+                <% end %>
+                </div>
             </div>
           </div>
         </div>
@@ -130,10 +131,7 @@
   </div>
 </div>
 
-
-
 <script>
-  var crop_div_width = parseInt($("#crop_div").width());
   $("#headshot_fileupload").change(function(e){
    var reader = new FileReader();
    reader.readAsDataURL(this.files[0]);
@@ -142,7 +140,7 @@
      if(typeof api != 'undefined') {
        api.destroy();
      }
-     return new AvatarCrop(crop_div_width);
+     return new AvatarCrop(400);
    }
    $('#submit_btn').addClass("new-upload");
    $('#profileModal').modal('show');
@@ -165,6 +163,7 @@ $("#submit_btn").click(function(e){
 
 
 $("#headshot_file_change").change(function(e){
+  $('#crop_div img').css('height', 'auto')
  var reader = new FileReader();
  reader.readAsDataURL(this.files[0]);
  reader.onload = function (e) {
@@ -173,25 +172,48 @@ $("#headshot_file_change").change(function(e){
      api.destroy();
    }
    $('#submit_btn').addClass("update-upload")
-   return new AvatarCrop(crop_div_width);
+   // $('#crop_div img').attr('class', 'north');
+   // $('.user_rotate').val(0)
+    new AvatarCrop(400);
  }
 })
 
 $("#edit_profile").click(function(e){
    $('#profileModal').modal({show: true,backdrop: 'static', keyboard: false})
+   return new AvatarCrop(400);
 })
 
 $("#rotate").click(function(e){
-  var jcp = $("#cropbox").Jcrop('api');
-  var rotate = 90;
-  if($('.user_rotate').val() == "90"){
-    rotate = 180;
-  } else if($('.user_rotate').val() == "180"){
-    rotate = 270;
-  } else if($('.user_rotate').val() == "270"){
-    rotate = 360;
+  var img = $("#crop_div img");
+  var rotate = 0;
+  if (img.hasClass('north')) {
+      img.attr('class', 'west');
+      rotate = 90;
+  } else if (img.hasClass('west')) {
+      img.attr('class', 'south');
+      rotate = 180;
+  } else if (img.hasClass('south')) {
+      img.attr('class', 'east');
+      rotate = 270;
+  } else if (img.hasClass('east')) {
+      img.attr('class', 'north');
+      rotate = 360;
   }
   $('.user_rotate').val(rotate);
-  jcp.ui.stage.setAngle(rotate).redraw();
+
+
+
+
+  // var jcp = $("#cropbox").Jcrop('api');
+  // console.log("---",jcp.ui)
+  // var rotate = 90;
+  // if($('.user_rotate').val() == "90"){
+  //   rotate = 180;
+  // } else if($('.user_rotate').val() == "180"){
+  //   rotate = 270;
+  // } else if($('.user_rotate').val() == "270"){
+  //   rotate = 360;
+  // }
+  // jcp.ui.stage.setAngle(rotate).redraw();
 })
 </script>
