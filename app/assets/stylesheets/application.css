@@ -322,7 +322,7 @@ h5 .icon-info{color: #3b88fd;font-size: 16px;}
     .summary-bx .ps-lists .form-group{width: 26%;}
     .property-summary-bx .ps-lists .btn-bx {width: 100%;text-align: center;}
     #crop_div {width:100% !important}
-    #profileModal {max-height: 600px}
+    /* #profileModal {max-height: 600px} */
 }
 
 /* upload-btn-wrapper */
