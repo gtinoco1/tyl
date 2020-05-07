@@ -16,6 +16,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require loading
-//= require touch-patch
-//= require jcrop
 //= require user
+//= require touch-patch

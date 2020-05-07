@@ -1,9 +1,9 @@
 var AvatarCrop,
   bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-// var api;
-$(function() {
-  return new AvatarCrop(400);
-});
+var api;
+// $(function() {
+//   return new AvatarCrop(400);
+// });
 
 AvatarCrop = (function() {
   function AvatarCrop(width) {
@@ -12,7 +12,7 @@ AvatarCrop = (function() {
     this.update = bind(this.update, this);
     // var height, width;
     // width = parseInt($('#crop_div').width());
-    // height = parseInt($('#crop_div').height());
+    // height = parseInt($('.crop_div').height());
     $('#cropbox').Jcrop({
       aspectRatio: 1,
       setSelect: [10, 10, 600, 600],

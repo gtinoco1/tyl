@@ -12,7 +12,6 @@
  *
  *= require_self
 *= require bootstrap-datetimepicker
-*= require jcrop
  */
 
  html { font-size: 1rem; }
@@ -322,10 +321,36 @@ h5 .icon-info{color: #3b88fd;font-size: 16px;}
     .property-summary-bx .ps-lists .form-group {width: 33.33%;}
     .summary-bx .ps-lists .form-group{width: 26%;}
     .property-summary-bx .ps-lists .btn-bx {width: 100%;text-align: center;}
-
+    #crop_div {width:100% !important}
+    /* #profileModal {max-height: 600px} */
 }
 
 /* upload-btn-wrapper */
 .file-upload-bx-2 { position: relative; overflow: hidden; display: inline-block;}
 .p { border: 2px solid gray; color: gray; background-color: white; padding: 8px 20px; border-radius: 8px; font-size: 20px; font-weight: bold; }
 .file-upload-bx-2 input[type=file] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
+
+.north
+{
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
+.west
+{
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+.south
+{
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+.east
+{
+    transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
