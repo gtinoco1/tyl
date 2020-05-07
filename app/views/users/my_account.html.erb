@@ -41,9 +41,9 @@
           <% else %>
             <div id= "edit_profile" class="p-edit-bx">
               <% if HeadshotCoordinate.find_by(user_headshot_id: current_user.id).present? %>
-                <%= cl_image_tag(current_user.headshot.file.filename,  :angle => HeadshotCoordinate.find_by(user_headshot_id: current_user.id).rotate, :x=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_x, :y=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_y, :width=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_w, :height=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_h, :crop=>"crop", version: current_user.headshot.file.version, class: "img-fluid img-thumbnail")  %>
+                <%= cl_image_tag(current_user.headshot.file.filename,  :angle => HeadshotCoordinate.find_by(user_headshot_id: current_user.id).rotate, :x=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_x, :y=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_y, :width=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_w, :height=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_h, :crop=>"crop", version: current_user.headshot.file.version, secure: true, class: "img-fluid img-thumbnail")  %>
               <% else %>
-              <%= cl_image_tag(current_user.headshot.file.filename, version: current_user.headshot.file.version, class: "img-fluid img-thumbnail")  %>
+              <%= cl_image_tag(current_user.headshot.file.filename, version: current_user.headshot.file.version, secure: true, class: "img-fluid img-thumbnail")  %>
               <% end %>
               <%#= image_tag current_user.headshot_url, class: "img-fluid img-thumbnail" %>
               <i class="fas fa-edit icon-edit"></i>
