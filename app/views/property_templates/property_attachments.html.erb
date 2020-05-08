@@ -45,12 +45,13 @@
 
         <% elsif attachment.attachment.to_s.slice(len-3..len) == "pdf" %>
           <a href="/property_attachments/<%= attachment.id %>">
-            <img src="<%= attachment.attachment.to_s.slice(0..-4) << 'jpg' %>" class="img-fluid" alt="...">
+            <%= cl_image_tag(attachment.attachment.to_s.slice(0..-4) << 'jpg', class: "img-fluid", alt: "...", secure: true) %>
           </a>
 
         <% else %>
           <a href="/property_attachments/<%= attachment.id %>">
-            <img src="<%= attachment.attachment %>" class="img-fluid" alt="...">
+            <%= cl_image_tag(attachment.attachment, class: "img-fluid", alt: "...", secure: true) %>
+
           </a>
 
         <% end %>

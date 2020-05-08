@@ -1,7 +1,7 @@
 require "open-uri"
 class ReportByDateHeader < Prawn::Document
   include ActionView::Helpers::NumberHelper
-  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type, show_total_toggle,show_chart_toggle,property_summary_table)
+  def initialize(property, current_user, start_date, end_date, subject_check, contact_check, duration_check, cost_check, attachment_toggle, report_type, show_total_toggle,show_chart_toggle,property_summary_table, profile_url)
     super(top_margin: 50, bottom_margin: 55)
 
     font_families.update("Nunito" => {:normal => Rails.root.join("app/assets/fonts/Nunito-Regular.ttf"),
@@ -23,6 +23,7 @@ class ReportByDateHeader < Prawn::Document
     @show_total_toggle = show_total_toggle
     @total_min = 0
     @property_summary_table = property_summary_table
+    @profile_url = profile_url
 
     move_down 80
     header
@@ -110,7 +111,7 @@ class ReportByDateHeader < Prawn::Document
 
     if @current_user.headshot.blank?
     else
-    image open("#{@current_user.headshot}"), :height => 110, :at => [430, 725]
+    image open("#{@profile_url}"), :height => 110, :at => [430, 725]
     end
 
     text_box "#{@current_user.first_name} #{@current_user.last_name}",  :at => [340, 610],
