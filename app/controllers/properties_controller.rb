@@ -88,12 +88,12 @@ class PropertiesController < ApplicationController
   def create_row
     @property = Property.new
 
-    @property.address = params.fetch("address")
-    @property.realtor_id = params.fetch("realtor_id")
-    @property.city = params.fetch("city")
-    @property.state = params.fetch("state")
-    @property.zipcode = params.fetch("zipcode")
-    @property.status = params.fetch("status")
+    @property.address = params[:property][:address]
+    @property.realtor_id = params[:property][:realtor_id]
+    @property.city = params[:property][:city]
+    @property.state = params[:property][:state]
+    @property.zipcode = params[:property][:zipcode]
+    @property.status = params[:property][:status]
     @property.listing_type = params.fetch("listing_type", "")
 
     if @property.valid?
@@ -113,13 +113,13 @@ class PropertiesController < ApplicationController
 
   def update_row
     @property = Property.find(params.fetch("id_to_modify"))
-    @property.address = params.fetch("address")
-    @property.realtor_id = params.fetch("realtor_id")
-    @property.city = params.fetch("city")
-    @property.state = params.fetch("state")
-    @property.zipcode = params.fetch("zipcode")
-    @property.status = params.fetch("status")
-    @property.listing_type = params.fetch("listing_type")
+    @property.address = params[:property][:address]
+    @property.realtor_id = params[:property][:realtor_id]
+    @property.city = params[:property][:city]
+    @property.state = params[:property][:state]
+    @property.zipcode = params[:property][:zipcode]
+    @property.status = params[:property][:status]
+    @property.listing_type = params.fetch("listing_type", "")
 
     if @property.valid?
       @property.save
