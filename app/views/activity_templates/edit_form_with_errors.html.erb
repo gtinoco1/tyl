@@ -5,7 +5,6 @@
     </div>
   <% end %>
 <% end %>
-
 <div class="row">
   <div class="col-lg-4 offset-lg-2">
     <h4 class="text-secondary text-uppercase">
@@ -17,133 +16,99 @@
     <hr>
   </div>
 </div>
-
-
-<form action="/update_activity/<%= @activity.id %>" method="post" enctype="multipart/form-data">
-
+<%=form_for(@activity, url: {action: "update_row", id_to_modify: @activity.id}, enctype: "multipart/form-data",method: :post) do |f| %>
   <div class="row mb-2">
     <div class="col-lg-3 offset-lg-3 mb-2">
       <label for="activity_type_id">
-        Activity Type            
+        Activity Type
       </label>
-      <input type="text" id="activity_type_id" name="activity_type_id" class="form-control" value="<%= @activity.activity_type.title %>" disabled>
-    </div>
-
-    <div class="form-group">
+      <!-- <input type="text" id="activity_type_id" name="activity_type_id" class="form-control" value="<%= @activity.activity_type.title %>" > -->
+     <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title, @activity.activity_type_id), :class => "form-control", :type => "text" ) %>
+      </div>
+    <!-- <div class="form-group">
       <input type="hidden" name="activity_type_id" class="form-control" value="<%= @activity.activity_type_id %>">
-    </div>
-
+    </div> -->
     <div class="col-lg-3 mb-2">
       <label for="date">
         Date
       </label>
-      <input type="date" id="date" name="date" class="form-control" value="<%= @activity.date %>">
+      <%= f.date_field :date, as: :date,  class: "form-control"%>
     </div>
-
   </div>
-
-
   <div class="row mb-2">
-
     <% if @activity.activity_type.contact_toggle == "Show" %>
-
       <div class="col-lg-4 offset-lg-3 mb-2">
         <label for="contact">
-          Contact            
+          Contact
         </label>
-        <input type="text" id="contact" name="contact" class="form-control" value="<%= @activity.contact %>">
+        <%= f.text_field :contact, :class => "form-control" %>
       </div>
-
-    <% else %>
     <% end %>
-
     <div class="col-lg-2 mb-0">
       <label for="duration">
-        Time (minutes)            
+        Time (minutes)
       </label>
-      <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @activity.duration %>">
+      <%= f.number_field :duration, pattern: "\d*", class: "form-control" %>
     </div>
-
   </div>
-
-  <div class="row mb-3">
-
+  <div class="row mb-2">
     <div class="col-lg-6 offset-lg-3 mb-0">
       <label for="subject">
         Subject/Details
       </label>
-      <textarea id="detail" name="subject" class="form-control" type="text" rows="3" value="<%= @activity.detail %>"> <%= @activity.subject + ' ' + @activity.detail %></textarea>
+      <%= f.text_area :subject, :class => "form-control", rows: "3" %>
     </div>
-
   </div>
-
   <% if @activity.activity_type.outcome_toggle == "Show" %>
     <div class="row">
       <div class="col-lg-6 offset-lg-3 mb-2">
         <label for="outcome">
-          Outcome            
+          Outcome
         </label>
-        <textarea id="outcome" name="outcome" class="form-control" type="text" rows="3" value="<%= @activity.outcome %>"></textarea>
+        <%= f.text_area :outcome, :class => "form-control", rows: "3" %>
       </div>
     </div>
-
-  <% else %>
   <% end %>
-
-    <div class="row mb-3">
-  <% if @activity.activity_type.agent_toggle == "Show" %>
-
-    <div class="col-lg-3 offset-lg-3 mb-2">
-      <label for="agent">
-        Agent            
-      </label>
-      <input type="text" id="agent" name="agent" class="form-control" value="<%= @activity.agent %>">
-    </div>
-
-  <% else %>
-  <% end %>
-
-  <% if @activity.activity_type.customer_toggle == "Show" %>
-
-    <div class="col-lg-3 mb-0">
-      <label for="customer">
-        Customer            
-      </label>
-      <input type="text" id="customer" name="customer" class="form-control" value="<%= @activity.customer %>">
-    </div>
-
-  <% else %>
-  <% end %>
-</div>
-
+  <div class="row mb-3">
+    <% if @activity.activity_type.agent_toggle == "Show" %>
+      <div class="col-lg-3 offset-lg-3 mb-2">
+        <label for="agent">
+          Agent
+        </label>
+        <%= f.text_field :agent, :class => "form-control" %>
+      </div>
+    <% end %>
+    <% if @activity.activity_type.customer_toggle == "Show" %>
+      <div class="col-lg-3 mb-0">
+        <label for="customer">
+          Customer
+        </label>
+        <%= f.text_field :customer, :class => "form-control" %>
+      </div>
+    <% end %>
+  </div>
   <% if @activity.activity_type.cost_toggle == "Show" %>
     <div class="row mb-3">
       <div class="col-lg-3 offset-lg-3">
         <label for="cost">
-          Cost            
+          Cost
         </label>
-        <input type="number" pattern="\d*"/ id="cost" name="cost" class="form-control" value="<%= @activity.cost %>">
+        <%= f.number_field :cost, pattern: "\d*", class: "form-control", placeholder: "optional" %>
       </div>
     </div>
-  <% else %>
   <% end %>
-
-
-
-<div class="form-group">
-  <input type="hidden" name="property_id" class="form-control" value="<%= @activity.property_id %>">
-</div>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-    <button class="btn btn-block btn-outline-success">
-      Save activity
-    </button>
+  <div class="form-group">
+    <%= f.hidden_field :property_id, class: "form-control", value: @activity.property_id %>
   </div>
-</div>
-
-</form>
-
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <%= f.submit "Save activity", class: "btn btn-block btn-outline-success" %>
+      <!-- <button class="btn btn-block btn-outline-success">
+        Save activity
+      </button> -->
+    </div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <a href="/delete_activity/<%= @activity.id %>" data-confirm="Delete: Are you sure?" class="btn btn-block btn-outline-danger">

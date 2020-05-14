@@ -11,22 +11,22 @@
 
 <div class="row mb-3">
   <div class="col-lg-6 offset-lg-3">
-    
+
   <% if @property_attachment.attachment.blank? %>
         <a href="/property_attachments/<%= @property_attachment.id %>/edit">click to add</a>
-      
+
       <% elsif @property_attachment.attachment.to_s.slice(len-3..len) == "pdf" %>
-      
+
       <% (1..@property_attachment.pages).each do |i| %>
-  
+
       <div class="card pr-3 pl-3 pt-3 pb-3 mb-3 border-light" style="background-color: #F0F0F0">
-        <%=  cl_image_tag(@property_attachment.attachment.full_public_id + "." + "jpg", :page => i, :class => "img-fluid") %>
+        <%=  cl_image_tag(@property_attachment.attachment, :page => i, :class => "img-fluid", secure: true, format: :jpg) %>
         </div>
       <% end %>
 
       <% else %>
-            <div class="card pr-3 pl-3 pt-3 pb-3 mb-3 border-light" style="background-color: #F0F0F0">
-        <img src="<%= @property_attachment.attachment %>" class="img-fluid" alt="...">
+        <div class="card pr-3 pl-3 pt-3 pb-3 mb-3 border-light" style="background-color: #F0F0F0">
+          <%= cl_image_tag(@property_attachment.attachment, class: "img-fluid", alt: "...", secure: true) %>
         </div>
       <% end %>
 

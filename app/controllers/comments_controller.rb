@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @comments = Comment.all
-
+    @comment = Comment.new
 
     render("comment_templates/index.html.erb")
   end
@@ -21,8 +21,8 @@ class CommentsController < ApplicationController
   def create_row
     @comment = Comment.new
 
-    @comment.user_id = params.fetch("user_id")
-    @comment.body = params.fetch("body")
+    @comment.user_id = params[:comment][:user_id]
+    @comment.body = params[:comment][:body]
 
     if @comment.valid?
       @comment.save

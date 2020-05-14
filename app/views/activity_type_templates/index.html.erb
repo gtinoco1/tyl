@@ -27,7 +27,7 @@
     <div class="accordion" id="accordionExample">
       <% current_user.activity_types.order(created_at: :desc).each do |type| %>
 
-        <form action="/update_activity_type/<%= type.id %>" method="post">
+        <%=form_for(type, url: {action: "update_row", id_to_modify: type.id}, method: :post) do |f| %>
           <div class="card bg-white border-white">
             <div class="card-header bg-white " id="heading<%= type.id %>">
               <h2 class="mb-0">
@@ -46,7 +46,7 @@
                       <label for="title">
                         Title
                       </label>
-                      <input type="text" id="title" name="title" class="form-control" value="<%= type.title %>">
+                      <%= f.text_field :title, :class => "form-control" %>
                     </div>
                   </div>
                   <div class="col-6">
@@ -71,30 +71,30 @@
 
                 <div class = "row mb-2">
                   <div class="form-group">
-                    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
-                    <input type="hidden" name="subject_toggle" class="form-control" value="<%= type.subject_toggle %>">
-                    <input type="hidden" name="contact_toggle" class="form-control" value="<%= type.contact_toggle %>">
-                    <input type="hidden" name="duration_toggle" class="form-control" value="<%= type.duration_toggle %>">
-                    <input type="hidden" name="cost_toggle" class="form-control" value="<%= type.cost_toggle %>">
-                    <input type="hidden" name="detail_toggle" class="form-control" value="<%= type.detail_toggle %>">
-                    <input type="hidden" name="outcome_toggle" class="form-control" value="<%= type.outcome_toggle %>">
-                    <input type="hidden" name="agent_toggle" class="form-control" value="<%= type.agent_toggle %>">
-                    <input type="hidden" name="customer_toggle" class="form-control" value="<%= type.customer_toggle %>">
-                    <input type="hidden" name="flyer_img_toggle" class="form-control" value="Hide">
-                    <input type="hidden" name="postcard_img_toggle" class="form-control" value="Hide">
+                      <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
+                      <%= f.hidden_field :subject_toggle, class: "form-control", value: "Show" %>
+                      <%= f.hidden_field :contact_toggle, class: "form-control", value: "Show" %>
+                      <%= f.hidden_field :duration_toggle, class: "form-control", value: "Show" %>
+                      <%= f.hidden_field :cost_toggle, class: "form-control", value: "Show" %>
+                      <%= f.hidden_field :detail_toggle, class: "form-control", value: "Hide" %>
+                      <%= f.hidden_field :outcome_toggle, class: "form-control", value: "Hide" %>
+                      <%= f.hidden_field :agent_toggle, class: "form-control", value: "Hide" %>
+                      <%= f.hidden_field :customer_toggle, class: "form-control", value: "Hide" %>
+                      <input type="hidden" name="flyer_img_toggle" class="form-control" value="Hide">
+                      <input type="hidden" name="postcard_img_toggle" class="form-control" value="Hide">
 
                     </div>
                 </div>
-
-                <button class="btn btn-block btn-outline-success">
+                <%= f.submit "Save", class: "btn btn-block btn-outline-success" %>
+                <!-- <button class="btn btn-block btn-outline-success">
                   Save
-                </button>
+                </button> -->
               </div>
 
             </div>
           </div>
 
-        </form>
+        <% end %>
 
       <% end %>
 

@@ -8,10 +8,10 @@
 </div>
 
 
-<form action="/update_price/<%= @price.id %>" method="post">
+  <%=form_for(@price, url: {action: "update_row", id_to_modify: @price.id}, method: :post) do |f| %>
 
   <div class="form-group">
-    <input type="hidden" name="property_id" class="form-control" value="<%= @price.property_id %>">
+    <%= f.hidden_field :property_id, class: "form-control", value: @price.property_id %>
   </div>
 
   <div class="row mb-0">
@@ -20,7 +20,7 @@
         <label for="date">
           Date
         </label>
-        <input type="date" id="date" name="date" class="form-control" value="<%= @price.date %>">
+        <%= f.date_field :date, as: :date, value: Date.current.strftime('%Y-%m-%d'), class: "form-control"%>
       </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -28,7 +28,7 @@
         <label for="amount">
           Amount
         </label>
-        <input type="text" id="amount" name="amount" class="form-control" value="<%= number_to_currency(@price.amount, precision: 0) %>">
+        <%= f.text_field :amount, :class => "form-control", value: number_to_currency(@price.amount, precision: 0) %>
       </div>
     </div>
   </div>
@@ -39,21 +39,22 @@
         <label for="detail">
           Detail
         </label>
-        <textarea id="detail" name="detail" class="form-control" rows="3" ><%= @price.detail %></textarea>
+        <%= f.text_area :detail, :class => "form-control", rows: "3", placeholder: "original listing price, reduction ... etc" %>
       </div>
     </div>
   </div>
 
   <div class="row mb-0">
     <div class="col-lg-6 offset-lg-3">
-      <button class="btn btn-block btn-outline-success">
+      <!-- <button class="btn btn-block btn-outline-success">
         Save price
-      </button>
-    </form>
+      </button> -->
+      <%= f.submit "Save price", class: "btn btn-block btn-outline-success" %>
+      <% end %>
     <a href="/delete_price/<%= @price.id %>" class="btn btn-block btn-outline-danger">
       Delete
     </a>
-    
+
     <hr>
 
     <a href="/properties/prices/<%= @property_id %>" class="btn btn-block btn-outline-secondary">

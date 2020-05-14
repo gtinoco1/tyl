@@ -1,83 +1,64 @@
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
-
     <h4 class="text-uppercase text-secondary">
       Add a new activity
     </h4>
     <hr>
   </div>
 </div>
-
-
-<form action="/create_activity" method="post">
-
+<%=form_for(@activity, url: create_activity_path(@activity)) do |f| %>
   <div class="row mb-1">
-
     <div class="col-lg-4 offset-lg-3 mb-3">
       <label for="activity_type_id">
         Activity Type
       </label>
       <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title,), :class => "form-control", :prompt => "Select type", :type => "text" ) %>
-      <a href="/activity_types/new" class="">
-        Add a type 
-      </a>
+      <%= link_to "Add a type", activity_types_new_path %>
     </div>
-
     <div class="col-lg-2 mb-3">
       <label for="date">
         Date
       </label>
-      <input class="form-control" type="date" id="date" name="date" value="<%= Date.current.strftime('%Y-%m-%d') %>">
+      <%= f.date_field :date, as: :date, value: Date.current.strftime('%Y-%m-%d'), class: "form-control"%>
     </div>
-</div>
-
- <div class="row mb-3">
-
-       <div class="col-lg-4 offset-lg-3 mb-2">
-        <label for="contact">
-          Contact
-        </label>
-        <input type="text" id="contact" name="contact" class="form-control" value="<%= @activity.contact %>">
-      </div>
-
+  </div>
+  <div class="row mb-3">
+     <div class="col-lg-4 offset-lg-3 mb-2">
+      <label for="contact">
+        Contact
+      </label>
+      <%= f.text_field :contact, :class => "form-control" %>
+    </div>
     <div class="col-lg-2 mb-0">
       <label for="duration">
         Time (minutes)
       </label>
-      <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control" value="<%= @activity.duration %>">
+      <%= f.number_field :duration, pattern: "\d*", class: "form-control" %>
     </div>
-
-</div>
-
-    <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
- 
-
+  </div>
+  <%= f.hidden_field :property_id, class: "form-control", value: @property_id %>
   <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3 mb-0">
       <label for="subject">
         Subject/Details
       </label>
-      <textarea id="detail" name="subject" class="form-control" type="text" rows="3" value=""> </textarea>
+      <%= f.text_area :subject, :class => "form-control", rows: "3" %>
     </div>
   </div>
-
-
   <div class="row mb-4">
-        <div class="col-lg-3 offset-lg-3">
-        <label for="cost">
-          Cost 
-        </label>
-        <input type="number" pattern="\d*"/ id="cost" placeholder="optional" name="cost" class="form-control" value="<%= @activity.cost %>">
-      </div>
+    <div class="col-lg-3 offset-lg-3">
+      <label for="cost">
+        Cost
+      </label>
+      <%= f.number_field :cost, pattern: "\d*", class: "form-control", placeholder: "optional" %>
+    </div>
   </div>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-    <button class="btn btn-block btn-outline-success">
-      Save activity
-    </button>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <%= f.submit "Create activity", class: "btn btn-block btn-outline-success" %>
+      <!-- <button class="btn btn-block btn-outline-success">
+        Save activity
+      </button> -->
+    </div>
   </div>
-</div>
-
-</form>
-
+<% end %>

@@ -70,26 +70,26 @@ class BuyersController < ApplicationController
 
   def create_row
     @buyer = Buyer.new
-
-    @buyer.user_id = params.fetch("user_id")
-    @buyer.name = params.fetch("name")
-    @buyer.funds = params.fetch("funds","")
-    @buyer.downpayment = params.fetch("downpayment","")
-    @buyer.preapproval = params.fetch("preapproval","")
-    @buyer.buyer_type = params.fetch("buyer_type")
-    @buyer.status = params.fetch("status")
-    @buyer.price_min = params.fetch("price_min","")
-    @buyer.price_max = params.fetch("price_max","")
-    @buyer.bed = params.fetch("bed")
     @buyer.bath = params.fetch("bath")
     @buyer.house = params.fetch("house","")
-    @buyer.condo = params.fetch("condo","")
-    @buyer.wd = params.fetch("wd","")
-    @buyer.balcony = params.fetch("balcony","")
-    @buyer.parking = params.fetch("parking","")
-    @buyer.garage = params.fetch("garage","")
-    @buyer.pool = params.fetch("pool","")
-    @buyer.notes = params.fetch("notes","")
+    @buyer.funds = params.fetch("funds","")
+    @buyer.preapproval = params.fetch("preapproval","")
+
+    @buyer.user_id = params[:buyer][:user_id]
+    @buyer.name = params[:buyer][:name]
+    @buyer.downpayment = params[:buyer][:downpayment]
+    @buyer.buyer_type = params[:buyer][:buyer_type]
+    @buyer.status = params[:buyer][:status]
+    @buyer.price_min = params[:buyer][:price_min]
+    @buyer.price_max = params[:buyer][:price_max]
+    @buyer.house = params[:buyer][:house]
+    @buyer.condo = params[:buyer][:condo]
+    @buyer.wd = params[:buyer][:wd]
+    @buyer.balcony = params[:buyer][:balcony]
+    @buyer.parking = params[:buyer][:parking]
+    @buyer.garage = params[:buyer][:garage]
+    @buyer.pool = params[:buyer][:pool]
+    @buyer.notes = params[:buyer][:notes]
 
     if @buyer.valid?
       @buyer.save
@@ -108,25 +108,27 @@ class BuyersController < ApplicationController
   def update_row
     @buyer = Buyer.find(params.fetch("id_to_modify"))
 
-    @buyer.user_id = params.fetch("user_id")
-    @buyer.name = params.fetch("name")
-    @buyer.funds = params.fetch("funds","")
-    @buyer.downpayment = params.fetch("downpayment","")
-    @buyer.preapproval = params.fetch("preapproval","")
-    @buyer.buyer_type = params.fetch("buyer_type")
-    @buyer.status = params.fetch("status")
-    @buyer.price_min = params.fetch("price_min","")
-    @buyer.price_max = params.fetch("price_max","")
-    @buyer.bed = params.fetch("bed")
     @buyer.bath = params.fetch("bath")
     @buyer.house = params.fetch("house","")
-    @buyer.condo = params.fetch("condo","")
-    @buyer.wd = params.fetch("wd","")
-    @buyer.balcony = params.fetch("balcony","")
-    @buyer.parking = params.fetch("parking","")
-    @buyer.garage = params.fetch("garage","")
-    @buyer.pool = params.fetch("pool","")
-    @buyer.notes = params.fetch("notes","")
+    @buyer.funds = params.fetch("funds","")
+    @buyer.preapproval = params.fetch("preapproval","")
+
+    @buyer.user_id = params[:buyer][:user_id]
+    @buyer.name = params[:buyer][:name]
+    @buyer.downpayment = params[:buyer][:downpayment]
+    @buyer.buyer_type = params[:buyer][:buyer_type]
+    @buyer.status = params[:buyer][:status]
+    @buyer.price_min = params[:buyer][:price_min]
+    @buyer.price_max = params[:buyer][:price_max]
+    @buyer.house = params[:buyer][:house]
+    @buyer.condo = params[:buyer][:condo]
+    @buyer.wd = params[:buyer][:wd]
+    @buyer.balcony = params[:buyer][:balcony]
+    @buyer.parking = params[:buyer][:parking]
+    @buyer.garage = params[:buyer][:garage]
+    @buyer.pool = params[:buyer][:pool]
+    @buyer.notes = params[:buyer][:notes]
+
 
     if @buyer.valid?
       @buyer.save

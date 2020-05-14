@@ -63,13 +63,14 @@ class PropertiesController < ApplicationController
     @show_total_toggle = params.fetch("total_toggle","")
     @show_chart_toggle = params.fetch("chart_toggle","")
     @property_summary_table = params.fetch("property_summary_table","")
+    @profile_url = params.fetch("profile_url", "")
 
     respond_to do |format|
       format.html
       format.pdf do
         if @report_type == "date_asc" || @report_type == "date_desc" || @report_type == "custom"
           pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
-                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle, @property_summary_table)
+                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle, @property_summary_table, @profile_url)
         elsif @report_type == "activity_type"
           pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
         end
@@ -87,12 +88,12 @@ class PropertiesController < ApplicationController
   def create_row
     @property = Property.new
 
-    @property.address = params.fetch("address")
-    @property.realtor_id = params.fetch("realtor_id")
-    @property.city = params.fetch("city")
-    @property.state = params.fetch("state")
-    @property.zipcode = params.fetch("zipcode")
-    @property.status = params.fetch("status")
+    @property.address = params[:property][:address]
+    @property.realtor_id = params[:property][:realtor_id]
+    @property.city = params[:property][:city]
+    @property.state = params[:property][:state]
+    @property.zipcode = params[:property][:zipcode]
+    @property.status = params[:property][:status]
     @property.listing_type = params.fetch("listing_type", "")
 
     if @property.valid?
@@ -112,13 +113,13 @@ class PropertiesController < ApplicationController
 
   def update_row
     @property = Property.find(params.fetch("id_to_modify"))
-    @property.address = params.fetch("address")
-    @property.realtor_id = params.fetch("realtor_id")
-    @property.city = params.fetch("city")
-    @property.state = params.fetch("state")
-    @property.zipcode = params.fetch("zipcode")
-    @property.status = params.fetch("status")
-    @property.listing_type = params.fetch("listing_type")
+    @property.address = params[:property][:address]
+    @property.realtor_id = params[:property][:realtor_id]
+    @property.city = params[:property][:city]
+    @property.state = params[:property][:state]
+    @property.zipcode = params[:property][:zipcode]
+    @property.status = params[:property][:status]
+    @property.listing_type = params.fetch("listing_type", "")
 
     if @property.valid?
       @property.save

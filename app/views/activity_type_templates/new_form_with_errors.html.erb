@@ -17,36 +17,28 @@
     <hr>
   </div>
 </div>
-<form action="/create_activity_type" method="post">
-  
+<%=form_for(@activity_type, url: create_activity_type_path(@activity_type)) do |f| %>
 <div class = "row">
   <div class="col-lg-8 offset-lg-2">
-
     <div class="form-group">
       <label for="title">
         Title
       </label>
-      <input type="text" id="title" name="title" class="form-control">
+      <%= f.text_field :title, :class => "form-control" %>
     </div>
-
   <div class="form-group">
-    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+    <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
   </div>
-  
-    <input type="hidden" name="subject_toggle" class="form-control" value="Show">
-    <input type="hidden" name="contact_toggle" class="form-control" value="Show">
-    <input type="hidden" name="duration_toggle" class="form-control" value="Show">
-    <input type="hidden" name="cost_toggle" class="form-control" value="Show">
-    <input type="hidden" name="detail_toggle" class="form-control" value="Hide">
-    <input type="hidden" name="outcome_toggle" class="form-control" value="Hide">
-    <input type="hidden" name="agent_toggle" class="form-control" value="Hide">
-    <input type="hidden" name="customer_toggle" class="form-control" value="Hide">
-
-      <button class="btn btn-block btn-outline-success">
-        Save
-      </button>
-
-    </form>
+    <%= f.hidden_field :subject_toggle, class: "form-control", value: "Show" %>
+    <%= f.hidden_field :contact_toggle, class: "form-control", value: "Show" %>
+    <%= f.hidden_field :duration_toggle, class: "form-control", value: "Show" %>
+    <%= f.hidden_field :cost_toggle, class: "form-control", value: "Show" %>
+    <%= f.hidden_field :detail_toggle, class: "form-control", value: "Hide" %>
+    <%= f.hidden_field :outcome_toggle, class: "form-control", value: "Hide" %>
+    <%= f.hidden_field :agent_toggle, class: "form-control", value: "Hide" %>
+    <%= f.hidden_field :customer_toggle, class: "form-control", value: "Hide" %>
+    <%= f.submit "Save", class: "btn btn-block btn-outline-success" %>
+    <% end %>
     <hr>
 
   </div>

@@ -18,111 +18,112 @@
   </div>
 </div>
 
-<form action="/create_buyer_activity" method="post" enctype="multipart/form-data">
+<%=form_for(@buyer_activity, url: create_buyer_activity_path(@buyer_activity)) do |f| %>
 
-  <div class="row mb-2">
-    <div class="col-lg-3 offset-lg-3 mb-2">
-      <label for="buyer_activity_type_id">
-        Activity Type            
+<div class="row mb-2">
+  <div class="col-lg-3 offset-lg-3 mb-2">
+    <label for="buyer_activity_type_id">
+      Activity Type
+  </label>
+    <%= select_tag(:buyer_activity_type_id, options_from_collection_for_select(BuyerActivityType.order("title ASC").where(user_id: current_user.id), :id, :title,), :class => "form-control", :prompt => "Select type" ) %>
+  <a href="/buyer_activity_types/new" class="">
+      Add a type
+  </a>
+  </div>
+
+  <div class="col-lg-3 mb-2">
+    <label for="date">
+      Date
     </label>
-      <%= select_tag(:buyer_activity_type_id, options_from_collection_for_select(BuyerActivityType.order("title ASC").where(user_id: current_user.id), :id, :title,), :class => "form-control", :prompt => "Select type" ) %>
-    <a href="/buyer_activity_types/new" class="">
-        Add a type 
-    </a>
-    </div>
-
-    <div class="col-lg-3 mb-2">
-      <label for="date">
-        Date
-      </label>
-      <input type="date" id="date" name="date" class="form-control" value="<%= Date.current.strftime('%Y-%m-%d') %>">
-    </div>
-
+    <%= f.date_field :date, as: :date, value: Date.current.strftime('%Y-%m-%d'), class: "form-control"%>
   </div>
 
-     <div class="row mb-2">
+</div>
 
-      <div class="col-lg-4 offset-lg-3 mb-2">
-        <label for="agent">
-          Contact            
-        </label>
-        <input type="text" id="agent" name="agent" class="form-control">
-      </div>
+   <div class="row mb-2">
 
-    <div class="col-lg-2 mb-0">
-      <label for="duration">
-        Time (minutes)            
+    <div class="col-lg-4 offset-lg-3 mb-2">
+      <label for="agent">
+        Contact
       </label>
-      <input type="number" pattern="\d*"/ id="duration" name="duration" class="form-control">
+      <%= f.text_field :agent, :class => "form-control" %>
     </div>
 
+  <div class="col-lg-2 mb-0">
+    <label for="duration">
+      Time (minutes)
+    </label>
+    <%= f.number_field :duration, pattern: "\d*", class: "form-control" %>
   </div>
-  
-      <div class="row">
-      <div class="offset-lg-3 col-lg-6 mb-3">
-        <div class="mb-2">Subject/Detail</div>            
-        <textarea id="detail" name="detail" class="form-control mt-2" rows="3"></textarea>
-      </div>
-    </div>
-    
-  <div id="accordion" class="col-lg-6 offset-lg-3 px-1">
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-          
-            <h5 class="font-weight-light mb-0"> Property</h5>
 
-      </div>
-
-      <div class="card-body">
-        <div class="row mb-2">
-          <div class="col-lg-12">
-          <label class="mb-1">
-          Street Address            
-          </label>
-        <input type="text" id="property_address" name="property_address" class="form-control">
-      </div>
-    </div>
-
+</div>
 
     <div class="row">
-      <div class="col-lg-6 mb-0">
-        <div class="mb-1">
-          City            
-        </div>
-        <input type="text" id="city" name="city" class="form-control mb-2">
-      </div>
-
-      <div class="form-group col-lg-2 col-4">
-        <div class="mb-1">
-          State            
-        </div>
-        <input type="text" id="state" name="state" class="form-control">
-      </div>
-
-      <div class="form-group col-lg-4 col-8">
-        <div class="mb-1">
-          Zipcode            
-        </div>
-        <input type="text" id="zipcode" name="zipcode" class="form-control">
-      </div>
+    <div class="offset-lg-3 col-lg-6 mb-3">
+      <div class="mb-2">Subject/Detail</div>
+      <%= f.text_area :detail, :class => "form-control", rows: "3" %>
     </div>
-        
-      </div>
+  </div>
 
-  </div>
-  </div>
-  
-  <div class="form-group">
-    <input type="hidden" name="buyer_id" class="form-control" value="<%= @buyer_id %>">
+<div id="accordion" class="col-lg-6 offset-lg-3 px-1">
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+
+          <h5 class="font-weight-light mb-0"> Property</h5>
+
+    </div>
+
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col-lg-12">
+        <label class="mb-1">
+        Street Address
+        </label>
+        <%= f.text_field :property_address, :class => "form-control" %>
+    </div>
   </div>
 
 
   <div class="row">
-    <div class="col-lg-6 offset-lg-3">
-  <hr>
-      <button class="btn btn-block btn-lg btn-outline-success">
-        Save activity
-      </button>
+    <div class="col-lg-6 mb-0">
+      <div class="mb-1">
+        City
+      </div>
+      <%= f.text_field :city, :class => "form-control mb-2" %>
+    </div>
+
+    <div class="form-group col-lg-2 col-4">
+      <div class="mb-1">
+        State
+      </div>
+      <%= f.text_field :state, :class => "form-control" %>
+    </div>
+
+    <div class="form-group col-lg-4 col-8">
+      <div class="mb-1">
+        Zipcode
+      </div>
+      <%= f.text_field :zipcode, :class => "form-control" %>
     </div>
   </div>
-</form>
+
+    </div>
+
+</div>
+</div>
+
+<div class="form-group">
+  <%= f.hidden_field :buyer_id, class: "form-control", value: @buyer_id %>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+<hr>
+<%= f.submit "Save activity", class: "btn btn-block btn-outline-success" %>
+    <!-- <button class="btn btn-block btn-lg btn-outline-success">
+      Save activity
+    </button> -->
+  </div>
+</div>
+<% end %>

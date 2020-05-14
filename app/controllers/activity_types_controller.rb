@@ -10,7 +10,7 @@ class ActivityTypesController < ApplicationController
 
     render("activity_type_templates/show.html.erb")
   end
-  
+
     def settings
     @activity_type = ActivityType.all
 
@@ -26,16 +26,16 @@ class ActivityTypesController < ApplicationController
   def create_row
     @activity_type = ActivityType.new
 
-    @activity_type.title = params.fetch("title")
-    @activity_type.cost_toggle = params.fetch("cost_toggle")
-    @activity_type.duration_toggle = params.fetch("duration_toggle")
-    @activity_type.detail_toggle = params.fetch("detail_toggle","")
-    @activity_type.outcome_toggle = params.fetch("outcome_toggle")
-    @activity_type.contact_toggle = params.fetch("contact_toggle")
-    @activity_type.subject_toggle = params.fetch("subject_toggle")
-    @activity_type.agent_toggle = params.fetch("agent_toggle")
-    @activity_type.customer_toggle = params.fetch("customer_toggle")
-    @activity_type.user_id = params.fetch("user_id")
+    @activity_type.title = params[:activity_type][:title]
+    @activity_type.cost_toggle = params[:activity_type][:cost_toggle]
+    @activity_type.duration_toggle = params[:activity_type][:duration_toggle]
+    @activity_type.detail_toggle = params[:activity_type][:detail_toggle]
+    @activity_type.outcome_toggle = params[:activity_type][:outcome_toggle]
+    @activity_type.contact_toggle = params[:activity_type][:contact_toggle]
+    @activity_type.subject_toggle = params[:activity_type][:subject_toggle]
+    @activity_type.agent_toggle = params[:activity_type][:agent_toggle]
+    @activity_type.customer_toggle = params[:activity_type][:customer_toggle]
+    @activity_type.user_id = params[:activity_type][:user_id]
 
     if @activity_type.valid?
       @activity_type.save
@@ -55,16 +55,16 @@ class ActivityTypesController < ApplicationController
   def update_row
     @activity_type = ActivityType.find(params.fetch("id_to_modify"))
 
-    @activity_type.title = params.fetch("title")
-    @activity_type.cost_toggle = params.fetch("cost_toggle")
-    @activity_type.duration_toggle = params.fetch("duration_toggle")
-    @activity_type.detail_toggle = params.fetch("detail_toggle","")
-    @activity_type.outcome_toggle = params.fetch("outcome_toggle")
-    @activity_type.contact_toggle = params.fetch("contact_toggle")
-    @activity_type.subject_toggle = params.fetch("subject_toggle")
-    @activity_type.agent_toggle = params.fetch("agent_toggle")
-    @activity_type.customer_toggle = params.fetch("customer_toggle")
-    @activity_type.user_id = params.fetch("user_id")
+    @activity_type.title = params[:activity_type][:title]
+    @activity_type.cost_toggle = params[:activity_type][:cost_toggle]
+    @activity_type.duration_toggle = params[:activity_type][:duration_toggle]
+    @activity_type.detail_toggle = params[:activity_type][:detail_toggle]
+    @activity_type.outcome_toggle = params[:activity_type][:outcome_toggle]
+    @activity_type.contact_toggle = params[:activity_type][:contact_toggle]
+    @activity_type.subject_toggle = params[:activity_type][:subject_toggle]
+    @activity_type.agent_toggle = params[:activity_type][:agent_toggle]
+    @activity_type.customer_toggle = params[:activity_type][:customer_toggle]
+    @activity_type.user_id = params[:activity_type][:user_id]
 
     if @activity_type.valid?
       @activity_type.save
