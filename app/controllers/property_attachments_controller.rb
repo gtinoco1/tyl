@@ -21,11 +21,11 @@ class PropertyAttachmentsController < ApplicationController
   def create_row
     @property_attachment = PropertyAttachment.new
 
-    @property_attachment.property_id = params.fetch("property_id")
-    @property_attachment.user_id = params.fetch("user_id")
-    @property_attachment.activity_id = params.fetch("activity_id")
-    @property_attachment.attachment = params.fetch("attachment","")
-    @property_attachment.title = params.fetch("title")
+    @property_attachment.property_id = params["property_attachment"][:property_id]
+    @property_attachment.user_id = params["property_attachment"][:user_id]
+    @property_attachment.activity_id = params["property_attachment"][:activity_id]
+    @property_attachment.attachment = params["property_attachment"][:attachment]
+    @property_attachment.title = params["property_attachment"][:title]
 
  if @property_attachment.attachment.blank?
    redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
@@ -57,11 +57,11 @@ class PropertyAttachmentsController < ApplicationController
   def update_row
     @property_attachment = PropertyAttachment.find(params.fetch("id_to_modify"))
 
-    @property_attachment.property_id = params.fetch("property_id")
-    @property_attachment.user_id = params.fetch("user_id")
-    @property_attachment.activity_id = params.fetch("activity_id")
-    @property_attachment.attachment = params.fetch("attachment", "")
-    @property_attachment.title = params.fetch("title")
+    @property_attachment.property_id = params["property_attachment"][:property_id]
+    @property_attachment.user_id = params["property_attachment"][:user_id]
+    @property_attachment.activity_id = params["property_attachment"][:activity_id]
+    @property_attachment.attachment = params["property_attachment"][:attachment]
+    @property_attachment.title = params["property_attachment"][:title]
 
     if @property_attachment.valid?
       @property_attachment.save

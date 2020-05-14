@@ -21,10 +21,10 @@ class PricesController < ApplicationController
   def create_row
     @price = Price.new
 
-    @price.property_id = params.fetch("property_id")
-    @price.amount = params.fetch("amount").gsub(/[^\d.]/, "")
-    @price.detail = params.fetch("detail")
-    @price.date = params.fetch("date")
+    @price.property_id = params[:price][:property_id]
+    @price.amount = params[:price][:amount].gsub(/[^\d.]/, "")
+    @price.detail = params[:price][:detail]
+    @price.date = params[:price][:date]
 
     if @price.valid?
       @price.save
@@ -45,10 +45,10 @@ class PricesController < ApplicationController
   def update_row
     @price = Price.find(params.fetch("id_to_modify"))
 
-    @price.property_id = params.fetch("property_id")
-    @price.amount = params.fetch("amount").gsub(/[^\d.]/, "")
-    @price.detail = params.fetch("detail")
-    @price.date = params.fetch("date")
+    @price.property_id = params[:price][:property_id]
+    @price.amount = params[:price][:amount].gsub(/[^\d.]/, "")
+    @price.detail = params[:price][:detail]
+    @price.date = params[:price][:date]
 
     if @price.valid?
       @price.save

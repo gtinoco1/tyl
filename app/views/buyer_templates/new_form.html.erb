@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
     <h4 class="text-secondary text-uppercase">
@@ -7,21 +8,22 @@
   </div>
 </div>
 
-<form action="/create_buyer" method="post">
+
+  <%=form_for(@buyer, url: create_buyer_path(@buyer)) do |f| %>
 
   <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
       <div class="form-group">
         <label for="name">
-        <h5 class="font-weight-light">  
+        <h5 class="font-weight-light">
           <%= @customer_type %> Name
         </h5>
         </label>
-        <input type="text" id="name" name="name" class="form-control">
+        <%= f.text_field :name, :class => "form-control" %>
       </div>
     </div>
   </div>
-  
+
 
 <div class="row">
   <div class="col-lg-6 offset-lg-3 col-12">
@@ -35,11 +37,11 @@
       <div class="text-center">
 
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="house" id="house" class="mr-1">
+          <%= check_box("buyer", "house", { class: 'mr-1' }, "on", "off") %>
           <span class="mr-3">House</span>
         </label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="condo" id="condo" class="mr-1">
+          <%= check_box("buyer", "condo", { class: 'mr-1' }, "on", "off") %>
           <% if @customer_type == "Buyer" %>
           <span class="mr-3">Condo / Townhouse</span>
           <% elsif @customer_type == "Tenant" %>
@@ -52,7 +54,7 @@
 
     </div>
   </div>
-  
+
     <div class="row mb-3">
     <div class="col-lg-3 offset-lg-3 col-5 offset-1">
       <label for="bed"> Bed </label>
@@ -63,26 +65,26 @@
       <%= select_tag(:bath, options_for_select(["1", "1.5","2","2.5","3","3.5","4","4.5","5","5.5","6","6.5","7+"]), :class => "form-control") %>
     </div>
   </div>
-  
+
   <div class="row mb-2">
         <div class="col-lg-3 offset-lg-3 col-5 offset-1">
         Price Range
       </div>
   </div>
-  
+
   <div class="row">
      <div class="col-lg-3 offset-lg-3 col-5 offset-1">
       <div class="form-group">
-        <input type="text" id="price_min" name="price_min" class="form-control" placeholder="min">
+        <%= f.text_field :price_min, :class => "form-control", placeholder: "min" %>
       </div>
     </div>
     <div class="col-lg-3 col-5">
       <div class="form-group">
-        <input type="text" id="price_max" name="price_max" class="form-control" placeholder="max">
+        <%= f.text_field :price_max, :class => "form-control", placeholder: "max" %>
       </div>
     </div>
   </div>
-  
+
     <div class="row mb-3">
     <div class="col-lg-10 offset-lg-1 col-12">
 
@@ -91,25 +93,25 @@
       </h6>
       <div class="text-center">
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="wd" id="wd" class="mr-1">
+          <%= check_box("buyer", "wd", { class: 'mr-1' }, "on", "off") %>
           <span class="mr-3">Unit W/D</span>
         </label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="parking" id="parking" class="mr-1">
+          <%= check_box("buyer", "parking", { class: 'mr-1' }, "on", "off") %>
           <span class="mr-3">Parking</span>
         </label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="garage" id="garage" class="mr-1">
+          <%= check_box("buyer", "garage", { class: 'mr-1' }, "on", "off") %>
           <span class="mr-3">Garage</span>
         </label>
       </div>
       <div class="text-center">
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="balcony" id="balcony" class="mr-1">
+          <%= check_box("buyer", "balcony", { class: 'mr-1' }, "on", "off") %>
           <span class="mr-3">Balcony</span>
         </label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="on" name="pool" id="pool" class="mr-1">
+          <%= check_box("buyer", "pool", { class: 'mr-1' }, "on", "off") %>
           <span class="">Pool</span>
         </label>
       </div>
@@ -119,7 +121,7 @@
       </div>
   </div>
 </div>
-    
+
     <% if @customer_type == "Buyer" %>
 
   <div class="row">
@@ -144,7 +146,7 @@
           <%= select_tag(:preapproval, options_for_select(["","Yes", "No", "Not sure"]), :class => "form-control") %>
         </div>
       </div>
-    
+
       <div class="col-lg-2 col-6">
         <div class="form-group">
           <h5 class="font-weight-light">
@@ -152,26 +154,26 @@
             Downpayment
           </label>
           </h5>
-          <input type="text" id="downpayment" name="downpayment" class="form-control" placeholder="%">
+          <%= f.text_field :downpayment, :class => "form-control", placeholder: "%" %>
         </div>
       </div>
     </div>
 
     <% else %>
     <% end %>
-  
+
     <div class="row">
       <div class="col-lg-6 offset-lg-3 mb-2">
         <h5 class="font-weight-light">
         <label for="notes">
-          Additional Notes            
+          Additional Notes
         </label>
         </h5>
-        <textarea id="notes" name="notes" class="form-control" type="text" rows="3"></textarea>
+        <%= f.text_area :notes, :class => "form-control", rows: "3" %>
       </div>
     </div>
-  
-  
+
+
 
 
   <!--  <div class="col-lg-3">-->
@@ -194,28 +196,26 @@
   <!--      </div>-->
   <!--   </div>-->
   <!--</div>-->
-  
+
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
-          
+
   <div class="form-group">
-    <input type="hidden" name="buyer_type" class="form-control" value="<%= @customer_type %>">
+    <%= f.hidden_field :buyer_type, class: "form-control", value: @customer_type %>
   </div>
 
   <div class="form-group">
-    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+    <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
   </div>
 
   <div class="form-group">
-    <input type="hidden" name="status" class="form-control" value="Active">
+    <%= f.hidden_field :status, class: "form-control", value: "Active" %>
   </div>
-
-  <button class="btn btn-block btn-outline-success">
+  <%= f.submit "Create customer", class: "btn btn-block btn-outline-success" %>
+  <!-- <button class="btn btn-block btn-outline-success">
         Create customer
-  </button>
+  </button> -->
 </div>
 </div>
 
-</form>
-
-
+<% end %>

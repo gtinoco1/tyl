@@ -22,19 +22,19 @@ class BuyerActivitiesController < ApplicationController
   def create_row
     @buyer_activity = BuyerActivity.new
 
-    @buyer_activity.duration = params.fetch("duration", "")
-    @buyer_activity.property_address = params.fetch("property_address", "")
-    @buyer_activity.zipcode = params.fetch("zipcode", "")
-    @buyer_activity.detail = params.fetch("detail", "")
-    @buyer_activity.comment = params.fetch("comment", "")
-    @buyer_activity.image = params.fetch("image", "")
-    @buyer_activity.buyer_id = params.fetch("buyer_id", "")
+    @buyer_activity.duration = params[:buyer_activity][:duration]
+    @buyer_activity.property_address = params[:buyer_activity][:property_address]
+    @buyer_activity.zipcode = params[:buyer_activity][:zipcode]
+    @buyer_activity.detail = params[:buyer_activity][:detail]
+    @buyer_activity.comment = params[:buyer_activity][:comment]
+    # @buyer_activity.image = params[:buyer_activity][:image]
+    @buyer_activity.buyer_id = params[:buyer_activity][:buyer_id]
     @buyer_activity.buyer_activity_type_id = params.fetch("buyer_activity_type_id", "")
-    @buyer_activity.date = params.fetch("date", "")
-    @buyer_activity.subject = params.fetch("subject", "")
-    @buyer_activity.agent = params.fetch("agent", "")
-    @buyer_activity.city = params.fetch("city", "")
-    @buyer_activity.state = params.fetch("state", "")
+    @buyer_activity.date = params[:buyer_activity][:date]
+    @buyer_activity.subject = params[:buyer_activity][:subject]
+    @buyer_activity.agent = params[:buyer_activity][:agent]
+    @buyer_activity.city = params[:buyer_activity][:city]
+    @buyer_activity.state = params[:buyer_activity][:state]
 
     if @buyer_activity.valid?
       @buyer_activity.save

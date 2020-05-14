@@ -24,16 +24,16 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
 
     @activity.activity_type_id = params.fetch("activity_type_id")
-    @activity.date = params.fetch("date")
-    @activity.duration = params.fetch("duration", "")
-    @activity.cost = params.fetch("cost", "")
-    @activity.property_id = params.fetch("property_id", "")
-    @activity.detail = params.fetch("detail", "")
-    @activity.outcome = params.fetch("outcome", "")
-    @activity.contact = params.fetch("contact", "")
-    @activity.subject = params.fetch("subject", "")
-    @activity.agent = params.fetch("agent", "")
-    @activity.customer = params.fetch("customer", "")
+    @activity.date = params[:activity][:date]
+    @activity.duration = params[:activity][:duration]
+    @activity.cost = params[:activity][:cost]
+    @activity.property_id = params[:activity][:property_id]
+    @activity.detail = params.fetch("detail","")
+    @activity.outcome = params.fetch("outcome","")
+    @activity.contact = params[:activity][:contact]
+    @activity.subject = params[:activity][:subject]
+    @activity.agent = params.fetch("agent","")
+    @activity.customer = params.fetch("customer","")
 
     if @activity.valid?
       @activity.save
@@ -54,17 +54,17 @@ class ActivitiesController < ApplicationController
   def update_row
     @activity = Activity.find(params.fetch("id_to_modify"))
 
-    @activity.activity_type_id = params.fetch("activity_type_id", "")
-    @activity.date = params.fetch("date", "")
-    @activity.duration = params.fetch("duration", "")
-    @activity.cost = params.fetch("cost", "")
-    @activity.property_id = params.fetch("property_id", "")
-    @activity.detail = params.fetch("detail", "")
-    @activity.outcome = params.fetch("outcome", "")
-    @activity.contact = params.fetch("contact", "")
-    @activity.subject = params.fetch("subject", "")
-    @activity.agent = params.fetch("agent", "")
-    @activity.customer = params.fetch("customer", "")
+    @activity.activity_type_id = params.fetch("activity_type_id")
+    @activity.date = params[:activity][:date]
+    @activity.duration = params[:activity][:duration]
+    @activity.cost = params[:activity][:cost]
+    @activity.property_id = params[:activity][:property_id]
+    @activity.detail = params.fetch("detail","")
+    @activity.outcome = params.fetch("outcome","")
+    @activity.contact = params[:activity][:contact]
+    @activity.subject = params[:activity][:subject]
+    @activity.agent = params.fetch("agent","")
+    @activity.customer = params.fetch("customer","")
 
     if @activity.valid?
       @activity.save

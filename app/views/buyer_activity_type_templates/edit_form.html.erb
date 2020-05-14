@@ -5,18 +5,17 @@
       Edit activity type
     </h4>
     <hr>
-
-    <form action="/update_buyer_activity_type/<%= @buyer_activity_type.id %>" method="post">
+    <%=form_for(@buyer_activity_type, url: {action: "update_row", id_to_modify: @buyer_activity_type.id}, method: :post) do |f| %>
 
       <div class="form-group">
-        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+        <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
       </div>
 
       <div class="form-group">
         <label for="title">
           Title
         </label>
-        <input type="text" id="title" name="title" class="form-control" value="<%= @buyer_activity_type.title %>">
+        <%= f.text_field :title, :class => "form-control" %>
       </div>
 
       <div class="row mb-2">
@@ -69,23 +68,24 @@
       <div class="row mb-2">
         <div class="col-lg-3">
           <label for="agent_toggle">
-            Agent 
+            Agent
           </label>
           <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.agent_toggle), :class => "form-control") %>
         </div>
 
         <div class="col-lg-3">
           <label for="image_toggle">
-            Image 
+            Image
           </label>
           <%= select_tag(:image_toggle, options_for_select(["Show", "Hide"], @buyer_activity_type.image_toggle), :class => "form-control") %>
         </div>
       </div>
 
-      <button class="btn btn-block btn-outline-secondary">
+      <%= f.submit "Edit activity type", class: "btn btn-block btn-outline-secondary" %>
+      <!-- <button class="btn btn-block btn-outline-secondary">
         Edit activity type
-      </button>
-    </form>
+      </button> -->
+    <% end %>
 
     <hr>
 

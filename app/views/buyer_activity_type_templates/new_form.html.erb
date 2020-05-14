@@ -11,13 +11,13 @@
 <div class="row">
   <div class="col-lg-8 offset-lg-2">
 
-    <form action="/create_buyer_activity_type" method="post">
+      <%=form_for(@buyer_activity_type, url: create_buyer_activity_type_path(@buyer_activity_type)) do |f| %>
+      <div class="form-group">
+        <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
+      </div>
 
       <div class="form-group">
-        <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
-      </div>
-      
-      <div class="form-group">
+        <%= f.hidden_field :duration_toggle, class: "form-control", value: "show" %>
         <input type="hidden" name="duration_toggle" class="form-control" value="Show">
       </div>
 
@@ -25,7 +25,7 @@
         <label for="title">
           Title
         </label>
-        <input type="text" id="title" name="title" class="form-control">
+        <%= f.text_field :title, :class => "form-control" %>
       </div>
 
       <div class="row mb-2">
@@ -59,17 +59,17 @@
           </label>
           <%= select_tag(:comment_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
-        
+
         <div class="col-lg-3">
           <label for="cost_toggle">
             Property Address
           </label>
           <%= select_tag(:property_address_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
-        
+
         <div class="col-lg-3">
           <label for="agent_toggle">
-            Contact 
+            Contact
           </label>
           <%= select_tag(:agent_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>
         </div>
@@ -92,11 +92,11 @@
         <!--  <%= select_tag(:image_toggle, options_for_select(["Show", "Hide"]), :class => "form-control") %>-->
         <!--</div>-->
       </div>
-
-      <button class="btn btn-block btn-outline-secondary">
+      <%= f.submit "Create activity type", class: "btn btn-block btn-outline-secondary" %>
+      <!-- <button class="btn btn-block btn-outline-secondary">
         Create activity type
-      </button>
-    </form>
+      </button> -->
+      <% end %>
 
     <hr>
 

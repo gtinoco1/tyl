@@ -8,16 +8,16 @@
 </div>
 
 
-<form action="/update_property_attachment/<%= @property_attachment.id %>" method="post" enctype="multipart/form-data">
 
+<%=form_for(@property_attachment, url: {action: "update_row", id_to_modify: @property_attachment.id}, enctype: "multipart/form-data", method: :post) do |f| %>
   <div class="form-group">
-    <input type="hidden" name="property_id" class="form-control" value="<%= @property_attachment.property_id %>">
+    <%= f.hidden_field :property_id, class: "form-control", value: @property_attachment.property_id %>
   </div>
   <div class="form-group">
-    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
+    <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
   </div>
     <div class="form-group">
-    <input type="hidden" name="activity_id" class="form-control" value="<%= @property_attachment.activity_id %>">
+      <%= f.hidden_field :activity_id, class: "form-control", value: @property_attachment.activity_id %>
   </div>
 
   <div class="row mb-0">
@@ -27,7 +27,7 @@
         <label for="title">
           Title
         </label>
-        <input type="text" id="title" name="title" class="form-control" value="<%= @property_attachment.title %>">
+        <%= f.text_field :title, :class => "form-control" %>
       </div>
 
       <!--<div class="form-group">-->
@@ -39,16 +39,16 @@
 
       <div class="form-group">
         <label for="attachment">
-          Attachment (jpg, png, bmp, pdf) 
+          Attachment (jpg, png, bmp, pdf)
         </label>
-        <input type="file" id="attachment" name="attachment" class="form-control" value="<%= @property_attachment.attachment %>">
+        <%= f.file_field :attachment, :class => "form-control" %>
       </div>
 
-
-      <button class="btn btn-block btn-outline-success">
+      <%= f.submit "Upload Attachment", class: "btn btn-block btn-outline-success" %>
+      <!-- <button class="btn btn-block btn-outline-success">
         Upload Attachment
-      </button>
-    </form>
+      </button> -->
+    <% end %>
 
     <hr>
   </div>
@@ -69,4 +69,3 @@
     </a>
   </div>
 </div>
-

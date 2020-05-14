@@ -15,46 +15,48 @@
   </div>
 </div>
 
-<form action="/update_buyer/<%= @buyer.id %>" method="post">
+<%=form_for(@buyer, url: {action: "update_row", id_to_modify: @buyer.id}, method: :post) do |f| %>
 
-  <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
-      <div class="form-group">
-        <label for="name">
-        <h5 class="font-weight-light">  
-          <%= @buyer.buyer_type %> Name
-        </h5>
-        </label>
-        <input type="text" id="name" name="name" class="form-control" value="<%= @buyer.name %>">
-      </div>
+
+<div class="row mb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <div class="form-group">
+      <label for="name">
+      <h5 class="font-weight-light">
+        <%= @buyer.buyer_type %> Name
+      </h5>
+      </label>
+      <%= f.text_field :name, :class => "form-control" %>
     </div>
   </div>
-  
+</div>
 
-  
+<div class="row">
+<div class="col-lg-6 offset-lg-3 col-12">
+  <div class="card bg-white mb-3">
    <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-12">
 
-      <h5 class="font-weight-light mb-3">
+      <h5 class="card-header font-weight-light mb-3">
         Looking for:
       </h5>
       <div class="text-center">
 
         <label class="checkbox-inline">
           <% if @buyer.house == "on" %>
-          <input type="checkbox" value="on" name="house" id="house" class="mr-1" checked>
+          <%= check_box("buyer", "house", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="house" id="house" class="mr-1" unchecked>
+          <%= check_box("buyer", "house", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
           <span class="mr-3">House</span>
         </label>
         <label class="checkbox-inline">
           <% if @buyer.condo == "on" %>
-          <input type="checkbox" value="on" name="condo" id="condo" class="mr-1" checked>
+          <%= check_box("buyer", "condo", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="condo" id="condo" class="mr-1" unchecked>
+          <%= check_box("buyer", "condo", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
-          
+
           <% if @buyer.buyer_type == "Buyer" %>
           <span class="mr-3">Condo / Townhouse</span>
           <% elsif @buyer.buyer_type == "Tenant" %>
@@ -67,65 +69,65 @@
 
     </div>
   </div>
-  
+
     <div class="row mb-3">
-    <div class="col-lg-1 offset-lg-5 col-6">
+    <div class="col-lg-3 offset-lg-3 col-5 offset-1">
       <label for="bed"> Bed </label>
       <%= select_tag(:bed, options_for_select(["1", "2","3","4","5","6+"], @buyer.bed), :class => "form-control") %>
     </div>
-    <div class="col-lg-1 col-6">
+    <div class="col-lg-3 col-5">
       <label for="bed"> Bath </label>
       <%= select_tag(:bath, options_for_select(["1", "2","3","4","5","6+"], @buyer.bath), :class => "form-control") %>
     </div>
   </div>
-  
+
   <div class="row mb-2">
-      <div class="col-lg-2 offset-lg-4">
+      <div class="col-lg-3 offset-lg-3 col-5 offset-1">
         Price Range
       </div>
   </div>
-  
+
   <div class="row">
-    <div class="col-lg-2 offset-lg-4 col-6">
+     <div class="col-lg-3 offset-lg-3 col-5 offset-1">
       <div class="form-group">
-        <input type="text" id="price_min" name="price_min" class="form-control" placeholder="min" value="<%= @buyer.price_min %>">
+        <%= f.text_field :price_min, :class => "form-control", placeholder: "min" %>
       </div>
     </div>
-    <div class="col-lg-2 col-6">
+    <div class="col-lg-3 col-5">
       <div class="form-group">
-        <input type="text" id="price_max" name="price_max" class="form-control" placeholder="max" value="<%= @buyer.price_max %>">
+        <%= f.text_field :price_max, :class => "form-control", placeholder: "max" %>
       </div>
     </div>
   </div>
-  
-    <div class="row mb-3">
-    <div class="col-lg-6 offset-lg-3">
 
-      <h5 class="font-weight-light mb-3">
+    <div class="row mb-3">
+    <div class="col-lg-10 offset-lg-1 col-12">
+
+      <h6 class="font-weight-light mb-3 text-center">
         Must have:
-      </h5>
+      </h6>
       <div class="text-center">
         <label class="checkbox-inline">
           <% if @buyer.wd == "on" %>
-          <input type="checkbox" value="on" name="wd" id="wd" class="mr-1" checked>
+          <%= check_box("buyer", "wd", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="wd" id="wd" class="mr-1" unchecked>
+          <%= check_box("buyer", "wd", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
           <span class="mr-3">Unit W/D</span>
         </label>
         <label class="checkbox-inline">
           <% if @buyer.parking == "on" %>
-          <input type="checkbox" value="on" name="parking" id="parking" class="mr-1" checked>
+          <%= check_box("buyer", "parking", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="parking" id="parking" class="mr-1" unchecked>
+          <%= check_box("buyer", "parking", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
           <span class="mr-3">Parking</span>
         </label>
-        <label class="checkbox-inline">          
+        <label class="checkbox-inline">
           <% if @buyer.garage == "on" %>
-          <input type="checkbox" value="on" name="garage" id="garage" class="mr-1" checked>
+          <%= check_box("buyer", "garage", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="garage" id="garage" class="mr-1" unchecked>
+          <%= check_box("buyer", "garage", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
           <span class="mr-3">Garage</span>
         </label>
@@ -133,17 +135,17 @@
       <div class="text-center">
         <label class="checkbox-inline">
           <% if @buyer.balcony == "on" %>
-          <input type="checkbox" value="on" name="balcony" id="balcony" class="mr-1" checked>
+          <%= check_box("buyer", "balcony", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="balcony" id="balcony" class="mr-1" unchecked>
+          <%= check_box("buyer", "balcony", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
           <span class="mr-3">Balcony</span>
         </label>
         <label class="checkbox-inline">
           <% if @buyer.pool == "on" %>
-          <input type="checkbox" value="on" name="pool" id="pool" class="mr-1" checked>
+          <%= check_box("buyer", "pool", { class: 'mr-1' }, "on", "off")  %>
           <% else %>
-          <input type="checkbox" value="on" name="pool" id="pool" class="mr-1" unchecked>
+          <%= check_box("buyer", "pool", { class: 'mr-1' }, "on", "off")  %>
           <% end %>
           <span class="">Pool</span>
         </label>
@@ -151,106 +153,49 @@
 
     </div>
   </div>
-  
-        <% if @buyer.buyer_type == "Buyer" %>
+  </div>
+</div>
+</div>
 
-  <div class="row">
-    <div class="col-lg-2 offset-lg-3 col-6 col-md-6">
+      <% if @buyer.buyer_type == "Buyer" %>
+
+<div class="row">
+  <div class="col-lg-2 offset-lg-3 col-6 col-md-6">
+    <div class="form-group">
+      <h5 class="font-weight-light">
+      <label for="funds">
+        Type of Funds
+      </label>
+      </h5>
+      <%= select_tag(:funds, options_for_select(["","Financing", "Cash", "Not sure"], @buyer.funds), :class => "form-control") %>
+    </div>
+  </div>
+
+    <div class="col-xl-2 col-lg-2 col-6 col-md-6">
       <div class="form-group">
         <h5 class="font-weight-light">
-        <label for="funds">
-          Type of Funds
+        <label for="preapproval">
+          Preapproval?
         </label>
         </h5>
-        <%= select_tag(:funds, options_for_select(["Financing", "Cash", "Not sure"], @buyer.funds), :class => "form-control") %>
+        <%= select_tag(:preapproval, options_for_select(["","Yes", "No", "Not sure"], @buyer.preapproval), :class => "form-control") %>
       </div>
     </div>
 
-      <div class="col-xl-2 col-lg-2 col-6 col-md-6">
-        <div class="form-group">
-          <h5 class="font-weight-light">
-          <label for="preapproval">
-            Preapproval?
-          </label>
-          </h5>
-          <%= select_tag(:preapproval, options_for_select(["","Yes", "No", "Not sure"], @buyer.preapproval), :class => "form-control") %>
-        </div>
-      </div>
-    
-      <div class="col-lg-2 col-6">
-        <div class="form-group">
-          <h5 class="font-weight-light">
-          <label for="downpayment">
-            Downpayment
-          </label>
-          </h5>
-          <input type="text" id="downpayment" name="downpayment" class="form-control" placeholder="%" value="<%= @buyer.downpayment %>">
-        </div>
-      </div>
-    </div>
-
-    <% else %>
-    <% end %>
-  
-      <div class="row">
-      <div class="col-lg-6 offset-lg-3 mb-2">
+    <div class="col-lg-2 col-6">
+      <div class="form-group">
         <h5 class="font-weight-light">
-        <label for="notes">
-          Additional Notes            
+        <label for="downpayment">
+          Downpayment
         </label>
         </h5>
-        <textarea id="notes" name="notes" class="form-control" type="text" rows="3" value="<%= @buyer.notes %>"><%= @buyer.notes %></textarea>
+        <%= f.text_field :downpayment, :class => "form-control", placeholder: "%" %>
       </div>
     </div>
-  
-  
-
-
-  <!--  <div class="col-lg-3">-->
-  <!--    <div class="form-group">-->
-  <!--      <label for="downpayment">-->
-  <!--        Downpayment-->
-  <!--      </label>-->
-  <!--      <input type="text" id="downpayment" name="downpayment" class="form-control">-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
-
-  <!--<div class="row">-->
-  <!--  <div class="col-lg-6 offset-lg-3">-->
-  <!--      <div class="form-group">-->
-  <!--        <label for="preapproval">-->
-  <!--          Preapproval?-->
-  <!--        </label>-->
-  <!--        <input type="text" id="preapproval" name="preapproval" class="form-control">-->
-  <!--      </div>-->
-  <!--   </div>-->
-  <!--</div>-->
-  
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-          
-  <div class="form-group">
-    <input type="hidden" name="buyer_type" class="form-control" value="<%= @buyer.buyer_type %>">
   </div>
 
-  <div class="form-group">
-    <input type="hidden" name="user_id" class="form-control" value="<%= current_user.id %>">
-  </div>
-
-  <div class="form-group">
-    <input type="hidden" name="status" class="form-control" value="Active">
-  </div>
-
-  <button class="btn btn-block btn-outline-success">
-        Save customer
-  </button>
-  <hr>
-</div>
-
-</div>
-
-</form>
+  <% else %>
+  <% end %>
 
 <% if @buyer.status == "Active" or @buyer.status == "" %>
 
@@ -265,7 +210,7 @@
 
   <div class="col-lg-3">
     <p class="text-secondary text-center">
-      Archived Customers will be saved on the <a href="/archive"> Archive </a> page for future reference. 
+      Archived Customers will be saved on the <a href="/archive"> Archive </a> page for future reference.
       All activity information will be saved with the customer.
     </p>
   </div>
@@ -309,7 +254,7 @@
       <hr>
     </div>
   </div>
-    
+
    <div class="row mb-3">
     <div class="col-lg-3 offset-lg-3">
       <a href="/delete_buyer/<%= @buyer.id %>" class="btn disabled btn-block btn-outline-secondary mb-2">
@@ -325,5 +270,3 @@
   </div>
 
 <% end %>
-
-
