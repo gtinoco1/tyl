@@ -332,7 +332,9 @@
           </div>
           <!-- Devise Input for last_name end -->
           <div class="form-group">
-            <%= recaptcha_tags %>
+            <% if ENV['SITE_KEY']%>
+              <%= recaptcha_tags %>
+            <% end %>
           </div>
           <%= f.button class: "btn btn-outline-primary btn-block submit-form" %>
           <hr>
