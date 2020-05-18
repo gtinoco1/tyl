@@ -1,7 +1,7 @@
 class RegistrationsController < ::Devise::RegistrationsController
 
   def create
-    if verify_recaptcha
+    if verify_recaptcha or !ENV['SITE_KEY']
       super
     else
       build_resource(sign_up_params)
