@@ -1,22 +1,47 @@
-<div class="row mb-3">
+<div class="row mb-0">
   <div class="col-lg-8 offset-lg-2">
     <h5 class="text-info text-uppercase">
       Manage Property Activity Types
+       <i class="icon-info mr-1 fas fa-info-circle" data-toggle="tooltip" title='This allows you to customize what fields are shown for your activity types.
+    To enable a field, toggle that field to "Show" in the specific actitivity type.
+    In order to delete a type there must not be any activities associated with that type.'></i>
     </h5>
-    <hr>
   </div>
 </div>
 
+<div class="row mb-0">
+  <div class="col-lg-8 offset-lg-2">
+    <a data-toggle="collapse" class="icon-more remove-loader" href="#collapseExample" role="button">
+      <i class="fas fa-ellipsis-h"  data-toggle="tooltip" title="More Options"></i>
+    </a>
+
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body border-white">
+        <div class="row mb-1">
+          <div class="col-lg-4 offset-lg-2 col-6">
+            <a class="btn btn-outline-info btn-block text-center custom-info-button" href="">
+              <i class="fas fa-palette fa-2x my-2"></i>
+              <h5 class="font-weight-light">Use Preset Colors</h5>
+            </a>
+          </div>
+
+          <div class="col-lg-4 col-6">
+            <a class="btn btn-outline-info btn-block text-center custom-info-button" href="">
+              <i class="fas fa-times fa-2x my-2"></i>
+              <h5 class="font-weight-light">Remove All Colors</h5>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="row mb-2">
   <div class="col-lg-8 offset-lg-2">
-
-    <div class="text-center font-weight-light">
-    This allows you to customize what fields are shown for your activity types.
-    To enable a field, toggle that field to "Show" in the specific actitivity type.
-    In order to delete a type there must not be any activities associated with that type.
-    </div>
     <hr>
-
   </div>
 </div>
 
@@ -110,3 +135,11 @@
     </a>
   </div>
 </div>
+<script>
+  $('[data-toggle="tooltip"]').tooltip();
+  $(document).on('submit','form.remember',function(){
+    setTimeout(function(){
+    $('#loader-div').hide();
+  }, 3000);
+});
+</script>
