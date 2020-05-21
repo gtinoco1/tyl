@@ -25,25 +25,19 @@ class UsersController < ApplicationController
   def update_profile
     @user = User.find(current_user.id)
     @user.update_attributes(user_params) if params[:user][:headshot].present?
-
-
     if HeadshotCoordinate.find_by(user_headshot_id: @user.id).present?
       HeadshotCoordinate.find_by(user_headshot_id: @user.id).update(crop_x: params[:user][:crop_x],crop_y: params[:user][:crop_y], crop_w: params[:user][:crop_w], crop_h: params[:user][:crop_h], rotate: params[:user][:rotate])
     else
       HeadshotCoordinate.create(user_headshot_id: @user.id,crop_x: params[:user][:crop_x],crop_y: params[:user][:crop_y], crop_w: params[:user][:crop_w], crop_h: params[:user][:crop_h], rotate: params[:user][:rotate])
     end
     redirect_to user_root_path, :notice => "Profile update successfully."
+  end
 
-
-
-    # if @user.update(user_params)
-
-    # if @user.update_attributes(headshot: @user.headshot, crop_x: params[:user][:crop_x], crop_y: params[:user][:crop_y], crop_h: params[:user][:crop_h], crop_w: params[:user][:crop_w])
-    # else
-
-    # end
-
-
+  def delete_profile
+    @user = User.find_by(id: current_user.id)
+    @user.remove_headshot = true
+    @user.save
+    redirect_to user_root_path, :notice => "Profile Deleted successfully."
   end
 
   private

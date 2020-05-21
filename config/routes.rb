@@ -160,6 +160,7 @@ Rails.application.routes.draw do
 
   # update user profile
   post '/update_profile', :to => 'users#update_profile'
+  delete '/delete_profile', :to => 'users#delete_profile'
   get '/edit_user_profile', :to => 'users#edit_user_profile'
 
   # CREATE
