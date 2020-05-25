@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200429040548) do
+ActiveRecord::Schema.define(version: 20191205100545) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20200429040548) do
     t.datetime "updated_at", null: false
     t.string "agent"
     t.string "customer"
-    t.integer "sort"
   end
 
   create_table "activity_types", force: :cascade do |t|
@@ -141,15 +140,6 @@ ActiveRecord::Schema.define(version: 20200429040548) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "headshot_coordinates", force: :cascade do |t|
-    t.integer "crop_x", default: 0
-    t.integer "crop_y", default: 0
-    t.integer "crop_h", default: 0
-    t.integer "crop_w", default: 0
-    t.integer "rotate", default: 0
-    t.integer "user_headshot_id"
-  end
-
   create_table "likes", force: :cascade do |t|
     t.integer "comment_id"
     t.integer "user_id"
@@ -176,12 +166,6 @@ ActiveRecord::Schema.define(version: 20200429040548) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "listing_type"
-    t.integer "sort"
-    t.integer "showing_number_1", default: 0
-    t.integer "showing_number_2", default: 0
-    t.integer "showing_number_3", default: 0
-    t.integer "offer", default: 0
-    t.integer "contract", default: 0
   end
 
   create_table "property_attachments", force: :cascade do |t|
@@ -220,7 +204,6 @@ ActiveRecord::Schema.define(version: 20200429040548) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "activiy_order", default: "asc"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

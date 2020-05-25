@@ -107,7 +107,7 @@ class ReportByDateHeader < Prawn::Document
     # stroke do
     #   horizontal_rule
     # end
-    image open("https://res.cloudinary.com/hnx8y80mv/image/upload/v1588853250/main/picturemessage_fnlzoyti.gxy.png"), :height => 40, :width => 175, :at => [0, 720]
+    image open("https://res.cloudinary.com/hnx8y80mv/image/upload/v1588853250/main/picturemessage_fnlzoyti.gxy.png"), :height => 40, :width => 150, :at => [0, 720]
 
     if @current_user.headshot.file.nil?
     else
