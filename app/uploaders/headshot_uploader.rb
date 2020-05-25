@@ -2,17 +2,23 @@ class HeadshotUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-    include Cloudinary::CarrierWave
-    
-      process :tags => ["headshot"]
+  include Cloudinary::CarrierWave
+  after :remove, :clear_uploader
+  process :tags => ["headshot"]
 
   def public_id
     return "headshots/" +  model.first_name + "_" + model.last_name
-  end  
-  
-    version :thumbnail do
+  end
+
+  version :thumbnail do
     resize_to_fit(50, 50)
   end
+
+  def clear_uploader
+    p "methoddd"
+   @file = @filename = @original_filename = @cache_id = @version = @storage = nil
+   model.send(:write_attribute, mounted_as, nil)
+ end
 
   # Choose what kind of storage to use for this uploader:
   # storage :file

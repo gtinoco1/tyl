@@ -218,12 +218,14 @@
      </div>
     </div>
 
-    <% if HeadshotCoordinate.find_by(user_headshot_id: current_user.id).present? %>
-      <% url =  Cloudinary::Utils.cloudinary_url(current_user.headshot.file.filename,:x=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_x, :y=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_y, :width=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_w, :height=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_h, :crop=>"crop", version: current_user.headshot.file.version, secure: true) %>
-    <% else %>
-      <% url = Cloudinary::Utils.cloudinary_url(current_user.headshot.file.filename, version: current_user.headshot.file.version, secure: true) %>
+    <% unless current_user.headshot.file.nil? %>
+      <% if HeadshotCoordinate.find_by(user_headshot_id: current_user.id).present? %>
+        <% url =  Cloudinary::Utils.cloudinary_url(current_user.headshot.file.filename,:x=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_x, :y=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_y, :width=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_w, :height=>HeadshotCoordinate.find_by(user_headshot_id: current_user.id).crop_h, :crop=>"crop", version: current_user.headshot.file.version, secure: true) %>
+      <% else %>
+        <% url = Cloudinary::Utils.cloudinary_url(current_user.headshot.file.filename, version: current_user.headshot.file.version, secure: true) %>
+      <% end %>
+      <input id="profile_url" name="profile_url" type="hidden" value = "<%= url %>" />
     <% end %>
-    <input id="profile_url" name="profile_url" type="hidden" value = "<%= url %>" />
   <div class="col-lg-6 offset-lg-3 mb-3">
     <button class="btn btn-lg btn-block btn-outline-success">
       Generate PDF Report

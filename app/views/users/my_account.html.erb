@@ -26,7 +26,7 @@
   <div class="col-lg-3 col-6">
       <div class="card border-0">
         <div class="card-body p-box text-center font-weight-light text-uppercase">
-          <% if current_user.headshot.blank? %>
+          <% if current_user.headshot.file.nil? %>
             <div class=" upload-bx">
               <%= form_with(model: @user, url: update_profile_path, method: :post, local: true, class: 'file-upload-bx',id: "new-upload-form") do |f| %>
                 <p class="upname">Upload Profile picture</p>
@@ -93,12 +93,23 @@
           <div class='col-12'>
             <div class="panel panel-primary">
               <div class="panel-body">
-                <button type="button" id="rotate" class="btn btn-info d-block mx-auto remove-loader mb-15"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
+                <div style= "padding: 0 0; max-width:400px;" class="mt-4 mb-4 mx-auto justify-content-between d-flex">
+                  <%= form_with(model: @user, url: update_profile_path, method: :post, class: 'file-upload-bx-2', :html => {:multipart => true} ,id: 'change_profile_form') do |f| %>
+                    <%= f.button "New Image", class: 'btn custom-info-button' %>
+                    <%= f.file_field "user[headshot]", class: "form-control", accept:".jpeg, .jpg, .png", id: "headshot_file_change" %>
+                    <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+                    <%= f.hidden_field "user[mode]", value: 'update'%>
+                    <% %w[x y w h].each do |attribute| %>
+                      <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+                    <% end %>
+                  <% end %>
+                  <button type="button" id="rotate" class="btn btn-info d-block remove-loader"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
+                </div>
                 <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
                 <% if current_user.headshot.present? %>
                   <%= cl_image_tag(current_user.headshot.file.filename, version: current_user.headshot.file.version, secure: true, id: "cropbox", class: "north")  %>
                 <% else %>
-                  <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto"> -->
+                  <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
                     <%= image_tag '', id: "cropbox" %>
                   </div>
                 <% end %>
@@ -107,26 +118,21 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-between">
-        <%= form_with(model: @user, url: update_profile_path, method: :post, class: 'file-upload-bx-2', :html => {:multipart => true} ,id: 'change_profile_form') do |f| %>
-            <%= f.button "New Image", class: 'btn custom-info-button' %>
-          <%= f.file_field "user[headshot]", class: "form-control", accept:".jpeg, .jpg, .png", id: "headshot_file_change" %>
-          <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
-          <%= f.hidden_field "user[mode]", value: 'update'%>
-          <% %w[x y w h].each do |attribute| %>
-            <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
-          <% end %>
-        <% end %>
-        <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
-        <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
-        <%= f.hidden_field "user[mode]", value: 'edit'%>
-        <% %w[x y w h].each do |attribute| %>
-        <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
-        <% end %>
-        <% end %>
-        <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Save</button>
       </div>
-    </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <div class="d-flex justify-content-between w-100" style="max-width:400px;">
+          <%= link_to 'Delete',  delete_profile_path,  method: :delete, class: "btn btn-outline-danger" %>
+          <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
+          <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+          <%= f.hidden_field "user[mode]", value: 'edit'%>
+          <% %w[x y w h].each do |attribute| %>
+          <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+          <% end %>
+          <% end %>
+          <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Save</button>
+        </div>
+      </div>
+
   </div>
 </div>
 
