@@ -103,7 +103,7 @@
                       <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
                     <% end %>
                   <% end %>
-                  <button type="button" id="rotate" class="btn btn-info d-block"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
+                  <button type="button" id="rotate" class="btn btn-info d-block remove-loader"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
                 </div>
                 <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
                 <% if current_user.headshot.present? %>
