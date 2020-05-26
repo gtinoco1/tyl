@@ -93,7 +93,7 @@
           <div class='col-12'>
             <div class="panel panel-primary">
               <div class="panel-body">
-                <div style= "padding: 0 1rem 0 1rem;" class="mt-4 mb-4 mx-auto justify-content-between d-flex">
+                <div style= "padding: 0 0; max-width:400px;" class="mt-4 mb-4 mx-auto justify-content-between d-flex">
                   <%= form_with(model: @user, url: update_profile_path, method: :post, class: 'file-upload-bx-2', :html => {:multipart => true} ,id: 'change_profile_form') do |f| %>
                     <%= f.button "New Image", class: 'btn custom-info-button' %>
                     <%= f.file_field "user[headshot]", class: "form-control", accept:".jpeg, .jpg, .png", id: "headshot_file_change" %>
@@ -103,7 +103,7 @@
                       <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
                     <% end %>
                   <% end %>
-                  <button type="button" id="rotate" class="btn btn-info d-block"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
+                  <button type="button" id="rotate" class="btn btn-info d-block remove-loader"><i class="fas fa-sync-alt"></i> Rotate 90deg</button>
                 </div>
                 <div id="crop_div" style="width:400px;height:100%;overflow:hidden;display: flex;justify-content: center; margin:0 auto" class="mt-4 mb-4 mx-auto">
                 <% if current_user.headshot.present? %>
@@ -118,19 +118,21 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-between">
-        <%= link_to 'Destroy',  delete_profile_path,  method: :delete, class: "btn btn-outline-danger" %>
-        <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
-        <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
-        <%= f.hidden_field "user[mode]", value: 'edit'%>
-        <% %w[x y w h].each do |attribute| %>
-        <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
-        <% end %>
-        <% end %>
-        <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Save</button>
-
       </div>
-    </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <div class="d-flex justify-content-between w-100" style="max-width:400px;">
+          <%= link_to 'Delete',  delete_profile_path,  method: :delete, class: "btn btn-outline-danger" %>
+          <%= form_with(model: @user,url: update_profile_path, local: true, method: :post, id: "edit-upload-form") do |f| %>
+          <%= f.hidden_field "user[rotate]", value: 0, class: "user_rotate" %>
+          <%= f.hidden_field "user[mode]", value: 'edit'%>
+          <% %w[x y w h].each do |attribute| %>
+          <%= f.hidden_field "user[crop_#{attribute}]" , class: "user_crop_#{attribute}" %>
+          <% end %>
+          <% end %>
+          <button type="button" name="Submit" id="submit_btn" class="btn custom-info-button">Save</button>
+        </div>
+      </div>
+
   </div>
 </div>
 
