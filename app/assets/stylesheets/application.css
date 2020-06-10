@@ -355,3 +355,44 @@ h5 .icon-info{color: #3b88fd;font-size: 16px;}
     -ms-transform: rotate(270deg);
     -webkit-transform: rotate(270deg);
 }
+
+/*.activity-type-bx*/
+.activity-type-bx{
+    max-width: 100%;
+}
+
+.activity-type-bx .icon-square{
+  font-size: 16px;
+  display: block;
+  border: 1px solid #ddd;
+  line-height: 1;
+}
+
+.activity-type-bx .activity-type-list .atl-name{
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.activity-type-bx .activity-type-list{
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  width: calc(100% - 34px);
+}
+
+.activity-type-bx .activity-type-list .icon-edit{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+}
+
+.activity-type-head .add-activity-type{
+  font-size: 20px;
+  color: #17a2b8;
+}

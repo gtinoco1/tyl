@@ -1,0 +1,11 @@
+<%= form_for(activity_type, url: url, method: :post) do |f| %>
+  <div class = "row">
+    <div class="col-lg-8 offset-lg-2">
+      <% ActivityType.colors.each do |color| %>
+        <%= radio_button("activity_type", "color_code", color, options = { class: "abc" }) %>
+      <% end %>
+      <%= f.submit "Save", class: "btn btn-block btn-outline-success" %>
+      <hr>
+    </div>
+  </div>
+<% end %>

@@ -1,15 +1,15 @@
-<div class="row mb-0">
-  <div class="col-lg-8 offset-lg-2">
-    <h5 class="text-info text-uppercase">
-      Manage Property Activity Types
-       <i class="icon-info mr-1 fas fa-info-circle" data-toggle="tooltip" title='This allows you to customize what fields are shown for your activity types.
-    To enable a field, toggle that field to "Show" in the specific actitivity type.
-    In order to delete a type there must not be any activities associated with that type.'></i>
-    </h5>
-  </div>
-</div>
+<% if @activity_type.errors.any? %>
+  <% @activity_type.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <%= message %>
+      <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+<% end %>
 
-<div class="row mb-0">
+<div class="row mb-3">
   <div class="col-lg-8 offset-lg-2">
     <a data-toggle="collapse" class="icon-more remove-loader" href="#collapseExample" role="button">
       <i class="fas fa-ellipsis-h"  data-toggle="tooltip" title="More Options"></i>
@@ -19,95 +19,117 @@
       <div class="card card-body border-white">
         <div class="row mb-1">
           <div class="col-lg-4 offset-lg-2 col-6">
-            <a class="btn btn-outline-info btn-block text-center custom-info-button" href="">
+            <%= link_to activity_type_use_present_color_path, class: "btn btn-outline-info btn-block text-center custom-info-button" do %>
               <i class="fas fa-palette fa-2x my-2"></i>
               <h5 class="font-weight-light">Use Preset Colors</h5>
-            </a>
+            <% end %>
           </div>
 
           <div class="col-lg-4 col-6">
-            <a class="btn btn-outline-info btn-block text-center custom-info-button" href="">
+            <%= link_to activity_type_remove_colors_path, class: "btn btn-outline-info btn-block text-center custom-info-button" do %>
               <i class="fas fa-times fa-2x my-2"></i>
               <h5 class="font-weight-light">Remove All Colors</h5>
-            </a>
+            <% end %>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
 
+<div class="row mb-0">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="activity-type-head d-flex justify-content-between align-items-center">
+      <h5 class="text-info text-uppercase mb-0">
+        Manage Property Activity Types
+         <i class="icon-info mr-1 fas fa-info-circle" data-toggle="tooltip" title='This allows you to customize what fields are shown for your activity types.
+      To enable a field, toggle that field to "Show" in the specific actitivity type.
+      In order to delete a type there must not be any activities associated with that type.'></i>
+      </h5>
+      <a href="#" class="d-none d-sm-block add-activity-type remove-loader" data-toggle="modal" data-target="#activityModal">
+        <i class="icon-plus fas fa-plus" data-toggle="tooltip" title='Add New Activity Type'></i>
+      </a>
+    </div>
+  </div>
+</div>
 <div class="row mb-2">
   <div class="col-lg-8 offset-lg-2">
     <hr>
   </div>
 </div>
-
 <div class="row mb-3">
-  <div class="col-lg-4 offset-lg-2 col-12">
-
-      <% current_user.activity_types.order(created_at: :desc).each_with_index do |type,i| %>
-     
-    <% if i%2 == 0 %>
-       <div class="card border-info mb-2">
-          <div class="card-body text-info py-2">
-             <div class="row">
-                 <div class= "col-lg-2 col-2 text-center">
-                    <a href="" class="icon icon-edit activity_edit text-info"><span class="fas fa-square"></span> </a>
-                 </div>
-                 <div class= "col-lg-8 col-8 text-center">
-                    <%= type.title %> 
-                 </div>
-                 <div class= "col-lg-2 col-2 text-center">
-                    <a href="" class="icon icon-edit activity_edit text-info"><span class="fas fa-edit"></span> </a>
-                 </div>
-             </div> 
-          </div>  
+  <div class="col-lg-8 offset-lg-2">
+    <div class="row">
+      <% current_user.activity_types.order(created_at: :desc).each_with_index do |type, i| %>
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card activity-type-bx border-0 mb-2">
+            <div class="card-body p-0 text-info ">
+              <div class="d-flex align-items-center">
+                <div class= "d-block mr-3 text-center">
+                  <%= link_to url_options = {controller: :activity_types, action: "edit_color_code",  prefill_with_id: type.id}, html_options = {class: "icon-square remove-loader", remote: true} do %>
+                    <span style="color: <%= type.color_code %>" class="fas fa-square"></span>
+                  <% end %>
+                </div>
+                <div class= "activity-type-list d-flex border-info align-items-center justify-content-center">
+                  <span class="atl-name"><%= type.title %></span>
+                  <%= link_to url_options = {controller: :activity_types, action: "edit_form",  prefill_with_id: type.id}, html_options = {class: "icon icon-edit activity_edit text-info remove-loader", remote: true} do %>
+                    <span class="fas fa-edit"></span>
+                  <% end %>
+                  <a href="" class="icon icon-edit activity_edit text-info">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    <% else %>
-    <% end %>
- 
        <% end %>
-        </div>
-
-
-  <div class="col-lg-4 col-12">
-
-      <% current_user.activity_types.order(created_at: :desc).each_with_index do |type,i| %>
-     
-    <% if i%2 == 0 %>
-    <% else %>
-       <div class="card border-info mb-2">
-          <div class="card-body text-info py-2">
-             <div class="row">
-                 <div class= "col-lg-2 col-2 text-center">
-                    <a href="" class="icon icon-edit activity_edit text-info"><span class="fas fa-square"></span> </a>
-                 </div>
-                 <div class= "col-lg-8 col-8 text-center">
-                    <%= type.title %> 
-                 </div>
-                 <div class= "col-lg-2 col-2 text-center">
-                    <a href="" class="icon icon-edit activity_edit text-info"><span class="fas fa-edit"></span> </a>
-                 </div>
-             </div> 
-          </div>  
-        </div>
-    <% end %>
- 
-       <% end %>
-        </div>
-</div>
-
-
-<div class="row mb-3">
-  <div class="col-md-4 offset-md-2">
-    <a href="/activity_types/new" class="btn btn-block btn-outline-secondary">
-      Add a new activity type
-    </a>
+     </div>
   </div>
 </div>
+
+<a href="#" class="d-block d-sm-none  custom-plus-image add-activity-type remove-loader" data-toggle="modal" data-target="#activityModal">
+  <img src="/logos/pluse_icon.png" alt="" data-toggle="tooltip" title='Add New Activity Type'>
+</a>
+
+
+<div class="modal fade" id="activityModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" id="modal_form">
+          <%= render "activity_type_templates/form", activity_type: @activity_type, url: create_activity_type_path(@activity_type) %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary remove-loader" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="colorModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" id="color_modal_form">
+          <%#= render "activity_type_templates/edit_color_form", activity_type: @activity_type, url: activity_type_update_color_code_path(prefill_with_id: @activity_type.id)%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary remove-loader" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <script>
   $('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,30 @@
+<%= form_for(activity_type, url: url, method: :post) do |f| %>
+  <div class = "row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="form-group">
+        <label for="title">
+          Title
+        </label>
+        <%= f.text_field :title, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
+      </div>
+
+      <% ActivityType.colors.each do |color| %>
+        <%= radio_button("activity_type", "color_code", color, options = { class: "abc" }) %>
+      <% end %>
+
+      <%= f.hidden_field :subject_toggle, class: "form-control", value: "Show" %>
+      <%= f.hidden_field :contact_toggle, class: "form-control", value: "Show" %>
+      <%= f.hidden_field :duration_toggle, class: "form-control", value: "Show" %>
+      <%= f.hidden_field :cost_toggle, class: "form-control", value: "Show" %>
+      <%= f.hidden_field :detail_toggle, class: "form-control", value: "Hide" %>
+      <%= f.hidden_field :outcome_toggle, class: "form-control", value: "Hide" %>
+      <%= f.hidden_field :agent_toggle, class: "form-control", value: "Hide" %>
+      <%= f.hidden_field :customer_toggle, class: "form-control", value: "Hide" %>
+      <%= f.submit "Save", class: "btn btn-block btn-outline-success" %>
+      <hr>
+    </div>
+  </div>
+<% end %>

@@ -178,6 +178,11 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_activity_type/:id_to_remove", {:controller => "activity_types", :action => "destroy_row"})
 
+  #use Present COlor
+  get("/activity_type/use_present_color", {:controller => "activity_types", :action => "use_present_color"})
+  get("/activity_type/remove_colors", {:controller => "activity_types", :action => "remove_colors"})
+  get("/activity_type/edit_color_code", {:controller => "activity_types", :action => "edit_color_code"})
+  post("/activity_type/update_color_code", {:controller => "activity_types", :action => "update_color_code"})
   #------------------------------
 
   # Routes for the Activity resource:
