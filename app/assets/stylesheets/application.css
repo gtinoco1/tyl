@@ -396,3 +396,70 @@ h5 .icon-info{color: #3b88fd;font-size: 16px;}
   font-size: 20px;
   color: #17a2b8;
 }
+
+/*up-color*/
+.up-color {display: block;color: #6f6e6e;font-weight: 500;margin: 0 0 15px;}
+
+/*r-color*/
+.r-color {display: block;color: #17a2b8;font-weight: 500;margin: 15px 0 15px;text-align: center;}
+
+.btn-cc-bx .btn{text-transform: capitalize;margin: 0;max-width: 80px;}
+
+
+/*fi-groups*/
+.fi-groups {display: flex; padding: 10px 5px; margin: 0; flex-wrap: wrap; justify-content: center; background: #f5f5f5;}
+.fi-groups .rd-bx {display: block;margin: 3px;background-color: transparent;width: 25px;height: 25px;border:2px solid #ddd;cursor: pointer;}
+.fi-groups .rd-bx.active {border-color: #6c757d;}
+/* .fi-groups .rd-bx [type="radio"]:checked,
+.fi-groups .rd-bx [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.fi-groups .rd-bx [type="radio"]:checked + label,
+.fi-groups .rd-bx [type="radio"]:not(:checked) + label
+{
+  position: relative;
+  padding-left: 0;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+  color: #666;
+  width: 25px;
+  margin: 0;
+  height: 25px;
+}
+.fi-groups .rd-bx [type="radio"]:checked + label:before,
+.fi-groups .rd-bx [type="radio"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #fff;
+}
+.fi-groups .rd-bx [type="radio"]:checked + label:after,
+.fi-groups .rd-bx [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 21px;
+    height: 21px;
+    background: #F87DA9;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 0;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.fi-groups .rd-bx [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.fi-groups .rd-bx [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+} */

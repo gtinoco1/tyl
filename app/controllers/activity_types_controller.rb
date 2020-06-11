@@ -113,4 +113,10 @@ class ActivityTypesController < ApplicationController
     redirect_to("/activity_types", :notice => "Color code updated successfully")
   end
 
+  def archive_activity_type
+    @activity_type = ActivityType.find(params.fetch("prefill_with_id"))
+    @activity_type.status = 'archive'
+    @activity_type.save
+    redirect_to("/activity_types", :notice => "Color code updated successfully")
+  end
 end
