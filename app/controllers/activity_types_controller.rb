@@ -20,8 +20,10 @@ class ActivityTypesController < ApplicationController
 
   def new_form
     @activity_type = ActivityType.new
-
-    render("activity_type_templates/new_form.html.erb")
+    respond_to do |format|
+      format.js { render "activity_type_templates/new_form.js.erb" }
+    end
+    # render("activity_type_templates/new_form.html.erb")
   end
 
   def create_row
@@ -86,8 +88,12 @@ class ActivityTypesController < ApplicationController
   end
 
   def use_present_color
-    current_user.activity_types.order(created_at: :desc).each_with_index do |type, index|
-      type.update(color_code: ActivityType.colors[index])
+    current_user.activity_types.active.order(created_at: :desc).each_with_index do |type, index|
+      if index >= ActivityType.colors.size
+        type.update(color_code: ActivityType.colors[index - ActivityType.colors.size])
+      else
+        type.update(color_code: ActivityType.colors[index])
+      end
     end
     redirect_to("/activity_types", :notice => "Used present colors")
   end
@@ -108,7 +114,7 @@ class ActivityTypesController < ApplicationController
 
   def update_color_code
     @activity_type = ActivityType.find(params.fetch("prefill_with_id"))
-    @activity_type.color_code = params[:activity_type][:color_code]
+    @activity_type.color_code = params[:color_code]
     @activity_type.save
     redirect_to("/activity_types", :notice => "Color code updated successfully")
   end

@@ -1,11 +1,29 @@
 <%= form_for(activity_type, url: url, method: :post) do |f| %>
-  <div class = "row">
-    <div class="col-lg-8 offset-lg-2">
-      <% ActivityType.colors.each do |color| %>
-        <%= radio_button("activity_type", "color_code", color, options = { class: "abc" }) %>
-      <% end %>
-      <%= f.submit "Save", class: "btn btn-block btn-outline-success" %>
-      <hr>
+<div class = "row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      <label for="title">
+        Select color code
+        <%= hidden_field_tag :color_code %>
+      </label>
+      <div class="fi-groups">
+        <% ActivityType.colors.each do |color| %>
+          <span class="rd-bx <%= 'active' if activity_type.color_code == color %>" id="<%= color %>" value="activity_type[color_code]"  style="background-color: <%= color %>;">
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <div class="btn-cc-bx d-flex justify-content-between">
+      <%= f.submit "Save", class: "btn btn-block ml-auto btn-outline-success" %>
     </div>
   </div>
+</div>
 <% end %>
+<script type="text/javascript">
+    $('.rd-bx').click(function(){
+      $('.rd-bx').removeClass("active")
+      $(this).addClass("active")
+      $("#color_code").val($(this).attr("id"))
+      // console.log($("#activity_type_color_code").val())
+    })
+</script>

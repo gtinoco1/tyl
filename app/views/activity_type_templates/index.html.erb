@@ -47,9 +47,9 @@
       To enable a field, toggle that field to "Show" in the specific actitivity type.
       In order to delete a type there must not be any activities associated with that type.'></i>
       </h5>
-      <a href="#" class="d-none d-sm-block add-activity-type remove-loader" data-toggle="modal" data-target="#activityModal">
+      <%= link_to url_options = {controller: :activity_types, action: "new_form"}, html_options = {class: "d-none d-sm-block add-activity-type remove-loader", remote: true} do %>
         <i class="icon-plus fas fa-plus" data-toggle="tooltip" title='Add New Activity Type'></i>
-      </a>
+      <% end %>
     </div>
   </div>
 </div>
@@ -62,7 +62,7 @@
   <div class="col-lg-8 offset-lg-2">
     <div class="row">
       <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
-        <a href="#" class="up-color">Use Preset Colors</a>
+        <%= link_to "Use Preset Colors", activity_type_use_present_color_path, class: "up-color" %>
       </div>
       <% current_user.activity_types.active.order(created_at: :desc).each_with_index do |type, i| %>
         <div class="col-12 col-md-6 col-lg-6">
@@ -71,7 +71,7 @@
               <div class="d-flex align-items-center">
                 <div class= "d-block mr-3 text-center">
                   <%= link_to url_options = {controller: :activity_types, action: "edit_color_code",  prefill_with_id: type.id}, html_options = {class: "icon-square remove-loader", remote: true} do %>
-                    <span style="color: <%= type.color_code %>" class="fas fa-square"></span>
+                    <span style="color: <%= type.color_code %> ;background:<%= type.color_code %>;" class="fas fa-square custom-square"></span>
                   <% end %>
                 </div>
                 <div class= "activity-type-list d-flex border-info align-items-center justify-content-center">
@@ -88,7 +88,7 @@
         </div>
        <% end %>
        <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
-         <a href="#" class="r-color">Remove All Colors</a>
+         <%= link_to "Remove All Colors", activity_type_remove_colors_path, class: "r-color" %>
        </div>
      </div>
   </div>
@@ -100,10 +100,10 @@
 
 
 <div class="modal fade" id="activityModal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-sm custom-modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h5 class="modal-title heading">Add New activity Type</h5>
           <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" id="modal_form">
@@ -115,14 +115,13 @@
 </div>
 
 <div class="modal fade" id="colorModal">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-sm custom-modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
+          <h5 class="modal-title">Edit color code</h5>
           <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" id="color_modal_form">
-          <%#= render "activity_type_templates/edit_color_form", activity_type: @activity_type, url: activity_type_update_color_code_path(prefill_with_id: @activity_type.id)%>
         </div>
       </div>
     </div>

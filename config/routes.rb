@@ -183,6 +183,7 @@ Rails.application.routes.draw do
   get("/activity_type/remove_colors", {:controller => "activity_types", :action => "remove_colors"})
   get("/activity_type/edit_color_code", {:controller => "activity_types", :action => "edit_color_code"})
   post("/activity_type/update_color_code", {:controller => "activity_types", :action => "update_color_code"})
+  get("/archive_activity_type", {:controller => "activity_types", :action => "archive_activity_type"})
   #------------------------------
 
   # Routes for the Activity resource:
