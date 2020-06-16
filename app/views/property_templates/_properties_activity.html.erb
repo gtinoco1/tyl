@@ -3,17 +3,14 @@
     <% activities.each do |activity| %>
       <div id="accordion" data-id="<%= activity.sort %>" activity-id="<%= activity.id %>" class="accordion-bx sortable-item">
         <div class="card" id="<%= activity.id %>">
-          <div data-toggle="collapse" data-parent="#accordion" data-target="#activity_<%= activity.id%>" class="card-header">
+          <div data-toggle="collapse" data-parent="#accordion" data-target="#activity_<%= activity.id%>" class="card-header" style="background-color: <%= activity.activity_type.color_code %>">
             <a class="icon icon-arrow remove-loader" ><span class="fas fa-chevron-right"></span> </a>
             <a href="/activities/<%= activity.id %>/edit" class="icon icon-edit activity_edit"><span class="fas fa-edit"></span> </a>
             <div class="master-icon-edit icon icon-edit activity_edit">
               <img src="/logos/master_icon.png" />
             </div>
-            <h4 class=""><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
-            <div class="d-flex justify-content-center align-items-center">
-                <span style="color: <%= activity.activity_type.color_code %>;background:<%= activity.activity_type.color_code %>;" class="fas fa-square custom-square"></span>
-                <p class="w-100"><%= activity.subject.truncate(116) + ' ' + activity.detail.truncate(116) %></p>
-             </div>
+            <h4><%= activity.date.strftime("%b %d") %> - <%= activity.activity_type.title %></h4>
+            <p style="background-color: <%= activity.activity_type.color_code %>"><%= activity.subject.truncate(116) + ' ' + activity.detail.truncate(116) %></p>
           </div>
           <div id="activity_<%= activity.id %>" class="card-collapse collapse ">
               <div class="card-body card-padding">

@@ -99,7 +99,7 @@
 .accordion-bx .card {border-color: #9e9494;}
 .accordion-bx .card .card-header {display: block;position: relative;background-color: #fff;border-bottom:0;border-radius: 5px;}
 .accordion-bx .card .card-header h4 {display: block;font-size: 16px;font-weight: 400;margin: 0 0 10px 30px;padding-right: 25px;}
-.accordion-bx .card .card-header p {display: block;font-size: 16px;font-weight: 400;margin: 0 0 0px 15px;padding: 10px;background-color: #fff;border: 1px solid #ddd;}
+.accordion-bx .card .card-header p {display: block;font-size: 16px;font-weight: 400;margin: 0 0 0px 30px;padding: 10px;background-color: #fff;border: 1px solid #ddd;}
 .accordion-bx .card .card-header .icon{position: absolute;color: #727373;}
 .accordion-bx .card .card-header .icon.icon-edit{right: 20px;}
 .accordion-bx .card .card-header .icon:hover {color: #0f6674;}
