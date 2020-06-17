@@ -9,7 +9,8 @@
   <% end %>
 <% end %>
 
-<div class="row mb-3 d-none d-sm-block">
+<!-- <div class="row mb-3 d-none d-sm-block"> -->
+<div class="row mb-3">
   <div class="col-lg-8 offset-lg-2">
     <a data-toggle="collapse" class="icon-more remove-loader" href="#collapseExample" role="button">
       <i class="fas fa-ellipsis-h"  data-toggle="tooltip" title="More Options"></i>
@@ -61,9 +62,9 @@
 <div class="row mb-3">
   <div class="col-lg-8 offset-lg-2">
     <div class="row">
-      <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
-        <%= link_to "Use Preset Colors", activity_type_use_present_color_path, class: "up-color" %>
-      </div>
+      <!-- <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
+        <%#= link_to "Use Preset Colors", activity_type_use_present_color_path, class: "up-color" %>
+      </div> -->
       <% current_user.activity_types.active.order(created_at: :desc).each_with_index do |type, i| %>
         <div class="col-12 col-md-6 col-lg-6">
           <div class="card activity-type-bx border-0 mb-2">
@@ -87,9 +88,9 @@
           </div>
         </div>
        <% end %>
-       <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
-         <%= link_to "Remove All Colors", activity_type_remove_colors_path, class: "r-color" %>
-       </div>
+       <!-- <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
+         <%#= link_to "Remove All Colors", activity_type_remove_colors_path, class: "r-color" %>
+       </div> -->
      </div>
   </div>
 </div>
