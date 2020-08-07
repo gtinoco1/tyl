@@ -1,0 +1,2 @@
+$("#color_modal_form").html(`<%= j render 'activity_type_templates/edit_color_form', activity_type: @activity_type, url: activity_type_update_color_code_path(prefill_with_id: @activity_type.id)%>`);
+$("#colorModal").modal("show")

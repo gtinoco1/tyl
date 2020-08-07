@@ -1,112 +1,141 @@
-<div class="row mb-3">
-  <div class="col-lg-8 offset-lg-2">
-    <h5 class="text-info text-uppercase">
-      Manage Property Activity Types
-    </h5>
-    <hr>
-  </div>
-</div>
-
-<div class="row mb-2">
-  <div class="col-lg-8 offset-lg-2">
-
-    <div class="text-center font-weight-light">
-    This allows you to customize what fields are shown for your activity types.
-    To enable a field, toggle that field to "Show" in the specific actitivity type.
-    In order to delete a type there must not be any activities associated with that type.
+<% if @activity_type.errors.any? %>
+  <% @activity_type.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <%= message %>
+      <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <hr>
+  <% end %>
+<% end %>
 
-  </div>
-</div>
-
+<!-- <div class="row mb-3 d-none d-sm-block"> -->
 <div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
+  <div class="col-lg-8 offset-lg-2">
+    <a data-toggle="collapse" class="icon-more remove-loader" href="#collapseExample" role="button">
+      <i class="fas fa-ellipsis-h"  data-toggle="tooltip" title="More Options"></i>
+    </a>
 
-
-    <div class="accordion" id="accordionExample">
-      <% current_user.activity_types.order(created_at: :desc).each do |type| %>
-
-        <%=form_for(type, url: {action: "update_row", id_to_modify: type.id}, method: :post) do |f| %>
-          <div class="card bg-white border-white">
-            <div class="card-header bg-white " id="heading<%= type.id %>">
-              <h2 class="mb-0">
-                <button class="btn btn-outline-info btn-block remove-loader" type="button" data-toggle="collapse" data-target="#collapse<%= type.id %>" aria-expanded="true" aria-controls="collapse<%= type.id %>">
-                  <%= type.title %>
-                </button>
-              </h2>
-            </div>
-
-            <div id="collapse<%= type.id %>" class="collapse remove-loader" aria-labelledby="heading<%= type.id %>" data-parent="#accordionExample">
-              <div class="card-body">
-
-                <div class="row mb-2">
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label for="title">
-                        Title
-                      </label>
-                      <%= f.text_field :title, :class => "form-control" %>
-                    </div>
-                  </div>
-                  <div class="col-6">
-
-                    <% if type.activities.count == 0 %>
-
-                      <div><br>
-                      </div>
-                      <a href="/delete_activity_type/<%= type.id %>/">
-                        <button type="button" class="btn btn-outline-danger btn-block mt-2 text-uppercase">Delete</button>
-                      </a>
-
-                    <% else %>
-                      <div><br>
-                      </div>
-                      <a href="/delete_activity_type/<%= type.id %>/">
-                        <button type="button" class="btn btn-outline-secondary btn-block mt-2 text-uppercase" disabled>Delete</button>
-                      </a>
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class = "row mb-2">
-                  <div class="form-group">
-                      <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
-                      <%= f.hidden_field :subject_toggle, class: "form-control", value: "Show" %>
-                      <%= f.hidden_field :contact_toggle, class: "form-control", value: "Show" %>
-                      <%= f.hidden_field :duration_toggle, class: "form-control", value: "Show" %>
-                      <%= f.hidden_field :cost_toggle, class: "form-control", value: "Show" %>
-                      <%= f.hidden_field :detail_toggle, class: "form-control", value: "Hide" %>
-                      <%= f.hidden_field :outcome_toggle, class: "form-control", value: "Hide" %>
-                      <%= f.hidden_field :agent_toggle, class: "form-control", value: "Hide" %>
-                      <%= f.hidden_field :customer_toggle, class: "form-control", value: "Hide" %>
-                      <input type="hidden" name="flyer_img_toggle" class="form-control" value="Hide">
-                      <input type="hidden" name="postcard_img_toggle" class="form-control" value="Hide">
-
-                    </div>
-                </div>
-                <%= f.submit "Save", class: "btn btn-block btn-outline-success" %>
-                <!-- <button class="btn btn-block btn-outline-success">
-                  Save
-                </button> -->
-              </div>
-
-            </div>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body border-white">
+        <div class="row mb-1">
+          <div class="col-lg-4 offset-lg-2 col-6">
+            <%= link_to activity_type_use_present_color_path, class: "btn btn-outline-info btn-block text-center custom-info-button" do %>
+              <i class="fas fa-palette fa-2x my-2"></i>
+              <h5 class="font-weight-light">Use Preset Colors</h5>
+            <% end %>
           </div>
 
-        <% end %>
-
-      <% end %>
-
+          <div class="col-lg-4 col-6">
+            <%= link_to activity_type_remove_colors_path, class: "btn btn-outline-info btn-block text-center custom-info-button" do %>
+              <i class="fas fa-times fa-2x my-2"></i>
+              <h5 class="font-weight-light">Remove All Colors</h5>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
 
+
+<div class="row mb-0">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="activity-type-head d-flex justify-content-between align-items-center">
+      <h5 class="text-info text-uppercase mb-0">
+        Manage Property Activity Types
+         <i class="icon-info mr-1 fas fa-info-circle" data-toggle="tooltip" title='This allows you to customize what fields are shown for your activity types.
+      To enable a field, toggle that field to "Show" in the specific actitivity type.
+      In order to delete a type there must not be any activities associated with that type.'></i>
+      </h5>
+      <%= link_to url_options = {controller: :activity_types, action: "new_form"}, html_options = {class: "d-none d-sm-block add-activity-type remove-loader", remote: true} do %>
+        <i class="icon-plus fas fa-plus" data-toggle="tooltip" title='Add New Activity Type'></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-lg-8 offset-lg-2">
+    <hr>
+  </div>
+</div>
 <div class="row mb-3">
-  <div class="col-md-8 offset-md-2">
-    <a href="/activity_types/new" class="btn btn-block btn-outline-secondary">
-      Add a new activity type
-    </a>
+  <div class="col-lg-8 offset-lg-2">
+    <div class="row">
+      <!-- <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
+        <%#= link_to "Use Preset Colors", activity_type_use_present_color_path, class: "up-color" %>
+      </div> -->
+      <% current_user.activity_types.active.order(created_at: :desc).each_with_index do |type, i| %>
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card activity-type-bx border-0 mb-2">
+            <div class="card-body p-0 text-info ">
+              <div class="d-flex align-items-center">
+                <div class= "d-block mr-3 text-center">
+                  <%= link_to url_options = {controller: :activity_types, action: "edit_color_code",  prefill_with_id: type.id}, html_options = {class: "icon-square remove-loader", remote: true} do %>
+                    <span style="color: <%= type.color_code %> ;background:<%= type.color_code %>;" class="fas fa-square custom-square"></span>
+                  <% end %>
+                </div>
+                <div class= "activity-type-list d-flex border-info align-items-center justify-content-center">
+                  <span class="atl-name"><%= type.title %></span>
+                  <%= link_to url_options = {controller: :activity_types, action: "edit_form",  prefill_with_id: type.id}, html_options = {class: "icon icon-edit activity_edit text-info remove-loader", remote: true} do %>
+                    <span class="fas fa-edit"></span>
+                  <% end %>
+                  <a href="" class="icon icon-edit activity_edit text-info">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       <% end %>
+       <!-- <div class="col-12 col-md-6 col-lg-6 d-block d-sm-none">
+         <%#= link_to "Remove All Colors", activity_type_remove_colors_path, class: "r-color" %>
+       </div> -->
+     </div>
   </div>
 </div>
+
+<a href="#" class="d-block d-sm-none  custom-plus-image add-activity-type remove-loader" data-toggle="modal" data-target="#activityModal">
+  <img src="/logos/pluse_icon.png" alt="" data-toggle="tooltip" title='Add New Activity Type'>
+</a>
+
+
+<div class="modal fade" id="activityModal">
+    <div class="modal-dialog modal-sm custom-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title heading">Add New activity Type</h5>
+          <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" id="modal_form">
+          <%= render "activity_type_templates/form", activity_type: @activity_type, url: create_activity_type_path(@activity_type) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="colorModal">
+    <div class="modal-dialog modal-sm custom-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit color code</h5>
+          <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" id="color_modal_form">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  $('[data-toggle="tooltip"]').tooltip();
+  $(document).on('submit','form.remember',function(){
+    setTimeout(function(){
+    $('#loader-div').hide();
+  }, 3000);
+});
+</script>

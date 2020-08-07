@@ -1,0 +1,3 @@
+$("#modal_form").html(`<%= j render 'activity_type_templates/form', activity_type: @activity_type, url: create_activity_type_path(@activity_type)%>`);
+$("#activityModal .heading").html("Add New Activity Type")
+$("#activityModal").modal("show")

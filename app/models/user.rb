@@ -93,7 +93,7 @@ class User < ApplicationRecord
                         outcome_toggle: "Hide",
                         agent_toggle: "Hide",
                         customer_toggle: "Hide",
-                        cost_toggle: "Hide")
+                        cost_toggle: "Show")
 
     ActivityType.create(user: self, title: "Promotion & Advertising",
                         duration_toggle: "Show",
@@ -103,7 +103,7 @@ class User < ApplicationRecord
                         outcome_toggle: "Hide",
                         agent_toggle: "Hide",
                         customer_toggle: "Hide",
-                        cost_toggle: "Hide")
+                        cost_toggle: "Show")
 
     ActivityType.create(user: self, title: "Listing Agreement Paperwork",
                         duration_toggle: "Show",
