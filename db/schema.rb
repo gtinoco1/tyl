@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200429040548) do
+ActiveRecord::Schema.define(version: 20200522112946) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20200429040548) do
     t.string "customer_toggle"
     t.string "subject_toggle"
     t.integer "user_id"
+    t.string "color_code", default: "#fff"
+    t.string "status", default: "active"
   end
 
   create_table "admin_users", force: :cascade do |t|
