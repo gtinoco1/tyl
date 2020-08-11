@@ -95,14 +95,14 @@ class ActivityTypesController < ApplicationController
         type.update(color_code: ActivityType.colors[index])
       end
     end
-    redirect_to("/activity_types", :notice => "Used present colors")
+    redirect_to("/activity_types", :notice => "Applied preset colors to activity types")
   end
 
   def remove_colors
     current_user.activity_types.order(created_at: :desc).each_with_index do |type, index|
       type.update(color_code: '#fff')
     end
-    redirect_to("/activity_types", :notice => "Remove all present colors")
+    redirect_to("/activity_types", :notice => "Removed all preset colors")
   end
 
   def edit_color_code
@@ -116,13 +116,13 @@ class ActivityTypesController < ApplicationController
     @activity_type = ActivityType.find(params.fetch("prefill_with_id"))
     @activity_type.color_code = params[:color_code]
     @activity_type.save
-    redirect_to("/activity_types", :notice => "Color code updated successfully")
+    redirect_to("/activity_types", :notice => "Colors updated successfully")
   end
 
   def archive_activity_type
     @activity_type = ActivityType.find(params.fetch("prefill_with_id"))
     @activity_type.status = 'archive'
     @activity_type.save
-    redirect_to("/activity_types", :notice => "Color code updated successfully")
+    redirect_to("/activity_types", :notice => "Color updated successfully")
   end
 end
