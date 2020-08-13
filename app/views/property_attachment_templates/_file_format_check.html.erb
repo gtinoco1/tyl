@@ -1,0 +1,40 @@
+<script>
+  $('.show-exceed-size-msg').hide();
+  function validateFiles(inputFile) {
+    $('.show-exceed-size-msg').text("")
+    var allowedExtension = ["jpg", "jpeg", "bmp", "png", "pdf" ];
+
+    var extName;
+    var show = false;
+    var maxFileSize = $(inputFile).data('max-file-size');
+    var sizeExceeded = false;
+    var extError = false;
+
+    $.each(inputFile.files, function() {
+      if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;};
+      extName = this.name.split('.').pop();
+      if ($.inArray(extName, allowedExtension) == -1) {extError=true;};
+    });
+    if (sizeExceeded) {
+      $('.show-exceed-size-msg').text("This file exceeds the maximum allowed file size (20 MB)")
+      $(inputFile).val('');
+      show = true;
+    };
+
+    if (extError) {
+      if($('.show-exceed-size-msg').contents().length){
+        $('.show-exceed-size-msg').append("</br>Only image file with extension: .jpg, .jpeg, .bmp or .png and pdf file is allowed")
+      }else{
+        $('.show-exceed-size-msg').text("Only image file with extension: .jpg, .jpeg, .bmp or .png and pdf file is allowed")
+      }
+      show = true;
+      $(inputFile).val('');
+    };
+
+    if(show){
+      $('.show-exceed-size-msg').show();
+    }else{
+      $('.show-exceed-size-msg').hide();
+    }
+  }
+</script>

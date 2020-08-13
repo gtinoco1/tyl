@@ -7,7 +7,6 @@
 <% end %>
 
 <div class="alert alert-danger alert-dismissable show-exceed-size-msg" role="alert">
-  This file exceeds the maximum allowed file size (20 MB)
   <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -64,19 +63,4 @@
     </a>
   </div>
 </div>
-<script type="text/javascript">
-  $('.show-exceed-size-msg').hide();
-  function validateFiles(inputFile) {
-  var maxFileSize = $(inputFile).data('max-file-size');
-  var sizeExceeded = false;
-  $.each(inputFile.files, function() {
-    if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;};
-  });
-  if (sizeExceeded) {
-    $('.show-exceed-size-msg').show();
-    $(inputFile).val('');
-  }else{
-    $('.show-exceed-size-msg').hide();
-  }
-}
-</script>
+<%= render 'property_attachment_templates/file_format_check' %>
