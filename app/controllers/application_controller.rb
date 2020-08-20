@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_based_on_user
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    redirect_to root_url, :alert => exception.message unless current_admin_user.present?
   end
 
 
@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
     url = request.path_info
     if url.include?('admin')
       authenticate_admin_user!
+    elsif current_admin_user.present?
     else
       authenticate_user!
     end

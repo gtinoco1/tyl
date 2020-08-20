@@ -1,3 +1,9 @@
+<div class="alert alert-danger alert-dismissable show-exceed-size-msg" role="alert">
+
+  <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="row mb-0">
   <div class="col-lg-6 offset-lg-3">
     <h5 class="text-info text-left text-uppercase mb-0">
@@ -8,57 +14,40 @@
 </div>
 
 <%=form_for(@property_attachment, url: create_property_attachment_path(@property_attachment), enctype: "multipart/form-data") do |f| %>
-
   <div class="form-group">
       <%= f.hidden_field :property_id, class: "form-control", value: @property_id %>
   </div>
   <div class="form-group">
       <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
   </div>
-
   <div class="form-group">
       <%= f.hidden_field :activity_id, class: "form-control" %>
   </div>
-
   <div class="row mb-0">
     <div class="col-lg-6 offset-lg-3 col-12">
-
       <div class="form-group">
         <label for="title">
           Title
         </label>
         <%= f.text_field :title, :class => "form-control" %>
       </div>
-
-      <!--<div class="form-group">-->
-      <!--  <label for="activity_id">-->
-      <!--    Activity-->
-      <!--  </label>-->
-      <!--  <input type="text" id="activity_id" name="activity_id" class="form-control">-->
-      <!--</div>-->
-
       <div class="form-group">
         <label for="attachment">
           Attachment (jpg, png, bmp, pdf)
         </label>
-        <%= f.file_field :attachment, :class => "form-control" %>
+        <%= f.file_field :attachment, :class => "form-control", accept: "image/*, .pdf", onchange: "validateFiles(this);",
+          data: { max_file_size: 20.megabytes } %>
       </div>
-
-
-      <!-- <button class="btn btn-block btn-outline-success">
-        Upload Attachment
-      </button> -->
       <%= f.submit "Upload Attachment", class: "btn btn-block btn-outline-success" %>
-      <% end %>
-    <hr>
-
-      </div>
-</div>
-
-    <div class="row mb-3">
-      <div class="col-md-6 offset-md-3">
-        <a href="/properties/<%= @property_id %>/attachments" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-      </div>
+      <hr>
     </div>
+  </div>
+<% end %>
+<div class="row mb-3">
+  <div class="col-md-6 offset-md-3">
+    <a href="/properties/<%= @property_id %>/attachments" class="btn btn-block btn-outline-secondary">
+      Go back
+    </a>
+  </div>
+</div>
+<%= render 'property_attachment_templates/file_format_check' %>

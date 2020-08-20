@@ -1,5 +1,4 @@
 class PropertiesController < ApplicationController
-
   def index
     render("property_templates/index.html.erb")
   end
@@ -12,6 +11,8 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find(params.fetch("id_to_display"))
 
+    @user= @property.user
+    bypass_sign_in @user if current_admin_user.present?
     authorize! :manage, @property
     render("property_templates/show.html.erb")
   end

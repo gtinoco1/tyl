@@ -1,3 +1,8 @@
+<div class="alert alert-danger alert-dismissable show-exceed-size-msg" role="alert">
+  <button type="button" class="close remove-loader" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <div class="row mb-0">
   <div class="col-lg-6 offset-lg-3">
     <h5 class="text-info text-left text-uppercase mb-0">
@@ -6,9 +11,6 @@
     <hr>
   </div>
 </div>
-
-
-
 <%=form_for(@property_attachment, url: {action: "update_row", id_to_modify: @property_attachment.id}, enctype: "multipart/form-data", method: :post) do |f| %>
   <div class="form-group">
     <%= f.hidden_field :property_id, class: "form-control", value: @property_attachment.property_id %>
@@ -16,44 +18,29 @@
   <div class="form-group">
     <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
   </div>
-    <div class="form-group">
-      <%= f.hidden_field :activity_id, class: "form-control", value: @property_attachment.activity_id %>
+  <div class="form-group">
+    <%= f.hidden_field :activity_id, class: "form-control", value: @property_attachment.activity_id %>
   </div>
-
   <div class="row mb-0">
     <div class="col-lg-6 offset-lg-3 col-12">
-
       <div class="form-group">
         <label for="title">
           Title
         </label>
         <%= f.text_field :title, :class => "form-control" %>
       </div>
-
-      <!--<div class="form-group">-->
-      <!--  <label for="activity_id">-->
-      <!--    Activity-->
-      <!--  </label>-->
-      <!--  <input type="text" id="activity_id" name="activity_id" class="form-control">-->
-      <!--</div>-->
-
       <div class="form-group">
         <label for="attachment">
           Attachment (jpg, png, bmp, pdf)
         </label>
-        <%= f.file_field :attachment, :class => "form-control" %>
+        <%= f.file_field :attachment, :class => "form-control", accept: "image/*, .pdf", onchange: "validateFiles(this);",
+          data: { max_file_size: 20.megabytes } %>
       </div>
-
       <%= f.submit "Upload Attachment", class: "btn btn-block btn-outline-success" %>
-      <!-- <button class="btn btn-block btn-outline-success">
-        Upload Attachment
-      </button> -->
-    <% end %>
-
     <hr>
   </div>
-</div>
-
+  </div>
+<% end %>
 <div class="row mb-3">
   <div class="col-md-6 offset-md-3">
     <a href="/delete_property_attachment/<%= @property_attachment.id %>" data-confirm="Delete: Are you sure?" class="btn btn-block btn-outline-danger">
@@ -61,7 +48,6 @@
     </a>
   </div>
 </div>
-
 <div class="row mb-3">
   <div class="col-md-6 offset-md-3">
     <a href="/properties/<%= @property_attachment.property_id %>/attachments" class="btn btn-block btn-outline-secondary">
@@ -69,3 +55,4 @@
     </a>
   </div>
 </div>
+<%= render 'property_attachment_templates/file_format_check' %>

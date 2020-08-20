@@ -82,17 +82,19 @@ class ReportByDateHeader < Prawn::Document
                 :background_colors => 'white'
               }
       g.title = 'Activity Summary'
-      @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).map do |activity|
-        if activity[1] > 0
-          g.data "#{ActivityType.find(activity[0]).title.truncate(27, omission: '...')} - (#{number_with_precision((activity[1]/60.0).to_s.rjust(2, '0'), precision: 2)} Hours)", activity[1]
+      if @property.activities.where(:date => (@start_date..@end_date)).present?
+        @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).map do |activity|
+          if activity[1] > 0
+            g.data "#{ActivityType.find(activity[0]).title.truncate(27, omission: '...')} - (#{number_with_precision((activity[1]/60.0).to_s.rjust(2, '0'), precision: 2)} Hours)", activity[1]
+          end
         end
+        g.text_offset_percentage = 0.05
+        g.marker_font_size = 25
+        g.legend_font_size = 25
+        g.legend_position = :right
+        text "Activity Summary", size: 20, :align => :center
+        image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
       end
-      g.text_offset_percentage = 0.05
-      g.marker_font_size = 25
-      g.legend_font_size = 25
-      g.legend_position = :right
-      text "Activity Summary", size: 20, :align => :center
-      image StringIO.new(g.to_blob), :fit => [540, 650], :position => :center
     end
     attachments
     footer
