@@ -71,10 +71,10 @@ class PropertiesController < ApplicationController
         if @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).values().sum() > 0
           perform_report_operation = true
         else
-          redirect_to request.referrer, :notice => "Require at least one activity with the time field value to generate report with chart"
+          redirect_to request.referrer, :alert => "Require at least one activity with the time field value to generate report with chart"
         end
       else
-        redirect_to request.referrer, :notice => "No activity present for selected date"
+        redirect_to request.referrer, :alert => "No activity present for selected date"
       end
     else
       perform_report_operation = true
