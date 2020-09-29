@@ -20,31 +20,29 @@ class PropertyAttachmentsController < ApplicationController
 
   def create_row
     @property_attachment = PropertyAttachment.new
-
     @property_attachment.property_id = params["property_attachment"][:property_id]
     @property_attachment.user_id = params["property_attachment"][:user_id]
     @property_attachment.activity_id = params["property_attachment"][:activity_id]
     @property_attachment.attachment = params["property_attachment"][:attachment]
     @property_attachment.title = params["property_attachment"][:title]
 
- if @property_attachment.attachment.blank?
-   redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
- else
+ # if @property_attachment.attachment.blank?
+   # redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
+  #  @property_id = @property_attachment.property_id
+  # render("property_attachment_templates/new_form_with_errors.html.erb", :alert => "Make sure you have attached an accepted file format.")
+ # else
 
-    if @property_attachment.valid?
-     @property_attachment.save
-
-      @property_attachment.pages = @property_attachment.attachment.metadata.fetch("pages","")
-      @property_attachment.save
-
-      redirect_to("/properties/#{@property_attachment.property_id}/attachments", :notice => "Attachment uploaded successfully.")
-    else
-     redirect_to("/property_attachments/new/#{@property_attachment.property_id}", :alert => "Make sure you have attached an accepted file format.")
-    # render("property_attachment_templates/new_form_with_errors.html.erb")
+    respond_to do |format|
+      if @property_attachment.valid?
+        @property_attachment.save
+        @property_attachment.pages = @property_attachment.attachment.metadata.fetch("pages","")
+        @property_attachment.save
+        flash[:notice] = "Attachment uploaded successfully."
+        format.js {render js: "$('#loader-div').show(); window.location.href='/properties/#{@property_attachment.property_id}/attachments'" }
+      else
+        format.js   { render "property_attachment_templates/create_row.js.erb" }
+      end
     end
-
-  end
-
   end
 
   def edit_form

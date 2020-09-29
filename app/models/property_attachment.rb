@@ -17,8 +17,9 @@ class PropertyAttachment < ApplicationRecord
   belongs_to :user
   belongs_to :property
   belongs_to :activity, :required => false
-  
-#  validates :attachment, :presence => true
-  
+
+ validates :attachment, :presence => true
+ validates :title, :presence => true
+
   mount_uploader :attachment, AttachmentUploader
 end

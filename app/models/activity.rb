@@ -24,7 +24,6 @@ class Activity < ApplicationRecord
   has_many :property_attachments, :dependent => :nullify
 
   validates :date, :presence => true
+  validates :activity_type, :presence => true
 
 end
-
-

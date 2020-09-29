@@ -1,0 +1,15 @@
+$('#property_attachment_attachment').removeClass('error-class');
+$('#property_attachment_title').removeClass('error-class');
+$('.show-exceed-size-msg').show();
+$('.show-exceed-size-msg').text("");
+<% if @property_attachment.errors[:title].present? and @property_attachment.errors[:attachment].present? %>
+  $('.show-exceed-size-msg').text("*Title and Attachment Required");
+  $('#property_attachment_title').addClass('error-class');
+  $('#property_attachment_attachment').addClass('error-class');
+<% elsif @property_attachment.errors[:title].present? %>
+  $('#property_attachment_title').addClass('error-class');
+  $('.show-exceed-size-msg').text("*Title Required");
+<% elsif @property_attachment.errors[:attachment].present? %>
+  $('#property_attachment_attachment').addClass('error-class');
+  $('.show-exceed-size-msg').text("*Attachment Required");
+<% end %>

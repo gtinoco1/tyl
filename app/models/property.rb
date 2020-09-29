@@ -20,6 +20,7 @@ class Property < ApplicationRecord
   has_many :prices, :dependent => :destroy
   has_many :property_attachments, :dependent => :destroy
 
+  validates :address, :presence => true
   # def self.to_csv
   #   attributes = ["subject"]
   #   CSV.generate(headers: true) do |csv|

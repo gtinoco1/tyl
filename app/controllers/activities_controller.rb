@@ -34,13 +34,14 @@ class ActivitiesController < ApplicationController
     @activity.subject = params[:activity][:subject]
     @activity.agent = params.fetch("agent","")
     @activity.customer = params.fetch("customer","")
-
     if @activity.valid?
       @activity.save
       @activity.update(sort: @activity.id)
       redirect_to("/properties/#{@activity.property_id}")
     else
-      redirect_to("/properties/#{@activity.property_id}", :notice => "Type and Date cannot be blank.")
+      # redirect_to("/activities/new/#{@activity.property_id}", :notice => "*Required Field")
+      @property_id = @activity.property_id
+      render("activity_templates/new_form_with_errors.html.erb")
     end
   end
 
