@@ -1,3 +1,4 @@
+$('#loader-div').show();
 $('#property_attachment_attachment').removeClass('error-class');
 $('#property_attachment_title').removeClass('error-class');
 $('.show-exceed-size-msg').show();
@@ -13,3 +14,4 @@ $('.show-exceed-size-msg').text("");
   $('#property_attachment_attachment').addClass('error-class');
   $('.show-exceed-size-msg').text("*Attachment Required");
 <% end %>
+$('#loader-div').hide();
