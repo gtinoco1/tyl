@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<%=form_for(@property_attachment, url: create_property_attachment_path(@property_attachment), enctype: "multipart/form-data") do |f| %>
+<%=form_for(@property_attachment, url: create_property_attachment_path(@property_attachment), enctype: "multipart/form-data", remote: :true) do |f| %>
   <div class="form-group">
       <%= f.hidden_field :property_id, class: "form-control", value: @property_id %>
   </div>

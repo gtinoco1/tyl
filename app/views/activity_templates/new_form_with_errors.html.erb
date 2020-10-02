@@ -1,89 +1,84 @@
 <!-- Validation failure messages -->
 <% if @activity.present? %>
   <% if @activity.errors.any? %>
-    <% @activity.errors.full_messages.each do |message| %>
+    <%# @activity.errors.full_messages.each do |message| %>
       <div class="alert alert-danger">
-        <%= message %>
+        <% if @activity.errors[:activity_type].present? and @activity.errors[:date].present? %>
+          *ActivityType and Date Required
+        <% elsif @activity.errors[:activity_type].present? %>
+          *ActivityType Required
+        <% elsif @activity.errors[:date].present? %>
+          *Date Required
+        <% end %>
+        <%#= message %>
       </div>
-    <% end %>
+    <%# end %>
   <% end %>
 <% end %>
 <div class="row">
-  <div class="col-lg-8 offset-lg-2">
-
+  <div class="col-lg-6 offset-lg-3">
     <h4 class="text-uppercase text-secondary">
       Add a new activity
     </h4>
-
-
     <hr>
-
-    <form action="/create_activity" method="post">
-
-      <div class="form-row">
-
-        <div class="form-group col-lg-4 mb-3">
-          <label for="activity_type_id">
-            Activity Type
-          </label>
-          <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title,), :class => "form-control", :prompt => "Select type" ) %>
-          <a href="/activity_types/new" class="">
-            Add a type 
-          </a>
-        </div>
-
-        <div class="form-group col-lg-4 mb-3">
-          <label for="date">
-            Date
-          </label>
-          <input class="form-control" type="date" id="date" name="date" value="<%= Date.current.strftime('%Y-%m-%d') %>">
-        </div>
-
-<!--<div class="container">-->
-<!--    <div class="col-sm-6" style="height:130px;">-->
-<!--        <div class="form-group">-->
-<!--            <div class='input-group date' id='datetimepicker8'>-->
-<!--                <input type='text' class="form-control" />-->
-<!--                <span class="input-group-addon">-->
-<!--                    <span class="fa fa-calendar">-->
-<!--                    </span>-->
-<!--                </span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <script type="text/javascript">-->
-<!--        $(function () {-->
-<!--            $('#datetimepicker8').datetimepicker({-->
-<!--                icons: {-->
-<!--                    time: "fas fa-clock",-->
-<!--                    date: "far fa-calendar",-->
-<!--                    up: "fa fa-arrow-up",-->
-<!--                    down: "fa fa-arrow-down"-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    </script>-->
-<!--</div>-->
-
-        <div class="form-group">
-          <input type="hidden" name="property_id" class="form-control" value="<%= @property_id %>">
-        </div>
-
-      </div>
-
-      <button class="btn btn-block btn-outline-success">
-        Next
-      </button>
-    </form>
-
-    <hr>
-
-
-        <a href="/all_properties" class="btn btn-block btn-outline-secondary">
-          Go back
-        </a>
-
-
   </div>
 </div>
-
+<%=form_for(@activity, url: create_activity_path(@activity)) do |f| %>
+  <div class="row mb-1">
+    <div class="col-lg-4 offset-lg-3 mb-3">
+      <label for="activity_type_id">
+        Activity Type
+      </label>
+      <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title,), :class => "form-control #{@activity.errors[:activity_type].present? ? 'error-class' : ''}", :prompt => "Select type", :type => "text" ) %>
+      <%= link_to "Add a type", activity_types_new_path %>
+    </div>
+    <div class="col-lg-2 mb-3">
+      <label for="date">
+        Date
+      </label>
+      <%= f.date_field :date, as: :date, value: Date.current.strftime('%Y-%m-%d'), class: "form-control #{@activity.errors[:date].present? ? 'error-class' : ''}"%>
+    </div>
+  </div>
+  <div class="row mb-3">
+     <div class="col-lg-4 offset-lg-3 mb-2">
+      <label for="contact">
+        Contact
+      </label>
+      <%= f.text_field :contact, :class => "form-control" %>
+    </div>
+    <div class="col-lg-2 mb-0">
+      <label for="duration">
+        Time (minutes)
+      </label>
+      <%= f.number_field :duration, pattern: "\d*", class: "form-control" %>
+    </div>
+  </div>
+  <%= f.hidden_field :property_id, class: "form-control", value: @property_id %>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3 mb-0">
+      <label for="subject">
+        Subject/Details
+      </label>
+      <%= f.text_area :subject, :class => "form-control", rows: "3" %>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-lg-3 offset-lg-3">
+      <label for="cost">
+        Cost
+      </label>
+      <%= f.number_field :cost, pattern: "\d*", class: "form-control", placeholder: "optional" %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-lg-6 offset-lg-3">
+      <%= f.submit "Create activity", class: "btn btn-block btn-outline-success" %>
+      <!-- <button class="btn btn-block btn-outline-success">
+        Save activity
+      </button> -->
+    </div>
+  </div>
+<% end %>
+<!-- <a href="/all_properties" class="btn btn-block btn-outline-secondary">
+  Go back
+</a> -->

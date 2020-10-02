@@ -65,17 +65,33 @@ class PropertiesController < ApplicationController
     @show_chart_toggle = params.fetch("chart_toggle","")
     @property_summary_table = params.fetch("property_summary_table","")
     @profile_url = params.fetch("profile_url", "")
-
-    respond_to do |format|
-      format.html
-      format.pdf do
-        if @report_type == "date_asc" || @report_type == "date_desc" || @report_type == "custom"
-          pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
-                                    @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle, @property_summary_table, @profile_url)
-        elsif @report_type == "activity_type"
-          pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
+    perform_report_operation = false
+    if @show_chart_toggle == "yes"
+      if @property.activities.where(:date => (@start_date..@end_date)).present?
+        if @property.activities.where(:date => (@start_date..@end_date)).group(:activity_type_id).sum(:duration).values().sum() > 0
+          perform_report_operation = true
+        else
+          redirect_to request.referrer, :alert => "Require at least one activity with the time field value to generate report with chart"
         end
-        send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", :layout => false
+      else
+        redirect_to request.referrer, :alert => "No activity present for selected date"
+      end
+    else
+      perform_report_operation = true
+    end
+
+    if perform_report_operation
+      respond_to do |format|
+        format.html
+        format.pdf do
+          if @report_type == "date_asc" || @report_type == "date_desc" || @report_type == "custom"
+            pdf = ReportByDateHeader.new(@property, @current_user, @start_date, @end_date, @subject_check,
+                                      @contact_check, @duration_check, @cost_check, @attachment_toggle, @report_type, @show_total_toggle,@show_chart_toggle, @property_summary_table, @profile_url)
+          elsif @report_type == "activity_type"
+            pdf = ReportThreePdf.new(@property, @current_user, @start_date, @end_date)
+          end
+          send_data pdf.render, :filename => "Report: #{@property.address}.pdf", :type => "application/pdf", :layout => false
+        end
       end
     end
   end
