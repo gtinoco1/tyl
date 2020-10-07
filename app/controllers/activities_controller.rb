@@ -15,7 +15,7 @@ class ActivitiesController < ApplicationController
   def new_form
     @activity = Activity.new
     @property_id = params.fetch("id_of_property")
-
+    @activity_type = ActivityType.new
     render("activity_templates/new_form.html.erb")
   end
 
