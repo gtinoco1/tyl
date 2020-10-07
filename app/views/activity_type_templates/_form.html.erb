@@ -19,7 +19,7 @@
         </div>
       </div>
       <%= f.hidden_field 'from', value: from %>
-      <%= f.hidden_field :color_code, class: "form-control" %>
+      <%= f.hidden_field :color_code, class: "form-control", value: '#ffffff' %>
       <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
       <%= f.hidden_field :subject_toggle, class: "form-control", value: "Show" %>
       <%= f.hidden_field :contact_toggle, class: "form-control", value: "Show" %>

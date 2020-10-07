@@ -20,7 +20,11 @@ class ActivityTypesController < ApplicationController
 
   def new_form
     @activity_type = ActivityType.new
-    @from = 'activity_type'
+    if params[:from].present?
+      @from = params[:from]
+    else
+      @from = 'activity_type'
+    end
     respond_to do |format|
       # format.html {render "activity_type_templates/new_form.html.erb" }
       format.js { render "activity_type_templates/new_form.js.erb" }
@@ -46,17 +50,30 @@ class ActivityTypesController < ApplicationController
 
     if @activity_type.valid?
       @activity_type.save
-      if(@from.present? and @from == 'activity_type')
+      if @from.present? and @from == 'activity_type'
         redirect_to("/activity_types", :notice => "Activity type created successfully.")
       else
         @property_id = @from.split("_")[1]
         @activity = Activity.new
         @activity_type = ActivityType.new
-        render("/activity_templates/new_form.html.erb", :notice => "Activity type created successfully.")
+        flash.now[:notice] = 'Activity type created successfully'
+        render("/activity_templates/new_form.html.erb")
       end
     else
       # render("activity_type_templates/new_form_with_errors.html.erb")
-      render("activity_type_templates/index.html.erb")
+      if @from.present? and @from == 'activity_type'
+        render("activity_type_templates/index.html.erb")
+      else
+        eror_msg = ""
+        @activity_type.errors.full_messages.each do |message|
+          eror_msg += message
+        end
+        flash.now[:alert] = eror_msg
+        @property_id = @from.split("_")[1]
+        @activity = Activity.new
+        @activity_type = ActivityType.new
+        render("/activity_templates/new_form.html.erb")
+      end
     end
   end
 
