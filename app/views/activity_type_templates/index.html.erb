@@ -107,7 +107,7 @@
           <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" id="modal_form">
-          <%= render "activity_type_templates/form", activity_type: @activity_type, url: create_activity_type_path(@activity_type) %>
+          <%= render "activity_type_templates/form", activity_type: @activity_type, url: create_activity_type_path(@activity_type), from: 'activity_type' %>
         </div>
       </div>
     </div>

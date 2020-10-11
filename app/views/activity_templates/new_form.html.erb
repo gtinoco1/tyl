@@ -13,7 +13,7 @@
         Activity Type
       </label>
       <%= select_tag(:activity_type_id, options_from_collection_for_select(ActivityType.order("title ASC").where(user_id: current_user.id), :id, :title,), :class => "form-control", :prompt => "Select type", :type => "text" ) %>
-      <%= link_to "Add a type", activity_types_new_path %>
+      <%= link_to "Add a type", activity_types_new_path(from: "activity_#{@property_id}"), class: 'remove-loader', remote: true %>
     </div>
     <div class="col-lg-2 mb-3">
       <label for="date">
@@ -62,3 +62,17 @@
     </div>
   </div>
 <% end %>
+<div class="modal fade" id="activityModal">
+    <div class="modal-dialog modal-sm custom-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title heading">Add New activity Type</h5>
+          <button type="button" class="close remove-loader" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" id="modal_form">
+          <%= render "activity_type_templates/form", activity_type: @activity_type, url: create_activity_type_path(@activity_type), from: "activity_#{@property_id}" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

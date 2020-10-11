@@ -1,5 +1,15 @@
+
 Rails.application.routes.draw do
   # Routes for the Property attachment resource:
+
+  authenticated :user do
+    root "properties#index", as: :authenticated_root
+  end
+
+  unauthenticated :user do
+    root 'home#home', as: :unauthenticated_root
+  end
+  devise_for :users, :controllers => {registrations: 'registrations'}
 
   # CREATE
   get("/property_attachments/new/:id_of_property", { :controller => "property_attachments", :action => "new_form" })
@@ -207,7 +217,8 @@ Rails.application.routes.draw do
 
   # Routes for the Property resource:
 
-  root "properties#index"
+  # root "properties#index"
+  get("/home", {:controller => "home", :action => "home"})
 
   # CREATE
   get("/properties/new", {:controller => "properties", :action => "new_form"})
@@ -258,12 +269,11 @@ Rails.application.routes.draw do
   post("/properties/summary", {:controller => "properties", :action => "property_summary_update"})
 
   # devise_for :users
-  devise_for :users, :controllers => {registrations: 'registrations'}
   # devise_for :users, :controllers => {:registrations => "my_devise/registrations"}
 
-  as :user do
-  get '/my_account', :to => 'devise/registrations#edit', :as => :user_root
-  end
+  # as :user do
+  # get '/my_account', :to => 'devise/registrations#edit', :as => :user_root
+  # end
 
   get("/contact_list_download", { :controller => "application", :action => "contact_list_download" })
   resource :user, only: [:edit] do

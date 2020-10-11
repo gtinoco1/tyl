@@ -439,3 +439,133 @@ h5 .icon-info{color: #3b88fd;font-size: 16px;}
 
 /* Error-class */
 .error-class{background: #F8D7DA; border: 1px solid red;}
+
+
+/* Home Page */
+header .container-fluid,.banner-bg .container-fluid,
+.built-sec .container-fluid,.track-sec .container-fluid,
+.property-sec .container-fluid,.agents-sec .container-fluid,
+.sell-sec .container-fluid,footer .container-fluid{width: 80%;}
+
+header.nav-header{height: 75px;border-bottom: 1px solid #b5b5b5}
+header.nav-header .navbar-nav .nav-item{margin-left: 25px;}
+header.nav-header .navbar-nav .nav-link{color: #000; font-weight: 600; text-decoration: underline;}
+header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;font-family: inherit;}
+
+.btn.btn-orange{min-width: 120px;padding: 10px;min-height: 34px;text-align: center;display: flex;justify-content: center;align-items: center;font-size: 15px;text-transform: capitalize;background-color: #F6CC00;border-radius: 8px;font-weight: 600;font-family: 'Montserrat', sans-serif;}
+.btn.btn-orange:hover,.btn.btn-orange.active{background-color: #d8b91f;}
+
+/* .banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 45%  auto; height: 460px;display: block;position: relative;margin: 75px 0 0;} */
+.banner-bg{background: #F7F7F7;height: 460px;display: block;position: relative;margin: 75px 0 0;}
+.banner-bg .banner-img{max-width: 100%;display: block;}
+.banner-bg h3{display: block;margin: 0 0 20px 20px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
+.banner-bg p{display: block;margin: 0 0 20px 20px;line-height: 1.2;font-size: 16px;font-family: 'Montserrat', sans-serif;letter-spacing: 0.9px;font-weight: 400;color: #212121;}
+.banner-bg .btn-started{max-width: 120px;margin-left: 20px;}
+
+.built-sec {display: block;position: relative;padding: 50px 0 55px;}
+.built-sec h3 {display: block;margin: 0 0 30px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
+.built-sec .bs-img {display: block;max-width: 100%;object-fit: contain;margin: 0 auto;}
+.built-sec .bs-del {display: block;border-top: 12px solid #ffcb00;padding: 40px 35px 50px;box-shadow: 0 2px 2px 2px rgba(0,0,0,.3);max-width: 61%;margin: 0 auto;}
+.built-sec .bs-del h4{display: block;margin: 0 0 20px;line-height: 1.2;font-size: 20px;font-weight: 600;letter-spacing: 0.9px;}
+.built-sec .bs-del p{display: block;margin: 0 0px;line-height: 1.5;font-size: 11.6px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
+
+.track-sec {display: block;position: relative;padding: 50px 0 90px;background-color: #F6F6F6;}
+.track-sec h3 {display: block;margin: 0 0 45px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
+.track-sec .ts-item {display: block;position: relative;text-align: center;padding: 0 35px;}
+.track-sec .ts-item .ts-img{display: block;position: relative;max-width: 100%;margin: 0 auto;}
+.track-sec .ts-item h4{display: block;position: relative;margin: 35px 3px 10px;line-height: 1.2;font-size: 20px;font-weight: 600;letter-spacing: 0.9px;}
+.track-sec .ts-item p{display: block;margin: 0 16px;line-height: 1.5;font-size: 12px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
+
+.property-sec{background: #fff;display: block;position: relative;height:445px;}
+.property-sec h3{display: block;margin: 0 auto;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;max-width: 53%;}
+
+.agents-sec{background: #fff;display: block;position: relative;padding: 35px 0 20px;background: #f6f6f6;}
+.agents-sec h3{display: block;margin: 0 0 45px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
+.agents-sec .as-item{display: block;position: relative;text-align: center;padding: 0 50px;}
+.agents-sec .as-item .img{display: block;position: relative;border-radius: 50%;margin: 0 auto;width: 145px;height: 145px;background-color: #D8D8D8;overflow: hidden;}
+.agents-sec .as-item .img img{display: block;width: 100%;height: 100%;object-fit: cover;}
+.agents-sec .as-item p{display: block;margin: 15px 0 10px;line-height: 1.5;font-size: 14px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
+.agents-sec .as-item h5{display: block;margin: 0 0;line-height: 1.2;font-size: 16px;font-weight: 600;color: #000;text-transform: capitalize;}
+
+.sell-sec{background: #fff;display: block;position: relative;padding: 55px 0 45px;}
+.sell-sec h3 {display: block;margin: 0 0 25px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
+.sell-sec .btn {max-width: 120px;font-size: 500;margin: 0 auto;}
+
+footer{display: block;border-top: 1px solid #d8d8d8;position: relative;padding: 16px 0 140px;}
+footer p{display: block;margin: 0px 0 0px;line-height: 1.3;font-size: 14px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
+footer p a{color: #212121;}
+
+/********************************/
+@media(min-width:1920px){
+  .banner-bg{height:55vh;background-size: 50%  auto;}
+}
+@media(min-width:1601px){
+  header .container-fluid, .banner-bg .container-fluid,
+  .built-sec .container-fluid, .track-sec .container-fluid,
+  .property-sec .container-fluid, .agents-sec .container-fluid,
+  .sell-sec .container-fluid, footer .container-fluid{width: 65%;}
+
+  .banner-bg{height:73vh;}
+  .built-sec .bs-del{max-width: 75%;}
+  .property-sec{height: auto;}
+}
+@media(max-width:1440px){
+  .banner-bg{background-size: 49%  auto;}
+  .property-sec{height: 405px;}
+}
+
+@media(max-width:1280px){
+  .banner-bg{background-size: 50%  auto;height: 425px;}
+  .property-sec{height: 355px;}
+}
+
+@media(max-width:1199px){
+  header .container-fluid, .banner-bg .container-fluid, .built-sec .container-fluid, .track-sec .container-fluid, .property-sec .container-fluid, .agents-sec .container-fluid, .sell-sec .container-fluid, footer .container-fluid{width: 90%;}
+  .banner-bg { background-size: 52% auto; height: 355px;}
+  .built-sec .bs-del{max-width: 70%;}
+  .track-sec .ts-item{max-width: 0 20px;}
+  .property-sec{height: 290px;}
+  .property-sec h3{max-width: 80%;}
+  .agents-sec .as-item{padding: 0 20px}
+}
+
+@media(max-width:991px){
+  header .container-fluid, .banner-bg .container-fluid, .built-sec .container-fluid, .track-sec .container-fluid, .property-sec .container-fluid, .agents-sec .container-fluid, .sell-sec .container-fluid, footer .container-fluid{width: 100%;}
+  .banner-bg {background-size: 57% auto; height: 300px;}
+  .banner-bg h3{font-size: 25px;}
+  .built-sec .bs-del {max-width: 90%;padding: 25px 25px 30px;}
+  .track-sec .ts-item{padding: 0}
+  .property-sec {height: 210px;}
+  .property-sec h3{font-size: 22px;}
+  .agents-sec .as-item{padding: 0 10px;}
+}
+
+@media(max-width:767px){
+  header.nav-header .navbar-nav {flex-direction: row; align-items: center;}
+  .banner-bg {height: auto; text-align: center; padding: 50px 0 20px;}
+  .banner-bg .btn-started{margin: 0 auto 40px;}
+  .built-sec .bs-del{max-width: 80%;margin: 30px auto 0;}
+  .track-sec .ts-item{padding: 0 50px;margin-bottom: 50px;}
+  .agents-sec .as-item{padding: 0 60px;margin-bottom: 50px;}
+  .property-sec{height: auto;}
+  .property-sec h3{margin: 50px auto;}
+  .track-sec h3{margin: 0 40px 45px}
+}
+
+@media(max-width:575px){
+  header.nav-header {height: auto; padding: 20px 1rem;}
+  header.nav-header .navbar-brand{margin: -15px 0 0; width: 50%;}
+  header.nav-header .navbar-nav {flex-direction: row;}
+  header.nav-header .navbar-nav .nav-item {margin-left: 15px;width: inherit;text-align: center;}
+  header.nav-header .navbar-nav .nav-item:first-child {margin-left: 0px;}
+  header.nav-header .navbar-nav .nav-link.btn.btn-orange{min-width: inherit; padding: 5px 15px;}
+  /* .banner-bg {background-size: 100%; height: auto; text-align: center;    padding: 50px 0 320px; background-position: center bottom;}
+  .banner-bg .btn-started{margin: 0 auto;} */
+  .built-sec h3,.track-sec h3,.agents-sec h3,.sell-sec h3{font-size: 24px;}
+}
+
+@media(max-width:375px){
+  .track-sec h3{margin: 0 0px 45px}
+  .track-sec .ts-item{padding: 0 30px;}
+  .agents-sec .as-item{padding: 0 40px;}
+}
