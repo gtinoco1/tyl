@@ -18,6 +18,7 @@
 
  html { font-size: 1rem; }
 
+
 @media (min-width: 300px) {
     html { font-size: .9rem; }
 }
@@ -456,7 +457,7 @@ header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;fon
 .btn.btn-orange{min-width: 120px;padding: 10px;min-height: 34px;text-align: center;display: flex;justify-content: center;align-items: center;font-size: 15px;text-transform: capitalize;background-color: #F6CC00;border-radius: 8px;font-weight: 600;font-family: 'Montserrat', sans-serif;}
 .btn.btn-orange:hover,.btn.btn-orange.active{background-color: #d8b91f;}
 
-.banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 50%  auto; height: 71vh;display: block;position: relative;margin: 75px 0 0;}
+.banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 50%  auto; height: 475px;display: block;position: relative;margin: 75px 0 0;}
 /* .banner-bg{background: #F7F7F7;height: 460px;display: block;position: relative;margin: 75px 0 0;overflow: hidden;} */
 /* .banner-bg .banner-img{max-width: 50%;display: block;position: absolute;top: 0;right: 0;} */
 .banner-bg h3{display: block;margin: 0 0 20px 20px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
@@ -498,7 +499,7 @@ footer p a{color: #212121;}
 
 /********************************/
 @media(min-width:1920px){
-  .banner-bg{height:55vh;background-size: 50%  auto;}
+  .banner-bg{background-size: 50%  auto;}
 }
 @media(min-width:1601px){
   header .container-fluid, .banner-bg .container-fluid,
@@ -509,13 +510,16 @@ footer p a{color: #212121;}
   .built-sec .bs-del{max-width: 75%;}
   .property-sec{height: auto;}
 }
-
+@media(min-width:1440px){
+  header { max-width: 1440px;margin: 0 auto;}
+  .shell{ max-width: 1440px; background-color: #fff; box-shadow: 0 8px 20px 0 rgba(0,0,0,.08); margin: 0 auto; }
+}
 @media(max-width:1440px){
-  .banner-bg{background-size: 50%  auto;height: 52vh;}
+  .banner-bg{background-size: 50%  auto;height: 470px;}
   .property-sec{height: 405px;}
 }
 @media(max-width:1399px){
-  .banner-bg{background-size: 50%  auto;height: 44vh;}
+  .banner-bg{background-size: 50%  auto;height: 355px;}
   .banner-bg h3{margin: 0 20px 20px 20px}
   .banner-bg p{margin: 0 20px 20px 20px}
 }
@@ -525,7 +529,7 @@ footer p a{color: #212121;}
 
 @media(max-width:1199px){
   header .container-fluid, .banner-bg .container-fluid, .built-sec .container-fluid, .track-sec .container-fluid, .property-sec .container-fluid, .agents-sec .container-fluid, .sell-sec .container-fluid, footer .container-fluid{width: 90%;}
-  .banner-bg { background-size: 52% auto; height: 26vh;}
+  .banner-bg { background-size: 52% auto;}
   .banner-bg h3{margin: 0 40px 20px 20px}
   .banner-bg p{margin: 0 40px 20px 20px}
   .built-sec .bs-del{max-width: 70%;}
@@ -537,7 +541,7 @@ footer p a{color: #212121;}
 
 @media(max-width:991px){
   header .container-fluid, .banner-bg .container-fluid, .built-sec .container-fluid, .track-sec .container-fluid, .property-sec .container-fluid, .agents-sec .container-fluid, .sell-sec .container-fluid, footer .container-fluid{width: 100%;}
-  .banner-bg {background-size: 57% auto; height: 29vh;}
+  .banner-bg {background-size: 57% auto; height: 296px;}
   .banner-bg h3{font-size: 25px;margin: 0 0px 20px 20px}
   .banner-bg p{margin: 0 0px 20px 20px}
   .built-sec .bs-del {max-width: 90%;padding: 25px 25px 30px;}
