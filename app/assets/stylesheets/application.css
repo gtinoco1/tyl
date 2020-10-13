@@ -18,6 +18,7 @@
 
  html { font-size: 1rem; }
 
+
 @media (min-width: 300px) {
     html { font-size: .9rem; }
 }
@@ -447,7 +448,10 @@ header .container-fluid,.banner-bg .container-fluid,
 .property-sec .container-fluid,.agents-sec .container-fluid,
 .sell-sec .container-fluid,footer .container-fluid{width: 80%;}
 
-header.nav-header{height: 75px;border-bottom: 1px solid #b5b5b5}
+header.nav-header{height: 75px;}
+header.nav-header .header-big{display: flex;align-items: center;justify-content: space-between;width: 100%;}
+header.nav-header .header-big .container-fluid{display: flex;align-items: center;justify-content: space-between;}
+header.nav-header.bb-1{border-bottom: 1px solid #b5b5b5}
 header.nav-header .navbar-nav .nav-item{margin-left: 25px;}
 header.nav-header .navbar-nav .nav-link{color: #000; font-weight: 600; text-decoration: underline;}
 header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;font-family: inherit;}
@@ -455,9 +459,9 @@ header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;fon
 .btn.btn-orange{min-width: 120px;padding: 10px;min-height: 34px;text-align: center;display: flex;justify-content: center;align-items: center;font-size: 15px;text-transform: capitalize;background-color: #F6CC00;border-radius: 8px;font-weight: 600;font-family: 'Montserrat', sans-serif;}
 .btn.btn-orange:hover,.btn.btn-orange.active{background-color: #d8b91f;}
 
-/* .banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 45%  auto; height: 460px;display: block;position: relative;margin: 75px 0 0;} */
-.banner-bg{background: #F7F7F7;height: 460px;display: block;position: relative;margin: 75px 0 0;}
-.banner-bg .banner-img{max-width: 100%;display: block;}
+.banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 50%  auto; height: 475px;display: block;position: relative;margin: 75px 0 0;}
+/* .banner-bg{background: #F7F7F7;height: 460px;display: block;position: relative;margin: 75px 0 0;overflow: hidden;} */
+/* .banner-bg .banner-img{max-width: 50%;display: block;position: absolute;top: 0;right: 0;} */
 .banner-bg h3{display: block;margin: 0 0 20px 20px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
 .banner-bg p{display: block;margin: 0 0 20px 20px;line-height: 1.2;font-size: 16px;font-family: 'Montserrat', sans-serif;letter-spacing: 0.9px;font-weight: 400;color: #212121;}
 .banner-bg .btn-started{max-width: 120px;margin-left: 20px;}
@@ -497,7 +501,7 @@ footer p a{color: #212121;}
 
 /********************************/
 @media(min-width:1920px){
-  .banner-bg{height:55vh;background-size: 50%  auto;}
+  .banner-bg{background-size: 50%  auto;}
 }
 @media(min-width:1601px){
   header .container-fluid, .banner-bg .container-fluid,
@@ -505,23 +509,34 @@ footer p a{color: #212121;}
   .property-sec .container-fluid, .agents-sec .container-fluid,
   .sell-sec .container-fluid, footer .container-fluid{width: 65%;}
 
-  .banner-bg{height:73vh;}
   .built-sec .bs-del{max-width: 75%;}
   .property-sec{height: auto;}
 }
+@media(min-width:1440px){
+  header{ max-width: 1440px;margin: 0 auto;}
+  header .header-big{ max-width: 1440px;margin: 0 auto;}
+  header.bb-1 .header-big{padding: .5rem 1rem;}
+  header.nav-header.bb-1{max-width: inherit;}
+  .shell{ max-width: 1440px; background-color: #fff; box-shadow: 0 8px 20px 0 rgba(0,0,0,.08); margin: 0 auto; }
+}
 @media(max-width:1440px){
-  .banner-bg{background-size: 49%  auto;}
+  .banner-bg{background-size: 50%  auto;height: 470px;}
   .property-sec{height: 405px;}
 }
-
+@media(max-width:1399px){
+  .banner-bg{background-size: 50%  auto;height: 355px;}
+  .banner-bg h3{margin: 0 20px 20px 20px}
+  .banner-bg p{margin: 0 20px 20px 20px}
+}
 @media(max-width:1280px){
-  .banner-bg{background-size: 50%  auto;height: 425px;}
   .property-sec{height: 355px;}
 }
 
 @media(max-width:1199px){
   header .container-fluid, .banner-bg .container-fluid, .built-sec .container-fluid, .track-sec .container-fluid, .property-sec .container-fluid, .agents-sec .container-fluid, .sell-sec .container-fluid, footer .container-fluid{width: 90%;}
-  .banner-bg { background-size: 52% auto; height: 355px;}
+  .banner-bg { background-size: 52% auto;}
+  .banner-bg h3{margin: 0 40px 20px 20px}
+  .banner-bg p{margin: 0 40px 20px 20px}
   .built-sec .bs-del{max-width: 70%;}
   .track-sec .ts-item{max-width: 0 20px;}
   .property-sec{height: 290px;}
@@ -531,8 +546,9 @@ footer p a{color: #212121;}
 
 @media(max-width:991px){
   header .container-fluid, .banner-bg .container-fluid, .built-sec .container-fluid, .track-sec .container-fluid, .property-sec .container-fluid, .agents-sec .container-fluid, .sell-sec .container-fluid, footer .container-fluid{width: 100%;}
-  .banner-bg {background-size: 57% auto; height: 300px;}
-  .banner-bg h3{font-size: 25px;}
+  .banner-bg {background-size: 57% auto; height: 296px;}
+  .banner-bg h3{font-size: 25px;margin: 0 0px 20px 20px}
+  .banner-bg p{margin: 0 0px 20px 20px}
   .built-sec .bs-del {max-width: 90%;padding: 25px 25px 30px;}
   .track-sec .ts-item{padding: 0}
   .property-sec {height: 210px;}
@@ -542,14 +558,21 @@ footer p a{color: #212121;}
 
 @media(max-width:767px){
   header.nav-header .navbar-nav {flex-direction: row; align-items: center;}
-  .banner-bg {height: auto; text-align: center; padding: 50px 0 20px;}
+  header.bb-1 .header-big{padding: 0;}
+  .banner-bg {height: auto; text-align: center;padding: 50px 0 34em;background-position: center bottom;background-size: 100% auto;}
   .banner-bg .btn-started{margin: 0 auto 40px;}
+  .banner-bg h3{font-size: 25px;margin: 0 0px 20px 0px}
+  .banner-bg p{margin: 0 0px 20px 0px}
   .built-sec .bs-del{max-width: 80%;margin: 30px auto 0;}
   .track-sec .ts-item{padding: 0 50px;margin-bottom: 50px;}
   .agents-sec .as-item{padding: 0 60px;margin-bottom: 50px;}
   .property-sec{height: auto;}
   .property-sec h3{margin: 50px auto;}
   .track-sec h3{margin: 0 40px 45px}
+}
+
+@media(max-width:600px){
+  .banner-bg {padding: 50px 0 28em;}
 }
 
 @media(max-width:575px){
@@ -559,13 +582,21 @@ footer p a{color: #212121;}
   header.nav-header .navbar-nav .nav-item {margin-left: 15px;width: inherit;text-align: center;}
   header.nav-header .navbar-nav .nav-item:first-child {margin-left: 0px;}
   header.nav-header .navbar-nav .nav-link.btn.btn-orange{min-width: inherit; padding: 5px 15px;}
-  /* .banner-bg {background-size: 100%; height: auto; text-align: center;    padding: 50px 0 320px; background-position: center bottom;}
-  .banner-bg .btn-started{margin: 0 auto;} */
+  .banner-bg {height: auto; text-align: center; padding: 50px 0 26em; background-position: center bottom;}
+  .banner-bg .btn-started{margin: 0 auto;}
   .built-sec h3,.track-sec h3,.agents-sec h3,.sell-sec h3{font-size: 24px;}
+}
+
+@media(max-width:414px){
+  .banner-bg{padding: 50px 0 23em;}
 }
 
 @media(max-width:375px){
   .track-sec h3{margin: 0 0px 45px}
   .track-sec .ts-item{padding: 0 30px;}
   .agents-sec .as-item{padding: 0 40px;}
+}
+
+@media(max-width:320px){
+  header.nav-header .container-fluid{padding: 0;}
 }
