@@ -449,6 +449,8 @@ header .container-fluid,.banner-bg .container-fluid,
 .sell-sec .container-fluid,footer .container-fluid{width: 80%;}
 
 header.nav-header{height: 75px;}
+header.nav-header .header-big{display: flex;align-items: center;justify-content: space-between;width: 100%;}
+header.nav-header .header-big .container-fluid{display: flex;align-items: center;justify-content: space-between;}
 header.nav-header.bb-1{border-bottom: 1px solid #b5b5b5}
 header.nav-header .navbar-nav .nav-item{margin-left: 25px;}
 header.nav-header .navbar-nav .nav-link{color: #000; font-weight: 600; text-decoration: underline;}
@@ -511,7 +513,10 @@ footer p a{color: #212121;}
   .property-sec{height: auto;}
 }
 @media(min-width:1440px){
-  header { max-width: 1440px;margin: 0 auto;}
+  header{ max-width: 1440px;margin: 0 auto;}
+  header .header-big{ max-width: 1440px;margin: 0 auto;}
+  header.bb-1 .header-big{padding: .5rem 1rem;}
+  header.nav-header.bb-1{max-width: inherit;}
   .shell{ max-width: 1440px; background-color: #fff; box-shadow: 0 8px 20px 0 rgba(0,0,0,.08); margin: 0 auto; }
 }
 @media(max-width:1440px){
@@ -553,6 +558,7 @@ footer p a{color: #212121;}
 
 @media(max-width:767px){
   header.nav-header .navbar-nav {flex-direction: row; align-items: center;}
+  header.bb-1 .header-big{padding: 0;}
   .banner-bg {height: auto; text-align: center;padding: 50px 0 34em;background-position: center bottom;background-size: 100% auto;}
   .banner-bg .btn-started{margin: 0 auto 40px;}
   .banner-bg h3{font-size: 25px;margin: 0 0px 20px 0px}
@@ -589,4 +595,8 @@ footer p a{color: #212121;}
   .track-sec h3{margin: 0 0px 45px}
   .track-sec .ts-item{padding: 0 30px;}
   .agents-sec .as-item{padding: 0 40px;}
+}
+
+@media(max-width:320px){
+  header.nav-header .container-fluid{padding: 0;}
 }
