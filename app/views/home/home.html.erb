@@ -20,6 +20,27 @@
       </div>
     </div>
   </header>
+  <header class="navbar navbar-expand-md navbar-light bg-white nav-header fixed-top bb-1">
+    <div class="header-big">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="/logos/logo4.png" width="260" class="img-fluid" alt="Responsive image">
+        </a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link btn btn-orange" href="/users/sign_up">
+              Sign up
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/sign_in">
+              Log in
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
 <div class="shell">
   <div class="banner-bg">
     <div class="container-fluid h-100">
@@ -166,12 +187,13 @@
   </footer>
 </div>
 <script type="text/javascript">
+  $("header.nav-header.bb-1").hide();
   $(window).scroll(function() {
     var scroll = $(window).scrollTop();
     if (scroll >= 75) {
-        $("header.nav-header").addClass("bb-1");
+      $("header.nav-header.bb-1").fadeIn(1000)
     } else {
-        $("header.nav-header").removeClass("bb-1");
+      $("header.nav-header.bb-1").fadeOut(1000)
     }
 });
 </script>
