@@ -456,7 +456,7 @@ header.nav-header .navbar-nav .nav-item{margin-left: 25px;}
 header.nav-header .navbar-nav .nav-link{color: #000; font-weight: 600; text-decoration: underline;}
 header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;font-family: inherit;}
 
-.btn.btn-orange{min-width: 120px;padding: 10px;min-height: 34px;text-align: center;display: flex;justify-content: center;align-items: center;font-size: 15px;text-transform: capitalize;background-color: #F6CC00;border-radius: 8px;font-weight: 600;font-family: 'Montserrat', sans-serif;}
+.btn.btn-orange{min-width: 120px;padding: 10px;min-height: 34px;text-align: center;display: flex;justify-content: center;align-items: center;font-size: 15px;background-color: #F6CC00;border-radius: 8px;font-weight: 600;font-family: 'Montserrat', sans-serif;}
 .btn.btn-orange:hover,.btn.btn-orange.active{background-color: #d8b91f;}
 
 .banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 50%  auto; height: 475px;display: block;position: relative;margin: 0px 0 0;}
