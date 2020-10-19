@@ -459,7 +459,7 @@ header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;fon
 .btn.btn-orange{min-width: 120px;padding: 10px;min-height: 34px;text-align: center;display: flex;justify-content: center;align-items: center;font-size: 15px;text-transform: capitalize;background-color: #F6CC00;border-radius: 8px;font-weight: 600;font-family: 'Montserrat', sans-serif;}
 .btn.btn-orange:hover,.btn.btn-orange.active{background-color: #d8b91f;}
 
-.banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 50%  auto; height: 475px;display: block;position: relative;margin: 75px 0 0;}
+.banner-bg{background: #F7F7F7 url(/assets/banner-bg.jpg) no-repeat center right;background-size: 50%  auto; height: 475px;display: block;position: relative;margin: 0px 0 0;}
 /* .banner-bg{background: #F7F7F7;height: 460px;display: block;position: relative;margin: 75px 0 0;overflow: hidden;} */
 /* .banner-bg .banner-img{max-width: 50%;display: block;position: absolute;top: 0;right: 0;} */
 .banner-bg h3{display: block;margin: 0 0 20px 20px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
@@ -470,15 +470,15 @@ header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;fon
 .built-sec h3 {display: block;margin: 0 0 30px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
 .built-sec .bs-img {display: block;max-width: 100%;object-fit: contain;margin: 0 auto;}
 .built-sec .bs-del {display: block;border-top: 12px solid #ffcb00;padding: 40px 35px 50px;box-shadow: 0 2px 2px 2px rgba(0,0,0,.3);max-width: 61%;margin: 0 auto;}
-.built-sec .bs-del h4{display: block;margin: 0 0 20px;line-height: 1.2;font-size: 20px;font-weight: 600;letter-spacing: 0.9px;}
-.built-sec .bs-del p{display: block;margin: 0 0px;line-height: 1.5;font-size: 11.6px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
+.built-sec .bs-del h4{display: block;margin: 0 0 20px;line-height: 1.2;font-size: 20px;font-family: 'Montserrat', sans-serif;font-weight: 600;letter-spacing: 0.9px;}
+.built-sec .bs-del p{display: block;margin: 0 0px;line-height: 1.5;font-size: 14px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
 
 .track-sec {display: block;position: relative;padding: 50px 0 90px;background-color: #F6F6F6;}
 .track-sec h3 {display: block;margin: 0 0 45px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
 .track-sec .ts-item {display: block;position: relative;text-align: center;padding: 0 35px;}
 .track-sec .ts-item .ts-img{display: block;position: relative;max-width: 100%;margin: 0 auto;}
-.track-sec .ts-item h4{display: block;position: relative;margin: 35px 3px 10px;line-height: 1.2;font-size: 20px;font-weight: 600;letter-spacing: 0.9px;}
-.track-sec .ts-item p{display: block;margin: 0 16px;line-height: 1.5;font-size: 12px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
+.track-sec .ts-item h4{display: block;position: relative;margin: 35px 3px 10px;line-height: 1.2;font-size: 20px;font-family: 'Montserrat', sans-serif;font-weight: 600;letter-spacing: 0.9px;}
+.track-sec .ts-item p{display: block;margin: 0 16px;line-height: 1.5;font-size: 14px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
 
 .property-sec{background: #fff;display: block;position: relative;height:445px;}
 .property-sec h3{display: block;margin: 0 auto;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;max-width: 53%;}
@@ -489,7 +489,7 @@ header.nav-header .navbar-nav .nav-link.btn.btn-orange{text-decoration: none;fon
 .agents-sec .as-item .img{display: block;position: relative;border-radius: 50%;margin: 0 auto;width: 145px;height: 145px;background-color: #D8D8D8;overflow: hidden;}
 .agents-sec .as-item .img img{display: block;width: 100%;height: 100%;object-fit: cover;}
 .agents-sec .as-item p{display: block;margin: 15px 0 10px;line-height: 1.5;font-size: 14px;font-family: 'Montserrat', sans-serif;font-weight: 400;color: #212121;}
-.agents-sec .as-item h5{display: block;margin: 0 0;line-height: 1.2;font-size: 16px;font-weight: 600;color: #000;text-transform: capitalize;}
+.agents-sec .as-item h5{display: block;margin: 0 0;line-height: 1.2;font-size: 16px;font-family: 'Montserrat', sans-serif;font-weight: 600;color: #000;text-transform: capitalize;}
 
 .sell-sec{background: #fff;display: block;position: relative;padding: 55px 0 45px;}
 .sell-sec h3 {display: block;margin: 0 0 25px;line-height: 1.2;font-size: 30px;font-family: 'Spectral', serif;letter-spacing: 0.9px;font-weight: 600;}
