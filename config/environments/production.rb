@@ -104,13 +104,21 @@ config.action_mailer.default :charset => "utf-8"
   #   :password => ENV.fetch("MAILGUN_SMTP_PASSWORD")
   # }
 
+  # config.action_mailer.smtp_settings = {
+  #   address: ENV['SENDGRID_ADDRESS'],
+  #   domain: ENV['SENDGRID_DOMAIN'],
+  #   port: ENV['SENDGRID_PORT'],
+  #   user_name: ENV['SENDGRID_USERNAME'],
+  #   password: ENV['SENDGRID_PASSWORD'],
+  #   authentication: :login,
+  #   enable_starttls_auto: true
+  # }
   config.action_mailer.smtp_settings = {
     address: ENV['SENDGRID_ADDRESS'],
     domain: ENV['SENDGRID_DOMAIN'],
     port: ENV['SENDGRID_PORT'],
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
-    authentication: :login,
-    enable_starttls_auto: true
+    authentication: :plain,
+    user_name: 'apikey',
+    password: ENV['SENDGRID_API_KEY']
   }
 end
