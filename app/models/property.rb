@@ -43,4 +43,16 @@ class Property < ApplicationRecord
   def to_s
     "#{address}"
   end
+
+  def activities_count
+    self.activities.count
+  end
+
+  def property_user
+    self.user.first_name + " " + self.user.last_name
+  end
+
+  def date_of_last_activity
+    self&.activities&.order("created_at DESC")&.first&.created_at&.strftime("%m/%d/%Y %H:%M %p")
+  end
 end

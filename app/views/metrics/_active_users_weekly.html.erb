@@ -1,0 +1,2 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= line_chart Property.where(created_at: DateTime.now - 13.weeks..DateTime.now).or(Property.where('id in (?)', Activity.where(created_at: DateTime.now - 13.weeks..DateTime.now).pluck(:property_id))).group_by_week(:created_at, last: 12).count(:realtor_id), colors: ["#5F5F5F"], library: {hAxis: {title: "Show Last 12 Weeks", format: "MMM d"}, vAxis: {title: "Number Of Users"}, title: "Weekly Active Unique Users(# of Unique Users who add an Activity or Property in each Week)" }%>

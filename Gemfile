@@ -20,7 +20,8 @@ gem 'gruff'
 
 gem "browser"
 
-
+gem "chartkick"
+gem 'groupdate'
 
 # gem "carrierwave"
 gem 'carrierwave', '~> 1.1.0'

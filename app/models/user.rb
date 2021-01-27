@@ -179,4 +179,16 @@ class User < ApplicationRecord
   def to_s
     "#{first_name} #{last_name}"
   end
+
+  def properties_count
+    self.properties.count
+  end
+
+  def activities_count
+    self.properties.map{|p| p.activities}.flatten.count
+  end
+
+  def date_of_last_activity
+    self&.properties&.map{|p| p&.activities&.order("created_at DESC")}&.flatten&.first&.created_at&.strftime("%m/%d/%Y %H:%M %p")
+  end
 end

@@ -1,0 +1,2 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= line_chart [ {name: "Property", data: Property.where(created_at: DateTime.now - 13.months..DateTime.now).group_by_month(:created_at).count}, {name: "Activity", data: Activity.where(created_at: DateTime.now - 13.months..DateTime.now).group_by_month(:created_at).count }], colors: ["#F5BF05", "#EC7D30"], library: {hAxis: {title: "Show Last 12 Months", format: "MMM y"}, vAxis: {title: "Number Of Entries"}, title: "# of Properties and Activities saved", legend: { position: "top", align: "middle" }} %>
