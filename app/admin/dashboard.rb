@@ -57,8 +57,8 @@ ActiveAdmin.register_page "Dashboard" do
           else
             "created_at desc"
           end
-          paginated_collection(Property&.all&.order(property_order).page(params[:property_page]).per(2), download_links: false, :param_name => 'property_page') do
-            table_for Property&.all&.order(property_order).page(params[:property_page]).per(2), sortable: true, class: 'index_table' do
+          paginated_collection(Property&.all&.order(property_order).page(params[:property_page]).per(5), download_links: false, :param_name => 'property_page') do
+            table_for Property&.all&.order(property_order).page(params[:property_page]).per(5), sortable: true, class: 'index_table' do
               column :address, :sortable => 'address' do |property|
                 link_to(property.address, admin_property_path(property))
               end
