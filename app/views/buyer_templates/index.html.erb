@@ -1,18 +1,4 @@
 <div class="row mb-0">
-  <div class="col-lg-4 offset-lg-3 col-10">
-    <h4 class="text-info text-uppercase">
-      Customers
-    </h4>
-  </div>
-
-  <div class="col-lg-1 offset-lg-1 col-2 mb-0">
-    <section class="vert-custom">
-    <a class="text-center text-info" href="/customer_type">
-      <h1 class="font-weight-light mb-0">+</h1>
-    </a>
-    </section>
-  </div>
-
 </div>
 
 <div class="row">
@@ -21,92 +7,20 @@
   </div>
 </div>
 
-<% if current_user.buyers.where(buyer_type: "Buyer").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).count > 0 %>
 
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-    <h5 class="text-secondary text-uppercase">
-      Buyers
-    </h5>
-  </div>
-</div>
-
-<% else %>
-<% end %>
-
-<% if current_user.buyers.where(status: "Active").or(current_user.buyers.where(status: "")).count == 0 %>
   <div class="row mb-3">
     <div class="col-lg-6 offset-lg-3">
-      <h5 class="font-weight-light text-center text-uppercase">
-        Add a customer to get started.
+      <h5 class="font-weight-light text-center ">
+        Our customer platform is being redesigned.
+        </h5>
+      <h5 class="font-weight-light text-center ">
+        For immediate questions or to access your customer data please email:
+        <a href="mailto:guillermo@trackyourlisting.com">guillermo@trackyourlisting.com</a>
+
       </h5>
     </div>
   </div>
-<% else %>
-<% end %>
 
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
 
-    <%  current_user.buyers.where(buyer_type: "Buyer").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).each do |buyer| %>
-
-      <div>
-        <a href="buyers/<%= buyer.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= buyer.name %></button>
-        </a>
-      </div>
-
-    <% end %>
-
-  </div>
 </div>
 
-
-<% if  current_user.buyers.where(buyer_type: "Tenant").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).count > 0 %>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-    <h5 class="text-secondary text-uppercase">
-      Tenants
-    </h5>
-  </div>
-</div>
-
-<% else %>
-<% end %>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3">
-
-    <%  current_user.buyers.where(buyer_type: "Tenant").where(status: "Active").or(current_user.buyers.where(buyer_type: "Buyer").where(status: "")).each do |buyer| %>
-
-      <div>
-        <a href="buyers/<%= buyer.id %>">
-          <button type="button" class="btn btn-secondary btn-lg btn-block mb-3 text-uppercase"> <%= buyer.name %></button>
-        </a>
-      </div>
-
-    <% end %>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-6 offset-lg-3">
-    <hr>
-    <h5>
-      <a href="/customer_type" class="btn btn-block btn-outline-secondary">
-        Add a new customer
-      </a>
-    </h5>
-  </div>
-</div>
-
-<div class="row mb-3">
-  <div class="col-lg-6 offset-lg-3 text-center">
-    <hr class="mt-2">
-  <a class="font-weight-light" href="/archive">
-    Archive
-  </a>
-  </div>
-</div>
