@@ -23,7 +23,7 @@ gem "browser"
 
 
 # gem "carrierwave"
-gem 'carrierwave', '~> 1.1.0'
+gem 'carrierwave', '~> 2.2.2'
 gem 'cloudinary'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
